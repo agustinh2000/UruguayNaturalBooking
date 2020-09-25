@@ -10,6 +10,8 @@ namespace Domain
 
         public string Name { get; set; }
 
+        public virtual List<CategoryTouristSpot> ListOfTouristSpot { get; set; }
+
         public Category() { }
     }
 }

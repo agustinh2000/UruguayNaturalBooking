@@ -14,7 +14,7 @@ namespace Domain
 
         public virtual Region Region { get; set; }
 
-        public virtual List<Category> ListOfCategories { get; set; }
+        public virtual List<CategoryTouristSpot> ListOfCategories { get; set; }
 
         public TouristSpot() { }
     }
