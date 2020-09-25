@@ -22,7 +22,5 @@ namespace Domain
         public virtual Lodging LodgingOfReserve { get; set; }
 
 
-
-
     }
 }
