@@ -11,8 +11,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DomainException\DomainException.csproj" />
-  </ItemGroup>
-
 </Project>

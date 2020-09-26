@@ -12,7 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DomainException\DomainException.csproj" />
+    <ProjectReference Include="..\BusinessLogicException\BusinessLogicException.csproj" />
+    <ProjectReference Include="..\BusinessLogicInterface\BusinessLogicInterface.csproj" />
+    <ProjectReference Include="..\DataAccessInterface\DataAccessInterface.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\RepositoryException\RepositoryException.csproj" />
   </ItemGroup>
 
 </Project>

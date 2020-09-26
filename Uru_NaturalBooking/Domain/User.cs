@@ -14,7 +14,5 @@ namespace Domain
         public bool Admin { get; set; } = false;
         public string Mail { get; set; }
 
-
-
     }
 }

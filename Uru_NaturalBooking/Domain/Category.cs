@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Domain
 {
@@ -12,6 +11,25 @@ namespace Domain
 
         public virtual List<CategoryTouristSpot> ListOfTouristSpot { get; set; }
 
-        public Category() { }
-    }
+        public Category() {
+			ListOfTouristSpot = new List<CategoryTouristSpot>(); 
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj == null)
+			{
+				return false;
+			}
+			else if (this.GetType() != obj.GetType())
+			{
+				return false;
+			}
+			else
+			{
+				Category category = (Category)obj;
+				return Name.Equals(category.Name);
+			}
+		}
+	}
 }

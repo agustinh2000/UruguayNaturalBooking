@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainException;
+using System;
 using System.Collections.Generic;
 
 namespace Domain
@@ -16,6 +17,26 @@ namespace Domain
 
         public virtual List<CategoryTouristSpot> ListOfCategories { get; set; }
 
-        public TouristSpot() { }
+        public TouristSpot() {
+            ListOfCategories = new List<CategoryTouristSpot>(); 
+        }
+
+        public void VerifyFormat()
+        {
+            if (String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(Description))
+            {
+                throw new TouristSpotException(MessageException.ErrorIsEmpty);
+            }
+
+            if (IsLongerThanTheLimit())
+            {
+                throw new TouristSpotException(MessageException.ErrorIsLongerThanTheLimit);
+            }
+        }
+
+        private bool IsLongerThanTheLimit()
+        {
+            return Description.Length > 2000;
+        }
     }
 }
