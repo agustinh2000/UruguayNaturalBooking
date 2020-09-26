@@ -148,9 +148,7 @@ namespace DataAcessTest
             };
 
             categoryRepo.Update(categoryToAdd);
-            Category category = categoryRepo.Get(categoryToAdd.Id);
             categoryRepo.Save();
-
         }
 
 
