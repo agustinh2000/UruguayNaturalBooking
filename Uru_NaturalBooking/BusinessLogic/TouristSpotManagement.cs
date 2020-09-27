@@ -5,6 +5,7 @@ using Domain;
 using RepositoryException;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic
 {
@@ -19,6 +20,11 @@ namespace BusinessLogic
             touristSpotRepository = repository;
             regionManagementLogic = regionLogic;
             categoryManagementLogic = categoryLogic;
+        }
+
+        public TouristSpotManagement(IRepository<TouristSpot> repository)
+        {
+            touristSpotRepository = repository;
         }
 
         public TouristSpot Create(TouristSpot touristSpot, Guid regionId, List<Guid> categoriesId)
@@ -51,5 +57,32 @@ namespace BusinessLogic
             }
         }
 
+        public List<TouristSpot> GetTouristSpotByRegion(Guid regionId)
+        {
+            try
+            {
+                List<TouristSpot> listOfTouristSpot = new List<TouristSpot>();
+                listOfTouristSpot = touristSpotRepository.GetAll().Where(m => m.Region.Id.Equals(regionId)).ToList();
+                return listOfTouristSpot; 
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede crear el punto turistico debido a que no es valido.", e);
+            }
+        }
+
+        public TouristSpot GetTouristSpotById(Guid touristSpotId)
+        {
+            try
+            {
+
+                TouristSpot touristSpotObteined = touristSpotRepository.Get(touristSpotId); 
+                return touristSpotObteined;
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede crear el punto turistico debido a que no es valido.", e);
+            }
+        }
     }
 }

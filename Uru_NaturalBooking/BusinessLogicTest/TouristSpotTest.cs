@@ -206,6 +206,173 @@ namespace BusinessLogicTest
             var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
         }
 
+        [TestMethod]
+        public void GetValidTouristSpotByRegion()
+        {
+            Region region1 = new Region()
+            {
+                Id = Guid.NewGuid(),
+                Name = Region.RegionName.Región_Centro_Sur
+            };
+
+            Region region2 = new Region()
+            {
+                Id = Guid.NewGuid(),
+                Name = Region.RegionName.Región_Este
+            };
+
+            Category category = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Playa"
+            };
+
+            Guid idForTouristSpot = Guid.NewGuid(); 
+
+            CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
+            {
+                CategoryId = category.Id,
+                TouristSpotId = idForTouristSpot
+            };
+
+            TouristSpot touristSpot = new TouristSpot
+            {
+                Id = idForTouristSpot,
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar.",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() {categoryTouristSpot} 
+            };
+
+            TouristSpot touristSpot2 = new TouristSpot
+            {
+                Id = idForTouristSpot,
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar.",
+                Region = region2,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot }
+            };
+
+            List<TouristSpot> listOfTouristSpotSearched = new List<TouristSpot>() { touristSpot, touristSpot2 }; 
+
+            var mock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Returns(listOfTouristSpotSearched);
+
+            var touristSpotLogic = new TouristSpotManagement(mock.Object);
+
+            var result = touristSpotLogic.GetTouristSpotByRegion(region1.Id); 
+
+            mock.VerifyAll();
+            Assert.AreEqual(touristSpot, result[0]); 
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void GetInvalidTouristSpotByRegion()
+        {
+            Region region1 = new Region()
+            {
+                Id = Guid.NewGuid(),
+                Name = Region.RegionName.Región_Centro_Sur
+            };
+
+            Region region2 = new Region()
+            {
+                Id = Guid.NewGuid(),
+                Name = Region.RegionName.Región_Este
+            };
+
+            Category category = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Playa"
+            };
+
+            Guid idForTouristSpot = Guid.NewGuid();
+
+            CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
+            {
+                CategoryId = category.Id,
+                TouristSpotId = idForTouristSpot
+            };
+
+            TouristSpot touristSpot = new TouristSpot
+            {
+                Id = idForTouristSpot,
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar.",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot }
+            };
+
+            TouristSpot touristSpot2 = new TouristSpot
+            {
+                Id = idForTouristSpot,
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar.",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot }
+            };
+
+            List<TouristSpot> listOfTouristSpotSearched = new List<TouristSpot>() { touristSpot, touristSpot2 };
+
+            var mock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
+
+            var touristSpotLogic = new TouristSpotManagement(mock.Object);
+
+            var result = touristSpotLogic.GetTouristSpotByRegion(region1.Id);
+        }
+
+
+        [TestMethod]
+        public void GetValidTouristSpotById()
+        {
+            Region region1 = new Region()
+            {
+                Id = Guid.NewGuid(),
+                Name = Region.RegionName.Región_Centro_Sur
+            };
+
+            Category category = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Playa"
+            };
+
+            Guid idForTouristSpot = Guid.NewGuid();
+
+            CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
+            {
+                CategoryId = category.Id,
+                TouristSpotId = idForTouristSpot
+            };
+
+            TouristSpot touristSpot = new TouristSpot
+            {
+                Id = idForTouristSpot,
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar.",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot }
+            };
+
+            var mock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot); 
+
+            var touristSpotLogic = new TouristSpotManagement(mock.Object);
+
+            var result = touristSpotLogic.GetTouristSpotById(idForTouristSpot);
+
+            mock.VerifyAll();
+            Assert.AreEqual(touristSpot, result); 
+
+        }
+
+
+
+
 
     }
 }
