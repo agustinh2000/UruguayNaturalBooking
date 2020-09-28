@@ -20,6 +20,11 @@ namespace BusinessLogic
             touristSpotManagementLogic = touristSpotLogic; 
         }
 
+        public LodgingManagement(IRepository<Lodging> repository)
+        {
+            lodgingRepository = repository; 
+        }
+
         public Lodging Create(Lodging lodging, Guid touristSpotId)
         {
             try
@@ -35,6 +40,18 @@ namespace BusinessLogic
             catch (ExceptionRepository e)
             {
                 throw new ExceptionBusinessLogic("No se puede crear el hospedaje debido a que ha ocurrido un error.", e);
+            }
+        }
+
+        public Lodging GetLodgingById(Guid lodgingId)
+        {
+            try
+            {
+                Lodging lodgingObteined = lodgingRepository.Get(lodgingId);
+                return lodgingObteined; 
+            }catch(ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede obtener el hospedaje deseado", e); 
             }
         }
     }

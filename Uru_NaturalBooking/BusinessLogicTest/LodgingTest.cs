@@ -189,6 +189,28 @@ namespace BusinessLogicTest
             var resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
         }
 
+        [TestMethod]
+        public void GetValidLodgingOk()
+        {
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
+            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+
+            var resultOfGetTheLodging = lodgingLogic.GetLodgingById(lodging.Id);
+            Assert.AreEqual(lodging, resultOfGetTheLodging); 
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void FailInGetValidLodging()
+        {
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+
+            var resultOfGetLodging = lodgingLogic.GetLodgingById(lodging.Id); 
+        }
+
 
     }
 }

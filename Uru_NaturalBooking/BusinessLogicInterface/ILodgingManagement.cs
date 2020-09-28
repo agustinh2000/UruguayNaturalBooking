@@ -8,5 +8,7 @@ namespace BusinessLogicInterface
     public interface ILodgingManagement
     {
         Lodging Create(Lodging lodging, Guid touristSpotId);
+
+        Lodging GetLodgingById(Guid lodgingId); 
     }
 }
