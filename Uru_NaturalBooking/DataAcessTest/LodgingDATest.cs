@@ -125,7 +125,7 @@ namespace DataAcessTest
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionRepository))]
-        public void TestUpdateRegionInvalid()
+        public void TestUpdateLodgingInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
@@ -135,7 +135,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        public void TestGetAllRegionOK()
+        public void TestGetAllLodgingsOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);

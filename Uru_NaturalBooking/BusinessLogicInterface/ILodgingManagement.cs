@@ -11,6 +11,12 @@ namespace BusinessLogicInterface
 
         Lodging GetLodgingById(Guid lodgingId);
 
-        List<Lodging> GetLodgingsByTouristSpot(Guid touristSpotId); 
+        List<Lodging> GetLodgingsByTouristSpot(Guid touristSpotId);
+
+        List<Lodging> GetAllLoadings();
+
+        void RemoveLodging(Guid lodgingId);
+
+        Lodging UpdateLodging(Lodging aLodging);
     }
 }

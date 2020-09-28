@@ -297,5 +297,86 @@ namespace BusinessLogicTest
             List<Lodging> resultOfSearchLodgingByTouristSpot = lodgingLogic.GetLodgingsByTouristSpot(touristSpot.Id);
         }
 
+        [TestMethod]
+        public void UpdateValidLodging()
+        {
+            lodging.Name = "San Ramon Hotel";
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
+            lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.Save());
+            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+            var resultOfUpdate = lodgingLogic.UpdateLodging(lodging);
+            lodgingRepositoryMock.VerifyAll();
+            Assert.IsTrue(resultOfUpdate.Name.Equals("San Ramon Hotel"));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void FailInUpdateLodging()
+        {
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+            lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.Save());
+            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+            var resultOfUpdate = lodgingLogic.UpdateLodging(lodging);
+        }
+
+        [TestMethod]
+        public void RemoveValidLodging()
+        {
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
+            lodgingRepositoryMock.Setup(m => m.Remove(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetAll()).Returns(new List<Lodging>());
+            lodgingRepositoryMock.Setup(m => m.Save());
+            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+            lodgingLogic.RemoveLodging(lodging.Id);
+            List<Lodging> listOfLodging = lodgingLogic.GetAllLoadings();
+            lodgingRepositoryMock.VerifyAll();
+            Assert.IsTrue(listOfLodging.Count==0); 
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void RemoveInvalidLodging()
+        {
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+            lodgingRepositoryMock.Setup(m => m.Remove(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetAll()).Returns(new List<Lodging>());
+            lodgingRepositoryMock.Setup(m => m.Save());
+            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+            lodgingLogic.RemoveLodging(lodging.Id);
+        }
+
+        [TestMethod]
+        public void GetAllLodgings()
+        {
+            List<Lodging> lodgingsToReturn = new List<Lodging>() {lodging};
+
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.GetAll()).Returns(lodgingsToReturn);
+
+            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+
+            List<Lodging> lodgingsObteinedOfGetAll = lodgingLogic.GetAllLoadings();
+
+            lodgingRepositoryMock.VerifyAll();
+
+            CollectionAssert.AreEqual(lodgingsToReturn, lodgingsObteinedOfGetAll);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void FailAboutGetAllLodgings()
+        {
+            List<Lodging> lodgingsToReturn = new List<Lodging>() {lodging};
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
+            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+            List<Lodging> loadgingsObteinedOfGetAll = lodgingLogic.GetAllLoadings();
+        }
     }
 }

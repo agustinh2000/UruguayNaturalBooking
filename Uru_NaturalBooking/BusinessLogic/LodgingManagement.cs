@@ -68,5 +68,48 @@ namespace BusinessLogic
                 throw new ExceptionBusinessLogic("No se puede obtener el hospedaje deseado", e);
             }
         }
+
+        public void RemoveLodging(Guid lodgingId)
+        {
+            try
+            {
+                Lodging lodgingToDelete = lodgingRepository.Get(lodgingId);
+                lodgingRepository.Remove(lodgingToDelete);
+                lodgingRepository.Save();
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede eliminar el hospedaje deseado.", e);
+            }
+        }
+
+        public Lodging UpdateLodging(Lodging aLodging)
+        {
+            try
+            {
+                Lodging lodgingDb = lodgingRepository.Get(aLodging.Id);
+                lodgingDb.UpdateAttributes(aLodging);
+                lodgingRepository.Update(lodgingDb);
+                lodgingRepository.Save();
+                return lodgingDb;
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede actualizar el hospedaje.", e);
+            }
+        }
+
+        public List<Lodging> GetAllLoadings()
+        {
+            try
+            {
+                List<Lodging> allLodgings = lodgingRepository.GetAll().ToList();
+                return allLodgings;
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se pudieron obtener todos los hospedajes", e);
+            }
+        }
     }
 }
