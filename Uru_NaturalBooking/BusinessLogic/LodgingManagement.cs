@@ -5,6 +5,7 @@ using Domain;
 using RepositoryException;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BusinessLogic
@@ -52,6 +53,19 @@ namespace BusinessLogic
             }catch(ExceptionRepository e)
             {
                 throw new ExceptionBusinessLogic("No se puede obtener el hospedaje deseado", e); 
+            }
+        }
+
+        public List<Lodging> GetLodgingsByTouristSpot(Guid touristSpotId)
+        {
+            try
+            {
+                List<Lodging> listOfLodgingInTouristSpot = lodgingRepository.GetAll().Where(lod => lod.TouristSpot.Id.Equals(touristSpotId)).ToList();
+                return listOfLodgingInTouristSpot; 
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede obtener el hospedaje deseado", e);
             }
         }
     }

@@ -231,5 +231,71 @@ namespace BusinessLogicTest
         }
 
 
+        [TestMethod]
+        public void GetLodgingsByTouristSpot()
+        {
+            TouristSpot touristSpotOfPuntaDelEste = new TouristSpot()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Punta del este",
+                Description = "Donde el lujo y la naturaleza convergen, las mejores playas del Uruguay."
+            }; 
+
+            Lodging lodgingConrad = new Lodging()
+            {
+                Id = Guid.NewGuid(), 
+                Name = "Hotel Enjoy Conrad",
+                QuantityOfStars = 5,
+                Address = "Ruta 12 km 3.5",
+                PricePerNight = 1500, 
+                TouristSpot= touristSpotOfPuntaDelEste
+            };
+
+            lodging.TouristSpot = touristSpot; 
+
+            List<Lodging> listOfLodgings = new List<Lodging>() { lodging, lodgingConrad }; 
+
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.GetAll()).Returns(listOfLodgings);
+            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+
+            List<Lodging> resultOfSearchLodgingByTouristSpot = lodgingLogic.GetLodgingsByTouristSpot(touristSpot.Id);
+
+            lodgingRepositoryMock.VerifyAll();
+            Assert.AreEqual(lodging, resultOfSearchLodgingByTouristSpot[0]); 
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void FailInGetLodgingByTouristSpot()
+        {
+            TouristSpot touristSpotOfPuntaDelEste = new TouristSpot()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Punta del este",
+                Description = "Donde el lujo y la naturaleza convergen, las mejores playas del Uruguay."
+            };
+
+            Lodging lodgingConrad = new Lodging()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Hotel Enjoy Conrad",
+                QuantityOfStars = 5,
+                Address = "Ruta 12 km 3.5",
+                PricePerNight = 1500,
+                TouristSpot = touristSpotOfPuntaDelEste
+            };
+
+            lodging.TouristSpot = touristSpot;
+
+            List<Lodging> listOfLodgings = new List<Lodging>() { lodging, lodgingConrad };
+
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
+            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+
+            List<Lodging> resultOfSearchLodgingByTouristSpot = lodgingLogic.GetLodgingsByTouristSpot(touristSpot.Id);
+        }
+
     }
 }

@@ -9,6 +9,8 @@ namespace BusinessLogicInterface
     {
         Lodging Create(Lodging lodging, Guid touristSpotId);
 
-        Lodging GetLodgingById(Guid lodgingId); 
+        Lodging GetLodgingById(Guid lodgingId);
+
+        List<Lodging> GetLodgingsByTouristSpot(Guid touristSpotId); 
     }
 }
