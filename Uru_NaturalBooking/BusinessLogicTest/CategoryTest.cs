@@ -112,7 +112,6 @@ namespace BusinessLogicTest
 
             var result = categoriLogic.GetAllCategories();
 
-            mock.VerifyAll();
         }
 
 

@@ -39,21 +39,13 @@ namespace Domain
             return Description.Length > 2000;
         }
 
-        public override bool Equals(object obj)
+        public void UpdateAttributes(TouristSpot touristSpotWithModification)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-            else if (this.GetType() != obj.GetType())
-            {
-                return false;
-            }
-            else
-            {
-                TouristSpot touristSpot = (TouristSpot)obj;
-                return Name.Equals(touristSpot.Name) && Region.Equals(touristSpot.Region);
-            }
+            Name = touristSpotWithModification.Name;
+            Description = touristSpotWithModification.Description;
+            Image = touristSpotWithModification.Image;
+            Region = touristSpotWithModification.Region;
+            ListOfCategories = touristSpotWithModification.ListOfCategories;
         }
     }
 }
