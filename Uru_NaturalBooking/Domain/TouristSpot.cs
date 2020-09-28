@@ -38,5 +38,22 @@ namespace Domain
         {
             return Description.Length > 2000;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            else if (this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+            else
+            {
+                TouristSpot touristSpot = (TouristSpot)obj;
+                return Name.Equals(touristSpot.Name) && Region.Equals(touristSpot.Region);
+            }
+        }
     }
 }
