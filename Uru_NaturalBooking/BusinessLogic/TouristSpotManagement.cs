@@ -31,7 +31,6 @@ namespace BusinessLogic
         {
             try
             {
-                touristSpot.VerifyFormat();
                 touristSpot.Id = Guid.NewGuid();
                 Region regionForTouristSpot = regionManagementLogic.GetById(regionId);
                 touristSpot.Region = regionForTouristSpot;
@@ -47,6 +46,7 @@ namespace BusinessLogic
                     };
                     touristSpot.ListOfCategories.Add(categoryTouristSpot);
                 }
+                touristSpot.VerifyFormat();
                 touristSpotRepository.Add(touristSpot);
                 touristSpotRepository.Save();
                 return touristSpot;

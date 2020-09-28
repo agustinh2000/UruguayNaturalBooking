@@ -16,17 +16,36 @@ namespace BusinessLogicTest
     public class LodgingTest
     {
         TouristSpot touristSpot;
-        Lodging lodging; 
+        Lodging lodging;
+        CategoryTouristSpot categoryTouristSpot;
+        Category aCategory;
+
 
         [TestInitialize]
         public void SetUp()
         {
+
+            aCategory = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Playa",
+            };
+            CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
+            {
+                Category = aCategory,
+                CategoryId = aCategory.Id,
+            };
+            
             touristSpot = new TouristSpot
             {
                 Id = Guid.NewGuid(),
                 Name = "Maldonado",
-                Description = "Departamento donde la naturaleza y la tranquilidad desborda."
+                Description = "Departamento donde la naturaleza y la tranquilidad desborda.",
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot}
             };
+
+            categoryTouristSpot.TouristSpot = touristSpot;
+            categoryTouristSpot.TouristSpotId = touristSpot.Id;
 
             lodging = new Lodging()
             {

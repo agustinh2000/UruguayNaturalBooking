@@ -32,11 +32,20 @@ namespace Domain
             {
                 throw new TouristSpotException(MessageException.ErrorIsLongerThanTheLimit);
             }
+            if (NotHasCategoriesDefined())
+            {
+                throw new TouristSpotException(MessageException.ErrorDoesNotHaveCategory);
+            }
         }
 
         private bool IsLongerThanTheLimit()
         {
             return Description.Length > 2000;
+        }
+
+        private bool NotHasCategoriesDefined()
+        {
+            return ListOfCategories.Count == 0;
         }
 
         public void UpdateAttributes(TouristSpot touristSpotWithModification)
