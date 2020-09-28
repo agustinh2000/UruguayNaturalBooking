@@ -78,6 +78,7 @@ namespace BusinessLogicTest
                 Name = "Punta del este",
                 Description = "Lo mejor para gastar.",
                 Region = region1,
+                Image= new byte[10],
                 ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1, categoryTouristSpot2 }
             };
 
@@ -291,6 +292,41 @@ namespace BusinessLogicTest
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object, regionLogic, categoryLogic);
 
             var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TouristSpotException))]
+        public void CreateValidTouristSpotWithoutCategories()
+        {
+            TouristSpot touristSpot = new TouristSpot
+            {
+                Id = Guid.NewGuid(),
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar."
+            };
+            var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
+            touristSpotRepositoryMock.Setup(m => m.Save());
+
+            Guid regionId = Guid.NewGuid();
+            List<Guid> listIdCategories = new List<Guid>();
+            Guid id = Guid.NewGuid();
+
+            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
+
+            var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
+            regionsRepositoryMock.Setup(m => m.Get(regionId)).Returns(new Region() { Id = regionId });
+
+            var categoryLogic = new CategoryManagement(categoriesRepositoryMock.Object);
+            var regionLogic = new RegionManagement(regionsRepositoryMock.Object);
+
+            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object, regionLogic, categoryLogic);
+
+            var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
+
+            touristSpotRepositoryMock.VerifyAll();
+            Assert.AreEqual(result.Id, touristSpot.Id);
         }
 
         [TestMethod]
@@ -522,6 +558,123 @@ namespace BusinessLogicTest
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+            touristSpotRepositoryMock.Setup(m => m.Update(It.IsAny<TouristSpot>()));
+            touristSpotRepositoryMock.Setup(m => m.Save());
+
+            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            var resultOfUpdate = touristSpotLogic.UpdateTouristSpot(touristSpotToUpdate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TouristSpotException))]
+        public void FailInUpdateTouristSpotWithoutName()
+        {
+            TouristSpot touristSpotToUpdate = new TouristSpot()
+            {
+                Id = touristSpot2.Id,
+                Name = "",
+                Description = "Para tomarte un relax con tu pareja y descansar.",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
+            };
+
+            var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot2); ;
+            touristSpotRepositoryMock.Setup(m => m.Update(It.IsAny<TouristSpot>()));
+            touristSpotRepositoryMock.Setup(m => m.Save());
+
+            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            var resultOfUpdate = touristSpotLogic.UpdateTouristSpot(touristSpotToUpdate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TouristSpotException))]
+        public void FailInUpdateTouristSpotWithoutDescription()
+        {
+            TouristSpot touristSpotToUpdate = new TouristSpot()
+            {
+                Id = touristSpot2.Id,
+                Name = "Colonia",
+                Description = "",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
+            };
+
+            var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot2); ;
+            touristSpotRepositoryMock.Setup(m => m.Update(It.IsAny<TouristSpot>()));
+            touristSpotRepositoryMock.Setup(m => m.Save());
+
+            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            var resultOfUpdate = touristSpotLogic.UpdateTouristSpot(touristSpotToUpdate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TouristSpotException))]
+        public void FailInUpdateTouristSpotWithLargeDescription()
+        {
+            TouristSpot touristSpotToUpdate = new TouristSpot()
+            {
+                Id = touristSpot2.Id,
+                Name = "Colonia",
+                Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
+            };
+
+            var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot2); ;
+            touristSpotRepositoryMock.Setup(m => m.Update(It.IsAny<TouristSpot>()));
+            touristSpotRepositoryMock.Setup(m => m.Save());
+
+            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            var resultOfUpdate = touristSpotLogic.UpdateTouristSpot(touristSpotToUpdate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TouristSpotException))]
+        public void FailInUpdateTouristSpotWithoutCategories()
+        {
+            TouristSpot touristSpotToUpdate = new TouristSpot()
+            {
+                Id = touristSpot2.Id,
+                Name = "Colonia",
+                Description = "",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { }
+            };
+
+            var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot2); ;
             touristSpotRepositoryMock.Setup(m => m.Update(It.IsAny<TouristSpot>()));
             touristSpotRepositoryMock.Setup(m => m.Save());
 

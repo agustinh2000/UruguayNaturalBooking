@@ -140,6 +140,7 @@ namespace BusinessLogic
             {
                 TouristSpot touristSpotDb = touristSpotRepository.Get(touristSpot.Id);
                 touristSpotDb.UpdateAttributes(touristSpot);
+                touristSpotDb.VerifyFormat(); 
                 touristSpotRepository.Update(touristSpotDb);
                 touristSpotRepository.Save();
                 return touristSpotDb;
