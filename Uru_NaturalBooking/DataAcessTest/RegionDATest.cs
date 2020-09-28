@@ -30,9 +30,9 @@ namespace DataAcessTest
             regionRepo.Add(regionToAdd);
             regionRepo.Save();
 
-            List<Region> listOfCategories = regionRepo.GetAll().ToList();
+            List<Region> listOfRegion = regionRepo.GetAll().ToList();
 
-            Assert.AreEqual(regionToAdd, listOfCategories[0]);
+            Assert.AreEqual(regionToAdd, listOfRegion[0]);
         }
 
         [TestMethod]
@@ -129,9 +129,9 @@ namespace DataAcessTest
             regionRepo.Update(regionToAdd);
             regionRepo.Save();
 
-            List<Region> listOfCategories = regionRepo.GetAll().ToList();
+            List<Region> listOfRegions = regionRepo.GetAll().ToList();
 
-            Assert.AreNotEqual(Region.RegionName.Región_Centro_Sur, listOfCategories[0].Name);
+            Assert.AreNotEqual(Region.RegionName.Región_Centro_Sur, listOfRegions[0].Name);
         }
 
         [TestMethod]

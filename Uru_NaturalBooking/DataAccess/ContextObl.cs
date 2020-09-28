@@ -17,6 +17,8 @@ namespace DataAccess
 
         public DbSet<CategoryTouristSpot> CategoriesTouristSpots { get; set; }
 
+        public DbSet<Lodging> Lodgings { get; set; }
+
         public ContextObl(DbContextOptions options) : base(options)
         {
 

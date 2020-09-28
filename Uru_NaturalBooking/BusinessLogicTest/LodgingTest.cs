@@ -33,7 +33,7 @@ namespace BusinessLogicTest
                 Name = "Hotel Las Cumbres",
                 QuantityOfStars = 5,
                 Address = "Ruta 12 km 3.5",
-                PricePerNight = 150,
+                PricePerNight = 150
             };
 
         }
