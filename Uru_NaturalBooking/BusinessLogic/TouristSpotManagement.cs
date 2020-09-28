@@ -84,5 +84,29 @@ namespace BusinessLogic
                 throw new ExceptionBusinessLogic("No se puede crear el punto turistico debido a que no es valido.", e);
             }
         }
+
+        public List<TouristSpot> GetTouristSpotsByCategories(List<Guid> listOfCategoriesIdSearched)
+        {
+            try
+            {
+                List<CategoryTouristSpot> list = new List<CategoryTouristSpot>(); 
+
+                for(int i=0; i<listOfCategoriesIdSearched.Count; i++)
+                {
+                    CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
+                    {
+                        CategoryId = listOfCategoriesIdSearched[i]
+                    }; 
+                    list.Add(categoryTouristSpot); 
+                }
+
+                List<TouristSpot> listOfTouristSpot = touristSpotRepository.GetAll().Where(m => m.ListOfCategories.SequenceEqual(list)).ToList();
+                return listOfTouristSpot;
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede crear el punto turistico debido a que no es valido.", e);
+            }
+        }
     }
 }

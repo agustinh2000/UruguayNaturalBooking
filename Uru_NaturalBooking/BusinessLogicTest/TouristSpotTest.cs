@@ -371,6 +371,142 @@ namespace BusinessLogicTest
         }
 
 
+        [TestMethod]
+        public void GetValidTouristSpotSearchByCategories()
+        {
+            Region region1 = new Region()
+            {
+                Id = Guid.NewGuid(),
+                Name = Region.RegionName.Región_Centro_Sur
+            };
+
+            Category category1 = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Playa"
+            };
+
+            Category category2 = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Arena"
+            };
+
+            Guid idForTouristSpot1 = Guid.NewGuid();
+            Guid idForTouristSpot2 = Guid.NewGuid(); 
+
+            CategoryTouristSpot categoryTouristSpot1 = new CategoryTouristSpot()
+            {
+                CategoryId = category1.Id,
+                TouristSpotId = idForTouristSpot1
+            };
+
+            CategoryTouristSpot categoryTouristSpot2 = new CategoryTouristSpot()
+            {
+                CategoryId = category2.Id,
+                TouristSpotId = idForTouristSpot2
+            };
+
+            TouristSpot touristSpot = new TouristSpot
+            {
+                Id = idForTouristSpot1,
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar.",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1, categoryTouristSpot2 }
+            };
+
+            TouristSpot touristSpot2 = new TouristSpot
+            {
+                Id = idForTouristSpot2,
+                Name = "Punta del diablo",
+                Description = "Las mejores playas del Uruguay",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
+            };
+
+            List<TouristSpot> listOfTouristSpotSearched = new List<TouristSpot>() { touristSpot, touristSpot2 };
+
+            var mock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Returns(listOfTouristSpotSearched);
+
+            var touristSpotLogic = new TouristSpotManagement(mock.Object);
+
+            List<Guid> listOfCategoriesToSearch = new List<Guid>() { category1.Id, category2.Id }; 
+
+            var result = touristSpotLogic.GetTouristSpotsByCategories(listOfCategoriesToSearch); 
+
+            mock.VerifyAll();
+            Assert.AreEqual(touristSpot, result[0]);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void GetInvalidTouristSpotSearchByCategories()
+        {
+            Region region1 = new Region()
+            {
+                Id = Guid.NewGuid(),
+                Name = Region.RegionName.Región_Centro_Sur
+            };
+
+            Category category1 = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Playa"
+            };
+
+            Category category2 = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Arena"
+            };
+
+            Guid idForTouristSpot1 = Guid.NewGuid();
+            Guid idForTouristSpot2 = Guid.NewGuid();
+
+            CategoryTouristSpot categoryTouristSpot1 = new CategoryTouristSpot()
+            {
+                CategoryId = category1.Id,
+                TouristSpotId = idForTouristSpot1
+            };
+
+            CategoryTouristSpot categoryTouristSpot2 = new CategoryTouristSpot()
+            {
+                CategoryId = category2.Id,
+                TouristSpotId = idForTouristSpot2
+            };
+
+            TouristSpot touristSpot = new TouristSpot
+            {
+                Id = idForTouristSpot1,
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar.",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1, categoryTouristSpot2 }
+            };
+
+            TouristSpot touristSpot2 = new TouristSpot
+            {
+                Id = idForTouristSpot2,
+                Name = "Punta del diablo",
+                Description = "Las mejores playas del Uruguay",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
+            };
+
+            List<TouristSpot> listOfTouristSpotSearched = new List<TouristSpot>() { touristSpot, touristSpot2 };
+
+            var mock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
+
+            var touristSpotLogic = new TouristSpotManagement(mock.Object);
+
+            List<Guid> listOfCategoriesToSearch = new List<Guid>() { category1.Id, category2.Id };
+
+            var result = touristSpotLogic.GetTouristSpotsByCategories(listOfCategoriesToSearch);
+        }
+
 
 
 

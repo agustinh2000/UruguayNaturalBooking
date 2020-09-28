@@ -10,6 +10,8 @@ namespace BusinessLogicInterface
 
         List<TouristSpot> GetTouristSpotByRegion(Guid regionId);
 
-        TouristSpot GetTouristSpotById(Guid touristSpotId); 
+        TouristSpot GetTouristSpotById(Guid touristSpotId);
+
+        List<TouristSpot> GetTouristSpotsByCategories(List<Guid> listOfCategoriesIdSearched); 
     }
 }

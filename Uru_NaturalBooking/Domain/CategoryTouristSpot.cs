@@ -16,5 +16,24 @@ namespace Domain
 
         public CategoryTouristSpot() { }
 
-    }
+		public override bool Equals(object obj)
+		{
+			if (obj == null)
+			{
+				return false;
+			}
+			else if (this.GetType() != obj.GetType())
+			{
+				return false;
+			}
+			else
+			{
+				CategoryTouristSpot categoryTouristSpot = (CategoryTouristSpot)obj;
+				return CategoryId.ToString().Equals(categoryTouristSpot.CategoryId.ToString());
+			}
+		}
+
+
+
+	}
 }
