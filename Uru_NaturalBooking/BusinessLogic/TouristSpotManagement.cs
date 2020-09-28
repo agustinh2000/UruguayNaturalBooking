@@ -13,7 +13,7 @@ namespace BusinessLogic
     {
         private readonly IRepository<TouristSpot> touristSpotRepository;
         private readonly IRegionManagement regionManagementLogic;
-        private readonly ICategoryManagement categoryManagementLogic; 
+        private readonly ICategoryManagement categoryManagementLogic;
 
         public TouristSpotManagement(IRepository<TouristSpot> repository, IRegionManagement regionLogic, ICategoryManagement categoryLogic)
         {
@@ -35,8 +35,8 @@ namespace BusinessLogic
                 touristSpot.Id = Guid.NewGuid();
                 Region regionForTouristSpot = regionManagementLogic.GetById(regionId);
                 touristSpot.Region = regionForTouristSpot;
-                List<Category> listOfCategoriesToAdd = categoryManagementLogic.GetAssociatedCategories(categoriesId); 
-                foreach(Category category in listOfCategoriesToAdd)
+                List<Category> listOfCategoriesToAdd = categoryManagementLogic.GetAssociatedCategories(categoriesId);
+                foreach (Category category in listOfCategoriesToAdd)
                 {
                     CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
                     {
@@ -45,7 +45,7 @@ namespace BusinessLogic
                         Category = category,
                         CategoryId = category.Id
                     };
-                    touristSpot.ListOfCategories.Add(categoryTouristSpot); 
+                    touristSpot.ListOfCategories.Add(categoryTouristSpot);
                 }
                 touristSpotRepository.Add(touristSpot);
                 touristSpotRepository.Save();
@@ -63,11 +63,11 @@ namespace BusinessLogic
             {
                 List<TouristSpot> listOfTouristSpot = new List<TouristSpot>();
                 listOfTouristSpot = touristSpotRepository.GetAll().Where(m => m.Region.Id.Equals(regionId)).ToList();
-                return listOfTouristSpot; 
+                return listOfTouristSpot;
             }
             catch (ExceptionRepository e)
             {
-                throw new ExceptionBusinessLogic("No se puede crear el punto turistico debido a que no es valido.", e);
+                throw new ExceptionBusinessLogic("No se puede obtener el punto turistico por la region.", e);
             }
         }
 
@@ -76,12 +76,12 @@ namespace BusinessLogic
             try
             {
 
-                TouristSpot touristSpotObteined = touristSpotRepository.Get(touristSpotId); 
+                TouristSpot touristSpotObteined = touristSpotRepository.Get(touristSpotId);
                 return touristSpotObteined;
             }
             catch (ExceptionRepository e)
             {
-                throw new ExceptionBusinessLogic("No se puede crear el punto turistico debido a que no es valido.", e);
+                throw new ExceptionBusinessLogic("No se puede obtener el punto turistico atraves del Id.", e);
             }
         }
 
@@ -89,15 +89,15 @@ namespace BusinessLogic
         {
             try
             {
-                List<CategoryTouristSpot> list = new List<CategoryTouristSpot>(); 
+                List<CategoryTouristSpot> list = new List<CategoryTouristSpot>();
 
-                for(int i=0; i<listOfCategoriesIdSearched.Count; i++)
+                for (int i = 0; i < listOfCategoriesIdSearched.Count; i++)
                 {
                     CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
                     {
                         CategoryId = listOfCategoriesIdSearched[i]
-                    }; 
-                    list.Add(categoryTouristSpot); 
+                    };
+                    list.Add(categoryTouristSpot);
                 }
 
                 List<TouristSpot> listOfTouristSpot = touristSpotRepository.GetAll().Where(m => m.ListOfCategories.SequenceEqual(list)).ToList();
@@ -105,7 +105,74 @@ namespace BusinessLogic
             }
             catch (ExceptionRepository e)
             {
-                throw new ExceptionBusinessLogic("No se puede crear el punto turistico debido a que no es valido.", e);
+                throw new ExceptionBusinessLogic("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias.", e);
+            }
+        }
+
+        public List<TouristSpot> GetTouristSpotsByCategoriesAndRegion(List<Guid> listOfCategoriesIdSearched, Guid regionIdSearched)
+        {
+            try
+            {
+                List<CategoryTouristSpot> list = new List<CategoryTouristSpot>();
+
+                for (int i = 0; i < listOfCategoriesIdSearched.Count; i++)
+                {
+                    CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
+                    {
+                        CategoryId = listOfCategoriesIdSearched[i]
+                    };
+                    list.Add(categoryTouristSpot);
+                }
+
+                List<TouristSpot> listOfTouristSpot = touristSpotRepository.GetAll()
+                    .Where(m => m.ListOfCategories.SequenceEqual(list) && m.Region.Id.Equals(regionIdSearched)).ToList();
+                return listOfTouristSpot;
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias y region.", e);
+            }
+        }
+
+        public TouristSpot UpdateTouristSpot(TouristSpot touristSpot)
+        {
+            try
+            {
+                TouristSpot touristSpotDb = touristSpotRepository.Get(touristSpot.Id);
+                touristSpotDb.UpdateAttributes(touristSpot);
+                touristSpotRepository.Update(touristSpotDb);
+                touristSpotRepository.Save();
+                return touristSpotDb;
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede actualizar el punto turistico.", e);
+            }
+        }
+
+        public void RemoveTouristSpot(Guid touristSpotId)
+        {
+            try
+            {
+                TouristSpot touristSpotToDelete = touristSpotRepository.Get(touristSpotId);
+                touristSpotRepository.Remove(touristSpotToDelete);
+                touristSpotRepository.Save();
+            }catch(ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede eliminar el punto turistico deseado.", e); 
+            }
+        }
+
+        public List<TouristSpot> GetAllTouristSpot()
+        {
+            try
+            {
+                List<TouristSpot> allTouristSpot = touristSpotRepository.GetAll().ToList();
+                return allTouristSpot; 
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se pudieron obtener todos los puntos turisticos", e);
             }
         }
     }

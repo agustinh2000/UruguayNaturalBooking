@@ -12,6 +12,16 @@ namespace BusinessLogicInterface
 
         TouristSpot GetTouristSpotById(Guid touristSpotId);
 
-        List<TouristSpot> GetTouristSpotsByCategories(List<Guid> listOfCategoriesIdSearched); 
+        List<TouristSpot> GetTouristSpotsByCategories(List<Guid> listOfCategoriesIdSearched);
+
+        List<TouristSpot> GetTouristSpotsByCategoriesAndRegion(List<Guid> listOfCategoriesIdSearched, Guid regionIdSearched);
+
+        TouristSpot UpdateTouristSpot(TouristSpot touristSpot);
+
+        void RemoveTouristSpot(Guid touristSpotId);
+
+        List<TouristSpot> GetAllTouristSpot(); 
+
+
     }
 }

@@ -38,5 +38,14 @@ namespace Domain
         {
             return Description.Length > 2000;
         }
+
+        public void UpdateAttributes(TouristSpot touristSpotWithModification)
+        {
+            Name = touristSpotWithModification.Name;
+            Description = touristSpotWithModification.Description;
+            Image = touristSpotWithModification.Image;
+            Region = touristSpotWithModification.Region;
+            ListOfCategories = touristSpotWithModification.ListOfCategories;
+        }
     }
 }
