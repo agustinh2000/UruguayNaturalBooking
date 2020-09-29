@@ -30,7 +30,7 @@ namespace BusinessLogicTest
                 Id = Guid.NewGuid(),
                 Name = "Playa",
             };
-            CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
+            categoryTouristSpot = new CategoryTouristSpot()
             {
                 Category = aCategory,
                 CategoryId = aCategory.Id,

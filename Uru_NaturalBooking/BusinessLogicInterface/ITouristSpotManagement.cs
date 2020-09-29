@@ -20,8 +20,6 @@ namespace BusinessLogicInterface
 
         void RemoveTouristSpot(Guid touristSpotId);
 
-        List<TouristSpot> GetAllTouristSpot(); 
-
-
+        List<TouristSpot> GetAllTouristSpot();
     }
 }
