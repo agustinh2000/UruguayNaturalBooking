@@ -21,6 +21,7 @@ namespace DataAccess
             try
             {
                 Context.Set<T>().Add(entity);
+                Context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -29,11 +30,11 @@ namespace DataAccess
         }
 
         public void Remove(T entity)
-
         {
             try
             {
                 Context.Set<T>().Remove(entity);
+                Context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -47,18 +48,6 @@ namespace DataAccess
             {
                 //Context.Entry(entity).State = EntityState.Modified;
                 Context.Set<T>().Update(entity);
-            }
-            catch (Exception e)
-            {
-
-                throw new ExceptionRepository(e.Message, e);
-            }
-        }
-
-        public void Save()
-        {
-            try
-            {
                 Context.SaveChanges();
             }
             catch (Exception e)

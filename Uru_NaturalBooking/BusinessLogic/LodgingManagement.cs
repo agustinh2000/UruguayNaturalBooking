@@ -35,7 +35,6 @@ namespace BusinessLogic
                 lodging.TouristSpot = touristSpotForLodging; 
                 lodging.VerifyFormat();
                 lodgingRepository.Add(lodging);
-                lodgingRepository.Save();
                 return lodging;
             }
             catch (ExceptionRepository e)
@@ -75,7 +74,6 @@ namespace BusinessLogic
             {
                 Lodging lodgingToDelete = lodgingRepository.Get(lodgingId);
                 lodgingRepository.Remove(lodgingToDelete);
-                lodgingRepository.Save();
             }
             catch (ExceptionRepository e)
             {
@@ -90,7 +88,6 @@ namespace BusinessLogic
                 Lodging lodgingDb = lodgingRepository.Get(aLodging.Id);
                 lodgingDb.UpdateAttributes(aLodging);
                 lodgingRepository.Update(lodgingDb);
-                lodgingRepository.Save();
                 return lodgingDb;
             }
             catch (ExceptionRepository e)

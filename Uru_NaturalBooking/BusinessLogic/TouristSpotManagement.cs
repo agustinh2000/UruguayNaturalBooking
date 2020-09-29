@@ -48,7 +48,6 @@ namespace BusinessLogic
                 }
                 touristSpot.VerifyFormat();
                 touristSpotRepository.Add(touristSpot);
-                touristSpotRepository.Save();
                 return touristSpot;
             }
             catch (ExceptionRepository e)
@@ -142,7 +141,6 @@ namespace BusinessLogic
                 touristSpotDb.UpdateAttributes(touristSpot);
                 touristSpotDb.VerifyFormat(); 
                 touristSpotRepository.Update(touristSpotDb);
-                touristSpotRepository.Save();
                 return touristSpotDb;
             }
             catch (ExceptionRepository e)
@@ -157,7 +155,6 @@ namespace BusinessLogic
             {
                 TouristSpot touristSpotToDelete = touristSpotRepository.Get(touristSpotId);
                 touristSpotRepository.Remove(touristSpotToDelete);
-                touristSpotRepository.Save();
             }catch(ExceptionRepository e)
             {
                 throw new ExceptionBusinessLogic("No se puede eliminar el punto turistico deseado.", e); 
