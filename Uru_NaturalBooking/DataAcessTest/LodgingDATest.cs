@@ -46,7 +46,6 @@ namespace DataAcessTest
             IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
 
             lodgingRepository.Add(lodging);
-            lodgingRepository.Save();
 
             List<Lodging> listOfLodging = lodgingRepository.GetAll().ToList();
 
@@ -60,7 +59,6 @@ namespace DataAcessTest
             IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
 
             lodgingRepository.Add(lodging);
-            lodgingRepository.Save();
             Lodging lodgingOfDb = lodgingRepository.Get(lodging.Id);
 
             Assert.AreEqual(lodgingOfDb, lodgingOfDb);
@@ -83,10 +81,8 @@ namespace DataAcessTest
             IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
 
             lodgingRepository.Add(lodging);
-            lodgingRepository.Save();
             List<Lodging> listOfLodginfOfDbBeforeRemove = lodgingRepository.GetAll().ToList(); 
             lodgingRepository.Remove(lodging);
-            lodgingRepository.Save();
 
             List<Lodging> listOfLodgingOfDbAfterRemove = lodgingRepository.GetAll().ToList();
 
@@ -101,7 +97,6 @@ namespace DataAcessTest
             IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
 
             lodgingRepository.Remove(lodging);
-            lodgingRepository.Save();
         }
 
         [TestMethod]
@@ -111,12 +106,10 @@ namespace DataAcessTest
             IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
 
             lodgingRepository.Add(lodging);
-            lodgingRepository.Save();
 
             lodging.Name = "Hotel Enjoy Conrad";
 
             lodgingRepository.Update(lodging);
-            lodgingRepository.Save();
 
             List<Lodging> listOfLodgings = lodgingRepository.GetAll().ToList();
 
@@ -131,7 +124,6 @@ namespace DataAcessTest
             IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
 
             lodgingRepository.Update(lodging);
-            lodgingRepository.Save();
         }
 
         [TestMethod]
@@ -152,7 +144,6 @@ namespace DataAcessTest
 
             lodgingRepository.Add(lodging);
             lodgingRepository.Add(lodgingOfConrad);
-            lodgingRepository.Save();
 
             List<Lodging> listWithOriginalsLodgings = new List<Lodging>();
             listWithOriginalsLodgings.Add(lodging);

@@ -113,7 +113,6 @@ namespace BusinessLogicTest
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             Guid regionId = Guid.NewGuid();
             List<Guid> listIdCategories = new List<Guid>();
@@ -149,7 +148,6 @@ namespace BusinessLogicTest
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             Guid regionId = Guid.NewGuid();
             List<Guid> listIdCategories = new List<Guid>();
@@ -182,7 +180,6 @@ namespace BusinessLogicTest
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             Guid regionId = Guid.NewGuid();
             List<Guid> listIdCategories = new List<Guid>();
@@ -240,7 +237,6 @@ namespace BusinessLogicTest
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             Guid regionId = Guid.NewGuid();
             List<Guid> listIdCategories = new List<Guid>();
@@ -273,7 +269,6 @@ namespace BusinessLogicTest
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>())).Throws(new ExceptionRepository());
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             Guid regionId = Guid.NewGuid();
             List<Guid> listIdCategories = new List<Guid>();
@@ -306,7 +301,6 @@ namespace BusinessLogicTest
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             Guid regionId = Guid.NewGuid();
             List<Guid> listIdCategories = new List<Guid>();
@@ -532,7 +526,6 @@ namespace BusinessLogicTest
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot2);
             touristSpotRepositoryMock.Setup(m => m.Update(It.IsAny<TouristSpot>()));
-            touristSpotRepositoryMock.Setup(m => m.Save()); 
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
@@ -559,7 +552,6 @@ namespace BusinessLogicTest
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
             touristSpotRepositoryMock.Setup(m => m.Update(It.IsAny<TouristSpot>()));
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
@@ -582,7 +574,6 @@ namespace BusinessLogicTest
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot2); ;
             touristSpotRepositoryMock.Setup(m => m.Update(It.IsAny<TouristSpot>()));
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
@@ -605,7 +596,6 @@ namespace BusinessLogicTest
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot2); ;
             touristSpotRepositoryMock.Setup(m => m.Update(It.IsAny<TouristSpot>()));
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
@@ -653,7 +643,6 @@ namespace BusinessLogicTest
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot2); ;
             touristSpotRepositoryMock.Setup(m => m.Update(It.IsAny<TouristSpot>()));
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
@@ -676,7 +665,6 @@ namespace BusinessLogicTest
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot2); ;
             touristSpotRepositoryMock.Setup(m => m.Update(It.IsAny<TouristSpot>()));
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
@@ -690,7 +678,6 @@ namespace BusinessLogicTest
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot1);
             touristSpotRepositoryMock.Setup(m => m.Remove(It.IsAny<TouristSpot>()));
             touristSpotRepositoryMock.Setup(m => m.GetAll()).Returns(new List<TouristSpot>()); 
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
@@ -710,7 +697,6 @@ namespace BusinessLogicTest
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository()); 
             touristSpotRepositoryMock.Setup(m => m.Remove(It.IsAny<TouristSpot>()));
             touristSpotRepositoryMock.Setup(m => m.GetAll()).Returns(new List<TouristSpot>());
-            touristSpotRepositoryMock.Setup(m => m.Save());
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
@@ -747,8 +733,5 @@ namespace BusinessLogicTest
 
             List<TouristSpot> touristSpotObteinedOfGetAll = touristSpotLogic.GetAllTouristSpot();
         }
-
-
-
     }
 }

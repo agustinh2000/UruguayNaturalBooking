@@ -26,7 +26,6 @@ namespace DataAcessTest
             };
 
             categoryRepo.Add(categoryToAdd);
-            categoryRepo.Save(); 
             
             List<Category> listOfCategories = categoryRepo.GetAll().ToList();
 
@@ -46,7 +45,6 @@ namespace DataAcessTest
             };
 
             categoryRepo.Add(categoryToAdd);
-            categoryRepo.Save();
             Category categoryOfDb = categoryRepo.Get(categoryToAdd.Id); 
 
             Assert.AreEqual(categoryToAdd, categoryOfDb);
@@ -82,9 +80,7 @@ namespace DataAcessTest
             };
 
             categoryRepo.Add(categoryToAdd);
-            categoryRepo.Save();
             categoryRepo.Remove(categoryToAdd);
-            categoryRepo.Save(); 
 
             List<Category> listOfCategories = categoryRepo.GetAll().ToList();
 
@@ -105,7 +101,6 @@ namespace DataAcessTest
             };
 
             categoryRepo.Remove(categoryToAdd);
-            categoryRepo.Save();
         }
 
 
@@ -122,12 +117,10 @@ namespace DataAcessTest
             };
 
             categoryRepo.Add(categoryToAdd);
-            categoryRepo.Save();
 
             categoryToAdd.Name = "Piscinas"; 
 
             categoryRepo.Update(categoryToAdd);
-            categoryRepo.Save();
 
             List<Category> listOfCategories = categoryRepo.GetAll().ToList();
 
@@ -148,7 +141,6 @@ namespace DataAcessTest
             };
 
             categoryRepo.Update(categoryToAdd);
-            categoryRepo.Save();
         }
 
 
@@ -172,7 +164,6 @@ namespace DataAcessTest
 
             categoryRepo.Add(categoryToAdd);
             categoryRepo.Add(categoryToAdd2); 
-            categoryRepo.Save();
 
             List<Category> listTest = new List<Category>();
             listTest.Add(categoryToAdd);

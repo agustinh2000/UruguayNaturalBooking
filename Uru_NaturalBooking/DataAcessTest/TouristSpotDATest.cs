@@ -41,9 +41,7 @@ namespace DataAcessTest
             IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
             IRepository<Region> regionRepo = new BaseRepository<Region>(context);
             regionRepo.Add(aRegion);
-            regionRepo.Save();
             touristSpotRepo.Add(aTouristSpot);
-            touristSpotRepo.Save();
             List<TouristSpot> listOfTouristSpots = touristSpotRepo.GetAll().ToList();
             Assert.AreEqual(aTouristSpot, listOfTouristSpots[0]);
         }
@@ -55,9 +53,7 @@ namespace DataAcessTest
             IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
             IRepository<Region> regionRepo = new BaseRepository<Region>(context);
             regionRepo.Add(aRegion);
-            regionRepo.Save();
             touristSpotRepo.Add(aTouristSpot);
-            touristSpotRepo.Save();
             TouristSpot touristSpotOfDb = touristSpotRepo.Get(aTouristSpot.Id);
             Assert.AreEqual(aTouristSpot, touristSpotOfDb);
         }
@@ -77,9 +73,7 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
             touristSpotRepo.Add(aTouristSpot);
-            touristSpotRepo.Save();
             touristSpotRepo.Remove(aTouristSpot);
-            touristSpotRepo.Save();
             List<TouristSpot> listOfTouristSpots = touristSpotRepo.GetAll().ToList();
             Assert.IsTrue(listOfTouristSpots.IsNullOrEmpty());
         }
@@ -91,7 +85,6 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
             touristSpotRepo.Remove(aTouristSpot);
-            touristSpotRepo.Save();
         }
 
         [TestMethod]
@@ -100,10 +93,8 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
             touristSpotRepo.Add(aTouristSpot);
-            touristSpotRepo.Save();
             aTouristSpot.Name = "Piscinas";
             touristSpotRepo.Update(aTouristSpot);
-            touristSpotRepo.Save();
             List<TouristSpot> listOfTouristSpots = touristSpotRepo.GetAll().ToList();
             Assert.AreEqual("Piscinas", listOfTouristSpots[0].Name);
         }
@@ -116,7 +107,6 @@ namespace DataAcessTest
             IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
             touristSpotRepo.Update(aTouristSpot);
             TouristSpot touristSpot = touristSpotRepo.Get(aTouristSpot.Id);
-            touristSpotRepo.Save();
         }
 
         [TestMethod]
@@ -133,7 +123,6 @@ namespace DataAcessTest
             };
             touristSpotRepo.Add(aTouristSpot);
             touristSpotRepo.Add(aTouristSpot2);
-            touristSpotRepo.Save();
             List<TouristSpot> listTest = new List<TouristSpot>();
             listTest.Add(aTouristSpot);
             listTest.Add(aTouristSpot2);

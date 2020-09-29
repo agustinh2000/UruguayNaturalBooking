@@ -28,7 +28,6 @@ namespace DataAcessTest
             };
 
             regionRepo.Add(regionToAdd);
-            regionRepo.Save();
 
             List<Region> listOfRegion = regionRepo.GetAll().ToList();
 
@@ -48,7 +47,7 @@ namespace DataAcessTest
             };
 
             regionRepo.Add(regionToAdd);
-            regionRepo.Save();
+
             Region regionOfDb = regionRepo.Get(regionToAdd.Id);
 
             Assert.AreEqual(regionToAdd, regionOfDb);
@@ -83,9 +82,7 @@ namespace DataAcessTest
             };
 
             regionRepo.Add(regionToAdd);
-            regionRepo.Save();
             regionRepo.Remove(regionToAdd);
-            regionRepo.Save();
 
             List<Region> listOfRegion = regionRepo.GetAll().ToList();
 
@@ -106,7 +103,6 @@ namespace DataAcessTest
             };
 
             regionRepo.Remove(regionToAdd);
-            regionRepo.Save();
         }
 
         [TestMethod]
@@ -122,12 +118,10 @@ namespace DataAcessTest
             };
 
             regionRepo.Add(regionToAdd);
-            regionRepo.Save();
 
             regionToAdd.Name = Region.RegionName.Región_Corredor_Pajaros_Pintados;
 
             regionRepo.Update(regionToAdd);
-            regionRepo.Save();
 
             List<Region> listOfRegions = regionRepo.GetAll().ToList();
 
@@ -148,7 +142,6 @@ namespace DataAcessTest
             };
 
             regionRepo.Update(regionToAdd);
-            regionRepo.Save();
         }
 
         [TestMethod]
@@ -171,7 +164,6 @@ namespace DataAcessTest
 
             regionRepo.Add(regionToAdd);
             regionRepo.Add(regionToAdd2);
-            regionRepo.Save();
 
             List<Region> listTest = new List<Region>();
             listTest.Add(regionToAdd);
