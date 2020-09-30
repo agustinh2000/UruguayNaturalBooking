@@ -40,11 +40,13 @@ namespace WebApi
             services.AddScoped(typeof(IRepository<TouristSpot>), typeof(BaseRepository<TouristSpot>));
             services.AddScoped(typeof(IRepository<Region>), typeof(BaseRepository<Region>));
             services.AddScoped(typeof(IRepository<Category>), typeof(BaseRepository<Category>));
-            services.AddScoped(typeof(IRepository<Lodging>), typeof(BaseRepository<Lodging>)); 
+            services.AddScoped(typeof(IRepository<Lodging>), typeof(BaseRepository<Lodging>));
+            services.AddScoped(typeof(IRepository<Reserve>), typeof(BaseRepository<Reserve>));
             services.AddScoped<ITouristSpotManagement, TouristSpotManagement>();
             services.AddScoped<IRegionManagement, RegionManagement>();
             services.AddScoped<ICategoryManagement, CategoryManagement>();
-            services.AddScoped<ILodgingManagement, LodgingManagement>(); 
+            services.AddScoped<ILodgingManagement, LodgingManagement>();
+            services.AddScoped<IReserveManagement, ReserveManagement>(); 
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

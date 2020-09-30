@@ -63,7 +63,7 @@ namespace DataAcessTest
             lodgingRepository.Save();
             Lodging lodgingOfDb = lodgingRepository.Get(lodging.Id);
 
-            Assert.AreEqual(lodgingOfDb, lodgingOfDb);
+            Assert.AreEqual(lodging, lodgingOfDb);
         }
 
         [TestMethod]
