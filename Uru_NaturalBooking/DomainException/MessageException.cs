@@ -12,5 +12,8 @@ namespace DomainException
         public static string ErrorQuantity = "Error. La cantidad de estrellas debe estar entre 1 y 5.";
         public static string ErrorPrice = "Error. El precio por noche del hospedaje debe estar entre 0 y 100000.";
         public static string ErrorDoesNotHaveCategory = "Error. El punto turistico debe tener al menos una categoria asociada";
+        public static string ErrorInvalidEmail = "Error. El email es invalido.";
+        public static string ErrorTokenNotExist = "Error. El token no existe.";
+
     }
 }
