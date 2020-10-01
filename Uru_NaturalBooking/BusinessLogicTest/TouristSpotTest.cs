@@ -325,8 +325,6 @@ namespace BusinessLogicTest
 
             var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
 
-            touristSpotRepositoryMock.VerifyAll();
-            Assert.AreEqual(result.Id, touristSpot.Id);
         }
 
         [TestMethod]

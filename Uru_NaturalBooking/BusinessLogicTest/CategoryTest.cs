@@ -31,7 +31,7 @@ namespace BusinessLogicTest
             var result = categoryLogic.GetById(category.Id);
 
             mock.VerifyAll();
-            Assert.AreEqual(category.Name, result.Name);
+            Assert.AreEqual(category, result);
         }
 
         [TestMethod]
