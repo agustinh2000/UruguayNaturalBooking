@@ -3,6 +3,7 @@ using BusinessLogic;
 using BusinessLogicException;
 using DataAccessInterface;
 using Domain;
+using DomainException;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RepositoryException;
@@ -164,7 +165,63 @@ namespace BusinessLogicTest
             var categoryLogic = new CategoryManagement(mock.Object);
 
             var result = categoryLogic.GetAssociatedCategories(listOfIdentifier);
+        }
 
+
+        [TestMethod]
+        public void CreateValidCategory()
+        {
+            Category category = new Category
+            {
+                Name = "Playita y calor"
+            };
+
+            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(It.IsAny<Category>()));
+            mock.Setup(m => m.Save()); 
+
+            var categoryLogic = new CategoryManagement(mock.Object);
+
+            var result = categoryLogic.Create(category);
+
+            mock.VerifyAll();
+            Assert.AreEqual(category, result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void CreateInvalidCategory()
+        {
+            Category category = new Category
+            {
+                Name = "Playita y calor"
+            };
+
+            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(It.IsAny<Category>())).Throws(new ExceptionRepository());
+            mock.Setup(m => m.Save());
+
+            var categoryLogic = new CategoryManagement(mock.Object);
+
+            var result = categoryLogic.Create(category);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(CategoryException))]
+        public void CreateInvalidCategoryWithoutName()
+        {
+            Category category = new Category
+            {
+                Name = ""
+            };
+
+            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(It.IsAny<Category>()));
+            mock.Setup(m => m.Save());
+
+            var categoryLogic = new CategoryManagement(mock.Object);
+
+            var result = categoryLogic.Create(category);
         }
 
     }

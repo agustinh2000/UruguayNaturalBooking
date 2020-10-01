@@ -6,6 +6,8 @@ namespace BusinessLogicInterface
 {
     public interface ICategoryManagement
     {
+        Category Create(Category category); 
+
         Category GetById(Guid identifier);
 
         List<Category> GetAllCategories();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainException;
+using System;
 using System.Collections.Generic;
 
 namespace Domain
@@ -14,6 +15,14 @@ namespace Domain
         public Category() {
 			ListOfTouristSpot = new List<CategoryTouristSpot>(); 
 		}
+
+        public void VerifyFormat()
+        {
+            if (string.IsNullOrEmpty(Name))
+            {
+                throw new CategoryException(MessageException.ErrorIsEmpty); 
+            }
+        }
 
         public override bool Equals(object obj)
         {

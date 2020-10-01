@@ -55,5 +55,21 @@ namespace BusinessLogic
              }
              return listOfCategoriesToAssociated;   
         }
+
+        public Category Create(Category categoryToCreate)
+        {
+            try
+            {
+                categoryToCreate.Id = Guid.NewGuid();
+                categoryToCreate.VerifyFormat();
+                categoryRepository.Add(categoryToCreate);
+                categoryRepository.Save();
+                return categoryToCreate; 
+
+            }catch(ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede crear la categoria deseada", e); 
+            }
+        }
     }
 }
