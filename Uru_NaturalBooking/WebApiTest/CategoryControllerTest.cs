@@ -1,3 +1,4 @@
+using BusinessLogicException;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -14,43 +15,51 @@ namespace WebApiTest
     [TestClass]
     public class CategoryControllerTest
     {
-        [TestMethod]
-        public void GetCategoryTestOk()
+        CategoryModel categoryBeachModel;
+        CategoryModel categoryAtractionsModel; 
+
+        [TestInitialize]
+        public void SetUp()
         {
-            CategoryModel categoryModel = new CategoryModel
+             categoryBeachModel = new CategoryModel
             {
                 Id = Guid.NewGuid(),
                 Name = "Playa"
             };
 
+             categoryAtractionsModel = new CategoryModel
+            {
+                Id = Guid.NewGuid(),
+                Name = "Atracciones"
+            };
+        }
+
+        [TestMethod]
+        public void GetCategoryTestOk()
+        {
+
             var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
-            mock.Setup(m => m.GetById(It.IsAny<Guid>())).Returns(categoryModel.ToEntity());
+            mock.Setup(m => m.GetById(It.IsAny<Guid>())).Returns(categoryBeachModel.ToEntity());
             CategoryController categoryController = new CategoryController(mock.Object);
 
-            var result = categoryController.Get(categoryModel.Id);
+            var result = categoryController.Get(categoryBeachModel.Id);
             var createdResult = result as OkObjectResult;
             var model = createdResult.Value as CategoryModel;
 
             mock.VerifyAll();
-            Assert.AreEqual(categoryModel.Name, model.Name); 
-            Assert.AreEqual(categoryModel.Id, model.Id);
+            Assert.AreEqual(categoryBeachModel.Name, model.Name); 
+            Assert.AreEqual(categoryBeachModel.Id, model.Id);
         }
 
         [TestMethod]
         
         public void GetCategoryTestFailed()
         {
-            CategoryModel categoryModel = new CategoryModel
-            {
-                Id = Guid.NewGuid(),
-                Name = "Playa"
-            };
-
             var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
             mock.Setup(m => m.GetById(It.IsAny<Guid>())).Returns(value: null);
             CategoryController categoryController = new CategoryController(mock.Object);
 
-            var result = categoryController.Get(categoryModel.Id);
+            var result = categoryController.Get(categoryBeachModel.Id);
             var createdResult = result as NotFoundObjectResult;
             var resultValue = createdResult.Value;
             mock.VerifyAll();
@@ -59,20 +68,22 @@ namespace WebApiTest
 
         [TestMethod]
 
-        public void GetAllCategoriesOk()
+        public void GetCategoryTestInternalServer()
         {
-            CategoryModel categoryBeachModel = new CategoryModel
-            {
-                Id = Guid.NewGuid(),
-                Name = "Playa"
-            };
+            var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
+            mock.Setup(m => m.GetById(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("No se pudo obtener la categoria deseada."));
+            CategoryController categoryController = new CategoryController(mock.Object);
 
-            CategoryModel categoryAtractionsModel = new CategoryModel
-            {
-                Id = Guid.NewGuid(),
-                Name = "Atracciones"
-            };
+            var result = categoryController.Get(categoryBeachModel.Id);
+            var createdResult = result as ObjectResult;
+            mock.VerifyAll();
+            Assert.AreEqual(500, createdResult.StatusCode);
+        }
 
+        [TestMethod]
+
+        public void GetAllCategoriesOkTest()
+        {
             List<CategoryModel> listOfCategoriesModel = new List<CategoryModel>() { categoryBeachModel, categoryAtractionsModel };
             List<Category> listOfCategories = new List<Category>() { categoryBeachModel.ToEntity(), categoryAtractionsModel.ToEntity() }; 
 
@@ -90,14 +101,43 @@ namespace WebApiTest
         }
 
         [TestMethod]
-        public void PostACategory()
-        {
-            CategoryModel categoryBeachModel = new CategoryModel
-            {
-                Id = Guid.NewGuid(),
-                Name = "Playa"
-            };
 
+        public void GetAllCategoriesNotFoundTest()
+        {
+            List<CategoryModel> listOfCategoriesModel = new List<CategoryModel>() { categoryBeachModel, categoryAtractionsModel };
+            List<Category> listOfCategories = new List<Category>() { categoryBeachModel.ToEntity(), categoryAtractionsModel.ToEntity() };
+
+            var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAllCategories()).Returns(value: null);
+            CategoryController categoryController = new CategoryController(mock.Object);
+
+            var result = categoryController.Get();
+            var createdResult = result as NotFoundObjectResult;
+
+            mock.VerifyAll();
+            Assert.AreEqual(404, createdResult.StatusCode); 
+        }
+
+        [TestMethod]
+        public void GetAllCategoriesInternalErrorTest()
+        {
+            List<CategoryModel> listOfCategoriesModel = new List<CategoryModel>() { categoryBeachModel, categoryAtractionsModel };
+            List<Category> listOfCategories = new List<Category>() { categoryBeachModel.ToEntity(), categoryAtractionsModel.ToEntity() };
+
+            var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAllCategories()).Throws(new ExceptionBusinessLogic("No se ha podido obtener las regiones"));
+            CategoryController categoryController = new CategoryController(mock.Object);
+
+            var result = categoryController.Get();
+            var createdResult = result as ObjectResult;
+
+            mock.VerifyAll();
+            Assert.AreEqual(500, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void PostACategoryTest()
+        {
             Category categoryToReturn = new Category()
             {
                 Id = Guid.NewGuid(),
@@ -117,17 +157,10 @@ namespace WebApiTest
         }
 
         [TestMethod]
-        public void TestPostMovieIncorrectCategory()
+        public void TestPostIncorrectCategory()
         {
-
-            CategoryModel categoryBeachModel = new CategoryModel
-            {
-                Id = Guid.NewGuid(),
-                Name = "Playa"
-            };
-
             var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
-            mock.Setup(m => m.Create(It.IsAny<Category>())).Throws(new ArgumentException());
+            mock.Setup(m => m.Create(It.IsAny<Category>())).Throws(new ExceptionBusinessLogic());
             CategoryController categoryController = new CategoryController(mock.Object);
 
             var result = categoryController.Post(categoryBeachModel);

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicException;
 using BusinessLogicInterface;
 using Domain;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 
@@ -23,18 +25,37 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(CategoryModel.ToModel(categoryManagement.GetAllCategories())); 
+            try
+            {
+                List<Category> categories = categoryManagement.GetAllCategories(); 
+                if (categories == null)
+                {
+                    return NotFound("No se pudo encontrar hospedajes");
+                }
+                return Ok(CategoryModel.ToModel(categories));
+            }
+            catch(ExceptionBusinessLogic e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
+            }
         }
 
         [HttpGet("{id}", Name="Get")]
         public IActionResult Get(Guid id)
         {
-            Category category = categoryManagement.GetById(id); 
-            if(category== null)
+            try
             {
-                return NotFound("El objeto solicitado no fue encontrado"); 
+                Category category = categoryManagement.GetById(id);
+                if (category == null)
+                {
+                    return NotFound("El objeto solicitado no fue encontrado");
+                }
+                return Ok(CategoryModel.ToModel(category));
+            }catch(ExceptionBusinessLogic e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
-            return Ok(CategoryModel.ToModel(category)); 
+            
         }
 
         [HttpPost]
@@ -45,7 +66,7 @@ namespace WebApi.Controllers
                 Category category = categoryManagement.Create(CategoryModel.ToEntity(categoryModel));
                 return CreatedAtRoute("Get", new { id = category.Id }, CategoryModel.ToModel(category));
             }
-            catch (ArgumentException e)
+            catch (ExceptionBusinessLogic e)
             {
                 return BadRequest(e.Message);
             }
