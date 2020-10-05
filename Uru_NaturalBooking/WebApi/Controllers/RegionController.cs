@@ -32,7 +32,7 @@ namespace WebApi.Controllers
                 {
                     return NotFound("No se encontraron regiones.");
                 }
-                return Ok(RegionModel.ToModel(regionManagement.GetAllRegions()));
+                return Ok(RegionModel.ToModel(regions));
             }
             catch (ExceptionBusinessLogic e)
             {

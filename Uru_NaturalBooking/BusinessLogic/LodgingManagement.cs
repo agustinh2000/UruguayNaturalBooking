@@ -88,10 +88,16 @@ namespace BusinessLogic
             try
             {
                 Lodging lodgingDb = lodgingRepository.Get(aLodging.Id);
-                lodgingDb.UpdateAttributes(aLodging);
-                lodgingRepository.Update(lodgingDb);
-                lodgingRepository.Save();
-                return lodgingDb;
+                if (lodgingDb != null)
+                {
+                    lodgingRepository.Update(aLodging);
+                    lodgingRepository.Save();
+                    return lodgingRepository.Get(aLodging.Id);
+                }
+                else
+                {
+                    throw new ExceptionBusinessLogic("El hospedaje buscado no existe"); 
+                }
             }
             catch (ExceptionRepository e)
             {

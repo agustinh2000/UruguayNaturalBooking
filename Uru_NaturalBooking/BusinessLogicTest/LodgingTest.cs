@@ -49,6 +49,7 @@ namespace BusinessLogicTest
 
             lodging = new Lodging()
             {
+                Id = Guid.NewGuid(), 
                 Name = "Hotel Las Cumbres",
                 QuantityOfStars = 5,
                 Address = "Ruta 12 km 3.5",
@@ -317,6 +318,18 @@ namespace BusinessLogicTest
         {
             var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+            lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.Save());
+            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+            var resultOfUpdate = lodgingLogic.UpdateLodging(lodging);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void FailInUpdateNullLodging()
+        {
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(value: null);
             lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
             var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);

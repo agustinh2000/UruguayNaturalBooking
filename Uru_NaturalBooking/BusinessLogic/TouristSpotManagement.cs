@@ -75,7 +75,6 @@ namespace BusinessLogic
         {
             try
             {
-
                 TouristSpot touristSpotObteined = touristSpotRepository.Get(touristSpotId);
                 return touristSpotObteined;
             }
