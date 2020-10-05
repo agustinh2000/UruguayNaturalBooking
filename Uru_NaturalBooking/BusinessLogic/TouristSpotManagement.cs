@@ -1,4 +1,4 @@
-﻿using BusinessLogicException;
+using BusinessLogicException;
 using BusinessLogicInterface;
 using DataAccessInterface;
 using Domain;
@@ -89,18 +89,9 @@ namespace BusinessLogic
         {
             try
             {
-                List<CategoryTouristSpot> list = new List<CategoryTouristSpot>();
 
-                for (int i = 0; i < listOfCategoriesIdSearched.Count; i++)
-                {
-                    CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
-                    {
-                        CategoryId = listOfCategoriesIdSearched[i]
-                    };
-                    list.Add(categoryTouristSpot);
-                }
-
-                List<TouristSpot> listOfTouristSpot = touristSpotRepository.GetAll().Where(m => m.ListOfCategories.SequenceEqual(list)).ToList();
+                List<TouristSpot> listOfTouristSpot = touristSpotRepository.GetAll().
+                    Where(m => !listOfCategoriesIdSearched.Except(m.ListOfCategories.ConvertAll(cat => cat.CategoryId )).Any()).ToList();
                 return listOfTouristSpot;
             }
             catch (ExceptionRepository e)
@@ -113,19 +104,8 @@ namespace BusinessLogic
         {
             try
             {
-                List<CategoryTouristSpot> list = new List<CategoryTouristSpot>();
-
-                for (int i = 0; i < listOfCategoriesIdSearched.Count; i++)
-                {
-                    CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
-                    {
-                        CategoryId = listOfCategoriesIdSearched[i]
-                    };
-                    list.Add(categoryTouristSpot);
-                }
-
-                List<TouristSpot> listOfTouristSpot = touristSpotRepository.GetAll()
-                    .Where(m => m.ListOfCategories.SequenceEqual(list) && m.Region.Id.Equals(regionIdSearched)).ToList();
+                List<TouristSpot> listOfTouristSpot = touristSpotRepository.GetAll().
+                    Where(m => !listOfCategoriesIdSearched.Except(m.ListOfCategories.ConvertAll(cat => cat.CategoryId)).Any() && m.Region.Id.Equals(regionIdSearched)).ToList();
                 return listOfTouristSpot;
             }
             catch (ExceptionRepository e)

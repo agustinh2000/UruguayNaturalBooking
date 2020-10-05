@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Domain
@@ -18,22 +19,14 @@ namespace Domain
 
 		public override bool Equals(object obj)
 		{
-			if (obj == null)
+
+			CategoryTouristSpot categoryTouristSpot = obj as CategoryTouristSpot;
+			if(categoryTouristSpot == null || Convert.IsDBNull(categoryTouristSpot))
 			{
 				return false;
-			}
-			else if (this.GetType() != obj.GetType())
-			{
-				return false;
-			}
-			else
-			{
-				CategoryTouristSpot categoryTouristSpot = (CategoryTouristSpot)obj;
-				return CategoryId.ToString().Equals(categoryTouristSpot.CategoryId.ToString());
-			}
+			}			
+			return CategoryId.Equals(categoryTouristSpot.CategoryId);
 		}
-
-
 
 	}
 }

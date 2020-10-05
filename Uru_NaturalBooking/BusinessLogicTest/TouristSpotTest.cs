@@ -1,4 +1,4 @@
-﻿using BusinessLogic;
+using BusinessLogic;
 using BusinessLogicException;
 using DataAccessInterface;
 using Domain;
@@ -200,7 +200,7 @@ namespace BusinessLogicTest
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object, regionLogic, categoryLogic);
 
-            var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
+           var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
         }
 
         [TestMethod]
@@ -258,7 +258,7 @@ namespace BusinessLogicTest
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object, regionLogic, categoryLogic);
 
-            var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
+           var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
         }
 
         [TestMethod]
@@ -323,10 +323,10 @@ namespace BusinessLogicTest
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object, regionLogic, categoryLogic);
 
-            var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
+           var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
 
             touristSpotRepositoryMock.VerifyAll();
-            Assert.AreEqual(result.Id, touristSpot.Id);
+           Assert.AreEqual(result.Id, touristSpot.Id);
         }
 
         [TestMethod]
