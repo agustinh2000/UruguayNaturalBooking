@@ -8,6 +8,7 @@ using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Model.ForRequest;
 
 namespace WebApi.Controllers
 {
@@ -64,7 +65,7 @@ namespace WebApi.Controllers
             try
             {
                 Lodging lodging = lodgingManagement.Create(LodgingModelForRequest.ToEntity(lodgingModel), lodgingModel.TouristSpotId);
-                return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForRequest.ToModel(lodging));
+                return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForResponse.ToModel(lodging));
             }
             catch (ExceptionBusinessLogic e)
             {
@@ -78,7 +79,7 @@ namespace WebApi.Controllers
             try
             {
                 Lodging lodging = lodgingManagement.UpdateLodging(LodgingModelForRequest.ToEntity(lodgingModel)); 
-                return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForRequest.ToModel(lodging));
+                return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForResponse.ToModel(lodging));
             }
             catch (ExceptionBusinessLogic e)
             {

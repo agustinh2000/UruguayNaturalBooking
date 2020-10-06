@@ -8,6 +8,7 @@ using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Model.ForRequest;
 
 namespace WebApi.Controllers
 {
@@ -120,7 +121,7 @@ namespace WebApi.Controllers
             try
             {
                 TouristSpot touristSpotAdded = touristSpotManagement.Create(TouristSpotForRequestModel.ToEntity(aTouristSpot), aTouristSpot.RegionId, aTouristSpot.ListOfCategoriesId);
-                return CreatedAtRoute("GetTouristSpot", new { id = touristSpotAdded.Id }, TouristSpotForRequestModel.ToModel(touristSpotAdded));
+                return CreatedAtRoute("GetTouristSpot", new { id = touristSpotAdded.Id }, TouristSpotForResponseModel.ToModel(touristSpotAdded));
             }
             catch (ExceptionBusinessLogic e)
             {

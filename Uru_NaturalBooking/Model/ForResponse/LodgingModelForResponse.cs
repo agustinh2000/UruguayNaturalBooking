@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model
+namespace Model.ForRequest
 {
-    public class LodgingModelForResponse : ModelBase<Lodging, LodgingModelForResponse>
+    public class LodgingModelForResponse : ModelBaseForResponse<Lodging, LodgingModelForResponse>
     {
         public Guid Id { get; set; }
 
@@ -19,24 +19,9 @@ namespace Model
 
         public double PricePerNight { get; set; }
 
-        public TouristSpotForLodgingModel LodgingTouristSpotModel { get; set; }
+        public TouristSpotModelForLodgingResponseModel LodgingTouristSpotModel { get; set; }
 
         public LodgingModelForResponse() { }
-
-        public LodgingModelForResponse(Lodging lodging)
-        {
-            SetModel(lodging);
-        }
-
-        public override Lodging ToEntity() => new Lodging()
-        {
-            Id = Id,
-            Name = Name, 
-            QuantityOfStars= QuantityOfStars, 
-            Address= Address, 
-            Images= Images, 
-            PricePerNight = PricePerNight
-        };
 
         protected override LodgingModelForResponse SetModel(Lodging lodging)
         {
@@ -46,7 +31,7 @@ namespace Model
             Address = lodging.Address;
             Images = lodging.Images;
             PricePerNight = lodging.PricePerNight;
-            LodgingTouristSpotModel = TouristSpotForLodgingModel.ToModel(lodging.TouristSpot); 
+            LodgingTouristSpotModel = TouristSpotModelForLodgingResponseModel.ToModel(lodging.TouristSpot); 
             return this;
         }
 

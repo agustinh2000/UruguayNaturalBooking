@@ -3,6 +3,7 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Model.ForRequest;
 using System.Collections.Generic;
 
 namespace WebApi.Controllers
