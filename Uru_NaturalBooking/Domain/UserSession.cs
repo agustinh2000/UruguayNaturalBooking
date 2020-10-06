@@ -1,19 +1,20 @@
-﻿using DomainException;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Net.Mail;
 using System.Text;
 
 namespace Domain
 {
-    public class User
+    public class UserSession
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string LastName { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string Mail { get; set; }
+        public string Token { get; set; }
+        public virtual User User { get; set; }
+        public DateTime ConnectedAt { get; set; }
+
+        public UserSession()
+        {
+            ConnectedAt = DateTime.Now;
+        }
 
         public override bool Equals(object obj)
         {
@@ -27,10 +28,9 @@ namespace Domain
             }
             else
             {
-                User user = (User)obj;
-                return Mail.Equals(user.Name);
+                UserSession userSession = (UserSession)obj;
+                return Id.Equals(userSession.Id) && Token.Equals(userSession.Token);
             }
         }
     }
-
 }
