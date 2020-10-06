@@ -15,6 +15,37 @@ namespace Domain
         public string Password { get; set; }
         public string Mail { get; set; }
 
+        public void VerifyFormat()
+        {
+            if (IsAtLeastOneEmptyField())
+            {
+                throw new UserException(MessageException.ErrorIsEmpty);
+            }
+            if (!IsValidEmail())
+            {
+                throw new UserException(MessageException.ErrorInvalidEmail);
+            }
+        }
+
+        private bool IsAtLeastOneEmptyField()
+        {
+            return String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(LastName) ||
+                String.IsNullOrEmpty(UserName) || String.IsNullOrEmpty(Password) ||
+                String.IsNullOrEmpty(Mail);
+        }
+
+        private bool IsValidEmail()
+        {
+            try
+            {
+                MailAddress address = new System.Net.Mail.MailAddress(Mail);
+                return address.Address.Equals(Mail);
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
         public override bool Equals(object obj)
         {
             if (obj == null)
