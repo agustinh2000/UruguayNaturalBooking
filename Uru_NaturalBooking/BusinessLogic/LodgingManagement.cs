@@ -56,11 +56,12 @@ namespace BusinessLogic
             }
         }
 
-        public List<Lodging> GetLodgingsByTouristSpot(Guid touristSpotId)
+        public List<Lodging> GetAvailableLodgingsByTouristSpot(Guid touristSpotId)
         {
             try
             {
-                List<Lodging> listOfLodgingInTouristSpot = lodgingRepository.GetAll().Where(lod => lod.TouristSpot.Id.Equals(touristSpotId)).ToList();
+                List<Lodging> listOfLodgingInTouristSpot = lodgingRepository.GetAll().Where(lod => lod.TouristSpot.Id.Equals(touristSpotId) 
+                && lod.IsAvailable).ToList();
                 return listOfLodgingInTouristSpot; 
             }
             catch (ExceptionRepository e)

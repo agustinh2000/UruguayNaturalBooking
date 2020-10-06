@@ -260,7 +260,7 @@ namespace BusinessLogicTest
             lodgingRepositoryMock.Setup(m => m.GetAll()).Returns(listOfLodgings);
             var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
 
-            List<Lodging> resultOfSearchLodgingByTouristSpot = lodgingLogic.GetLodgingsByTouristSpot(touristSpot.Id);
+            List<Lodging> resultOfSearchLodgingByTouristSpot = lodgingLogic.GetAvailableLodgingsByTouristSpot(touristSpot.Id);
 
             lodgingRepositoryMock.VerifyAll();
             Assert.AreEqual(lodging, resultOfSearchLodgingByTouristSpot[0]); 
@@ -295,7 +295,7 @@ namespace BusinessLogicTest
             lodgingRepositoryMock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
             var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
 
-            List<Lodging> resultOfSearchLodgingByTouristSpot = lodgingLogic.GetLodgingsByTouristSpot(touristSpot.Id);
+            List<Lodging> resultOfSearchLodgingByTouristSpot = lodgingLogic.GetAvailableLodgingsByTouristSpot(touristSpot.Id);
         }
 
         [TestMethod]

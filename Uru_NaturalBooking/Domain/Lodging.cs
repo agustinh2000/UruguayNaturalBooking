@@ -19,7 +19,7 @@ namespace Domain
         
         public double PricePerNight { get; set; }
 
-        public double TotalPrice { get; set; }
+        public bool IsAvailable { get; set; } = true; 
 
         public virtual TouristSpot TouristSpot { get; set; }
 
@@ -58,16 +58,27 @@ namespace Domain
             return PricePerNight < 0 || PricePerNight > 100000; 
         }
 
-        public void UpdateAttributes(Lodging aLodging)
+        public double CalculateTotalPrice(int totalDaysToStay, int[] quantityOfGuest)
         {
-            Name = aLodging.Name;
-            QuantityOfStars = aLodging.QuantityOfStars;
-            Address = aLodging.Address;
-            Images = aLodging.Images;
-            PricePerNight = aLodging.PricePerNight;
-            TouristSpot = aLodging.TouristSpot;
+            int quantityOfAdults = quantityOfGuest[0];
+            int quantityOfChilds = quantityOfGuest[1];
+            int quantityOfBabys = quantityOfGuest[2];
+            const double discountForChilds = 0.50;
+            const double discountForBabys = 0.25;
+            return (PricePerNight * totalDaysToStay) * (quantityOfAdults + (quantityOfChilds * discountForChilds) 
+                + (quantityOfBabys * discountForBabys)); 
         }
-        
+
+        //public void UpdateAttributes(Lodging aLodging)
+        //{
+        //    Name = aLodging.Name;
+        //    QuantityOfStars = aLodging.QuantityOfStars;
+        //    Address = aLodging.Address;
+        //    Images = aLodging.Images;
+        //    PricePerNight = aLodging.PricePerNight;
+        //    TouristSpot = aLodging.TouristSpot;
+        //}
+
         public override bool Equals(object obj)
         {
             if (obj == null)

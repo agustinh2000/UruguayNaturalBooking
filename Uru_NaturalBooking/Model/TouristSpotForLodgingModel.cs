@@ -5,15 +5,15 @@ using System.Text;
 
 namespace Model
 {
-    public class LodgingTouristSpotModel: ModelBase<TouristSpot, LodgingTouristSpotModel>
+    public class TouristSpotForLodgingModel: ModelBase<TouristSpot, TouristSpotForLodgingModel>
     {
         public Guid Id { get; set; }
 
         public string Name { get; set; }
 
-        public LodgingTouristSpotModel() { }
+        public TouristSpotForLodgingModel() { }
 
-        public LodgingTouristSpotModel(TouristSpot touristSpot)
+        public TouristSpotForLodgingModel(TouristSpot touristSpot)
         {
             SetModel(touristSpot);
         }
@@ -24,7 +24,7 @@ namespace Model
             Name = Name
         }; 
 
-        protected override LodgingTouristSpotModel SetModel(TouristSpot touristSpot)
+        protected override TouristSpotForLodgingModel SetModel(TouristSpot touristSpot)
         {
             Id = touristSpot.Id;
             Name = touristSpot.Name;

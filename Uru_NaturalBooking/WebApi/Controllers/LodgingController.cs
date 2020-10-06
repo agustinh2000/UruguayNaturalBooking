@@ -40,7 +40,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetLodging")]
         public IActionResult Get(Guid id)
         {
             try
@@ -64,7 +64,7 @@ namespace WebApi.Controllers
             try
             {
                 Lodging lodging = lodgingManagement.Create(LodgingModelForRequest.ToEntity(lodgingModel), lodgingModel.TouristSpotId);
-                return CreatedAtRoute("Get", new { id = lodging.Id }, LodgingModelForRequest.ToModel(lodging));
+                return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForRequest.ToModel(lodging));
             }
             catch (ExceptionBusinessLogic e)
             {
@@ -78,7 +78,7 @@ namespace WebApi.Controllers
             try
             {
                 Lodging lodging = lodgingManagement.UpdateLodging(LodgingModelForRequest.ToEntity(lodgingModel)); 
-                return CreatedAtRoute("Get", new { id = lodging.Id }, LodgingModelForRequest.ToModel(lodging));
+                return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForRequest.ToModel(lodging));
             }
             catch (ExceptionBusinessLogic e)
             {

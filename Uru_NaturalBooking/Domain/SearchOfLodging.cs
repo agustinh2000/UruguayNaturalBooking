@@ -12,7 +12,7 @@ namespace Domain
 
         public int [] QuantityOfGuest { get; set; }
 
-        public virtual List<Tuple <Lodging, double>> LodgingsAndPrice { get; set; }
+        public TouristSpot TouristSpotSearched { get; set; }
 
     }
 }

@@ -19,7 +19,7 @@ namespace Model
 
         public double PricePerNight { get; set; }
 
-        public LodgingTouristSpotModel LodgingTouristSpotModel { get; set; }
+        public TouristSpotForLodgingModel LodgingTouristSpotModel { get; set; }
 
         public LodgingModelForResponse() { }
 
@@ -46,7 +46,7 @@ namespace Model
             Address = lodging.Address;
             Images = lodging.Images;
             PricePerNight = lodging.PricePerNight;
-            LodgingTouristSpotModel = LodgingTouristSpotModel.ToModel(lodging.TouristSpot); 
+            LodgingTouristSpotModel = TouristSpotForLodgingModel.ToModel(lodging.TouristSpot); 
             return this;
         }
 

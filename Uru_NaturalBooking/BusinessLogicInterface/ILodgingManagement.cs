@@ -11,7 +11,7 @@ namespace BusinessLogicInterface
 
         Lodging GetLodgingById(Guid lodgingId);
 
-        List<Lodging> GetLodgingsByTouristSpot(Guid touristSpotId);
+        List<Lodging> GetAvailableLodgingsByTouristSpot(Guid touristSpotId);
 
         List<Lodging> GetAllLoadings();
 

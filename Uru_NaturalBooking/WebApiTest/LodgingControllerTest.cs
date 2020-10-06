@@ -16,7 +16,7 @@ namespace WebApiTest
     [TestClass]
     public class LodgingControllerTest
     {
-        LodgingTouristSpotModel lodgingTouristSpotModel;
+        TouristSpotForLodgingModel lodgingTouristSpotModel;
         LodgingModelForResponse lodgingModelForResponse;
         LodgingModelForRequest lodgingModelForRequest;
         Lodging lodgingOfficial;
@@ -27,7 +27,7 @@ namespace WebApiTest
         [TestInitialize]
         public void SetUp()
         {
-            lodgingTouristSpotModel = new LodgingTouristSpotModel()
+            lodgingTouristSpotModel = new TouristSpotForLodgingModel()
             {
                 Id = Guid.NewGuid(),
                 Name = "Punta del este"
