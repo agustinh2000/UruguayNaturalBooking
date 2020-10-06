@@ -3,19 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model
+namespace Model.ForResponseAndRequest
 {
-    public class CategoryModel : ModelBase<Category, CategoryModel>
+    public class CategoryModel : ModelBaseForRequestAndResponse<Category, CategoryModel>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
 
         public CategoryModel() { }
-
-        public CategoryModel(Category category)
-        {
-            SetModel(category);
-        }
 
         public override Category ToEntity() => new Category()
         {
@@ -32,19 +27,8 @@ namespace Model
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-            else if (this.GetType() != obj.GetType())
-            {
-                return false;
-            }
-            else
-            {
-                CategoryModel categoryModel = (CategoryModel)obj;
-                return Name.Equals(categoryModel.Name);
-            }
+            return obj is CategoryModel model &&
+                   Name == model.Name;
         }
     }
 }

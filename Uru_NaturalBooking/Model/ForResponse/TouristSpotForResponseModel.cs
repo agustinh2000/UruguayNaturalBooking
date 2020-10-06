@@ -1,12 +1,13 @@
 ﻿using Domain;
+using Model.ForResponseAndRequest;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Model
+namespace Model.ForRequest
 {
-    public class TouristSpotForResponseModel : ModelBase<TouristSpot, TouristSpotForResponseModel>
+    public class TouristSpotForResponseModel : ModelBaseForResponse<TouristSpot, TouristSpotForResponseModel>
     {
         public Guid Id { get; set; }
 
@@ -14,24 +15,16 @@ namespace Model
 
         public string Description { get; set; }
 
-        public RegionModel RegionModel { get; set; }
+        public RegionForResponseModel RegionModel { get; set; }
 
         public List<CategoryModel> ListOfCategoriesModel { get; set; }
-
-       
-        public override TouristSpot ToEntity() => new TouristSpot()
-        {
-            Id = Id,
-            Name = Name,
-            Description = Description
-        };
 
         protected override TouristSpotForResponseModel SetModel(TouristSpot touristSpot)
         {
             Id = touristSpot.Id;
             Name = touristSpot.Name;
             Description = touristSpot.Description;
-            RegionModel = RegionModel.ToModel(touristSpot.Region);
+            RegionModel = RegionForResponseModel.ToModel(touristSpot.Region);
             ListOfCategoriesModel = touristSpot.ListOfCategories.ConvertAll(m => CategoryModel.ToModel(m.Category));
             return this;
         }

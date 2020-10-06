@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Model
+namespace Model.ForResponseAndRequest
 {
-    public abstract class ModelBase<E, M>
+    public abstract class ModelBaseForRequestAndResponse<E, M>
     where E : class
-    where M : ModelBase<E, M>, new()
+    where M : ModelBaseForRequestAndResponse<E, M>, new()
     {
         public static IEnumerable<M> ToModel(IEnumerable<E> entities)
         {
@@ -25,11 +25,6 @@ namespace Model
         {
             if (entity == null) return null;
             return new M().SetModel(entity);
-        }
-
-        public static IEnumerable<E> ToEntity(IEnumerable<M> models)
-        {
-            return models.Select(x => ToEntity(x));
         }
 
         public static E ToEntity(M model)
