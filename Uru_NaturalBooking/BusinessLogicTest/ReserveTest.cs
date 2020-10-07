@@ -78,17 +78,15 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "Lamela",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 05, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 2, 2, 1 }
-            }; 
+                QuantityOfAdult= 2,
+                QuantityOfChild=2, 
+                QuantityOfBaby=1
+            };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
 
             reserveRepositoryMock.VerifyAll();
             Assert.AreEqual(lodging, resultOfCreateAReserve.LodgingOfReserve);
@@ -116,17 +114,15 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "Lamela",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 05, 25),
-                CheckOut = new DateTime(2020, 06, 10), 
-                QuantityOfGuest= new int[3] {2, 2, 1}
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
         [TestMethod]
@@ -151,17 +147,15 @@ namespace BusinessLogicTest
             {
                 Name = "",
                 LastName = "Lamela",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 05, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 2, 2, 1 }
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
 
         }
 
@@ -187,17 +181,15 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 05, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 2, 2, 1 }
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
         [TestMethod]
@@ -222,17 +214,15 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "Lamela",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 08, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 2, 2, 1 }
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
         [TestMethod]
@@ -257,17 +247,15 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "Lamela",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 05, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 0, 0, 0 }
+                QuantityOfAdult = 0,
+                QuantityOfChild = 0,
+                QuantityOfBaby = 0
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
 
@@ -293,17 +281,16 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "Lamela",
-                Email = "joaquin.lamela"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela",
                 CheckIn = new DateTime(2020, 05, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 1, 0, 0 }
+                QuantityOfAdult = 1,
+                QuantityOfChild = 0,
+                QuantityOfBaby = 0
+
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
     }
 }

@@ -55,13 +55,6 @@ namespace DataAcessTest
                 TouristSpot = touristSpot
             };
 
-            search = new SearchOfLodging()
-            {
-                CheckIn = new DateTime(2020, 05, 25),
-                CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 2, 2, 1 }
-            };
-
             reserve = new Reserve()
             {
                 Id = Guid.NewGuid(),
@@ -71,11 +64,11 @@ namespace DataAcessTest
                 PhoneNumberOfContact = 29082733, 
                 DescriptionForGuest= "Un lugar ideal para descansar", 
                 LodgingOfReserve= lodging, 
-                CheckIn= search.CheckIn, 
-                CheckOut= search.CheckOut, 
-                QuantityOfAdult= search.QuantityOfGuest[0], 
-                QuantityOfChild= search.QuantityOfGuest[1], 
-                QuantityOfBaby= search.QuantityOfGuest[2], 
+                CheckIn= new DateTime(2020, 05, 25), 
+                CheckOut= new DateTime(2020, 06, 10), 
+                QuantityOfAdult= 2, 
+                QuantityOfChild= 2, 
+                QuantityOfBaby= 1, 
                 StateOfReserve= Reserve.ReserveState.Creada
             };
 
@@ -183,13 +176,6 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<Reserve> reserveRepository = new BaseRepository<Reserve>(context);
 
-            SearchOfLodging searchForFamily = new SearchOfLodging()
-            {
-                CheckIn = new DateTime(2020, 10, 25),
-                CheckOut = new DateTime(2020, 12, 10),
-                QuantityOfGuest = new int[3] { 2, 0, 1 }
-            };
-
             Reserve reserveForAFamily = new Reserve()
             {
                 Id = Guid.NewGuid(),
@@ -199,11 +185,11 @@ namespace DataAcessTest
                 PhoneNumberOfContact = 24006478,
                 DescriptionForGuest = "Un lugar para pasar el rato con la familia, ideal para tomar un relax",
                 LodgingOfReserve = lodging,
-                CheckIn = search.CheckIn,
-                CheckOut = search.CheckOut,
-                QuantityOfAdult = searchForFamily.QuantityOfGuest[0],
-                QuantityOfChild = searchForFamily.QuantityOfGuest[1],
-                QuantityOfBaby = searchForFamily.QuantityOfGuest[2],
+                CheckIn = new DateTime(2020, 10, 25),
+                CheckOut = new DateTime(2020, 12, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 0,
+                QuantityOfBaby = 1,
                 StateOfReserve = Reserve.ReserveState.Creada
             };
 

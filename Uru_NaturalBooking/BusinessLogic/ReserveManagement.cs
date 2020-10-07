@@ -14,16 +14,15 @@ namespace BusinessLogic
     public class ReserveManagement : IReserveManagement
     {
         private readonly IRepository<Reserve> reserveRepository;
-        private readonly ILodgingManagement lodgingManagement; 
-        private readonly int maxNumberOfPhoneWithEightNumber; 
+        private readonly ILodgingManagement lodgingManagement;
 
         public ReserveManagement(IRepository<Reserve> repository, ILodgingManagement lodgingLogic)
         {
             reserveRepository = repository;
-            lodgingManagement = lodgingLogic; 
+            lodgingManagement = lodgingLogic;
         }
 
-        public Reserve Create(Reserve reserve, Guid lodgingId, SearchOfLodging search)
+        public Reserve Create(Reserve reserve, Guid lodgingId)
         {
             try
             {
@@ -31,11 +30,6 @@ namespace BusinessLogic
                 reserve.PhoneNumberOfContact = Int32.Parse(RandomPhoneNumber(8)); 
                 reserve.DescriptionForGuest = RandomDescription(50);
                 reserve.LodgingOfReserve = lodgingManagement.GetLodgingById(lodgingId);
-                reserve.CheckIn = search.CheckIn;
-                reserve.CheckOut = search.CheckOut;
-                reserve.QuantityOfAdult = search.QuantityOfGuest[0]; 
-                reserve.QuantityOfChild = search.QuantityOfGuest[1];
-                reserve.QuantityOfBaby = search.QuantityOfGuest[2]; 
                 reserve.StateOfReserve = Reserve.ReserveState.Creada; 
                 reserve.VerifyFormat();
                 reserveRepository.Add(reserve);
