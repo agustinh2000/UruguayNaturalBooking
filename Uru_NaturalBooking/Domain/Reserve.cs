@@ -88,6 +88,19 @@ namespace Domain
             }
         }
 
+        public void UpdateAttributes(Reserve infoReserveToUpdate)
+        {
+            if(infoReserveToUpdate.DescriptionForGuest != null)
+            {
+                DescriptionForGuest = infoReserveToUpdate.DescriptionForGuest; 
+            }
+
+            if(Enum.IsDefined(typeof(ReserveState), infoReserveToUpdate.StateOfReserve))
+            {
+                StateOfReserve = infoReserveToUpdate.StateOfReserve; 
+            }
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)

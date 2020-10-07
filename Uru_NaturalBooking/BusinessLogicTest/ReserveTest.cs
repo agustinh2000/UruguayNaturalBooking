@@ -346,5 +346,168 @@ namespace BusinessLogicTest
 
             var resultOfGetAReserve = reserveLogic.GetById(reserve.Id);
         }
+
+        [TestMethod]
+        public void UpdateTheDescriptionAndTheStateOfReserveTest()
+        {
+            Reserve reserve = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1,
+                LodgingOfReserve = lodging, 
+                StateOfReserve= Reserve.ReserveState.Creada,
+                PhoneNumberOfContact= 29082733, 
+                DescriptionForGuest= "Va a disfrutar de su estadia, garantia asegurada"
+            };
+
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>()));
+            reserveRepositoryMock.Setup(m => m.Save()); 
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            Reserve reserveToUpdate = new Reserve()
+            {
+                Id = reserve.Id,
+                DescriptionForGuest = "Su reserva ha sido aceptada",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            }; 
+
+            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+
+            reserve.DescriptionForGuest = "Su reserva ha sido aceptada";
+            reserve.StateOfReserve = Reserve.ReserveState.Creada; 
+
+            reserveRepositoryMock.VerifyAll();
+            Assert.IsTrue(reserve.Equals(resultOfUpdate)); 
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void ThrowExceptionInUpdateMethodTest()
+        {
+            Reserve reserve = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1,
+                LodgingOfReserve = lodging,
+                StateOfReserve = Reserve.ReserveState.Creada,
+                PhoneNumberOfContact = 29082733,
+                DescriptionForGuest = "Va a disfrutar de su estadia, garantia asegurada"
+            };
+
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>())).Throws(new ExceptionBusinessLogic("Ocurrio un error al actualizar."));
+            reserveRepositoryMock.Setup(m => m.Save());
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            Reserve reserveToUpdate = new Reserve()
+            {
+                Id = reserve.Id,
+                DescriptionForGuest = "Su reserva ha sido aceptada",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void ThrowExceptionRepositoryInUpdateMethodTest()
+        {
+            Reserve reserve = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1,
+                LodgingOfReserve = lodging,
+                StateOfReserve = Reserve.ReserveState.Creada,
+                PhoneNumberOfContact = 29082733,
+                DescriptionForGuest = "Va a disfrutar de su estadia, garantia asegurada"
+            };
+
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>())).Throws(new ExceptionRepository("Ocurrio un error al actualizar."));
+            reserveRepositoryMock.Setup(m => m.Save());
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            Reserve reserveToUpdate = new Reserve()
+            {
+                Id = reserve.Id,
+                DescriptionForGuest = "Su reserva ha sido aceptada",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void UpdateInvalidBecauseReserveIsNullTest()
+        {
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(value: null);
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>()));
+            reserveRepositoryMock.Setup(m => m.Save());
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            Reserve reserveToUpdate = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                DescriptionForGuest = "Su reserva ha sido aceptada",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void ThrowsExceptionOnUpdateReserveTest()
+        {
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("Ha ocurrido un error al obtener la reserva."));
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>()));
+            reserveRepositoryMock.Setup(m => m.Save());
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            Reserve reserveToUpdate = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                DescriptionForGuest = "Su reserva ha sido aceptada",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+        }
+
     }
 }

@@ -7,6 +7,10 @@ namespace BusinessLogicInterface
 {
     public interface IReserveManagement
     {
-        Reserve Create(Reserve reserve, Guid lodgingId); 
+        Reserve Create(Reserve reserve, Guid lodgingId);
+
+        Reserve GetById(Guid reserveId);
+
+        Reserve Update(Guid idOfReserveToUpdate, Reserve aReserveTouUpdate); 
     }
 }

@@ -91,13 +91,15 @@ namespace BusinessLogic
                 Lodging lodgingDb = lodgingRepository.Get(aLodging.Id);
                 if (lodgingDb != null)
                 {
-                    lodgingRepository.Update(aLodging);
+                    lodgingDb.UpdateAttributes(aLodging);
+                    //lodgingDb.VerifyFormat(); 
+                    lodgingRepository.Update(lodgingDb);
                     lodgingRepository.Save();
-                    return lodgingRepository.Get(aLodging.Id);
+                    return lodgingDb;
                 }
                 else
                 {
-                    throw new ExceptionBusinessLogic("El hospedaje buscado no existe"); 
+                    throw new ExceptionBusinessLogic("El hospedaje buscado no existe");
                 }
             }
             catch (ExceptionRepository e)

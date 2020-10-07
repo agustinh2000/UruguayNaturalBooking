@@ -33,10 +33,10 @@ namespace WebApi.Controllers
                 List<Lodging> lodgings = lodgingManagement.GetAllLoadings();
                 if (lodgings == null)
                 {
-                    return NotFound("No se pudo encontrar hospedajes"); 
+                    return NotFound("No se pudo encontrar hospedajes");
                 }
                 return Ok(LodgingModelForResponse.ToModel(lodgings));
-            }catch (ExceptionBusinessLogic e)
+            } catch (ExceptionBusinessLogic e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -86,7 +86,6 @@ namespace WebApi.Controllers
             {
                 return BadRequest(e.Message);
             }
-
         }
 
         [HttpDelete("{id}")]

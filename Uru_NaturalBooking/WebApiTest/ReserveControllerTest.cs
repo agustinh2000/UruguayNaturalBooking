@@ -5,6 +5,7 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model.ForRequest;
+using Model.ForResponse;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ namespace WebApiTest
                 Name = "Hotel las cumbres",
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
-                PricePerNight = 150,
+                PricePerNight = 100,
                 TouristSpot = touristSpotForLodging
             };
 
@@ -62,12 +63,15 @@ namespace WebApiTest
                 Name = "Joaquin",
                 LastName = "Lamela",
                 Email = "joaquin.lamela00@gmail.com",
+                DescriptionForGuest= "Se ha registrado correctamente la reserva", 
+                PhoneNumberOfContact= 29082733, 
                 CheckIn = new DateTime(2020, 10, 05),
                 CheckOut = new DateTime(2020, 10, 07),
                 QuantityOfAdult = 1,
                 QuantityOfBaby = 1,
                 QuantityOfChild = 1, 
-                LodgingOfReserve= lodgingForReserve
+                LodgingOfReserve= lodgingForReserve,
+                StateOfReserve= Reserve.ReserveState.Creada
             }; 
         }
 
@@ -93,15 +97,14 @@ namespace WebApiTest
 
             var result = reserveController.Post(reserveModelForRequest);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as Reserve;
+            var model = createdResult.Value as ReserveModelForResponse;
             reserveManagementMock.VerifyAll();
-            reserveOfLodging.Id = model.Id; 
 
-            Assert.AreEqual(reserveOfLodging, model);
+            Assert.AreEqual(ReserveModelForResponse.ToModel(reserveOfLodging), model);
         }
 
         [TestMethod]
-        public void CreateInvalidReserveTestOk()
+        public void CreateInvalidReserveTest()
         {
             var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
             reserveManagementMock.Setup(m => m.Create(It.IsAny<Reserve>(), It.IsAny<Guid>())).
@@ -125,6 +128,49 @@ namespace WebApiTest
             var createdResult = result as BadRequestObjectResult;
             reserveManagementMock.VerifyAll();
             Assert.AreEqual(400, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void GetExistingReserveByIdOkTest()
+        {
+            var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
+            reserveManagementMock.Setup(m => m.GetById(It.IsAny<Guid>())).Returns(reserveOfLodging);
+            ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
+
+            var result = reserveController.Get(reserveOfLodging.Id);
+            var createdResult = result as OkObjectResult;
+            var model = createdResult.Value as ReserveModelForResponse;
+
+            reserveManagementMock.VerifyAll();
+            Assert.AreEqual(ReserveModelForResponse.ToModel(reserveOfLodging), model); 
+        }
+
+        [TestMethod]
+        public void CantGetReserveByIdBecauseNotExistTest()
+        {
+            var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
+            reserveManagementMock.Setup(m => m.GetById(It.IsAny<Guid>())).Returns(value: null);
+            ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
+
+            var result = reserveController.Get(reserveOfLodging.Id);
+            var createdResult = result as NotFoundObjectResult;
+
+            reserveManagementMock.VerifyAll();
+            Assert.AreEqual(404, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void CantGetReserveByIdInternalServerErrorTest()
+        {
+            var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
+            reserveManagementMock.Setup(m => m.GetById(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("Ha ocurrido un error al acceder a la base de datos"));
+            ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
+
+            var result = reserveController.Get(reserveOfLodging.Id);
+            var createdResult = result as ObjectResult;
+
+            reserveManagementMock.VerifyAll();
+            Assert.AreEqual(500, createdResult.StatusCode);
         }
 
 

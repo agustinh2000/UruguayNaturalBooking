@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using BusinessLogicException;
 using BusinessLogicInterface;
 using Domain;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.ForRequest;
+using Model.ForResponse;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,13 +25,31 @@ namespace WebApi.Controllers
             reserveManagement = reserveLogic;
         }
 
+        [HttpGet("{id}", Name = "GetReserve")]
+        public IActionResult Get(Guid id)
+        {
+            try
+            {
+                Reserve reserve = reserveManagement.GetById(id);
+                if (reserve == null)
+                {
+                    return NotFound("La reserva solicitada no fue encontrado");
+                }
+                return Ok(ReserveModelForResponse.ToModel(reserve));
+            }
+            catch (ExceptionBusinessLogic e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
+            }
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody] ReserveModelForRequest aReserveModel)
         {
             try
             {
                 Reserve reserve = reserveManagement.Create(ReserveModelForRequest.ToEntity(aReserveModel), aReserveModel.IdOfLodgingToReserve);
-                return CreatedAtRoute("GetReserve", new { id = reserve.Id }, reserve);
+                return CreatedAtRoute("GetReserve", new { id = reserve.Id }, ReserveModelForResponse.ToModel(reserve));
             }
             catch(ExceptionBusinessLogic e)
             {

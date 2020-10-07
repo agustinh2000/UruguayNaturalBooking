@@ -40,7 +40,6 @@ namespace BusinessLogic
                 reserveRepository.Add(reserve);
                 reserveRepository.Save(); 
                 return reserve; 
-
             }catch(ExceptionRepository e)
             {
                 throw new ExceptionBusinessLogic("No se puede crear la reserva deseada.", e); 
@@ -57,6 +56,30 @@ namespace BusinessLogic
             catch (ExceptionRepository e)
             {
                 throw new ExceptionBusinessLogic("Hubo un error al obtener la reserva deseada.", e);
+            }
+        }
+
+        public Reserve Update(Guid id, Reserve aReserve)
+        {
+            try
+            {
+                Reserve reserveOfDb = reserveRepository.Get(id);
+                if (reserveOfDb != null)
+                {
+                    reserveOfDb.UpdateAttributes(aReserve);
+                    reserveOfDb.VerifyFormat(); 
+                    reserveRepository.Update(reserveOfDb);
+                    reserveRepository.Save();
+                    return reserveOfDb;
+                }
+                else
+                {
+                    throw new ExceptionBusinessLogic("La reserva buscada no existe.");
+                }
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede actualizar la reserva.", e);
             }
         }
 
