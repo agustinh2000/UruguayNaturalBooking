@@ -16,6 +16,7 @@ namespace Model.ForRequest
 
         public override Reserve ToEntity() => new Reserve()
         {
+            Id= Id, 
             DescriptionForGuest = Description,
             StateOfReserve = StateOfReserve
         }; 

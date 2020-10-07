@@ -173,7 +173,65 @@ namespace WebApiTest
             Assert.AreEqual(500, createdResult.StatusCode);
         }
 
+        [TestMethod]
+        public void UpdateReserveTestOk()
+        {
+            var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
+            reserveManagementMock.Setup(m => m.Update(It.IsAny<Guid>(), It.IsAny<Reserve>())).Returns(reserveOfLodging);
+            ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
 
+            ReserveModelForRequestUpdate reserveModelForRequestUpdate = new ReserveModelForRequestUpdate()
+            {
+                Id = reserveOfLodging.Id,
+                Description = "Su reserva ha sido aceptada correctamente, por favor verifique el nuevo estado",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            }; 
+
+            var result = reserveController.Put(reserveOfLodging.Id, reserveModelForRequestUpdate);
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as ReserveModelForResponse;
+            reserveManagementMock.VerifyAll();
+
+            Reserve reserveToCompare = new Reserve()
+            {
+                Id = reserveOfLodging.Id,
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela00@gmail.com",
+                DescriptionForGuest = "Su reserva ha sido aceptada correctamente, por favor verifique el nuevo estado",
+                PhoneNumberOfContact = 29082733,
+                CheckIn = new DateTime(2020, 10, 05),
+                CheckOut = new DateTime(2020, 10, 07),
+                QuantityOfAdult = 1,
+                QuantityOfBaby = 1,
+                QuantityOfChild = 1,
+                LodgingOfReserve = lodgingForReserve,
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            Assert.AreEqual(ReserveModelForResponse.ToModel(reserveToCompare), model);
+        }
+
+        [TestMethod]
+        public void FailInUpdateInternalServerErrorTest()
+        {
+            var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
+            reserveManagementMock.Setup(m => m.Update(It.IsAny<Guid>(), It.IsAny<Reserve>())).
+                Throws(new ExceptionBusinessLogic("No se ha podido actualizar correctamente la reserva"));
+            ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
+
+            ReserveModelForRequestUpdate reserveModelForRequestUpdate = new ReserveModelForRequestUpdate()
+            {
+                Id = reserveOfLodging.Id,
+                Description = "Su reserva ha sido aceptada correctamente, por favor verifique el nuevo estado",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            var result = reserveController.Put(reserveOfLodging.Id, reserveModelForRequestUpdate);
+            var createdResult = result as BadRequestObjectResult;
+            reserveManagementMock.VerifyAll();
+            Assert.AreEqual(400, createdResult.StatusCode);
+        }
 
     }
 }

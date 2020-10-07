@@ -56,5 +56,19 @@ namespace WebApi.Controllers
                 return BadRequest(e.Message); 
             }
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid idForUpdateReserve, ReserveModelForRequestUpdate aReserveModelForUpdate)
+        {
+            try
+            {
+                Reserve reserve = reserveManagement.Update(idForUpdateReserve,ReserveModelForRequestUpdate.ToEntity(aReserveModelForUpdate));
+                return CreatedAtRoute("GetReserve", new { id = reserve.Id }, ReserveModelForResponse.ToModel(reserve));
+            }
+            catch (ExceptionBusinessLogic e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
