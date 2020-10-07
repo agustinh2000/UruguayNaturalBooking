@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
+using Model.ForRequest;
+using Model.ForResponse;
+using Model.ForResponseAndRequest;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -62,7 +65,7 @@ namespace WebApiTest
                 Id = touristSpotAdded.Id,
                 Name = "Punta del Este",
                 Description = "Un lugar increible",
-                RegionModel = RegionModel.ToModel(regionForTouristSpot),
+                RegionModel = RegionForResponseModel.ToModel(regionForTouristSpot),
                 ListOfCategoriesModel = new List<CategoryModel>() { CategoryModel.ToModel(category) }
             };
         }
@@ -84,9 +87,83 @@ namespace WebApiTest
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             var result = touristSpotController.Post(touristSpotRequestModel);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as TouristSpotForRequestModel;
+            var model = createdResult.Value as TouristSpotForResponseModel;
             touristSpotMock.VerifyAll();
-            Assert.AreEqual(touristSpotRequestModel, model);
+
+            TouristSpotForResponseModel touristSpotResponseModel = new TouristSpotForResponseModel()
+            {
+                Id = touristSpotAdded.Id,
+                Name = "Punta del Este",
+                Description = "Un lugar increible",
+                RegionModel = RegionForResponseModel.ToModel(regionForTouristSpot),
+                ListOfCategoriesModel = new List<CategoryModel>() {CategoryModel.ToModel(category)}
+            };
+
+            Assert.AreEqual(touristSpotResponseModel, model);
+        }
+
+        [TestMethod]
+        public void CreateTouristSpotNotEqualsTest()
+        {
+
+            TouristSpotForRequestModel touristSpotRequestModel = new TouristSpotForRequestModel()
+            {
+                Id = touristSpotAdded.Id,
+                Name = "Punta del Este",
+                Description = "Un lugar increible",
+                RegionId = regionForTouristSpot.Id,
+                ListOfCategoriesId = new List<Guid>() { category.Id }
+            };
+            var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
+            touristSpotMock.Setup(m => m.Create(It.IsAny<TouristSpot>(), It.IsAny<Guid>(), It.IsAny<List<Guid>>())).Returns(touristSpotAdded);
+            TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
+            var result = touristSpotController.Post(touristSpotRequestModel);
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as TouristSpotForResponseModel;
+            touristSpotMock.VerifyAll();
+
+            TouristSpotForResponseModel touristSpotResponseModel = new TouristSpotForResponseModel()
+            {
+                Id = touristSpotAdded.Id,
+                Name = "Punta del ",
+                Description = "Un lugar increible",
+                RegionModel = RegionForResponseModel.ToModel(regionForTouristSpot),
+                ListOfCategoriesModel = new List<CategoryModel>() { CategoryModel.ToModel(category) }
+            };
+
+            Assert.AreNotEqual(touristSpotRequestModel, model);
+        }
+
+        [TestMethod]
+        public void CreateTouristSpotNotEqualsIdTest()
+        {
+
+            TouristSpotForRequestModel touristSpotRequestModel = new TouristSpotForRequestModel()
+            {
+                Id = touristSpotAdded.Id,
+                Name = "Punta del Este",
+                Description = "Un lugar increible",
+                RegionId = regionForTouristSpot.Id,
+                ListOfCategoriesId = new List<Guid>() { category.Id }
+            };
+            var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
+            touristSpotMock.Setup(m => m.Create(It.IsAny<TouristSpot>(), It.IsAny<Guid>(), It.IsAny<List<Guid>>())).Returns(touristSpotAdded);
+            TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
+            var result = touristSpotController.Post(touristSpotRequestModel);
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as TouristSpotForResponseModel;
+            touristSpotMock.VerifyAll();
+
+            TouristSpotForResponseModel touristSpotResponseModel = new TouristSpotForResponseModel()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Punta del ",
+                Description = "Un lugar increible",
+                RegionModel = RegionForResponseModel.ToModel(regionForTouristSpot),
+                ListOfCategoriesModel = new List<CategoryModel>() { CategoryModel.ToModel(category) }
+            };
+
+            Assert.AreNotEqual(touristSpotRequestModel, model);
         }
 
         [TestMethod]

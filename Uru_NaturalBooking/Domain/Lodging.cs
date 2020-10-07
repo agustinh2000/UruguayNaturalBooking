@@ -69,15 +69,15 @@ namespace Domain
                 + (quantityOfBabys * discountForBabys)); 
         }
 
-        //public void UpdateAttributes(Lodging aLodging)
-        //{
-        //    Name = aLodging.Name;
-        //    QuantityOfStars = aLodging.QuantityOfStars;
-        //    Address = aLodging.Address;
-        //    Images = aLodging.Images;
-        //    PricePerNight = aLodging.PricePerNight;
-        //    TouristSpot = aLodging.TouristSpot;
-        //}
+        public void UpdateAttributes(Lodging aLodging)
+        {
+            Name = aLodging.Name;
+            QuantityOfStars = aLodging.QuantityOfStars;
+            Address = aLodging.Address;
+            Images = aLodging.Images;
+            PricePerNight = aLodging.PricePerNight;
+            TouristSpot = aLodging.TouristSpot;
+        }
 
         public override bool Equals(object obj)
         {

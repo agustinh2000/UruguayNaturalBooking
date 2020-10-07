@@ -78,17 +78,15 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "Lamela",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 05, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 2, 2, 1 }
-            }; 
+                QuantityOfAdult= 2,
+                QuantityOfChild=2, 
+                QuantityOfBaby=1
+            };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
 
             reserveRepositoryMock.VerifyAll();
             Assert.AreEqual(lodging, resultOfCreateAReserve.LodgingOfReserve);
@@ -116,17 +114,15 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "Lamela",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 05, 25),
-                CheckOut = new DateTime(2020, 06, 10), 
-                QuantityOfGuest= new int[3] {2, 2, 1}
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
         [TestMethod]
@@ -151,17 +147,15 @@ namespace BusinessLogicTest
             {
                 Name = "",
                 LastName = "Lamela",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 05, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 2, 2, 1 }
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
 
         }
 
@@ -187,17 +181,15 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 05, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 2, 2, 1 }
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
         [TestMethod]
@@ -222,17 +214,15 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "Lamela",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 08, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 2, 2, 1 }
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
         [TestMethod]
@@ -257,17 +247,15 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "Lamela",
-                Email = "joaquin.lamela@hotmail.com"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela@hotmail.com",
                 CheckIn = new DateTime(2020, 05, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 0, 0, 0 }
+                QuantityOfAdult = 0,
+                QuantityOfChild = 0,
+                QuantityOfBaby = 0
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
 
@@ -293,17 +281,233 @@ namespace BusinessLogicTest
             {
                 Name = "Joaquin",
                 LastName = "Lamela",
-                Email = "joaquin.lamela"
-            };
-
-            SearchOfLodging search = new SearchOfLodging()
-            {
+                Email = "joaquin.lamela",
                 CheckIn = new DateTime(2020, 05, 25),
                 CheckOut = new DateTime(2020, 06, 10),
-                QuantityOfGuest = new int[3] { 1, 0, 0 }
+                QuantityOfAdult = 1,
+                QuantityOfChild = 0,
+                QuantityOfBaby = 0
+
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id, search);
+            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
+
+        [TestMethod]
+        public void GetValidReserveByIdTest()
+        {
+            Reserve reserve = new Reserve()
+            {
+                Id= Guid.NewGuid(), 
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1, 
+                LodgingOfReserve= lodging
+            };
+
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            var resultOfGetAReserve = reserveLogic.GetById(reserve.Id);
+
+            reserveRepositoryMock.VerifyAll();
+            Assert.IsTrue(reserve.Equals(resultOfGetAReserve));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void GetExceptionBySearchReserveWithId()
+        {
+            Reserve reserve = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1,
+                LodgingOfReserve = lodging
+            };
+
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            var resultOfGetAReserve = reserveLogic.GetById(reserve.Id);
+        }
+
+        [TestMethod]
+        public void UpdateTheDescriptionAndTheStateOfReserveTest()
+        {
+            Reserve reserve = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1,
+                LodgingOfReserve = lodging, 
+                StateOfReserve= Reserve.ReserveState.Creada,
+                PhoneNumberOfContact= 29082733, 
+                DescriptionForGuest= "Va a disfrutar de su estadia, garantia asegurada"
+            };
+
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>()));
+            reserveRepositoryMock.Setup(m => m.Save()); 
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            Reserve reserveToUpdate = new Reserve()
+            {
+                Id = reserve.Id,
+                DescriptionForGuest = "Su reserva ha sido aceptada",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            }; 
+
+            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+
+            reserve.DescriptionForGuest = "Su reserva ha sido aceptada";
+            reserve.StateOfReserve = Reserve.ReserveState.Creada; 
+
+            reserveRepositoryMock.VerifyAll();
+            Assert.IsTrue(reserve.Equals(resultOfUpdate)); 
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void ThrowExceptionInUpdateMethodTest()
+        {
+            Reserve reserve = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1,
+                LodgingOfReserve = lodging,
+                StateOfReserve = Reserve.ReserveState.Creada,
+                PhoneNumberOfContact = 29082733,
+                DescriptionForGuest = "Va a disfrutar de su estadia, garantia asegurada"
+            };
+
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>())).Throws(new ExceptionBusinessLogic("Ocurrio un error al actualizar."));
+            reserveRepositoryMock.Setup(m => m.Save());
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            Reserve reserveToUpdate = new Reserve()
+            {
+                Id = reserve.Id,
+                DescriptionForGuest = "Su reserva ha sido aceptada",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void ThrowExceptionRepositoryInUpdateMethodTest()
+        {
+            Reserve reserve = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1,
+                LodgingOfReserve = lodging,
+                StateOfReserve = Reserve.ReserveState.Creada,
+                PhoneNumberOfContact = 29082733,
+                DescriptionForGuest = "Va a disfrutar de su estadia, garantia asegurada"
+            };
+
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>())).Throws(new ExceptionRepository("Ocurrio un error al actualizar."));
+            reserveRepositoryMock.Setup(m => m.Save());
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            Reserve reserveToUpdate = new Reserve()
+            {
+                Id = reserve.Id,
+                DescriptionForGuest = "Su reserva ha sido aceptada",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void UpdateInvalidBecauseReserveIsNullTest()
+        {
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(value: null);
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>()));
+            reserveRepositoryMock.Setup(m => m.Save());
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            Reserve reserveToUpdate = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                DescriptionForGuest = "Su reserva ha sido aceptada",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void ThrowsExceptionOnUpdateReserveTest()
+        {
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("Ha ocurrido un error al obtener la reserva."));
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>()));
+            reserveRepositoryMock.Setup(m => m.Save());
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            Reserve reserveToUpdate = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                DescriptionForGuest = "Su reserva ha sido aceptada",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+        }
+
     }
 }

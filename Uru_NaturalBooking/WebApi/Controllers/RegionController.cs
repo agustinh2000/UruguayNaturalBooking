@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BusinessLogicException;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Model;
+using Model.ForRequest;
+using Model.ForResponse;
 
 namespace WebApi.Controllers
 {
@@ -32,7 +31,7 @@ namespace WebApi.Controllers
                 {
                     return NotFound("No se encontraron regiones.");
                 }
-                return Ok(RegionModel.ToModel(regions));
+                return Ok(RegionForResponseModel.ToModel(regions));
             }
             catch (ExceptionBusinessLogic e)
             {
@@ -50,7 +49,7 @@ namespace WebApi.Controllers
                 {
                     return NotFound("La region solicitada no fue encontrada");
                 }
-                return Ok(RegionModel.ToModel(region));
+                return Ok(RegionForResponseModel.ToModel(region));
             }
             catch (ExceptionBusinessLogic e)
             {

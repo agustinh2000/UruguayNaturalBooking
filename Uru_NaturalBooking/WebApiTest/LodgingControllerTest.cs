@@ -4,6 +4,8 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
+using Model.ForRequest;
+using Model.ForResponse;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -16,10 +18,11 @@ namespace WebApiTest
     [TestClass]
     public class LodgingControllerTest
     {
-        TouristSpotForLodgingModel lodgingTouristSpotModel;
+        TouristSpotModelForLodgingResponseModel lodgingTouristSpotModel;
         LodgingModelForResponse lodgingModelForResponse;
         LodgingModelForRequest lodgingModelForRequest;
         Lodging lodgingOfficial;
+        Lodging lodgingForGet; 
         Region regionForTouristSpot;
         Category category;
         TouristSpot touristSpotAdded;
@@ -27,7 +30,7 @@ namespace WebApiTest
         [TestInitialize]
         public void SetUp()
         {
-            lodgingTouristSpotModel = new TouristSpotForLodgingModel()
+            lodgingTouristSpotModel = new TouristSpotModelForLodgingResponseModel()
             {
                 Id = Guid.NewGuid(),
                 Name = "Punta del este"
@@ -82,14 +85,24 @@ namespace WebApiTest
                 QuantityOfStars = 5,
                 PricePerNight = 150,
                 TouristSpot = touristSpotAdded
-            }; 
+            };
+
+            lodgingForGet = new Lodging()
+            {
+                Id = lodgingModelForResponse.Id,
+                Name = "Hotel las cumbres",
+                Address = "En la punta de punta del este",
+                QuantityOfStars = 5,
+                PricePerNight = 150,
+                TouristSpot = touristSpotAdded
+            };
         }
 
         [TestMethod]
         public void GetLodgingByIdTestOk()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.GetLodgingById(It.IsAny<Guid>())).Returns(lodgingModelForResponse.ToEntity());
+            lodgingManagementMock.Setup(m => m.GetLodgingById(It.IsAny<Guid>())).Returns(lodgingForGet);
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
 
             var result = lodgingController.Get(lodgingModelForResponse.Id);
@@ -128,7 +141,7 @@ namespace WebApiTest
         public void GetAllLodgingsTestOk()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.GetAllLoadings()).Returns(new List<Lodging> { lodgingModelForResponse.ToEntity()});
+            lodgingManagementMock.Setup(m => m.GetAllLoadings()).Returns(new List<Lodging> { lodgingForGet });
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Get();
             var createdResult = result as OkObjectResult;
@@ -169,9 +182,9 @@ namespace WebApiTest
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Post(lodgingModelForRequest);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as LodgingModelForRequest;
+            var model = createdResult.Value as LodgingModelForResponse;
             lodgingManagementMock.VerifyAll();
-            Assert.AreEqual(lodgingModelForRequest, model);
+            Assert.AreEqual(LodgingModelForResponse.ToModel(lodgingOfficial), model);
         }
 
         [TestMethod]
@@ -210,9 +223,20 @@ namespace WebApiTest
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Put(lodgingModelForRequestToUpdate);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as LodgingModelForRequest;
+            var model = createdResult.Value as LodgingModelForResponse;
             lodgingManagementMock.VerifyAll();
-            Assert.AreEqual(LodgingModelForRequest.ToModel(lodgingUpdated), model);
+
+            LodgingModelForResponse lodgingModelForResponse = new LodgingModelForResponse()
+            {
+                Id = lodgingModelForRequest.Id,
+                Name = "Hotel Enjoy Conrad",
+                Address = "En la punta de punta del este",
+                QuantityOfStars = 5,
+                PricePerNight = 150,
+                LodgingTouristSpotModel = TouristSpotModelForLodgingResponseModel.ToModel(touristSpotAdded)
+            };
+
+            Assert.AreEqual(lodgingModelForResponse, model);
         }
 
         [TestMethod]

@@ -8,6 +8,8 @@ using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Model.ForRequest;
+using Model.ForResponse;
 
 namespace WebApi.Controllers
 {
@@ -31,10 +33,10 @@ namespace WebApi.Controllers
                 List<Lodging> lodgings = lodgingManagement.GetAllLoadings();
                 if (lodgings == null)
                 {
-                    return NotFound("No se pudo encontrar hospedajes"); 
+                    return NotFound("No se pudo encontrar hospedajes");
                 }
                 return Ok(LodgingModelForResponse.ToModel(lodgings));
-            }catch (ExceptionBusinessLogic e)
+            } catch (ExceptionBusinessLogic e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -64,7 +66,7 @@ namespace WebApi.Controllers
             try
             {
                 Lodging lodging = lodgingManagement.Create(LodgingModelForRequest.ToEntity(lodgingModel), lodgingModel.TouristSpotId);
-                return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForRequest.ToModel(lodging));
+                return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForResponse.ToModel(lodging));
             }
             catch (ExceptionBusinessLogic e)
             {
@@ -78,13 +80,12 @@ namespace WebApi.Controllers
             try
             {
                 Lodging lodging = lodgingManagement.UpdateLodging(LodgingModelForRequest.ToEntity(lodgingModel)); 
-                return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForRequest.ToModel(lodging));
+                return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForResponse.ToModel(lodging));
             }
             catch (ExceptionBusinessLogic e)
             {
                 return BadRequest(e.Message);
             }
-
         }
 
         [HttpDelete("{id}")]

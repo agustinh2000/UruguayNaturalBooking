@@ -4,6 +4,8 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
+using Model.ForRequest;
+using Model.ForResponse;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,7 @@ namespace WebApiTest
     {
         Region region;
 
-        RegionModel regionModel;
+        RegionForResponseModel regionModel;
 
         [TestInitialize]
         public void SetUp()
@@ -29,10 +31,10 @@ namespace WebApiTest
                 Name = Region.RegionName.Región_Centro_Sur
             };
 
-            regionModel = new RegionModel()
+            regionModel = new RegionForResponseModel()
             {
                 Id = region.Id,
-                Name = RegionModel.RegionName.Región_Centro_Sur
+                Name = RegionForResponseModel.RegionName.Región_Centro_Sur
 
             };
 
@@ -46,7 +48,7 @@ namespace WebApiTest
             RegionController regionController = new RegionController(regionMock.Object);
             var result = regionController.Get(region.Id);
             var createdResult = result as OkObjectResult;
-            var model = createdResult.Value as RegionModel;
+            var model = createdResult.Value as RegionForResponseModel;
             regionMock.VerifyAll();
             Assert.AreEqual(regionModel, model);
         }
@@ -84,7 +86,7 @@ namespace WebApiTest
             RegionController regionController = new RegionController(regionMock.Object);
             var result = regionController.Get();
             var createdResult = result as OkObjectResult;
-            var model = createdResult.Value as List <RegionModel>;
+            var model = createdResult.Value as List <RegionForResponseModel>;
             regionMock.VerifyAll();
             Assert.AreEqual(regionModel, model.First());
         }

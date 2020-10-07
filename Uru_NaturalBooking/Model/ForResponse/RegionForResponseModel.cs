@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model
+namespace Model.ForResponse
 {
-    public class RegionModel : ModelBase<Region, RegionModel>
+    public class RegionForResponseModel : ModelBaseForResponse<Region, RegionForResponseModel>
     {
 
         public Guid Id { get; set; }
@@ -14,22 +14,16 @@ namespace Model
 
         public RegionName Name { get; set; }
 
-        public override Region ToEntity() => new Region()
-        {
-            Id = Id,
-            Name = (Region.RegionName)Name
-        };
-
-        protected override RegionModel SetModel(Region region)
+        protected override RegionForResponseModel SetModel(Region region)
         {
             Id = region.Id;
-            Name = (RegionModel.RegionName)region.Name;
+            Name = (RegionForResponseModel.RegionName)region.Name;
             return this;
         }
 
         public override bool Equals(object obj)
         {
-            return obj is RegionModel model &&
+            return obj is RegionForResponseModel model &&
                    Id.Equals(model.Id) &&
                    Name == model.Name;
         }

@@ -14,16 +14,20 @@ namespace BusinessLogic
     public class ReserveManagement : IReserveManagement
     {
         private readonly IRepository<Reserve> reserveRepository;
-        private readonly ILodgingManagement lodgingManagement; 
-        private readonly int maxNumberOfPhoneWithEightNumber; 
+        private readonly ILodgingManagement lodgingManagement;
 
         public ReserveManagement(IRepository<Reserve> repository, ILodgingManagement lodgingLogic)
         {
             reserveRepository = repository;
-            lodgingManagement = lodgingLogic; 
+            lodgingManagement = lodgingLogic;
         }
 
-        public Reserve Create(Reserve reserve, Guid lodgingId, SearchOfLodging search)
+        public ReserveManagement(IRepository<Reserve> repository)
+        {
+            reserveRepository = repository; 
+        }
+
+        public Reserve Create(Reserve reserve, Guid lodgingId)
         {
             try
             {
@@ -31,20 +35,51 @@ namespace BusinessLogic
                 reserve.PhoneNumberOfContact = Int32.Parse(RandomPhoneNumber(8)); 
                 reserve.DescriptionForGuest = RandomDescription(50);
                 reserve.LodgingOfReserve = lodgingManagement.GetLodgingById(lodgingId);
-                reserve.CheckIn = search.CheckIn;
-                reserve.CheckOut = search.CheckOut;
-                reserve.QuantityOfAdult = search.QuantityOfGuest[0]; 
-                reserve.QuantityOfChild = search.QuantityOfGuest[1];
-                reserve.QuantityOfBaby = search.QuantityOfGuest[2]; 
                 reserve.StateOfReserve = Reserve.ReserveState.Creada; 
                 reserve.VerifyFormat();
                 reserveRepository.Add(reserve);
                 reserveRepository.Save(); 
                 return reserve; 
-
             }catch(ExceptionRepository e)
             {
                 throw new ExceptionBusinessLogic("No se puede crear la reserva deseada.", e); 
+            }
+        }
+
+        public Reserve GetById(Guid idOfReserve)
+        {
+            try
+            {
+                Reserve reserve = reserveRepository.Get(idOfReserve);
+                return reserve;
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("Hubo un error al obtener la reserva deseada.", e);
+            }
+        }
+
+        public Reserve Update(Guid id, Reserve aReserve)
+        {
+            try
+            {
+                Reserve reserveOfDb = reserveRepository.Get(id);
+                if (reserveOfDb != null)
+                {
+                    reserveOfDb.UpdateAttributes(aReserve);
+                    reserveOfDb.VerifyFormat(); 
+                    reserveRepository.Update(reserveOfDb);
+                    reserveRepository.Save();
+                    return reserveOfDb;
+                }
+                else
+                {
+                    throw new ExceptionBusinessLogic("La reserva buscada no existe.");
+                }
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede actualizar la reserva.", e);
             }
         }
 
