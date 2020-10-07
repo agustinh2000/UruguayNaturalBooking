@@ -111,13 +111,13 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        public void TestGetUserByNicknameAndPasswordOk()
+        public void TestGetUserByEmailAndPasswordOk()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IUserRepository userRepo = new UserRepository(context);
             userRepo.Add(userToAdd);
             userRepo.Save();
-            User userObtained = userRepo.GetUserByNicknameAndPassword("colo20", "martin1234");
+            User userObtained = userRepo.GetUserByEmailAndPassword("colo2020@gmail.com", "martin1234");
             Assert.AreEqual(userToAdd, userObtained);
         }
 
@@ -127,7 +127,7 @@ namespace DataAcessTest
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IUserRepository userRepo = new UserRepository(context);
-            User userObtained = userRepo.GetUserByNicknameAndPassword("colo20", "martin1234");
+            User userObtained = userRepo.GetUserByEmailAndPassword("colo2020@gmail.com", "martin1234");
         }
     }
 }

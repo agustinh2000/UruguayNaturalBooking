@@ -92,7 +92,6 @@ namespace WebApi.Controllers
         {
             try
             {
-
                 lodgingManagement.RemoveLodging(id);
                 return NoContent();
             }

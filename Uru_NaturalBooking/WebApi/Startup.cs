@@ -42,6 +42,9 @@ namespace WebApi
             services.AddScoped(typeof(IRepository<Category>), typeof(BaseRepository<Category>));
             services.AddScoped(typeof(IRepository<Lodging>), typeof(BaseRepository<Lodging>));
             services.AddScoped(typeof(IRepository<Reserve>), typeof(BaseRepository<Reserve>));
+            services.AddScoped(typeof(IRepository<UserSession>), typeof(BaseRepository<UserSession>));
+            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddScoped<ITouristSpotManagement, TouristSpotManagement>();
             services.AddScoped<IRegionManagement, RegionManagement>();
             services.AddScoped<ICategoryManagement, CategoryManagement>();

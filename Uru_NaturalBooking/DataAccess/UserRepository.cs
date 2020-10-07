@@ -18,14 +18,14 @@ namespace DataAccess
             this.context = context;
         }
 
-        public User GetUserByNicknameAndPassword(string userName, string password)
+        public User GetUserByEmailAndPassword(string email, string password)
         {
             try
             {
-                User userObteined = context.Set<User>().Where(x => x.UserName.Equals(userName) && x.Password.Equals(password)).FirstOrDefault();
+                User userObteined = context.Set<User>().Where(x => x.Mail.Equals(email) && x.Password.Equals(password)).FirstOrDefault();
                 if(userObteined == null)
                 {
-                    throw new ExceptionRepository("Usuario y/o contrasena incorrecta");
+                    throw new ExceptionRepository("Email y/o contrasena incorrecta");
                 }
                 return userObteined;
             }

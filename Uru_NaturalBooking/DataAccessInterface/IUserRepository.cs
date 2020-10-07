@@ -4,6 +4,6 @@ namespace DataAccessInterface
 {
     public interface IUserRepository: IRepository<User>
     {
-        User GetUserByNicknameAndPassword(string nickname, string password);
+        User GetUserByEmailAndPassword(string email, string password);
     }
 }

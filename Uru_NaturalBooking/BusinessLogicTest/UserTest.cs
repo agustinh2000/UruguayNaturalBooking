@@ -229,6 +229,46 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
+        public void GetUserByIdOk()
+        {
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "soyelcolobienfachero"
+            };
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            var userLogic = new UserManagement(userRepositoryMock.Object);
+            User userResult = userLogic.GetUser(user.Id);
+            userRepositoryMock.VerifyAll();
+            Assert.AreEqual(user, userResult);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void GetUserByIdInternalError()
+        {
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "soyelcolobienfachero"
+            };
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+            userRepositoryMock.Setup(m => m.Save());
+            var userLogic = new UserManagement(userRepositoryMock.Object);
+            User userResult = userLogic.GetUser(user.Id);
+        }
+
+        [TestMethod]
         public void LogInOk()
         {
             User user = new User()
@@ -253,7 +293,7 @@ namespace BusinessLogicTest
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
 
             userRepositoryMock.Setup(m => m.Add(It.IsAny<User>()));
-            userRepositoryMock.Setup(m => m.GetUserByNicknameAndPassword("colo20", "colo123")).Returns(user); ;
+            userRepositoryMock.Setup(m => m.GetUserByEmailAndPassword("colo20201@gmail.com", "colo123")).Returns(user); ;
             userRepositoryMock.Setup(m => m.Save());
             var userSessionRepositoryMock = new Mock<IRepository<UserSession>>(MockBehavior.Strict);
             userSessionRepositoryMock.Setup(m => m.GetAll()).Returns(new List<UserSession>() );
@@ -265,7 +305,7 @@ namespace BusinessLogicTest
             userSessionRepositoryMock2.Setup(m => m.Save());
             var userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
             userLogic.Create(user);
-            userLogic.LogIn("colo20", "colo123");
+            userLogic.LogIn("colo20201@gmail.com", "colo123");
             var userSessions = userSessionRepositoryMock2.Object.GetAll();
             userRepositoryMock.VerifyAll();
             Assert.AreEqual(user, userSessions.First().User);
@@ -302,7 +342,7 @@ namespace BusinessLogicTest
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
 
             userRepositoryMock.Setup(m => m.Add(It.IsAny<User>()));
-            userRepositoryMock.Setup(m => m.GetUserByNicknameAndPassword("colo20", "colo123")).Returns(user); ;
+            userRepositoryMock.Setup(m => m.GetUserByEmailAndPassword("colo20201@gmail.com", "colo123")).Returns(user); ;
             userRepositoryMock.Setup(m => m.Save());
             var userSessionRepositoryMock = new Mock<IRepository<UserSession>>(MockBehavior.Strict);
             userSessionRepositoryMock.Setup(m => m.GetAll()).Returns(new List<UserSession>() { userSession});
@@ -314,7 +354,7 @@ namespace BusinessLogicTest
             userSessionRepositoryMock2.Setup(m => m.Save());
             var userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
             userLogic.Create(user);
-            userLogic.LogIn("colo20", "colo123");
+            userLogic.LogIn("colo20201@gmail.com", "colo123");
             var userSessions = userSessionRepositoryMock2.Object.GetAll();
             userRepositoryMock.VerifyAll();
             Assert.AreEqual(user, userSessions.First().User);
@@ -334,11 +374,11 @@ namespace BusinessLogicTest
                 Password = "colo123"
             };
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
-            userRepositoryMock.Setup(m => m.GetUserByNicknameAndPassword("colo20", "colo123")).Throws(new ExceptionRepository()); ;
+            userRepositoryMock.Setup(m => m.GetUserByEmailAndPassword("colo20201@gmail.com", "colo123")).Throws(new ExceptionRepository()); ;
             userRepositoryMock.Setup(m => m.Save());
             var userSessionRepositoryMock = new Mock<IRepository<UserSession>>(MockBehavior.Strict);
             var userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
-            userLogic.LogIn("colo20", "colo123");
+            userLogic.LogIn("colo20201@gmail.com", "colo123");
         }
 
         [TestMethod]
@@ -361,7 +401,7 @@ namespace BusinessLogicTest
             
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
             userRepositoryMock.Setup(m => m.Add(It.IsAny<User>()));
-            userRepositoryMock.Setup(m => m.GetUserByNicknameAndPassword("colo20", "colo123")).Returns(user); ;
+            userRepositoryMock.Setup(m => m.GetUserByEmailAndPassword("colo20201@gmail.com", "colo123")).Returns(user); ;
             userRepositoryMock.Setup(m => m.Save());
             var userSessionRepositoryMock = new Mock<IRepository<UserSession>>(MockBehavior.Strict);
             userSessionRepositoryMock.Setup(m => m.GetAll()).Returns(new List<UserSession>() { userSession});
@@ -370,7 +410,7 @@ namespace BusinessLogicTest
             userSessionRepositoryMock.Setup(m => m.GetAll()).Returns(new List<UserSession>());
             var userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
             userLogic.Create(user);
-            var session = userLogic.LogIn("colo20", "colo123");
+            var session = userLogic.LogIn("colo20201@gmail.com", "colo123");
             userRepositoryMock.VerifyAll();
             Assert.AreEqual(userSession.User, session.User);
         }
@@ -522,16 +562,113 @@ namespace BusinessLogicTest
             Assert.IsFalse(result);
         }
 
+        [TestMethod]
+        public void UpdateValidUser()
+        {
 
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "martin1234"
+            };
+            user.Name = "Gonzalo";
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            userRepositoryMock.Setup(m => m.Update(It.IsAny<User>()));
+            userRepositoryMock.Setup(m => m.Save());
+            var userLogic = new UserManagement(userRepositoryMock.Object);
+            var result = userLogic.UpdateUser(user.Id, user);
+            userRepositoryMock.VerifyAll();
+            Assert.AreEqual("Gonzalo", user.Name);
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void UpdateNotExistUser()
+        {
 
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "martin1234"
+            };
+            user.Name = "Gonzalo";
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(value:null);
+            var userLogic = new UserManagement(userRepositoryMock.Object);
+            var result = userLogic.UpdateUser(user.Id, user);
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void UpdateUserInvalidDataBaseError()
+        {
 
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "martin1234"
+            };
+            user.Name = "Gonzalo";
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            userRepositoryMock.Setup(m => m.Update(It.IsAny<User>())).Throws(new ExceptionRepository());
+            var userLogic = new UserManagement(userRepositoryMock.Object);
+            var result = userLogic.UpdateUser(user.Id, user);
+        }
 
+        [TestMethod]
+        public void DeleteValidUser()
+        {
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "martin1234"
+            };
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            userRepositoryMock.Setup(m => m.Remove(It.IsAny<User>()));
+            userRepositoryMock.Setup(m => m.Save());
+            var userLogic = new UserManagement(userRepositoryMock.Object);
+            userLogic.RemoveUser(user.Id);
+            userRepositoryMock.VerifyAll();
+        }
 
-
-
-
-
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void DeleteUserDataBaseError()
+        {
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "martin1234"
+            };
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            userRepositoryMock.Setup(m => m.Remove(It.IsAny<User>())).Throws(new ExceptionRepository());
+            userRepositoryMock.Setup(m => m.Save());
+            var userLogic = new UserManagement(userRepositoryMock.Object);
+            userLogic.RemoveUser(user.Id);
+        }
     }
 }
