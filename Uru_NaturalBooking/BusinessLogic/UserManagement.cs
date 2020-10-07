@@ -21,6 +21,11 @@ namespace BusinessLogic
             sessionRepository = aSessionRepository;
         }
 
+        public UserManagement(IUserRepository aUserRepository)
+        {
+            userRepository = aUserRepository;
+        }
+
         public IEnumerable<User> GetAll()
         {
             try
@@ -56,14 +61,14 @@ namespace BusinessLogic
             }
         }
 
-        public UserSession LogIn(string nickname, string password)
+        public UserSession LogIn(string email, string password)
         {
             User user = null;
             try
             {
-                user = userRepository.GetUserByNicknameAndPassword(nickname, password);
+                user = userRepository.GetUserByEmailAndPassword(email, password);
             }
-            catch (ExceptionRepository e)
+            catch (ExceptionRepository)
             {
                 throw new ExceptionBusinessLogic("Usuario y/o password incorrecto");
             }
@@ -80,6 +85,19 @@ namespace BusinessLogic
                 sessionRepository.Save();
             }
             return userSession;
+        }
+
+        public User GetUser(Guid userId)
+        {
+            try
+            {
+                User userObteined = userRepository.Get(userId);
+                return userObteined;
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede obtener el usuario a traves del Id.", e);
+            }
         }
 
         public void LogOut(string token)
@@ -99,6 +117,43 @@ namespace BusinessLogic
 
             }
             sessionRepository.Save();
+        }
+
+        public User UpdateUser(Guid userToModifyId, User aUser)
+        {
+            try
+            {
+                User userDb = userRepository.Get(userToModifyId);
+                if (userDb != null)
+                {
+                    userDb.UpdateAttributes(aUser);
+                    userRepository.Update(userDb);
+                    userRepository.Save();
+                    return userDb;
+                }
+                else
+                {
+                    throw new ExceptionBusinessLogic("El usuario buscado no existe");
+                }
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede actualizar el usuario.", e);
+            }
+        }
+
+        public void RemoveUser(Guid userId)
+        {
+            try
+            {
+                User userToDelete = userRepository.Get(userId);
+                userRepository.Remove(userToDelete);
+                userRepository.Save();
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("No se puede eliminar el usuario deseado.", e);
+            }
         }
     }
 }

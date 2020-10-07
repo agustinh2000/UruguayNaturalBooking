@@ -14,6 +14,8 @@ namespace DomainException
         public static string ErrorDoesNotHaveCategory = "Error. El punto turistico debe tener al menos una categoria asociada";
         public static string ErrorDate = "Error. La fecha de CheckIn no puede ser despues de la fecha de CheckOut";
         public static string ErrorQuantityOfGuest = "Error. La cantidad total de huespedes debe ser mayor a cero. ";
-        public static string ErrorEmail = "Error. El mail ingresado es invalido"; 
+        public static string ErrorEmail = "Error. El mail ingresado es invalido";
+        public static string ErrorTokenNotExist = "Error. El token no existe";
+        public static string ErrorInvalidEmail = "Error. El email es invalido.";
     }
 }

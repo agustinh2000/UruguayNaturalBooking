@@ -46,6 +46,15 @@ namespace Domain
                 return false;
             }
         }
+
+        public void UpdateAttributes(User aUser)
+        {
+            Name = aUser.Name;
+            LastName = aUser.LastName;
+            UserName = aUser.UserName;
+            Password = aUser.Password;
+            Mail = aUser.Mail;
+        }
         public override bool Equals(object obj)
         {
             if (obj == null)
