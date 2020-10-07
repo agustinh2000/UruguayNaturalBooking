@@ -22,6 +22,11 @@ namespace BusinessLogic
             lodgingManagement = lodgingLogic;
         }
 
+        public ReserveManagement(IRepository<Reserve> repository)
+        {
+            reserveRepository = repository; 
+        }
+
         public Reserve Create(Reserve reserve, Guid lodgingId)
         {
             try
@@ -39,6 +44,19 @@ namespace BusinessLogic
             }catch(ExceptionRepository e)
             {
                 throw new ExceptionBusinessLogic("No se puede crear la reserva deseada.", e); 
+            }
+        }
+
+        public Reserve GetById(Guid idOfReserve)
+        {
+            try
+            {
+                Reserve reserve = reserveRepository.Get(idOfReserve);
+                return reserve;
+            }
+            catch (ExceptionRepository e)
+            {
+                throw new ExceptionBusinessLogic("Hubo un error al obtener la reserva deseada.", e);
             }
         }
 

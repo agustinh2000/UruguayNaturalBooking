@@ -292,5 +292,59 @@ namespace BusinessLogicTest
 
             var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
+
+        [TestMethod]
+        public void GetValidReserveByIdTest()
+        {
+            Reserve reserve = new Reserve()
+            {
+                Id= Guid.NewGuid(), 
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1, 
+                LodgingOfReserve= lodging
+            };
+
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            var resultOfGetAReserve = reserveLogic.GetById(reserve.Id);
+
+            reserveRepositoryMock.VerifyAll();
+            Assert.IsTrue(reserve.Equals(resultOfGetAReserve));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        public void GetExceptionBySearchReserveWithId()
+        {
+            Reserve reserve = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1,
+                LodgingOfReserve = lodging
+            };
+
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            var resultOfGetAReserve = reserveLogic.GetById(reserve.Id);
+        }
     }
 }
