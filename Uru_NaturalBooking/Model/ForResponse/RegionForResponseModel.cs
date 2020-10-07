@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model.ForRequest
+namespace Model.ForResponse
 {
     public class RegionForResponseModel : ModelBaseForResponse<Region, RegionForResponseModel>
     {

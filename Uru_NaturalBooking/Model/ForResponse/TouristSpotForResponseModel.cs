@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Model.ForRequest
+namespace Model.ForResponse
 {
     public class TouristSpotForResponseModel : ModelBaseForResponse<TouristSpot, TouristSpotForResponseModel>
     {

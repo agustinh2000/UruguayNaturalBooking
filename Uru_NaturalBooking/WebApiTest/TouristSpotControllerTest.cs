@@ -6,6 +6,7 @@ using Microsoft.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
 using Model.ForRequest;
+using Model.ForResponse;
 using Model.ForResponseAndRequest;
 using Moq;
 using System;

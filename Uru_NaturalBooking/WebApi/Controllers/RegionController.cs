@@ -6,6 +6,7 @@ using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.ForRequest;
+using Model.ForResponse;
 
 namespace WebApi.Controllers
 {
