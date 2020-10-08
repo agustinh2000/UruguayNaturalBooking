@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 using BusinessLogicException;
 using BusinessLogicInterface;
 using Domain;
+using Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.ForRequest;
 using Model.ForResponse;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApi.Controllers
 {
@@ -57,6 +56,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPut("{id}")]
         public IActionResult Put(Guid idForUpdateReserve, ReserveModelForRequestUpdate aReserveModelForUpdate)
         {

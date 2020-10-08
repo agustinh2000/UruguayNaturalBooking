@@ -4,6 +4,7 @@ using BusinessLogicInterface;
 using DataAccess;
 using DataAccessInterface;
 using Domain;
+using Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +50,10 @@ namespace WebApi
             services.AddScoped<IRegionManagement, RegionManagement>();
             services.AddScoped<ICategoryManagement, CategoryManagement>();
             services.AddScoped<ILodgingManagement, LodgingManagement>();
-            services.AddScoped<IReserveManagement, ReserveManagement>(); 
+            services.AddScoped<IReserveManagement, ReserveManagement>();
+            services.AddScoped<IUserManagement, UserManagement>(); 
+
+            services.AddScoped<AuthorizationFilter>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

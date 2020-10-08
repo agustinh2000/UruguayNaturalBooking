@@ -3,19 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model
+namespace Model.ForResponse
 {
-    public class UserModelForResponse : ModelBase<User, UserModelForResponse>
+    public class UserModelForResponse : ModelBaseForResponse<User, UserModelForResponse>
     {
         public string UserName { get; set; }
         public string Mail { get; set; }
-
-        
-
-        public override User ToEntity() 
-        {
-            throw new NotImplementedException();
-        }
 
         protected override UserModelForResponse SetModel(User entity)
         {

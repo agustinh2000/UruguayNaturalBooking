@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BusinessLogicException;
 using BusinessLogicInterface;
 using Domain;
+using Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
@@ -59,6 +60,7 @@ namespace WebApi.Controllers
             
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
         public IActionResult Post([FromBody] CategoryModel categoryModel)
         {

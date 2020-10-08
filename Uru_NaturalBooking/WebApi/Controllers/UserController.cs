@@ -1,9 +1,11 @@
 ﻿using BusinessLogicException;
 using BusinessLogicInterface;
 using Domain;
+using Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Model.ForResponse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,7 @@ namespace WebApi.Controllers
     [Route("api/users")]
     public class UserController: ControllerBase
     {
-        private readonly IUserManagement userManagement;
+        private  readonly IUserManagement userManagement;
 
         public UserController(IUserManagement logic)
         {
@@ -27,7 +29,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                return Ok(userManagement.LogIn(loginModel.Email, loginModel.Password));
+                UserSession userSession = userManagement.LogIn(loginModel.Email, loginModel.Password); 
+                return Ok(UserModelForResponse.ToModel(userSession.User));
             }
             catch (ExceptionBusinessLogic e)
             {
@@ -35,6 +38,8 @@ namespace WebApi.Controllers
             }
         }
 
+
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpGet]
         public IActionResult Get()
         {
@@ -71,13 +76,15 @@ namespace WebApi.Controllers
             }
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
+
         public IActionResult Post([FromBody]User user)
         {
             try
             {
                 User userCreated = userManagement.Create(user);
-                return CreatedAtRoute("GetUser", new { id = user.Id }, userCreated);
+                return CreatedAtRoute("GetUser", new { id = user.Id }, UserModelForResponse.ToModel(userCreated));
             }
             catch (ExceptionBusinessLogic e)
             {
@@ -85,6 +92,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPut("{id}")]
         public IActionResult Put(Guid id, [FromBody] User user)
         {
@@ -99,6 +107,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
@@ -113,6 +122,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpDelete("logout")]
         public IActionResult Logout([FromHeader] string token)
         {

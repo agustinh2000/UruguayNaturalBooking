@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BusinessLogicException;
 using BusinessLogicInterface;
 using Domain;
+using Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
@@ -60,6 +61,8 @@ namespace WebApi.Controllers
             }
         }
 
+
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
         public IActionResult Post([FromBody] LodgingModelForRequest lodgingModel)
         {
@@ -74,6 +77,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPut]
         public IActionResult Put([FromBody] LodgingModelForRequest lodgingModel)
         {
@@ -88,6 +92,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {

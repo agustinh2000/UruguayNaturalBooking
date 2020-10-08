@@ -4,6 +4,7 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
+using Model.ForResponse;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -97,9 +98,9 @@ namespace WebApiTest
             UserController userController = new UserController(userMock.Object);
             var result = userController.Login(aLoginModel);
             var createdResult = result as OkObjectResult;
-            var userSessionResult = createdResult.Value as UserSession;
+            var userModelResult = createdResult.Value as UserModelForResponse;
             userMock.VerifyAll();
-            Assert.AreEqual(aUserSession, userSessionResult);
+            Assert.AreEqual(aUserModel, userModelResult);
         }
 
         [TestMethod]
@@ -122,9 +123,9 @@ namespace WebApiTest
             UserController userController = new UserController(userMock.Object);
             var result = userController.Post(aUser);
             var createdResult = result as CreatedAtRouteResult;
-            var userResult = createdResult.Value as User;
+            var userResult = createdResult.Value as UserModelForResponse;
             userMock.VerifyAll();
-            Assert.AreEqual(aUser, userResult);
+            Assert.AreEqual(aUserModel, userResult);
         }
 
         [TestMethod]
