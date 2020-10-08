@@ -78,12 +78,12 @@ namespace WebApi.Controllers
         }
 
         [ServiceFilter(typeof(AuthorizationFilter))]
-        [HttpPut]
-        public IActionResult Put([FromBody] LodgingModelForRequest lodgingModel)
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, [FromBody] LodgingModelForRequest lodgingModel)
         {
             try
             {
-                Lodging lodging = lodgingManagement.UpdateLodging(LodgingModelForRequest.ToEntity(lodgingModel)); 
+                Lodging lodging = lodgingManagement.UpdateLodging(id, LodgingModelForRequest.ToEntity(lodgingModel)); 
                 return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForResponse.ToModel(lodging));
             }
             catch (ExceptionBusinessLogic e)

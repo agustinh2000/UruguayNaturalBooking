@@ -17,6 +17,6 @@ namespace BusinessLogicInterface
 
         void RemoveLodging(Guid lodgingId);
 
-        Lodging UpdateLodging(Lodging aLodging);
+        Lodging UpdateLodging(Guid idOfLodgingToUpdate, Lodging aLodging);
     }
 }

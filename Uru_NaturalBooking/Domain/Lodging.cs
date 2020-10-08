@@ -77,6 +77,7 @@ namespace Domain
             Images = aLodging.Images;
             PricePerNight = aLodging.PricePerNight;
             TouristSpot = aLodging.TouristSpot;
+            IsAvailable = aLodging.IsAvailable; 
         }
 
         public override bool Equals(object obj)

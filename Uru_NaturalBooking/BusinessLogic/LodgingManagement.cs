@@ -84,15 +84,15 @@ namespace BusinessLogic
             }
         }
 
-        public Lodging UpdateLodging(Lodging aLodging)
+        public Lodging UpdateLodging(Guid aIdOfLodging, Lodging aLodging)
         {
             try
             {
-                Lodging lodgingDb = lodgingRepository.Get(aLodging.Id);
+                Lodging lodgingDb = lodgingRepository.Get(aIdOfLodging);
                 if (lodgingDb != null)
                 {
                     lodgingDb.UpdateAttributes(aLodging);
-                    //lodgingDb.VerifyFormat(); 
+                    lodgingDb.VerifyFormat(); 
                     lodgingRepository.Update(lodgingDb);
                     lodgingRepository.Save();
                     return lodgingDb;

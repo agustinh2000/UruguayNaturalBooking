@@ -53,7 +53,8 @@ namespace BusinessLogicTest
                 Name = "Hotel Las Cumbres",
                 QuantityOfStars = 5,
                 Address = "Ruta 12 km 3.5",
-                PricePerNight = 150
+                PricePerNight = 150, 
+                TouristSpot= touristSpot
             };
 
         }
@@ -307,7 +308,7 @@ namespace BusinessLogicTest
             lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
             var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
-            var resultOfUpdate = lodgingLogic.UpdateLodging(lodging);
+            var resultOfUpdate = lodgingLogic.UpdateLodging(lodging.Id, lodging);
             lodgingRepositoryMock.VerifyAll();
             Assert.IsTrue(resultOfUpdate.Name.Equals("San Ramon Hotel"));
         }
@@ -321,7 +322,7 @@ namespace BusinessLogicTest
             lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
             var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
-            var resultOfUpdate = lodgingLogic.UpdateLodging(lodging);
+            var resultOfUpdate = lodgingLogic.UpdateLodging(lodging.Id, lodging);
         }
 
         [TestMethod]
@@ -333,7 +334,7 @@ namespace BusinessLogicTest
             lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
             var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
-            var resultOfUpdate = lodgingLogic.UpdateLodging(lodging);
+            var resultOfUpdate = lodgingLogic.UpdateLodging(lodging.Id, lodging);
         }
 
         [TestMethod]
