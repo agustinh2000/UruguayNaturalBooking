@@ -18,7 +18,6 @@ namespace DataAcessTest
         CategoryTouristSpot categoryTouristSpot;
         Category aCategory;
         Reserve reserve;
-        SearchOfLodging search; 
 
         [TestInitialize]
         public void SetUp()

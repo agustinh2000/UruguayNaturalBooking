@@ -16,21 +16,5 @@ namespace Domain
             ConnectedAt = DateTime.Now;
         }
 
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-            else if (this.GetType() != obj.GetType())
-            {
-                return false;
-            }
-            else
-            {
-                UserSession userSession = (UserSession)obj;
-                return Id.Equals(userSession.Id) && Token.Equals(userSession.Token);
-            }
-        }
     }
 }

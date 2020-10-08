@@ -55,21 +55,11 @@ namespace Domain
             Password = aUser.Password;
             Mail = aUser.Mail;
         }
+
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-            else if (this.GetType() != obj.GetType())
-            {
-                return false;
-            }
-            else
-            {
-                User user = (User)obj;
-                return Mail.Equals(user.Name);
-            }
+            return obj is User user &&
+                   Mail == user.Mail;
         }
     }
 
