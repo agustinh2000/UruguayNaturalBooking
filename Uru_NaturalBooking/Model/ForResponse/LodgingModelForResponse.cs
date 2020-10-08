@@ -1,6 +1,7 @@
 ﻿using Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Model.ForResponse
@@ -15,7 +16,7 @@ namespace Model.ForResponse
 
         public string Address { get; set; }
 
-        public byte[] Images { get; set; }
+        public Picture[] Images { get; set; }
 
         public double PricePerNight { get; set; }
 
@@ -29,7 +30,7 @@ namespace Model.ForResponse
             Name = lodging.Name;
             QuantityOfStars = lodging.QuantityOfStars;
             Address = lodging.Address;
-            Images = lodging.Images;
+            Images = lodging.Images.ToArray();
             PricePerNight = lodging.PricePerNight;
             LodgingTouristSpotModel = TouristSpotModelForLodgingResponseModel.ToModel(lodging.TouristSpot); 
             return this;

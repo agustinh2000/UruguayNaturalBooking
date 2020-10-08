@@ -25,6 +25,8 @@ namespace DataAccess
 
         public DbSet<UserSession> UserSessions { get; set; }
 
+        public DbSet<Picture> Pictures { get; set; }
+
         public ContextObl(DbContextOptions options) : base(options)
         {
 
@@ -48,9 +50,14 @@ namespace DataAccess
                 .WithMany(cat => cat.ListOfTouristSpot)
                 .HasForeignKey(cat => cat.CategoryId);
 
+            modelBuilder.Entity<Lodging>()
+                .HasMany<Reserve>()
+                .WithOne(l => l.LodgingOfReserve)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Picture>().HasAlternateKey("Path");
         }
 
-        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();

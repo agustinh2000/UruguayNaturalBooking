@@ -15,13 +15,16 @@ namespace Model.ForRequest
 
         public Guid RegionId{ get; set; }
 
+        public Picture Image { get; set; }
+
         public List<Guid> ListOfCategoriesId { get; set; }
 
         public override TouristSpot ToEntity() => new TouristSpot()
         {
             Id = Id,
             Name = Name,
-            Description = Description
+            Description = Description,
+            Image = Image
         };
     }
 }

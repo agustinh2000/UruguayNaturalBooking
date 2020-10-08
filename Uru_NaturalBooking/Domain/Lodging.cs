@@ -15,7 +15,7 @@ namespace Domain
 
         public string Address { get; set; }
 
-        public byte [] Images { get; set; }
+        public virtual List <Picture> Images { get; set; }
         
         public double PricePerNight { get; set; }
 

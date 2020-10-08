@@ -78,7 +78,7 @@ namespace BusinessLogicTest
                 Name = "Punta del este",
                 Description = "Lo mejor para gastar.",
                 Region = region1,
-                Image= new byte[10],
+                Image= new Picture(),
                 ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1, categoryTouristSpot2 }
             };
 
