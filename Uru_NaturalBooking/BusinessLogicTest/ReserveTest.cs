@@ -58,7 +58,7 @@ namespace BusinessLogicTest
 
 
         [TestMethod]
-        public void CreateValidReserve()
+        public void CreateValidReserveTestOk()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
@@ -71,8 +71,8 @@ namespace BusinessLogicTest
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
-            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
 
             Reserve reserve = new Reserve()
             {
@@ -86,15 +86,15 @@ namespace BusinessLogicTest
                 QuantityOfBaby=1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
+            Reserve resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
 
             reserveRepositoryMock.VerifyAll();
-            Assert.AreEqual(lodging, resultOfCreateAReserve.LodgingOfReserve);
+            Assert.IsTrue(reserve.Equals(resultOfCreateAReserve));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionBusinessLogic))]
-        public void CreateInvalidReserve()
+        public void CreateInvalidReserveTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>())).Throws(new ExceptionRepository());
@@ -107,8 +107,8 @@ namespace BusinessLogicTest
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
-            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
 
             Reserve reserve = new Reserve()
             {
@@ -122,12 +122,12 @@ namespace BusinessLogicTest
                 QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
+            Reserve resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ReserveException))]
-        public void CreateInvalidReserveWithoutName()
+        public void CreateInvalidReserveWithoutNameTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
@@ -140,8 +140,9 @@ namespace BusinessLogicTest
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
-            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
             var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
+            reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
 
             Reserve reserve = new Reserve()
             {
@@ -155,13 +156,13 @@ namespace BusinessLogicTest
                 QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
+            Reserve resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
 
         }
 
         [TestMethod]
         [ExpectedException(typeof(ReserveException))]
-        public void CreateInvalidReserveWithoutLastName()
+        public void CreateInvalidReserveWithoutLastNameTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
@@ -174,8 +175,8 @@ namespace BusinessLogicTest
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
-            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
 
             Reserve reserve = new Reserve()
             {
@@ -189,12 +190,12 @@ namespace BusinessLogicTest
                 QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
+            Reserve resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ReserveException))]
-        public void CreateInvalidReserveWithInvalidDate()
+        public void CreateInvalidReserveWithInvalidDateTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
@@ -207,8 +208,8 @@ namespace BusinessLogicTest
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
-            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
 
             Reserve reserve = new Reserve()
             {
@@ -222,12 +223,12 @@ namespace BusinessLogicTest
                 QuantityOfBaby = 1
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
+            Reserve resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ReserveException))]
-        public void CreateInvalidReserveWithoutGuest()
+        public void CreateInvalidReserveWithoutGuestTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
@@ -240,8 +241,8 @@ namespace BusinessLogicTest
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
-            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
 
             Reserve reserve = new Reserve()
             {
@@ -255,13 +256,13 @@ namespace BusinessLogicTest
                 QuantityOfBaby = 0
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
+            Reserve resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
 
         [TestMethod]
         [ExpectedException(typeof(ReserveException))]
-        public void CreateInvalidReserveWithInvalidMail()
+        public void CreateInvalidReserveWithInvalidMailTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
@@ -274,8 +275,8 @@ namespace BusinessLogicTest
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
-            var lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
 
             Reserve reserve = new Reserve()
             {
@@ -290,7 +291,7 @@ namespace BusinessLogicTest
 
             };
 
-            var resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
+            Reserve resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
         }
 
         [TestMethod]
@@ -313,9 +314,9 @@ namespace BusinessLogicTest
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
 
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
 
-            var resultOfGetAReserve = reserveLogic.GetById(reserve.Id);
+            Reserve resultOfGetAReserve = reserveLogic.GetById(reserve.Id);
 
             reserveRepositoryMock.VerifyAll();
             Assert.IsTrue(reserve.Equals(resultOfGetAReserve));
@@ -323,7 +324,7 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionBusinessLogic))]
-        public void GetExceptionBySearchReserveWithId()
+        public void GetExceptionBySearchReserveWithIdTest()
         {
             Reserve reserve = new Reserve()
             {
@@ -342,9 +343,9 @@ namespace BusinessLogicTest
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
 
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
 
-            var resultOfGetAReserve = reserveLogic.GetById(reserve.Id);
+            Reserve resultOfGetAReserve = reserveLogic.GetById(reserve.Id);
         }
 
         [TestMethod]
@@ -370,9 +371,9 @@ namespace BusinessLogicTest
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
             reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>()));
-            reserveRepositoryMock.Setup(m => m.Save()); 
+            reserveRepositoryMock.Setup(m => m.Save());
 
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
 
             Reserve reserveToUpdate = new Reserve()
             {
@@ -381,7 +382,7 @@ namespace BusinessLogicTest
                 StateOfReserve = Reserve.ReserveState.Aceptada
             }; 
 
-            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+            Reserve resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
 
             reserve.DescriptionForGuest = "Su reserva ha sido aceptada";
             reserve.StateOfReserve = Reserve.ReserveState.Creada; 
@@ -416,7 +417,7 @@ namespace BusinessLogicTest
             reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>())).Throws(new ExceptionBusinessLogic("Ocurrio un error al actualizar."));
             reserveRepositoryMock.Setup(m => m.Save());
 
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
 
             Reserve reserveToUpdate = new Reserve()
             {
@@ -425,7 +426,7 @@ namespace BusinessLogicTest
                 StateOfReserve = Reserve.ReserveState.Aceptada
             };
 
-            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+            Reserve resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
         }
 
         [TestMethod]
@@ -454,7 +455,7 @@ namespace BusinessLogicTest
             reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>())).Throws(new ExceptionRepository("Ocurrio un error al actualizar."));
             reserveRepositoryMock.Setup(m => m.Save());
 
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
 
             Reserve reserveToUpdate = new Reserve()
             {
@@ -463,7 +464,7 @@ namespace BusinessLogicTest
                 StateOfReserve = Reserve.ReserveState.Aceptada
             };
 
-            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+            Reserve resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
         }
 
 
@@ -476,7 +477,7 @@ namespace BusinessLogicTest
             reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>()));
             reserveRepositoryMock.Setup(m => m.Save());
 
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
 
             Reserve reserveToUpdate = new Reserve()
             {
@@ -485,7 +486,7 @@ namespace BusinessLogicTest
                 StateOfReserve = Reserve.ReserveState.Aceptada
             };
 
-            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+            Reserve resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
         }
 
         [TestMethod]
@@ -497,7 +498,7 @@ namespace BusinessLogicTest
             reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>()));
             reserveRepositoryMock.Setup(m => m.Save());
 
-            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
 
             Reserve reserveToUpdate = new Reserve()
             {
@@ -506,7 +507,7 @@ namespace BusinessLogicTest
                 StateOfReserve = Reserve.ReserveState.Aceptada
             };
 
-            var resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
+            Reserve resultOfUpdate = reserveLogic.Update(reserveToUpdate.Id, reserveToUpdate);
         }
 
     }

@@ -103,26 +103,15 @@ namespace Domain
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-            else if (GetType() != obj.GetType())
-            {
-                return false;
-            }
-            else
-            {
-                Reserve reserve = (Reserve)obj;
-                return Name.Equals(reserve.Name) && LastName.Equals(reserve.LastName)
-                     && Email.Equals(reserve.Email)
-                     && LodgingOfReserve.Equals(reserve.LodgingOfReserve)
-                     && DateTime.Compare(CheckIn, reserve.CheckIn) == 0
-                     && DateTime.Compare(CheckOut, reserve.CheckOut) == 0; 
-            }
+            return obj is Reserve reserve &&
+                   Name.Equals(reserve.Name) &&
+                   LastName.Equals(reserve.LastName) &&
+                   Email.Equals(reserve.Email) &&
+                   EqualityComparer<Lodging>.Default.Equals(LodgingOfReserve, reserve.LodgingOfReserve)
+                   && DateTime.Compare(CheckIn, reserve.CheckIn) == 0
+                   && DateTime.Compare(CheckOut, reserve.CheckOut) == 0
+                   && StateOfReserve.Equals(reserve.StateOfReserve);
         }
-
-
 
     }
 }
