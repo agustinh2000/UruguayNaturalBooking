@@ -1,6 +1,7 @@
 ﻿using Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Model.ForRequest
@@ -16,7 +17,7 @@ namespace Model.ForRequest
 
         public string Address { get; set; }
 
-        public byte[] Images { get; set; }
+        public Picture[] Images { get; set; }
 
         public double PricePerNight { get; set; }
 
@@ -28,7 +29,7 @@ namespace Model.ForRequest
             Name = Name,
             QuantityOfStars = QuantityOfStars,
             Address = Address,
-            Images = Images,
+            Images = Images.ToList(),
             PricePerNight = PricePerNight
         }; 
     }

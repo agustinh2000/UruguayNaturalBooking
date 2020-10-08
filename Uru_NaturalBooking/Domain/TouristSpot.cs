@@ -11,7 +11,7 @@ namespace Domain
 
         public string Description { get; set; }
 
-        public byte[] Image { get; set; }
+        public virtual Picture Image { get; set; }
 
         public virtual Region Region { get; set; }
 

@@ -17,6 +17,8 @@ namespace Model.ForResponse
 
         public RegionForResponseModel RegionModel { get; set; }
 
+        public Picture Image { get; set; }
+
         public List<CategoryModel> ListOfCategoriesModel { get; set; }
 
         protected override TouristSpotForResponseModel SetModel(TouristSpot touristSpot)
@@ -25,6 +27,7 @@ namespace Model.ForResponse
             Name = touristSpot.Name;
             Description = touristSpot.Description;
             RegionModel = RegionForResponseModel.ToModel(touristSpot.Region);
+            Image = touristSpot.Image;
             ListOfCategoriesModel = touristSpot.ListOfCategories.ConvertAll(m => CategoryModel.ToModel(m.Category));
             return this;
         }

@@ -117,7 +117,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [ServiceFilter(typeof(AuthorizationFilter))]
+        //[ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
         public IActionResult Post([FromBody] TouristSpotForRequestModel aTouristSpot)
         {
