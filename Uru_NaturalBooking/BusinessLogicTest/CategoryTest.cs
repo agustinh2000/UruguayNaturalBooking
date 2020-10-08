@@ -17,78 +17,101 @@ namespace BusinessLogicTest
     public class CategoryTest
     {
         [TestMethod]
-        public void GetCategoryById()
+        public void GetCategoryByIdTestOk()
         {
             Category category = new Category
             {
                 Id = Guid.NewGuid(),
                 Name= "Playita y calor"
             };
-            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(category.Id)).Returns(category);
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(category);
 
-            var categoryLogic = new CategoryManagement(mock.Object);
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
+            Category result = categoryLogic.GetById(category.Id);
 
-            var result = categoryLogic.GetById(category.Id);
+            Category categoryToCompare = new Category()
+            {
+                Id = result.Id,
+                Name = result.Name
+            }; 
 
-            mock.VerifyAll();
-            Assert.AreEqual(category, result);
+            categoryMock.VerifyAll();
+            Assert.AreEqual(category, categoryToCompare);
+        }
+
+        [TestMethod]
+        public void GetNullCategoryByIdTest()
+        {
+            Category category = new Category
+            {
+                Id = Guid.NewGuid(),
+                Name = "Playita y calor"
+            };
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(value: null);
+
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
+            Category result = categoryLogic.GetById(category.Id);
+
+            categoryMock.VerifyAll();
+            Assert.IsFalse(category.Equals(result)); 
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionBusinessLogic))]
-        public void GetInvalidCategoryById()
+        public void GetInvalidCategoryByIdTest()
         {
-            var guid = Guid.NewGuid();
+            Guid idForCategory = Guid.NewGuid();
             Category category = new Category
             {
-                Id = guid, 
+                Id = idForCategory, 
                 Name = "Playita y calor"
             };
 
-            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
 
-            mock.Setup(x => x.Get(guid)).Throws(new ExceptionRepository());
+            categoryMock.Setup(x => x.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
 
-            var categoryLogic = new CategoryManagement(mock.Object);
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
-            categoryLogic.GetById(guid);
+            categoryLogic.GetById(idForCategory);
         }
 
         [TestMethod]
-        public void GetAllCategories()
+        public void GetAllCategoriesTest()
         {
 
             List<Category> listOfCategories = new List<Category>();
-            Category category = new Category
+            Category categoryOfBeach = new Category
             {
                 Id = Guid.NewGuid(),
                 Name = "Playita y calor"
             };
-            listOfCategories.Add(category);
-            Category category2 = new Category
+            listOfCategories.Add(categoryOfBeach);
+            Category categoryOfCold = new Category
             {
                 Id = Guid.NewGuid(),
                 Name = "Frio"
             };
-            listOfCategories.Add(category2);
+            listOfCategories.Add(categoryOfCold);
 
 
-            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            mock.Setup(m => m.GetAll()).Returns(listOfCategories);
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoryMock.Setup(m => m.GetAll()).Returns(new List<Category>(listOfCategories));
 
-            var categoryLogic = new CategoryManagement(mock.Object);
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
-            var result = categoryLogic.GetAllCategories();
+            List<Category> result = categoryLogic.GetAllCategories();
 
-            mock.VerifyAll();
+            categoryMock.VerifyAll();
             CollectionAssert.AreEqual(listOfCategories, result);
         }
 
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionBusinessLogic))]
-        public void GetBadAllCategories()
+        public void GetExceptionObteinedAllCategoriesTest()
         {
 
             List<Category> listOfCategories = new List<Category>();
@@ -106,18 +129,18 @@ namespace BusinessLogicTest
             listOfCategories.Add(category2);
 
 
-            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            mock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoryMock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
 
-            var categoriLogic = new CategoryManagement(mock.Object);
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
-            var result = categoriLogic.GetAllCategories();
+            List<Category> result = categoryLogic.GetAllCategories();
 
         }
 
 
         [TestMethod]
-        public void GetAllCategoriesAssociated()
+        public void GetAllCategoriesAssociatedTestOk()
         {
 
             List<Guid> listOfIdentifier = new List<Guid>();
@@ -127,13 +150,13 @@ namespace BusinessLogicTest
             listOfIdentifier.Add(guid2); 
 
 
-            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(guid1)).Returns(new Category() { Id = guid1 });
-            mock.Setup(m => m.Get(guid2)).Returns(new Category() { Id= guid2}); 
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoryMock.Setup(m => m.Get(guid1)).Returns(new Category() { Id = guid1 });
+            categoryMock.Setup(m => m.Get(guid2)).Returns(new Category() { Id= guid2}); 
 
-            var categoryLogic = new CategoryManagement(mock.Object);
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
-            var result = categoryLogic.GetAssociatedCategories(listOfIdentifier);
+            List<Category> result = categoryLogic.GetAssociatedCategories(listOfIdentifier);
 
             List<Guid> listOfIdentifiersGetted = new List<Guid>(); 
             foreach(Category category in result)
@@ -141,14 +164,14 @@ namespace BusinessLogicTest
                 listOfIdentifiersGetted.Add(category.Id); 
             }
 
-            mock.VerifyAll();
+            categoryMock.VerifyAll();
             CollectionAssert.AreEqual(listOfIdentifier, listOfIdentifiersGetted); 
         }
 
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionBusinessLogic))]
-        public void GetBadAllCategoriesAssociated()
+        public void GetExceptionGettingAllCategoriesAssociatedTest()
         {
 
             List<Guid> listOfIdentifier = new List<Guid>();
@@ -157,34 +180,33 @@ namespace BusinessLogicTest
             listOfIdentifier.Add(guid1);
             listOfIdentifier.Add(guid2);
 
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(new Category() { Id = guid1 });
+            categoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
 
-            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(guid1)).Returns(new Category() { Id = guid1 });
-            mock.Setup(m => m.Get(guid2)).Throws(new ExceptionRepository());
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
-            var categoryLogic = new CategoryManagement(mock.Object);
-
-            var result = categoryLogic.GetAssociatedCategories(listOfIdentifier);
+            List<Category> result = categoryLogic.GetAssociatedCategories(listOfIdentifier);
         }
 
 
         [TestMethod]
-        public void CreateValidCategory()
+        public void CreateValidCategoryTestOk()
         {
             Category category = new Category
             {
                 Name = "Playita y calor"
             };
 
-            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            mock.Setup(m => m.Add(It.IsAny<Category>()));
-            mock.Setup(m => m.Save()); 
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoryMock.Setup(m => m.Add(It.IsAny<Category>()));
+            categoryMock.Setup(m => m.Save()); 
 
-            var categoryLogic = new CategoryManagement(mock.Object);
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
-            var result = categoryLogic.Create(category);
+            Category result = categoryLogic.Create(category);
 
-            mock.VerifyAll();
+            categoryMock.VerifyAll();
             Assert.AreEqual(category, result);
         }
 
@@ -197,13 +219,13 @@ namespace BusinessLogicTest
                 Name = "Playita y calor"
             };
 
-            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            mock.Setup(m => m.Add(It.IsAny<Category>())).Throws(new ExceptionRepository());
-            mock.Setup(m => m.Save());
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoryMock.Setup(m => m.Add(It.IsAny<Category>())).Throws(new ExceptionRepository());
+            categoryMock.Setup(m => m.Save());
 
-            var categoryLogic = new CategoryManagement(mock.Object);
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
-            var result = categoryLogic.Create(category);
+            Category result = categoryLogic.Create(category);
         }
 
         [TestMethod]
@@ -215,13 +237,13 @@ namespace BusinessLogicTest
                 Name = ""
             };
 
-            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            mock.Setup(m => m.Add(It.IsAny<Category>()));
-            mock.Setup(m => m.Save());
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoryMock.Setup(m => m.Add(It.IsAny<Category>()));
+            categoryMock.Setup(m => m.Save());
 
-            var categoryLogic = new CategoryManagement(mock.Object);
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
-            var result = categoryLogic.Create(category);
+            Category result = categoryLogic.Create(category);
         }
 
     }
