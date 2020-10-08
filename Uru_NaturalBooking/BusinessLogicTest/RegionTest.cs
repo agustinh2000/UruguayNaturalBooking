@@ -14,46 +14,52 @@ namespace BusinessLogicTest
     public class RegionTest
     {
         [TestMethod]
-        public void GetRegionById()
+        public void GetRegionValidByIdTestOk()
         {
             Region region = new Region
             {
                 Id = Guid.NewGuid(),
                 Name = Region.RegionName.Región_Centro_Sur
             };
-            var mock = new Mock<IRepository<Region>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(region.Id)).Returns(region);
+            var regionMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
+            regionMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(region);
 
-            var regionLogic = new RegionManagement(mock.Object);
+            RegionManagement regionLogic = new RegionManagement(regionMock.Object);
 
-            var result = regionLogic.GetById(region.Id);
+            Region result = regionLogic.GetById(region.Id);
 
-            mock.VerifyAll();
-            Assert.AreEqual(region.Name.ToString(), result.Name.ToString());
+            Region regiontToCompare = new Region()
+            {
+                Id = result.Id,
+                Name = result.Name
+            };
+
+            regionMock.VerifyAll();
+            Assert.AreEqual(region, regiontToCompare);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionBusinessLogic))]
-        public void GetInvalidRegionById()
+        public void GetInvalidRegionByIdTest()
         {
-            var guid = Guid.NewGuid();
+            var regionId = Guid.NewGuid();
             Region region = new Region
             {
-                Id = guid,
+                Id = regionId,
                 Name = Region.RegionName.Región_Centro_Sur
             };
 
-            var mock = new Mock<IRepository<Region>>(MockBehavior.Strict);
-            
-            mock.Setup(x => x.Get(guid)).Throws(new ExceptionRepository());
+            var regionMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
 
-            var regionLogic = new RegionManagement(mock.Object);
+            regionMock.Setup(x => x.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
 
-            regionLogic.GetById(guid);
+            RegionManagement regionLogic = new RegionManagement(regionMock.Object);
+
+            regionLogic.GetById(regionId);
         }
 
         [TestMethod]
-        public void GetAllRegion()
+        public void GetAllRegionTestOk()
         {
 
             List<Region> listOfRegions = new List<Region>();
@@ -71,21 +77,21 @@ namespace BusinessLogicTest
             listOfRegions.Add(region2); 
 
 
-            var mock = new Mock<IRepository<Region>>(MockBehavior.Strict);
-            mock.Setup(m => m.GetAll()).Returns(listOfRegions);
+            var regionMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
+            regionMock.Setup(m => m.GetAll()).Returns(listOfRegions);
 
-            var regionLogic = new RegionManagement(mock.Object);
+            RegionManagement regionLogic = new RegionManagement(regionMock.Object);
 
-            var result = regionLogic.GetAllRegions();
+            List<Region> result = regionLogic.GetAllRegions();
 
-            mock.VerifyAll();
+            regionMock.VerifyAll();
             CollectionAssert.AreEqual(listOfRegions, result); 
         }
 
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionBusinessLogic))]
-        public void GetBadAllRegion()
+        public void GetBadAllRegionTestOk()
         {
 
             List<Region> listOfRegions = new List<Region>();
@@ -103,14 +109,12 @@ namespace BusinessLogicTest
             listOfRegions.Add(region2);
 
 
-            var mock = new Mock<IRepository<Region>>(MockBehavior.Strict);
-            mock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
+            var regionMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
+            regionMock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
 
-            var regionLogic = new RegionManagement(mock.Object);
+            RegionManagement regionLogic = new RegionManagement(regionMock.Object);
 
-            var result = regionLogic.GetAllRegions();
-
-            mock.VerifyAll();
+            List<Region> result = regionLogic.GetAllRegions();
         }
 
 

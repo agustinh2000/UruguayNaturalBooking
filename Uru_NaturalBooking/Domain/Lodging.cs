@@ -82,22 +82,12 @@ namespace Domain
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-            else if (GetType() != obj.GetType())
-            {
-                return false;
-            }
-            else
-            {
-                Lodging lodging = (Lodging)obj;
-                return Id.Equals(lodging.Id) && Name.Equals(lodging.Name)
-                    && PricePerNight== lodging.PricePerNight
-                    && QuantityOfStars== lodging.QuantityOfStars;
-            }
+            return obj is Lodging lodging &&
+                   Id.Equals(lodging.Id) &&
+                   Name.Equals(lodging.Name) &&
+                   QuantityOfStars == lodging.QuantityOfStars &&
+                   Address.Equals(lodging.Address) &&
+                   PricePerNight == lodging.PricePerNight;
         }
-
     }
 }
