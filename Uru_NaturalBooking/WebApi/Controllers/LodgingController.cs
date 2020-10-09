@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BusinessLogicException;
 using BusinessLogicInterface;
 using Domain;
 using Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Model;
 using Model.ForRequest;
 using Model.ForResponse;
 
@@ -31,12 +28,12 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<Lodging> lodgings = lodgingManagement.GetAllLoadings();
-                if (lodgings == null)
+                List<Lodging> allLodgings = lodgingManagement.GetAllLoadings();
+                if (allLodgings == null)
                 {
                     return NotFound("No se pudo encontrar hospedajes");
                 }
-                return Ok(LodgingModelForResponse.ToModel(lodgings));
+                return Ok(LodgingModelForResponse.ToModel(allLodgings));
             } catch (ExceptionBusinessLogic e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
@@ -62,7 +59,7 @@ namespace WebApi.Controllers
         }
 
 
-        //[ServiceFilter(typeof(AuthorizationFilter))]
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
         public IActionResult Post([FromBody] LodgingModelForRequest lodgingModel)
         {

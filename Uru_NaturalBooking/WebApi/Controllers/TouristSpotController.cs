@@ -49,12 +49,12 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<TouristSpot> touristSpots = touristSpotManagement.GetAllTouristSpot();
-                if(touristSpots == null)
+                List<TouristSpot> allTouristSpots = touristSpotManagement.GetAllTouristSpot();
+                if(allTouristSpots == null)
                 {
                     return NotFound("No se encontraron puntos turisticos.");
                 }
-                return Ok(TouristSpotForResponseModel.ToModel(touristSpotManagement.GetAllTouristSpot()));
+                return Ok(TouristSpotForResponseModel.ToModel(allTouristSpots));
             }
             catch(ExceptionBusinessLogic e)
             {
@@ -72,7 +72,7 @@ namespace WebApi.Controllers
                 {
                     return NotFound("No se encontraron puntos turisticos asociados a la region indicada.");
                 }
-                return Ok(TouristSpotForResponseModel.ToModel(touristSpotManagement.GetTouristSpotByRegion(regionId)));
+                return Ok(TouristSpotForResponseModel.ToModel(touristSpotsInARegion));
             }
             catch (ExceptionBusinessLogic e)
             {
@@ -90,7 +90,7 @@ namespace WebApi.Controllers
                 {
                     return NotFound("No se encontraron puntos turisticos para las categorias seleccionadas");
                 }
-                return Ok(TouristSpotForResponseModel.ToModel(touristSpotManagement.GetTouristSpotsByCategories(categoriesId.ToList())));
+                return Ok(TouristSpotForResponseModel.ToModel(touristSpotsByCategories)));
             }
             catch (ExceptionBusinessLogic e)
             {
@@ -104,12 +104,13 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<TouristSpot> touristSpotsByRegionAndCategories = touristSpotManagement.GetTouristSpotsByCategoriesAndRegion(categoriesId.ToList(), regionId);
+                List<TouristSpot> touristSpotsByRegionAndCategories = touristSpotManagement.
+                    GetTouristSpotsByCategoriesAndRegion(categoriesId.ToList(), regionId);
                 if (touristSpotsByRegionAndCategories == null)
                 {
                     return NotFound("No se encontraron puntos turisticos para las categorias y region seleccionadas");
                 }
-                return Ok(TouristSpotForResponseModel.ToModel(touristSpotManagement.GetTouristSpotsByCategoriesAndRegion(categoriesId.ToList(), regionId)));
+                return Ok(TouristSpotForResponseModel.ToModel(touristSpotsByRegionAndCategories));
             }
             catch (ExceptionBusinessLogic e)
             {
@@ -117,7 +118,7 @@ namespace WebApi.Controllers
             }
         }
 
-        //[ServiceFilter(typeof(AuthorizationFilter))]
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
         public IActionResult Post([FromBody] TouristSpotForRequestModel aTouristSpot)
         {

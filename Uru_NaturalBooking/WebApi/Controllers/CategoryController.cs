@@ -29,12 +29,12 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<Category> categories = categoryManagement.GetAllCategories(); 
-                if (categories == null)
+                List<Category> allCategories = categoryManagement.GetAllCategories(); 
+                if (allCategories == null)
                 {
                     return NotFound("No se pudo encontrar hospedajes");
                 }
-                return Ok(CategoryModel.ToModel(categories));
+                return Ok(CategoryModel.ToModel(allCategories));
             }
             catch(ExceptionBusinessLogic e)
             {
