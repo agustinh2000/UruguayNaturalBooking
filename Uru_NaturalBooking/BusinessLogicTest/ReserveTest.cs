@@ -65,7 +65,7 @@ namespace BusinessLogicTest
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
             reserveRepositoryMock.Setup(m => m.Save());
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -101,7 +101,7 @@ namespace BusinessLogicTest
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>())).Throws(new ExceptionRepository());
             reserveRepositoryMock.Setup(m => m.Save());
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -134,7 +134,7 @@ namespace BusinessLogicTest
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
             reserveRepositoryMock.Setup(m => m.Save());
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -169,7 +169,7 @@ namespace BusinessLogicTest
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
             reserveRepositoryMock.Setup(m => m.Save());
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -202,7 +202,7 @@ namespace BusinessLogicTest
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
             reserveRepositoryMock.Setup(m => m.Save());
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -235,7 +235,7 @@ namespace BusinessLogicTest
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
             reserveRepositoryMock.Setup(m => m.Save());
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -269,7 +269,7 @@ namespace BusinessLogicTest
             reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
             reserveRepositoryMock.Setup(m => m.Save());
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);

@@ -43,7 +43,7 @@ namespace DataAcessTest
         public void TestAddLodgingOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
+            ILodgingRepository lodgingRepository = new LodgingRepository(context);
 
             lodgingRepository.Add(lodging);
             lodgingRepository.Save();
@@ -57,7 +57,7 @@ namespace DataAcessTest
         public void TestGetLodgingOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
+            ILodgingRepository lodgingRepository = new LodgingRepository(context);
 
             lodgingRepository.Add(lodging);
             lodgingRepository.Save();
@@ -71,7 +71,7 @@ namespace DataAcessTest
         public void GetLodgingDoesntExist()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
+            ILodgingRepository lodgingRepository = new LodgingRepository(context);
 
             Lodging lodgingOfDb = lodgingRepository.Get(lodging.Id);
         }
@@ -80,7 +80,7 @@ namespace DataAcessTest
         public void TestRemoveLodgingOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
+            ILodgingRepository lodgingRepository = new LodgingRepository(context);
 
             lodgingRepository.Add(lodging);
             lodgingRepository.Save();
@@ -98,7 +98,7 @@ namespace DataAcessTest
         public void TestRemoveLodgingDoesntExist()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
+            ILodgingRepository lodgingRepository = new LodgingRepository(context);
 
             lodgingRepository.Remove(lodging);
             lodgingRepository.Save();
@@ -108,7 +108,7 @@ namespace DataAcessTest
         public void TestUpdateLodgingOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
+            ILodgingRepository lodgingRepository = new LodgingRepository(context);
 
             lodgingRepository.Add(lodging);
             lodgingRepository.Save();
@@ -128,7 +128,7 @@ namespace DataAcessTest
         public void TestUpdateLodgingInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
+            ILodgingRepository lodgingRepository = new LodgingRepository(context);
 
             lodgingRepository.Update(lodging);
             lodgingRepository.Save();
@@ -138,7 +138,7 @@ namespace DataAcessTest
         public void TestGetAllLodgingsOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
+            ILodgingRepository lodgingRepository = new LodgingRepository(context);
 
             Lodging lodgingOfConrad = new Lodging()
             {
@@ -161,6 +161,45 @@ namespace DataAcessTest
             List<Lodging> listOfLodgingOfDb = lodgingRepository.GetAll().ToList();
 
             CollectionAssert.AreEqual(listWithOriginalsLodgings, listOfLodgingOfDb);
+        }
+
+        [TestMethod]
+        public void GetAvailableLodgingsByTouristSpotOk()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ILodgingRepository lodgingRepository = new LodgingRepository(context);
+
+            Lodging lodgingOfConrad = new Lodging()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Hotel Enjoy Conrad",
+                QuantityOfStars = 5,
+                Address = "Parada 4 Playa Mansa, Rambla Claudio Williman",
+                PricePerNight = 1500,
+                TouristSpot = touristSpot,
+            };
+
+            lodgingRepository.Add(lodging);
+            lodgingRepository.Add(lodgingOfConrad);
+            lodgingRepository.Save();
+
+            List<Lodging> listWithOriginalsLodgings = new List<Lodging>();
+            listWithOriginalsLodgings.Add(lodging);
+            listWithOriginalsLodgings.Add(lodgingOfConrad);
+
+            List<Lodging> listOfLodgingOfDb = lodgingRepository.GetAvailableLodgingsByTouristSpot(touristSpot.Id).ToList();
+
+            CollectionAssert.AreEqual(listWithOriginalsLodgings, listOfLodgingOfDb);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+
+        public void GetAvailableLodgingsByTouristSpotNotFound()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ILodgingRepository lodgingRepository = new LodgingRepository(context);
+            List<Lodging> listOfLodgingOfDb = lodgingRepository.GetAvailableLodgingsByTouristSpot(touristSpot.Id).ToList();
         }
 
     }

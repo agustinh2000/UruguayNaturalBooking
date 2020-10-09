@@ -63,7 +63,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CreateValidLodgingTestOk()
         {
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
 
@@ -97,7 +97,7 @@ namespace BusinessLogicTest
         {
             lodging.Name = ""; 
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
 
@@ -115,7 +115,7 @@ namespace BusinessLogicTest
         public void CreateInvalidLodgingWithErrorInAddTest()
         {
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>())).Throws(new ExceptionRepository());
             lodgingRepositoryMock.Setup(m => m.Save());
 
@@ -134,7 +134,7 @@ namespace BusinessLogicTest
         {
             lodging.Address = "";
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
 
@@ -153,7 +153,7 @@ namespace BusinessLogicTest
         {
             lodging.Description = "";
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
 
@@ -172,7 +172,7 @@ namespace BusinessLogicTest
         {
             lodging.QuantityOfStars = 0;
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
 
@@ -191,7 +191,7 @@ namespace BusinessLogicTest
         {
             lodging.QuantityOfStars = 15;
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
 
@@ -210,7 +210,7 @@ namespace BusinessLogicTest
         {
             lodging.PricePerNight = -10;
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
 
@@ -229,7 +229,7 @@ namespace BusinessLogicTest
         {
             lodging.PricePerNight = 15000000;
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
 
@@ -245,7 +245,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void GetValidLodgingTestOk()
         {
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
 
@@ -257,7 +257,7 @@ namespace BusinessLogicTest
         [ExpectedException(typeof(ExceptionBusinessLogic))]
         public void FailInGetValidLodgingTest()
         {
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
 
@@ -289,8 +289,8 @@ namespace BusinessLogicTest
 
             List<Lodging> listOfLodgings = new List<Lodging>() { lodging, lodgingConrad }; 
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
-            lodgingRepositoryMock.Setup(m => m.GetAll()).Returns(listOfLodgings);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.GetAvailableLodgingsByTouristSpot(It.IsAny<Guid>())).Returns(listOfLodgings);
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
 
             List<Lodging> resultOfSearchLodgingByTouristSpot = lodgingLogic.GetAvailableLodgingsByTouristSpot(touristSpot.Id);
@@ -324,8 +324,8 @@ namespace BusinessLogicTest
 
             List<Lodging> listOfLodgings = new List<Lodging>() { lodging, lodgingConrad };
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
-            lodgingRepositoryMock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.GetAvailableLodgingsByTouristSpot(touristSpot.Id)).Throws(new ExceptionRepository());
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
 
             List<Lodging> resultOfSearchLodgingByTouristSpot = lodgingLogic.GetAvailableLodgingsByTouristSpot(touristSpot.Id);
@@ -335,7 +335,7 @@ namespace BusinessLogicTest
         public void UpdateValidLodgingTest()
         {
             lodging.Name = "San Ramon Hotel";
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
             lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
@@ -349,7 +349,7 @@ namespace BusinessLogicTest
         [ExpectedException(typeof(ExceptionBusinessLogic))]
         public void FailInUpdateLodgingTest()
         {
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
             lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
@@ -361,7 +361,7 @@ namespace BusinessLogicTest
         [ExpectedException(typeof(ExceptionBusinessLogic))]
         public void FailInUpdateNullLodgingTest()
         {
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(value: null);
             lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.Save());
@@ -372,7 +372,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void RemoveValidLodgingTest()
         {
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
             lodgingRepositoryMock.Setup(m => m.Remove(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.GetAll()).Returns(new List<Lodging>());
@@ -388,7 +388,7 @@ namespace BusinessLogicTest
         [ExpectedException(typeof(ExceptionBusinessLogic))]
         public void RemoveInvalidLodgingTests()
         {
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
             lodgingRepositoryMock.Setup(m => m.Remove(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.GetAll()).Returns(new List<Lodging>());
@@ -402,7 +402,7 @@ namespace BusinessLogicTest
         {
             List<Lodging> lodgingsToReturn = new List<Lodging>() {lodging};
 
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.GetAll()).Returns(lodgingsToReturn);
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
@@ -419,7 +419,7 @@ namespace BusinessLogicTest
         public void FailAboutGetAllLodgingsTest()
         {
             List<Lodging> lodgingsToReturn = new List<Lodging>() {lodging};
-            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
             List<Lodging> loadgingsObteinedOfGetAll = lodgingLogic.GetAllLoadings();

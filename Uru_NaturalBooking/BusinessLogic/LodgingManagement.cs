@@ -12,16 +12,16 @@ namespace BusinessLogic
 {
     public class LodgingManagement : ILodgingManagement
     {
-        private readonly IRepository<Lodging> lodgingRepository;
+        private readonly ILodgingRepository lodgingRepository;
         private readonly ITouristSpotManagement touristSpotManagementLogic;
 
-        public LodgingManagement(IRepository<Lodging> repository, ITouristSpotManagement touristSpotLogic)
+        public LodgingManagement(ILodgingRepository repository, ITouristSpotManagement touristSpotLogic)
         {
             lodgingRepository = repository;
             touristSpotManagementLogic = touristSpotLogic; 
         }
 
-        public LodgingManagement(IRepository<Lodging> repository)
+        public LodgingManagement(ILodgingRepository repository)
         {
             lodgingRepository = repository; 
         }
@@ -60,9 +60,7 @@ namespace BusinessLogic
         {
             try
             {
-                List<Lodging> listOfLodgingInTouristSpot = lodgingRepository.GetAll().Where(lod => lod.TouristSpot.Id.Equals(touristSpotId) 
-                && lod.IsAvailable).ToList();
-                return listOfLodgingInTouristSpot; 
+                return lodgingRepository.GetAvailableLodgingsByTouristSpot(touristSpotId);
             }
             catch (ExceptionRepository e)
             {
