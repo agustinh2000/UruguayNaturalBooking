@@ -1,7 +1,10 @@
 ﻿using DomainException;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Net.Mail;
+using System.Reflection;
 using System.Text;
 
 namespace Domain
@@ -32,7 +35,17 @@ namespace Domain
 
         public int QuantityOfBaby { get; set; }
 
-        public enum ReserveState { Creada, Pendiente_Pago, Aceptada, Rechazada, Expirada }
+        public enum ReserveState { 
+            [Description("Creada")]
+            Creada,
+            [Description("Pendiente de pago")]
+            Pendiente_Pago,
+            [Description("Aceptada")]
+            Aceptada, 
+            [Description("Rechazada")]
+            Rechazada, 
+            [Description("Expirada")]
+            Expirada }
 
         public ReserveState StateOfReserve {get; set; }
 
@@ -99,6 +112,19 @@ namespace Domain
             {
                 StateOfReserve = infoReserveToUpdate.StateOfReserve; 
             }
+        }
+
+        public string GetEnumDescription()
+        {
+            FieldInfo fi = StateOfReserve.GetType().GetField(StateOfReserve.ToString());
+
+            DescriptionAttribute[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
+
+            if (attributes != null && attributes.Any())
+            {
+                return attributes.First().Description;
+            }
+            return StateOfReserve.ToString();
         }
 
         public override bool Equals(object obj)

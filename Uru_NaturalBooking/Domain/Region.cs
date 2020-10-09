@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 
 namespace Domain
 {
@@ -6,9 +9,34 @@ namespace Domain
     {
         public Guid Id { get; set; }
 
-        public enum RegionName { Región_Metropolitana, Región_Centro_Sur, Región_Este, Región_Literal_Norte, Región_Corredor_Pajaros_Pintados }
+        public enum RegionName
+        {
+            [Description("Region Metropolitana")]
+            Región_Metropolitana,
+            [Description("Region Centro Sur")]
+            Región_Centro_Sur,
+            [Description("Region Este")]
+            Región_Este,
+            [Description("Region Literal Norte")]
+            Región_Literal_Norte,
+            [Description("Region Corredor Pajaros Pintados")]
+            Región_Corredor_Pajaros_Pintados
+        }
 
         public RegionName Name { get; set; }
+
+        public string GetEnumDescription()
+        {
+            FieldInfo fi = Name.GetType().GetField(Name.ToString());
+
+            DescriptionAttribute[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
+
+            if (attributes != null && attributes.Any())
+            {
+                return attributes.First().Description;
+            }
+            return Name.ToString();
+        }
 
         public override bool Equals(object obj)
         {

@@ -30,6 +30,8 @@ namespace Model.ForResponse
 
         public ReserveState StateOfReserve { get; set; }
 
+        public string DescriptionOfState { get; set; }
+
         public LodgingModelForReserveResponseModel Lodging { get; set; }
 
         public double TotalPrice { get; set; }
@@ -49,6 +51,7 @@ namespace Model.ForResponse
             QuantityOfChild = entity.QuantityOfChild;
             QuantityOfBaby = entity.QuantityOfBaby;
             StateOfReserve = entity.StateOfReserve;
+            DescriptionOfState = entity.GetEnumDescription(); 
             Lodging = LodgingModelForReserveResponseModel.ToModel(entity.LodgingOfReserve); 
             int totalDays = (CheckOut - CheckIn).Days;
             int[] QuantityOfGuest = new int[3]{ QuantityOfAdult, QuantityOfChild, QuantityOfBaby }; 
