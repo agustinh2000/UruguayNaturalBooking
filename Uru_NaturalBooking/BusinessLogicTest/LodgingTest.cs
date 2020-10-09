@@ -100,6 +100,44 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(LodgingException))]
+        public void CreateInvalidLodgingWithoutPicturesTest()
+        {
+            lodging.Images = null;
+
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.Save());
+
+            var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
+            TouristSpotManagement touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LodgingException))]
+        public void CreateInvalidLodgingWithNewListOfPicturesTest()
+        {
+            lodging.Images = new List<Picture>();
+
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.Save());
+
+            var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
+            TouristSpotManagement touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LodgingException))]
         public void CreateInvalidLodgingWithoutNameTest()
         {
             lodging.Name = ""; 
