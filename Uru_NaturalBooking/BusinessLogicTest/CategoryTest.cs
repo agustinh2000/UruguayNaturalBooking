@@ -96,7 +96,6 @@ namespace BusinessLogicTest
             };
             listOfCategories.Add(categoryOfCold);
 
-
             var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
             categoryMock.Setup(m => m.GetAll()).Returns(new List<Category>(listOfCategories));
 

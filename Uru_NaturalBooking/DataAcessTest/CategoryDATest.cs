@@ -34,6 +34,15 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestAddCategoryNullInvalid()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            IRepository<Category> categoryRepo = new BaseRepository<Category>(context);
+            categoryRepo.Add(null);
+        }
+
+        [TestMethod]
         public void TestGetCategoryOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -67,7 +76,6 @@ namespace DataAcessTest
             
             Category categoryOfDb = categoryRepo.Get(categoryToAdd.Id);
         }
-
 
         [TestMethod]
         public void TestRemoveCategoryOK()
@@ -106,6 +114,15 @@ namespace DataAcessTest
 
             categoryRepo.Remove(categoryToAdd);
             categoryRepo.Save();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestRemoveCategoryNullInvalid()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            IRepository<Category> categoryRepo = new BaseRepository<Category>(context);
+            categoryRepo.Remove(null);
         }
 
 
@@ -149,6 +166,15 @@ namespace DataAcessTest
 
             categoryRepo.Update(categoryToAdd);
             categoryRepo.Save();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestUpdateCategoryNullInvalid()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            IRepository<Category> categoryRepo = new BaseRepository<Category>(context);
+            categoryRepo.Update(null);
         }
 
 
