@@ -15,7 +15,9 @@ namespace DataAcessTest
     {
         Region aRegion;
         TouristSpot aTouristSpot;
-        
+        Category aCategory;
+        CategoryTouristSpot categoryTouristSpot; 
+
         [TestInitialize]
         public void SetUp()
         {
@@ -32,13 +34,24 @@ namespace DataAcessTest
                 Description = "Un lugar unico",
                 Region = aRegion
             };
+
+            aCategory = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Playa",
+            };
+            categoryTouristSpot = new CategoryTouristSpot()
+            {
+                Category = aCategory,
+                CategoryId = aCategory.Id,
+            };
         }
 
         [TestMethod]
         public void TestAddTouristSpotOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
             IRepository<Region> regionRepo = new BaseRepository<Region>(context);
             regionRepo.Add(aRegion);
             regionRepo.Save();
@@ -49,10 +62,23 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestInvalidAddTouristSpot()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
+            IRepository<Region> regionRepo = new BaseRepository<Region>(context);
+            regionRepo.Add(aRegion);
+            regionRepo.Save();
+            touristSpotRepo.Add(null);
+        }
+
+
+        [TestMethod]
         public void TestGetTouristSpotOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
             IRepository<Region> regionRepo = new BaseRepository<Region>(context);
             regionRepo.Add(aRegion);
             regionRepo.Save();
@@ -67,7 +93,7 @@ namespace DataAcessTest
         public void TestGetTouristSpotBad()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
             TouristSpot touristSpotOfDb = touristSpotRepo.Get(aTouristSpot.Id);
         }
 
@@ -75,7 +101,7 @@ namespace DataAcessTest
         public void TestRemoveTouristSpotOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
             touristSpotRepo.Add(aTouristSpot);
             touristSpotRepo.Save();
             touristSpotRepo.Remove(aTouristSpot);
@@ -89,16 +115,25 @@ namespace DataAcessTest
         public void TestRemoveTouristSpotInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
             touristSpotRepo.Remove(aTouristSpot);
             touristSpotRepo.Save();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestRemoveTouristSpotNullInvalid()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
+            touristSpotRepo.Remove(null);
         }
 
         [TestMethod]
         public void TestUpdateTouristSpotOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
             touristSpotRepo.Add(aTouristSpot);
             touristSpotRepo.Save();
             aTouristSpot.Name = "Piscinas";
@@ -113,17 +148,26 @@ namespace DataAcessTest
         public void TestUpdateTouristSpotInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
             touristSpotRepo.Update(aTouristSpot);
             TouristSpot touristSpot = touristSpotRepo.Get(aTouristSpot.Id);
             touristSpotRepo.Save();
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestUpdateTouristSpotNullInvalid()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
+            touristSpotRepo.Update(null);
+        }
+
+        [TestMethod]
         public void TestGetAllTouristSpotsOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<TouristSpot> touristSpotRepo = new BaseRepository<TouristSpot>(context);
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
             TouristSpot aTouristSpot2 = new TouristSpot()
             {
                 Id = Guid.NewGuid(),
@@ -140,5 +184,107 @@ namespace DataAcessTest
             List<TouristSpot> listOfTouristSpots = touristSpotRepo.GetAll().ToList();
             CollectionAssert.AreEqual(listTest, listOfTouristSpots);
         }
+
+        [TestMethod]
+        public void TestGetTouristSpotsByRegionIdOK()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
+            TouristSpot aTouristSpot2 = new TouristSpot()
+            {
+                Id = Guid.NewGuid(),
+                Name = "La Paloma",
+                Description = "Un gran lugar",
+                Region = aRegion
+            };
+            touristSpotRepo.Add(aTouristSpot);
+            touristSpotRepo.Add(aTouristSpot2); 
+            touristSpotRepo.Save();
+            List<TouristSpot> listToCompare = new List<TouristSpot>();
+            listToCompare.Add(aTouristSpot);
+            listToCompare.Add(aTouristSpot2);
+            List<TouristSpot> touristSpotsByRegion = touristSpotRepo.GetTouristSpotByRegion(aRegion.Id); 
+            CollectionAssert.AreEqual(listToCompare, touristSpotsByRegion);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestFailInGetTouristSpotsByRegion()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
+            List<TouristSpot> touristSpotsByRegion = touristSpotRepo.GetTouristSpotByRegion(aTouristSpot.Region.Id);
+        }
+
+        [TestMethod]
+        public void TestGetTouristSpotsByCategoriesIdOK()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
+
+            TouristSpot aTouristSpot2 = new TouristSpot()
+            {
+                Id = Guid.NewGuid(),
+                Name = "La Paloma",
+                Description = "Un gran lugar",
+                Region = aRegion,
+                ListOfCategories = new List<CategoryTouristSpot>() { }
+            };
+            categoryTouristSpot.TouristSpot = aTouristSpot2;
+            categoryTouristSpot.TouristSpotId = aTouristSpot2.Id;
+            aTouristSpot2.ListOfCategories.Add(categoryTouristSpot); 
+            touristSpotRepo.Add(aTouristSpot2);
+            touristSpotRepo.Save();
+            List<TouristSpot> listToCompare = new List<TouristSpot>() { aTouristSpot2 };
+            List<Guid> listOfCategoriesIdToSearch = new List<Guid>() { categoryTouristSpot.CategoryId }; 
+
+            List<TouristSpot> touristSpotsByCategories = touristSpotRepo.GetTouristSpotsByCategories(listOfCategoriesIdToSearch);
+            CollectionAssert.AreEqual(listToCompare, touristSpotsByCategories);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestGetTouristSpotsByCategoriesIdInvalid()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
+            List<TouristSpot> touristSpotsByCategories = touristSpotRepo.GetTouristSpotsByCategories(null);
+        }
+
+        [TestMethod]
+        public void TestGetTouristSpotsByCategoriesIdAndRegionIdOK()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
+
+            TouristSpot aTouristSpot2 = new TouristSpot()
+            {
+                Id = Guid.NewGuid(),
+                Name = "La Paloma",
+                Description = "Un gran lugar",
+                Region = aRegion,
+                ListOfCategories = new List<CategoryTouristSpot>() { }
+            };
+            categoryTouristSpot.TouristSpot = aTouristSpot2;
+            categoryTouristSpot.TouristSpotId = aTouristSpot2.Id;
+            aTouristSpot2.ListOfCategories.Add(categoryTouristSpot);
+            touristSpotRepo.Add(aTouristSpot2);
+            touristSpotRepo.Save();
+            List<TouristSpot> listToCompare = new List<TouristSpot>() { aTouristSpot2};
+            List<Guid> listOfCategoriesIdToSearch = new List<Guid>() { categoryTouristSpot.CategoryId };
+
+            List<TouristSpot> touristSpotsByRegionAndCategories = touristSpotRepo.GetTouristSpotsByCategoriesAndRegion(listOfCategoriesIdToSearch, aRegion.Id);
+            CollectionAssert.AreEqual(listToCompare, touristSpotsByRegionAndCategories);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestGetTouristSpotsByCategoriesAndRegionIdInvalid()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
+            List<TouristSpot> touristSpotsByCategoriesAndRegion = touristSpotRepo.GetTouristSpotsByCategoriesAndRegion(null, aRegion.Id);
+        }
+
     }
 }

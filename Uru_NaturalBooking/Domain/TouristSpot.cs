@@ -1,6 +1,7 @@
 ﻿using DomainException;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain
 {
@@ -56,6 +57,11 @@ namespace Domain
         private bool IsInvalidPicture()
         {
             return Image==null || String.IsNullOrEmpty(Image.Path); 
+        }
+
+        public bool HasCategoriesSearched(List<Guid> listOfCategoriesIdSearched)
+        {
+            return !listOfCategoriesIdSearched.Except(ListOfCategories.ConvertAll(cat => cat.CategoryId)).Any(); 
         }
 
         public void UpdateAttributes(TouristSpot touristSpotWithModification)

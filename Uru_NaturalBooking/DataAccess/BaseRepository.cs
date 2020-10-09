@@ -45,7 +45,6 @@ namespace DataAccess
         {
             try
             {
-                //Context.Entry(entity).State = EntityState.Modified;
                 Context.Set<T>().Update(entity);
             }
             catch (Exception e)

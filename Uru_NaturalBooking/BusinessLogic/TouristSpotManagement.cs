@@ -11,18 +11,18 @@ namespace BusinessLogic
 {
     public class TouristSpotManagement : ITouristSpotManagement
     {
-        private readonly IRepository<TouristSpot> touristSpotRepository;
+        private readonly ITouristSpotRepository touristSpotRepository;
         private readonly IRegionManagement regionManagementLogic;
         private readonly ICategoryManagement categoryManagementLogic;
 
-        public TouristSpotManagement(IRepository<TouristSpot> repository, IRegionManagement regionLogic, ICategoryManagement categoryLogic)
+        public TouristSpotManagement(ITouristSpotRepository repository, IRegionManagement regionLogic, ICategoryManagement categoryLogic)
         {
             touristSpotRepository = repository;
             regionManagementLogic = regionLogic;
             categoryManagementLogic = categoryLogic;
         }
 
-        public TouristSpotManagement(IRepository<TouristSpot> repository)
+        public TouristSpotManagement(ITouristSpotRepository repository)
         {
             touristSpotRepository = repository;
         }
@@ -61,9 +61,7 @@ namespace BusinessLogic
         {
             try
             {
-                List<TouristSpot> listOfTouristSpot = new List<TouristSpot>();
-                listOfTouristSpot = touristSpotRepository.GetAll().Where(m => m.Region.Id.Equals(regionId)).ToList();
-                return listOfTouristSpot;
+                return touristSpotRepository.GetTouristSpotByRegion(regionId); 
             }
             catch (ExceptionRepository e)
             {
@@ -88,10 +86,7 @@ namespace BusinessLogic
         {
             try
             {
-
-                List<TouristSpot> listOfTouristSpot = touristSpotRepository.GetAll().
-                    Where(m => !listOfCategoriesIdSearched.Except(m.ListOfCategories.ConvertAll(cat => cat.CategoryId )).Any()).ToList();
-                return listOfTouristSpot;
+                return touristSpotRepository.GetTouristSpotsByCategories(listOfCategoriesIdSearched); 
             }
             catch (ExceptionRepository e)
             {
@@ -103,9 +98,7 @@ namespace BusinessLogic
         {
             try
             {
-                List<TouristSpot> listOfTouristSpot = touristSpotRepository.GetAll().
-                    Where(m => !listOfCategoriesIdSearched.Except(m.ListOfCategories.ConvertAll(cat => cat.CategoryId)).Any() && m.Region.Id.Equals(regionIdSearched)).ToList();
-                return listOfTouristSpot;
+                return touristSpotRepository.GetTouristSpotsByCategoriesAndRegion(listOfCategoriesIdSearched, regionIdSearched); 
             }
             catch (ExceptionRepository e)
             {
