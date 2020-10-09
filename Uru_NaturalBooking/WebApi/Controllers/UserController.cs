@@ -45,12 +45,12 @@ namespace WebApi.Controllers
         {
             try
             {
-                IEnumerable<User> users = userManagement.GetAll();
-                if (users == null)
+                IEnumerable<User> allUsers = userManagement.GetAll();
+                if (allUsers == null)
                 {
                     return NotFound("No se encontraron usuarios.");
                 }
-                return Ok(UserModelForResponse.ToModel(users));
+                return Ok(UserModelForResponse.ToModel(allUsers));
             }
             catch (ExceptionBusinessLogic e)
             {
