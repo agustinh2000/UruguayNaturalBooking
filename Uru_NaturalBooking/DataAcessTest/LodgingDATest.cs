@@ -54,6 +54,15 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestAddLodgingNullOK()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
+            lodgingRepository.Add(null);
+        }
+
+        [TestMethod]
         public void TestGetLodgingOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -105,6 +114,15 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestRemoveLodgingNull()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
+            lodgingRepository.Remove(null);
+        }
+
+        [TestMethod]
         public void TestUpdateLodgingOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -132,6 +150,15 @@ namespace DataAcessTest
 
             lodgingRepository.Update(lodging);
             lodgingRepository.Save();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionRepository))]
+        public void TestUpdateLodgingNullInvalid()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            IRepository<Lodging> lodgingRepository = new BaseRepository<Lodging>(context);
+            lodgingRepository.Update(null);
         }
 
         [TestMethod]
