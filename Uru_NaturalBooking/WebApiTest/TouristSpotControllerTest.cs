@@ -33,7 +33,7 @@ namespace WebApiTest
             regionForTouristSpot = new Region()
             {
                 Id = Guid.NewGuid(),
-                Name = Region.RegionName.Región_Centro_Sur,
+                Name = Region.RegionName.Región_Centro_Sur
             };
 
             category = new Category()

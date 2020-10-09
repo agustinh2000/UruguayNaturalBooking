@@ -34,8 +34,8 @@ namespace WebApiTest
             regionModel = new RegionForResponseModel()
             {
                 Id = region.Id,
-                Name = RegionForResponseModel.RegionName.Región_Centro_Sur
-
+                Name = RegionForResponseModel.RegionName.Región_Centro_Sur,
+                DescriptionOfName= "Region Centro Sur"
             };
 
         }

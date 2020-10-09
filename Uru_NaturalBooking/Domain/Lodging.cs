@@ -42,6 +42,11 @@ namespace Domain
                 throw new LodgingException(MessageException.ErrorPrice); 
             }
 
+            if (IsInvalidListOfPictures())
+            {
+                throw new LodgingException(MessageException.ErrorListPictures); 
+            }
+
             TouristSpot.VerifyFormat(); 
         }
 
@@ -58,6 +63,11 @@ namespace Domain
         private bool IsInvalidadPricePerNight()
         {
             return PricePerNight < 0 || PricePerNight > 100000; 
+        }
+
+        private bool IsInvalidListOfPictures()
+        {
+            return Images==null || Images.Count == 0 ; 
         }
 
         public double CalculateTotalPrice(int totalDaysToStay, int[] quantityOfGuest)

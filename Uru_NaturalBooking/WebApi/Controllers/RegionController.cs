@@ -26,12 +26,12 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<Region> regions = regionManagement.GetAllRegions();
-                if(regions == null)
+                List<Region> allRegions = regionManagement.GetAllRegions();
+                if(allRegions == null)
                 {
                     return NotFound("No se encontraron regiones.");
                 }
-                return Ok(RegionForResponseModel.ToModel(regions));
+                return Ok(RegionForResponseModel.ToModel(allRegions));
             }
             catch (ExceptionBusinessLogic e)
             {
