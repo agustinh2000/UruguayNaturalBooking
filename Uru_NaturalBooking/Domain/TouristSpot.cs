@@ -36,6 +36,11 @@ namespace Domain
             {
                 throw new TouristSpotException(MessageException.ErrorDoesNotHaveCategory);
             }
+
+            if (IsInvalidPicture())
+            {
+                throw new TouristSpotException(MessageException.ErrorPicture); 
+            }
         }
 
         private bool IsLongerThanTheLimit()
@@ -46,6 +51,11 @@ namespace Domain
         private bool NotHasCategoriesDefined()
         {
             return ListOfCategories.Count == 0;
+        }
+
+        private bool IsInvalidPicture()
+        {
+            return Image==null || String.IsNullOrEmpty(Image.Path); 
         }
 
         public void UpdateAttributes(TouristSpot touristSpotWithModification)

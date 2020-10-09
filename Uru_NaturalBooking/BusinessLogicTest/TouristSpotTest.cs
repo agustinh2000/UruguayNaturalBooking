@@ -9,6 +9,7 @@ using RepositoryException;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 
 namespace BusinessLogicTest
 {
@@ -27,7 +28,8 @@ namespace BusinessLogicTest
         CategoryTouristSpot categoryTouristSpot2;
         TouristSpot touristSpot1;
         TouristSpot touristSpot2;
-        TouristSpot touristSpot3; 
+        TouristSpot touristSpot3;
+        Picture picture; 
 
         [TestInitialize]
         public void SetUp()
@@ -72,13 +74,18 @@ namespace BusinessLogicTest
                 TouristSpotId = idForTouristSpot2
             };
 
+            picture = new Picture()
+            {
+                Path = "Desktop/luis/foto.jpg"
+            }; 
+
             touristSpot1 = new TouristSpot
             {
                 Id = idForTouristSpot1,
                 Name = "Punta del este",
                 Description = "Lo mejor para gastar.",
                 Region = region1,
-                Image= new Picture(),
+                Image= picture,
                 ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1, categoryTouristSpot2 }
             };
 
@@ -88,6 +95,7 @@ namespace BusinessLogicTest
                 Name = "Punta del diablo",
                 Description = "Las mejores playas del Uruguay",
                 Region = region2,
+                Image= picture, 
                 ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
             };
 
@@ -97,6 +105,7 @@ namespace BusinessLogicTest
                 Name = "Salto",
                 Description = "Las mejores naranjas del Uruguay y del mundo",
                 Region = region2,
+                Image= picture, 
                 ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
             };
         }
@@ -109,7 +118,8 @@ namespace BusinessLogicTest
             {
                 Id= Guid.NewGuid(), 
                 Name= "Punta del este",
-                Description= "Lo mejor para gastar."
+                Description= "Lo mejor para gastar.", 
+                Image= picture
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
@@ -139,13 +149,48 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(TouristSpotException))]
+        public void CreateInvalidTouristSpotWithoutPicture()
+        {
+            TouristSpot touristSpot = new TouristSpot
+            {
+                Id = Guid.NewGuid(),
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar.",
+                Image = null
+            };
+            var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
+            touristSpotRepositoryMock.Setup(m => m.Save());
+
+            Guid regionId = Guid.NewGuid();
+            List<Guid> listIdCategories = new List<Guid>();
+            Guid id = Guid.NewGuid();
+            listIdCategories.Add(id);
+
+            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
+
+            var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
+            regionsRepositoryMock.Setup(m => m.Get(regionId)).Returns(new Region() { Id = regionId });
+
+            var categoryLogic = new CategoryManagement(categoriesRepositoryMock.Object);
+            var regionLogic = new RegionManagement(regionsRepositoryMock.Object);
+
+            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object, regionLogic, categoryLogic);
+
+            var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TouristSpotException))]
         public void CreateInValidTouristSpot()
         {
             TouristSpot touristSpot = new TouristSpot
             {
                 Id = Guid.NewGuid(),
                 Name = "",
-                Description = "Lo mejor para gastar."
+                Description = "Lo mejor para gastar.",
+                Image = picture
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
@@ -178,7 +223,8 @@ namespace BusinessLogicTest
             {
                 Id = Guid.NewGuid(),
                 Name = "Punta del este",
-                Description = ""
+                Description = "",
+                Image = picture
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
@@ -236,7 +282,8 @@ namespace BusinessLogicTest
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                Image = picture
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
@@ -269,7 +316,8 @@ namespace BusinessLogicTest
             {
                 Id = Guid.NewGuid(),
                 Name = "Punta del este",
-                Description = "Donde la naturaleza y el lujo convergen"
+                Description = "Donde la naturaleza y el lujo convergen", 
+                Image= picture
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>())).Throws(new ExceptionRepository());
@@ -302,7 +350,8 @@ namespace BusinessLogicTest
             {
                 Id = Guid.NewGuid(),
                 Name = "Punta del este",
-                Description = "Lo mejor para gastar."
+                Description = "Lo mejor para gastar.",
+                Image = picture
             };
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
@@ -390,7 +439,8 @@ namespace BusinessLogicTest
                 Name = "Punta del este",
                 Description = "Lo mejor para gastar.",
                 Region = region1,
-                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot }
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot },
+                Image = picture
             };
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -435,7 +485,8 @@ namespace BusinessLogicTest
                 Name = "Punta del este",
                 Description = "Lo mejor para gastar.",
                 Region = region1,
-                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot }
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot },
+                Image = picture
             };
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -526,7 +577,8 @@ namespace BusinessLogicTest
                 Name = "Colonia",
                 Description = "Para tomarte un relax con tu pareja y descansar.",
                 Region = region1,
-                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }, 
+                Image= picture
             }; 
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -553,7 +605,8 @@ namespace BusinessLogicTest
                 Name = "Colonia",
                 Description = "Para tomarte un relax con tu pareja y descansar.",
                 Region = region1,
-                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }, 
+                Image= picture
             };
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -576,7 +629,8 @@ namespace BusinessLogicTest
                 Name = "",
                 Description = "Para tomarte un relax con tu pareja y descansar.",
                 Region = region1,
-                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }, 
+                Image= picture
             };
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -599,7 +653,8 @@ namespace BusinessLogicTest
                 Name = "Colonia",
                 Description = "",
                 Region = region1,
-                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 },
+                Image = picture
             };
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -647,7 +702,8 @@ namespace BusinessLogicTest
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 Region = region1,
-                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 }
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot1 },
+                Image = picture
             };
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -670,7 +726,8 @@ namespace BusinessLogicTest
                 Name = "Colonia",
                 Description = "",
                 Region = region1,
-                ListOfCategories = new List<CategoryTouristSpot>() { }
+                ListOfCategories = new List<CategoryTouristSpot>() { },
+                Image = picture
             };
 
             var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
@@ -747,8 +804,5 @@ namespace BusinessLogicTest
 
             List<TouristSpot> touristSpotObteinedOfGetAll = touristSpotLogic.GetAllTouristSpot();
         }
-
-
-
     }
 }

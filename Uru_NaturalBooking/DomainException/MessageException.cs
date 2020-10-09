@@ -17,5 +17,6 @@ namespace DomainException
         public static string ErrorEmail = "Error. El mail ingresado es invalido";
         public static string ErrorTokenNotExist = "Error. El token no existe";
         public static string ErrorInvalidEmail = "Error. El email es invalido.";
+        public static string ErrorPicture = "Error. El path de la foto no debe ser vacio."; 
     }
 }

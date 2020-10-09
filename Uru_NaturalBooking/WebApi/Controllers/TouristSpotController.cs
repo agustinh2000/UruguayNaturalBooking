@@ -90,7 +90,7 @@ namespace WebApi.Controllers
                 {
                     return NotFound("No se encontraron puntos turisticos para las categorias seleccionadas");
                 }
-                return Ok(TouristSpotForResponseModel.ToModel(touristSpotsByCategories)));
+                return Ok(TouristSpotForResponseModel.ToModel(touristSpotsByCategories));
             }
             catch (ExceptionBusinessLogic e)
             {

@@ -19,6 +19,7 @@ namespace BusinessLogicTest
         Lodging lodging;
         CategoryTouristSpot categoryTouristSpot;
         Category aCategory;
+        Picture picture;
 
 
         [TestInitialize]
@@ -35,13 +36,19 @@ namespace BusinessLogicTest
                 Category = aCategory,
                 CategoryId = aCategory.Id,
             };
-            
+
+            picture = new Picture()
+            {
+                Path = "Desktop/joaco/foto.jpg"
+            };
+
             touristSpot = new TouristSpot
             {
                 Id = Guid.NewGuid(),
                 Name = "Maldonado",
                 Description = "Departamento donde la naturaleza y la tranquilidad desborda.",
-                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot}
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot },
+                Image= picture  
             };
 
             categoryTouristSpot.TouristSpot = touristSpot;
@@ -49,12 +56,13 @@ namespace BusinessLogicTest
 
             lodging = new Lodging()
             {
-                Id = Guid.NewGuid(), 
+                Id = Guid.NewGuid(),
                 Name = "Hotel Las Cumbres",
                 QuantityOfStars = 5,
                 Address = "Ruta 12 km 3.5",
-                PricePerNight = 150, 
-                TouristSpot= touristSpot
+                PricePerNight = 150,
+                TouristSpot = touristSpot,
+                Images = new List<Picture> { picture }
             };
 
         }
