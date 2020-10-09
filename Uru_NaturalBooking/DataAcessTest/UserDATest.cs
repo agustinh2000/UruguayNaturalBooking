@@ -61,7 +61,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestGetUserBad()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -70,18 +70,18 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ClientException))]
         public void TestRemoveUserOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IUserRepository userRepo = new UserRepository(context);
             userRepo.Add(userToAdd);
             userRepo.Remove(userToAdd);
-            List<User> listOfUsers = userRepo.GetAll().ToList();
-            Assert.IsTrue(listOfUsers.IsNullOrEmpty());
+            userRepo.GetAll();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestRemoveUserInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -115,7 +115,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestGetUserByNicknameAndPasswordInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());

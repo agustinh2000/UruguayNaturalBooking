@@ -25,9 +25,13 @@ namespace BusinessLogic
                 List<Category> allCategories = categoryRepository.GetAll().ToList();
                 return allCategories;
             }
-            catch (ExceptionRepository e)
+            catch(ClientException e)
             {
-                throw new ExceptionBusinessLogic("Hubo un error al obtener la lista de categorias", e);
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistCategories, e); 
+            }
+            catch (ServerException e)
+            {
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedAllCategories, e);
             }
         }
 
@@ -38,9 +42,9 @@ namespace BusinessLogic
                 Category category = categoryRepository.Get(identifier);
                 return category;
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("Hubo un error al obtener la categoria.", e);
+                throw new ServerBusinessLogicException("Hubo un error al obtener la categoria.", e);
             }
         }
 
@@ -65,9 +69,9 @@ namespace BusinessLogic
                 categoryRepository.Add(categoryToCreate);
                 return categoryToCreate; 
 
-            }catch(ExceptionRepository e)
+            }catch(ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede crear la categoria deseada", e); 
+                throw new ServerBusinessLogicException("No se puede crear la categoria deseada", e); 
             }
         }
     }

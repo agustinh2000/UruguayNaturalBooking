@@ -37,9 +37,9 @@ namespace BusinessLogic
                 lodgingRepository.Add(lodging);
                 return lodging;
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede crear el hospedaje debido a que ha ocurrido un error.", e);
+                throw new ServerBusinessLogicException("No se puede crear el hospedaje debido a que ha ocurrido un error.", e);
             }
         }
 
@@ -49,9 +49,9 @@ namespace BusinessLogic
             {
                 Lodging lodgingObteined = lodgingRepository.Get(lodgingId);
                 return lodgingObteined; 
-            }catch(ExceptionRepository e)
+            }catch(ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede obtener el hospedaje deseado", e); 
+                throw new ServerBusinessLogicException("No se puede obtener el hospedaje deseado", e); 
             }
         }
 
@@ -61,9 +61,9 @@ namespace BusinessLogic
             {
                 return lodgingRepository.GetAvailableLodgingsByTouristSpot(touristSpotId);
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede obtener el hospedaje deseado", e);
+                throw new ServerBusinessLogicException("No se puede obtener el hospedaje deseado", e);
             }
         }
 
@@ -74,9 +74,9 @@ namespace BusinessLogic
                 Lodging lodgingToDelete = lodgingRepository.Get(lodgingId);
                 lodgingRepository.Remove(lodgingToDelete);
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede eliminar el hospedaje deseado.", e);
+                throw new ServerBusinessLogicException("No se puede eliminar el hospedaje deseado.", e);
             }
         }
 
@@ -94,12 +94,12 @@ namespace BusinessLogic
                 }
                 else
                 {
-                    throw new ExceptionBusinessLogic("El hospedaje buscado no existe");
+                    throw new ServerBusinessLogicException("El hospedaje buscado no existe");
                 }
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede actualizar el hospedaje.", e);
+                throw new ServerBusinessLogicException("No se puede actualizar el hospedaje.", e);
             }
         }
 
@@ -110,9 +110,13 @@ namespace BusinessLogic
                 List<Lodging> allLodgings = lodgingRepository.GetAll().ToList();
                 return allLodgings;
             }
-            catch (ExceptionRepository e)
+            catch(ClientException e)
             {
-                throw new ExceptionBusinessLogic("No se pudieron obtener todos los hospedajes", e);
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistLodgigns, e); 
+            }
+            catch (ServerException e)
+            {
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedAllLodgings, e);
             }
         }
     }

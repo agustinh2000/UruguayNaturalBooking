@@ -108,7 +108,7 @@ namespace WebApiTest
         {
             var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
             reserveManagementMock.Setup(m => m.Create(It.IsAny<Reserve>(), It.IsAny<Guid>())).
-                Throws(new ExceptionBusinessLogic("No se pudo crear correctamente la reserva"));
+                Throws(new ServerBusinessLogicException("No se pudo crear correctamente la reserva"));
             ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
 
             ReserveModelForRequest reserveModelForRequest = new ReserveModelForRequest()
@@ -163,7 +163,7 @@ namespace WebApiTest
         public void CantGetReserveByIdInternalServerErrorTest()
         {
             var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
-            reserveManagementMock.Setup(m => m.GetById(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("Ha ocurrido un error al acceder a la base de datos"));
+            reserveManagementMock.Setup(m => m.GetById(It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("Ha ocurrido un error al acceder a la base de datos"));
             ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
 
             var result = reserveController.Get(reserveOfLodging.Id);
@@ -217,7 +217,7 @@ namespace WebApiTest
         {
             var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
             reserveManagementMock.Setup(m => m.Update(It.IsAny<Guid>(), It.IsAny<Reserve>())).
-                Throws(new ExceptionBusinessLogic("No se ha podido actualizar correctamente la reserva"));
+                Throws(new ServerBusinessLogicException("No se ha podido actualizar correctamente la reserva"));
             ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
 
             ReserveModelForRequestUpdate reserveModelForRequestUpdate = new ReserveModelForRequestUpdate()

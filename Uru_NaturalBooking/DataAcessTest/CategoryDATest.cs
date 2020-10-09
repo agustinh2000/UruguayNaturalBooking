@@ -31,7 +31,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestAddCategoryNullInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -58,7 +58,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestGetCategoryBad()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -74,6 +74,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ClientException))]
         public void TestRemoveCategoryOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -88,13 +89,11 @@ namespace DataAcessTest
             categoryRepo.Add(categoryToAdd);
             categoryRepo.Remove(categoryToAdd);
 
-            List<Category> listOfCategories = categoryRepo.GetAll().ToList();
-
-            Assert.IsTrue(listOfCategories.IsNullOrEmpty()); 
+            categoryRepo.GetAll();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestRemoveCategoryInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -110,7 +109,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestRemoveCategoryNullInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -141,7 +140,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestUpdateCategoryInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -157,7 +156,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestUpdateCategoryNullInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());

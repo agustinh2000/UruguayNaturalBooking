@@ -39,7 +39,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void GetInvalidRegionByIdTest()
         {
             var regionId = Guid.NewGuid();
@@ -51,7 +51,7 @@ namespace BusinessLogicTest
 
             var regionMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
 
-            regionMock.Setup(x => x.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+            regionMock.Setup(x => x.Get(It.IsAny<Guid>())).Throws(new ServerException());
 
             RegionManagement regionLogic = new RegionManagement(regionMock.Object);
 
@@ -90,7 +90,7 @@ namespace BusinessLogicTest
 
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void GetBadAllRegionTestOk()
         {
 
@@ -110,13 +110,40 @@ namespace BusinessLogicTest
 
 
             var regionMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
-            regionMock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
+            regionMock.Setup(m => m.GetAll()).Throws(new ServerException());
 
             RegionManagement regionLogic = new RegionManagement(regionMock.Object);
 
             List<Region> result = regionLogic.GetAllRegions();
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void GetClientExceptionGettingAllRegionTest()
+        {
+
+            List<Region> listOfRegions = new List<Region>();
+            Region region = new Region
+            {
+                Id = Guid.NewGuid(),
+                Name = Region.RegionName.Región_Centro_Sur
+            };
+            listOfRegions.Add(region);
+            Region region2 = new Region
+            {
+                Id = Guid.NewGuid(),
+                Name = Region.RegionName.Región_Corredor_Pajaros_Pintados
+            };
+            listOfRegions.Add(region2);
+
+
+            var regionMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
+            regionMock.Setup(m => m.GetAll()).Throws(new ClientException());
+
+            RegionManagement regionLogic = new RegionManagement(regionMock.Object);
+
+            List<Region> result = regionLogic.GetAllRegions();
+        }
 
     }
 }

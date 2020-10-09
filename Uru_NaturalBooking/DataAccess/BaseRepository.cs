@@ -1,4 +1,5 @@
-﻿using DataAccessInterface;
+﻿using Castle.Core.Internal;
+using DataAccessInterface;
 using Microsoft.EntityFrameworkCore;
 using RepositoryException;
 using System;
@@ -25,7 +26,7 @@ namespace DataAccess
             }
             catch (Exception e)
             {
-                throw new ExceptionRepository(e.Message, e);
+                throw new ServerException(e.Message, e);
             }
         }
 
@@ -39,7 +40,7 @@ namespace DataAccess
             }
             catch (Exception e)
             {
-                throw new ExceptionRepository(e.Message, e);
+                throw new ServerException(e.Message, e);
             }
         }
 
@@ -53,7 +54,7 @@ namespace DataAccess
             catch (Exception e)
             {
 
-                throw new ExceptionRepository(e.Message, e);
+                throw new ServerException(e.Message, e);
             }
         }
 
@@ -61,16 +62,16 @@ namespace DataAccess
         {
             try
             {
-                T entityObteined =  Context.Set<T>().Find(id);
-                if(entityObteined == null)
+                T entityObteined = Context.Set<T>().Find(id);
+                if (entityObteined == null)
                 {
-                    throw new ExceptionRepository("Error obteniendo el elemento deseado"); 
+                    throw new ServerException("Error obteniendo el elemento deseado");
                 }
-                return entityObteined; 
+                return entityObteined;
             }
             catch (Exception e)
             {
-                throw new ExceptionRepository(e.Message, e);
+                throw new ServerException(e.Message, e);
             }
         }
 
@@ -78,12 +79,21 @@ namespace DataAccess
         {
             try
             {
-                return Context.Set<T>().ToList();
+                List<T> listOfEntities = Context.Set<T>().ToList();
+                if (listOfEntities.IsNullOrEmpty())
+                {
+                    throw new ClientException();
+                }
+                return listOfEntities;
+            }
+            catch (ClientException e)
+            {
+                throw new ClientException(MessagesExceptionRepository.ErrorGetAllElements, e);
             }
             catch (Exception e)
             {
-                throw new ExceptionRepository(e.Message, e);
+                throw new ServerException(e.Message, e);
             }
-        } 
+        }
     }
 }

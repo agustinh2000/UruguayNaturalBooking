@@ -30,13 +30,12 @@ namespace WebApi.Controllers
             try
             {
                 List<Category> allCategories = categoryManagement.GetAllCategories(); 
-                if (allCategories == null)
-                {
-                    return NotFound("No se pudo encontrar hospedajes");
-                }
                 return Ok(CategoryModel.ToModel(allCategories));
+            }catch(ClientBusinessLogicException)
+            {
+                return NotFound("No se pudo encontrar hospedajes");
             }
-            catch(ExceptionBusinessLogic e)
+            catch(ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -53,7 +52,7 @@ namespace WebApi.Controllers
                     return NotFound("El objeto solicitado no fue encontrado");
                 }
                 return Ok(CategoryModel.ToModel(category));
-            }catch(ExceptionBusinessLogic e)
+            }catch(ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -69,7 +68,7 @@ namespace WebApi.Controllers
                 Category category = categoryManagement.Create(CategoryModel.ToEntity(categoryModel));
                 return CreatedAtRoute("Get", new { id = category.Id }, CategoryModel.ToModel(category));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return BadRequest(e.Message);
             }

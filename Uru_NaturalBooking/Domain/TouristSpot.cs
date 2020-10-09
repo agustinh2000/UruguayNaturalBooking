@@ -27,21 +27,21 @@ namespace Domain
         {
             if (String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(Description))
             {
-                throw new TouristSpotException(MessageException.ErrorIsEmpty);
+                throw new TouristSpotException(MessageExceptionDomain.ErrorIsEmpty);
             }
 
             if (IsLongerThanTheLimit())
             {
-                throw new TouristSpotException(MessageException.ErrorIsLongerThanTheLimit);
+                throw new TouristSpotException(MessageExceptionDomain.ErrorIsLongerThanTheLimit);
             }
             if (NotHasCategoriesDefined())
             {
-                throw new TouristSpotException(MessageException.ErrorDoesNotHaveCategory);
+                throw new TouristSpotException(MessageExceptionDomain.ErrorDoesNotHaveCategory);
             }
 
             if (IsInvalidPicture())
             {
-                throw new TouristSpotException(MessageException.ErrorPicture); 
+                throw new TouristSpotException(MessageExceptionDomain.ErrorPicture); 
             }
         }
 

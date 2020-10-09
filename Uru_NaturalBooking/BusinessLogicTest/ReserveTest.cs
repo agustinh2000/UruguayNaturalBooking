@@ -101,11 +101,11 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void CreateInvalidReserveTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
-            reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>())).Throws(new ExceptionRepository());
+            reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>())).Throws(new ServerException());
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
@@ -325,7 +325,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void GetExceptionBySearchReserveWithIdTest()
         {
             Reserve reserve = new Reserve()
@@ -343,7 +343,7 @@ namespace BusinessLogicTest
             };
 
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
-            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerException());
 
             ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
 
@@ -393,7 +393,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void ThrowExceptionInUpdateMethodTest()
         {
             Reserve reserve = new Reserve()
@@ -415,7 +415,7 @@ namespace BusinessLogicTest
 
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
-            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>())).Throws(new ExceptionBusinessLogic("Ocurrio un error al actualizar."));
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>())).Throws(new ServerBusinessLogicException("Ocurrio un error al actualizar."));
 
             ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
 
@@ -430,7 +430,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void ThrowExceptionRepositoryInUpdateMethodTest()
         {
             Reserve reserve = new Reserve()
@@ -452,7 +452,7 @@ namespace BusinessLogicTest
 
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(reserve);
-            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>())).Throws(new ExceptionRepository("Ocurrio un error al actualizar."));
+            reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>())).Throws(new ServerException("Ocurrio un error al actualizar."));
 
             ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
 
@@ -468,7 +468,7 @@ namespace BusinessLogicTest
 
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void UpdateInvalidBecauseReserveIsNullTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
@@ -488,11 +488,11 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void ThrowsExceptionOnUpdateReserveTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
-            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("Ha ocurrido un error al obtener la reserva."));
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("Ha ocurrido un error al obtener la reserva."));
             reserveRepositoryMock.Setup(m => m.Update(It.IsAny<Reserve>()));
 
             ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);

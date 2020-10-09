@@ -19,11 +19,11 @@ namespace Domain
         {
             if (IsAtLeastOneEmptyField())
             {
-                throw new UserException(MessageException.ErrorIsEmpty);
+                throw new UserException(MessageExceptionDomain.ErrorIsEmpty);
             }
             if (!IsValidEmail())
             {
-                throw new UserException(MessageException.ErrorInvalidEmail);
+                throw new UserException(MessageExceptionDomain.ErrorInvalidEmail);
             }
         }
 

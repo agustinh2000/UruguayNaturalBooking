@@ -53,22 +53,22 @@ namespace Domain
         {
             if (IsInvalidNameOrLastName())
             {
-                throw new ReserveException(MessageException.ErrorIsEmpty); 
+                throw new ReserveException(MessageExceptionDomain.ErrorIsEmpty); 
             }
 
             if (IsInvalidDate())
             {
-                throw new ReserveException(MessageException.ErrorDate); 
+                throw new ReserveException(MessageExceptionDomain.ErrorDate); 
             }
 
             if (IsInvalidQuantityGuest())
             {
-                throw new ReserveException(MessageException.ErrorQuantityOfGuest);
+                throw new ReserveException(MessageExceptionDomain.ErrorQuantityOfGuest);
             }
 
             if (!IsValidEmail())
             {
-                throw new ReserveException(MessageException.ErrorEmail); 
+                throw new ReserveException(MessageExceptionDomain.ErrorEmail); 
             }
             LodgingOfReserve.VerifyFormat(); 
         }

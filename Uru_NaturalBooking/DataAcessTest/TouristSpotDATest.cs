@@ -60,7 +60,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestInvalidAddTouristSpot()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -84,7 +84,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestGetTouristSpotBad()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -93,18 +93,18 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ClientException))]
         public void TestRemoveTouristSpotOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
             touristSpotRepo.Add(aTouristSpot);
             touristSpotRepo.Remove(aTouristSpot);
-            List<TouristSpot> listOfTouristSpots = touristSpotRepo.GetAll().ToList();
-            Assert.IsTrue(listOfTouristSpots.IsNullOrEmpty());
+            touristSpotRepo.GetAll();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestRemoveTouristSpotInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -113,7 +113,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestRemoveTouristSpotNullInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -134,7 +134,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestUpdateTouristSpotInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -144,7 +144,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestUpdateTouristSpotNullInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -195,7 +195,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestFailInGetTouristSpotsByRegion()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -229,7 +229,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestGetTouristSpotsByCategoriesIdInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -263,7 +263,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestGetTouristSpotsByCategoriesAndRegionIdInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());

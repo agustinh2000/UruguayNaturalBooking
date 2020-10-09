@@ -72,7 +72,7 @@ namespace WebApiTest
         public void GetCategoryTestInternalServer()
         {
             var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
-            mock.Setup(m => m.GetById(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("No se pudo obtener la categoria deseada."));
+            mock.Setup(m => m.GetById(It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("No se pudo obtener la categoria deseada."));
             CategoryController categoryController = new CategoryController(mock.Object);
 
             var result = categoryController.Get(categoryBeachModel.Id);
@@ -109,7 +109,7 @@ namespace WebApiTest
             List<Category> listOfCategories = new List<Category>() { categoryBeachModel.ToEntity(), categoryAtractionsModel.ToEntity() };
 
             var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
-            mock.Setup(m => m.GetAllCategories()).Returns(value: null);
+            mock.Setup(m => m.GetAllCategories()).Throws(new ClientBusinessLogicException());
             CategoryController categoryController = new CategoryController(mock.Object);
 
             var result = categoryController.Get();
@@ -126,7 +126,7 @@ namespace WebApiTest
             List<Category> listOfCategories = new List<Category>() { categoryBeachModel.ToEntity(), categoryAtractionsModel.ToEntity() };
 
             var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
-            mock.Setup(m => m.GetAllCategories()).Throws(new ExceptionBusinessLogic("No se ha podido obtener las regiones"));
+            mock.Setup(m => m.GetAllCategories()).Throws(new ServerBusinessLogicException("No se ha podido obtener las regiones"));
             CategoryController categoryController = new CategoryController(mock.Object);
 
             var result = categoryController.Get();
@@ -161,7 +161,7 @@ namespace WebApiTest
         public void TestPostIncorrectCategory()
         {
             var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
-            mock.Setup(m => m.Create(It.IsAny<Category>())).Throws(new ExceptionBusinessLogic());
+            mock.Setup(m => m.Create(It.IsAny<Category>())).Throws(new ServerBusinessLogicException());
             CategoryController categoryController = new CategoryController(mock.Object);
 
             var result = categoryController.Post(categoryBeachModel);

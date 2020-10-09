@@ -53,7 +53,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestGetRegionBad()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -69,6 +69,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ClientException))]
         public void TestRemoveRegionOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -82,14 +83,11 @@ namespace DataAcessTest
 
             regionRepo.Add(regionToAdd);
             regionRepo.Remove(regionToAdd);
-
-            List<Region> listOfRegion = regionRepo.GetAll().ToList();
-
-            Assert.IsTrue(listOfRegion.IsNullOrEmpty());
+            regionRepo.GetAll();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestRemoveRegionInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -126,7 +124,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestUpdateRegionInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());

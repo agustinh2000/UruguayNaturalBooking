@@ -26,13 +26,13 @@ namespace DataAccess
                 List<TouristSpot> listOfTouristSpot= context.Set<TouristSpot>().Where(m => m.Region.Id.Equals(regionId)).ToList();
                 if (listOfTouristSpot.IsNullOrEmpty())
                 {
-                    throw new ExceptionRepository("Error obteniendo los elementos deseados");
+                    throw new ServerException("Error obteniendo los elementos deseados");
                 }
                 return listOfTouristSpot;
             }
             catch (Exception e)
             {
-                throw new ExceptionRepository("No se puede obtener el punto turistico por la region.", e);
+                throw new ServerException("No se puede obtener el punto turistico por la region.", e);
             }
         }
 
@@ -43,13 +43,13 @@ namespace DataAccess
                 List<TouristSpot> listOfTouristSpot = context.Set<TouristSpot>().AsEnumerable().Where(m => m.HasCategoriesSearched(listOfCategoriesIdSearched)).ToList();
                 if (listOfTouristSpot.IsNullOrEmpty())
                 {
-                    throw new ExceptionRepository("Error obteniendo los elementos deseados");
+                    throw new ServerException("Error obteniendo los elementos deseados");
                 }
                 return listOfTouristSpot;
             }
             catch (Exception e)
             {
-                throw new ExceptionRepository("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias.", e);
+                throw new ServerException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias.", e);
             }
         }
 
@@ -61,13 +61,13 @@ namespace DataAccess
                 && m.HasCategoriesSearched(listOfCategoriesIdSearched)).ToList();
                 if (listOfTouristSpot.IsNullOrEmpty())
                 {
-                    throw new ExceptionRepository("Error obteniendo los elementos deseados");
+                    throw new ServerException("Error obteniendo los elementos deseados");
                 }
                 return listOfTouristSpot;
             }
             catch (Exception e)
             {
-                throw new ExceptionRepository("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias y region.", e);
+                throw new ServerException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias y region.", e);
             }
         }
 

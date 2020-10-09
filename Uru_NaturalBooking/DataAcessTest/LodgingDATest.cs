@@ -53,7 +53,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestAddLodgingNullOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -73,7 +73,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void GetLodgingDoesntExist()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -83,22 +83,19 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ClientException))]
         public void TestRemoveLodgingOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             ILodgingRepository lodgingRepository = new LodgingRepository(context);
 
             lodgingRepository.Add(lodging);
-            List<Lodging> listOfLodginfOfDbBeforeRemove = lodgingRepository.GetAll().ToList(); 
             lodgingRepository.Remove(lodging);
-
-            List<Lodging> listOfLodgingOfDbAfterRemove = lodgingRepository.GetAll().ToList();
-
-            CollectionAssert.AreNotEqual(listOfLodginfOfDbBeforeRemove, listOfLodgingOfDbAfterRemove); 
+            lodgingRepository.GetAll();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestRemoveLodgingDoesntExist()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -107,7 +104,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestRemoveLodgingNull()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -133,7 +130,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestUpdateLodgingInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -143,7 +140,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestUpdateLodgingNullInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -208,7 +205,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
 
         public void GetAvailableLodgingsByTouristSpotNotFound()
         {

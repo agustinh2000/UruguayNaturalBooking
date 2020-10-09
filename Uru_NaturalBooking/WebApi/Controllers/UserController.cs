@@ -32,7 +32,7 @@ namespace WebApi.Controllers
                 UserSession userSession = userManagement.LogIn(loginModel.Email, loginModel.Password); 
                 return Ok(UserModelForResponse.ToModel(userSession.User));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return BadRequest(e.Message);
             }
@@ -46,13 +46,13 @@ namespace WebApi.Controllers
             try
             {
                 IEnumerable<User> allUsers = userManagement.GetAll();
-                if (allUsers == null)
-                {
-                    return NotFound("No se encontraron usuarios.");
-                }
                 return Ok(UserModelForResponse.ToModel(allUsers));
             }
-            catch (ExceptionBusinessLogic e)
+            catch(ClientBusinessLogicException)
+            {
+                return NotFound("No se encontraron usuarios.");
+            }
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -70,7 +70,7 @@ namespace WebApi.Controllers
                 }
                 return Ok(UserModelForResponse.ToModel(user));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -86,7 +86,7 @@ namespace WebApi.Controllers
                 User userCreated = userManagement.Create(user);
                 return CreatedAtRoute("GetUser", new { id = user.Id }, UserModelForResponse.ToModel(userCreated));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return BadRequest(e.Message);
             }
@@ -101,7 +101,7 @@ namespace WebApi.Controllers
                 User userUpdated = userManagement.UpdateUser(id, user);
                 return CreatedAtRoute("GetUser", new { id = userUpdated.Id }, UserModelForResponse.ToModel(userUpdated));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return BadRequest(e.Message);
             }
@@ -116,7 +116,7 @@ namespace WebApi.Controllers
                 userManagement.RemoveUser(id);
                 return NoContent();
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -131,7 +131,7 @@ namespace WebApi.Controllers
                 userManagement.LogOut(token);
                 return Ok();
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return NotFound(e.Message);
             }

@@ -29,22 +29,22 @@ namespace Domain
         {
             if (IsInvalidNameOrAddressOrDesription())
             {
-                throw new LodgingException(MessageException.ErrorIsEmpty); 
+                throw new LodgingException(MessageExceptionDomain.ErrorIsEmpty); 
             }
 
             if (IsInvalidQuantityOfStars())
             {
-                throw new LodgingException(MessageException.ErrorQuantity); 
+                throw new LodgingException(MessageExceptionDomain.ErrorQuantity); 
             }
 
             if (IsInvalidadPricePerNight())
             {
-                throw new LodgingException(MessageException.ErrorPrice); 
+                throw new LodgingException(MessageExceptionDomain.ErrorPrice); 
             }
 
             if (IsInvalidListOfPictures())
             {
-                throw new LodgingException(MessageException.ErrorListPictures); 
+                throw new LodgingException(MessageExceptionDomain.ErrorListPictures); 
             }
 
             TouristSpot.VerifyFormat(); 

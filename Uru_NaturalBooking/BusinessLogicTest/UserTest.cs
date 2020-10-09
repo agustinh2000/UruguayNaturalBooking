@@ -49,7 +49,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
 
         public void CreateInvalidUserRepositoryExceptionTest()
         {
@@ -63,7 +63,7 @@ namespace BusinessLogicTest
                 Password = "martin1234"
             };
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
-            userRepositoryMock.Setup(m => m.Add(It.IsAny<User>())).Throws(new ExceptionRepository());
+            userRepositoryMock.Setup(m => m.Add(It.IsAny<User>())).Throws(new ServerException());
             var userSessionRepositoryMock = new Mock<IRepository<UserSession>>(MockBehavior.Strict);
             UserManagement userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
             User result = userLogic.Create(user);
@@ -205,7 +205,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
 
         public void GetAllUsersInvalidTest()
         {
@@ -222,7 +222,31 @@ namespace BusinessLogicTest
             List<User> expectedResult = new List<User>() { user };
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
             userRepositoryMock.Setup(m => m.Add(It.IsAny<User>()));
-            userRepositoryMock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
+            userRepositoryMock.Setup(m => m.GetAll()).Throws(new ServerException());
+            var userSessionRepositoryMock = new Mock<IRepository<UserSession>>(MockBehavior.Strict);
+            UserManagement userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
+            List<User> obteinedResult = userLogic.GetAll().ToList();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+
+        public void GetAllUsersInvalidTestExceptionClient()
+        {
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "soyelcolobienfachero"
+            };
+
+            List<User> expectedResult = new List<User>() { user };
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Add(It.IsAny<User>()));
+            userRepositoryMock.Setup(m => m.GetAll()).Throws(new ClientException());
             var userSessionRepositoryMock = new Mock<IRepository<UserSession>>(MockBehavior.Strict);
             UserManagement userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
             List<User> obteinedResult = userLogic.GetAll().ToList();
@@ -249,7 +273,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void GetUserByIdInternalError()
         {
             User user = new User()
@@ -262,7 +286,7 @@ namespace BusinessLogicTest
                 Password = "soyelcolobienfachero"
             };
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
-            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerException());
             UserManagement userLogic = new UserManagement(userRepositoryMock.Object);
             User userResult = userLogic.GetUser(user.Id);
         }
@@ -354,7 +378,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void LogInFailedPassIncorrectTest()
         {
             User user = new User()
@@ -367,7 +391,7 @@ namespace BusinessLogicTest
                 Password = "colo123"
             };
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
-            userRepositoryMock.Setup(m => m.GetUserByEmailAndPassword("colo20201@gmail.com", "colo123")).Throws(new ExceptionRepository()); 
+            userRepositoryMock.Setup(m => m.GetUserByEmailAndPassword("colo20201@gmail.com", "colo123")).Throws(new ServerException()); 
             var userSessionRepositoryMock = new Mock<IRepository<UserSession>>(MockBehavior.Strict);
             UserManagement userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
             userLogic.LogIn("colo20201@gmail.com", "colo123");
@@ -436,7 +460,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void LogOutFailedWhenGetSessions()
         {
             User user = new User()
@@ -466,7 +490,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void LogOutFailedWhenRemoveSession()
         {
             User user = new User()
@@ -490,7 +514,7 @@ namespace BusinessLogicTest
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
             var userSessionRepositoryMock = new Mock<IRepository<UserSession>>(MockBehavior.Strict);
             userSessionRepositoryMock.Setup(m => m.GetAll()).Returns(new List<UserSession>() { userSession });
-            userSessionRepositoryMock.Setup(m => m.Remove(It.IsAny<UserSession>())).Throws(new ExceptionRepository());
+            userSessionRepositoryMock.Setup(m => m.Remove(It.IsAny<UserSession>())).Throws(new ServerException());
             var userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
             userLogic.LogOut(aToken);
         }
@@ -571,7 +595,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void UpdateNotExistUser()
         {
 
@@ -592,7 +616,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void UpdateUserInvalidDataBaseError()
         {
 
@@ -608,7 +632,7 @@ namespace BusinessLogicTest
             user.Name = "Gonzalo";
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
             userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
-            userRepositoryMock.Setup(m => m.Update(It.IsAny<User>())).Throws(new ExceptionRepository());
+            userRepositoryMock.Setup(m => m.Update(It.IsAny<User>())).Throws(new ServerException());
             var userLogic = new UserManagement(userRepositoryMock.Object);
             var result = userLogic.UpdateUser(user.Id, user);
         }
@@ -634,7 +658,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void DeleteUserDataBaseError()
         {
             User user = new User()
@@ -648,7 +672,7 @@ namespace BusinessLogicTest
             };
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
             userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
-            userRepositoryMock.Setup(m => m.Remove(It.IsAny<User>())).Throws(new ExceptionRepository());
+            userRepositoryMock.Setup(m => m.Remove(It.IsAny<User>())).Throws(new ServerException());
             var userLogic = new UserManagement(userRepositoryMock.Object);
             userLogic.RemoveUser(user.Id);
         }

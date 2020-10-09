@@ -39,9 +39,9 @@ namespace BusinessLogic
                 reserve.VerifyFormat();
                 reserveRepository.Add(reserve);
                 return reserve; 
-            }catch(ExceptionRepository e)
+            }catch(ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede crear la reserva deseada.", e); 
+                throw new ServerBusinessLogicException("No se puede crear la reserva deseada.", e); 
             }
         }
 
@@ -52,9 +52,9 @@ namespace BusinessLogic
                 Reserve reserve = reserveRepository.Get(idOfReserve);
                 return reserve;
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("Hubo un error al obtener la reserva deseada.", e);
+                throw new ServerBusinessLogicException("Hubo un error al obtener la reserva deseada.", e);
             }
         }
 
@@ -72,12 +72,12 @@ namespace BusinessLogic
                 }
                 else
                 {
-                    throw new ExceptionBusinessLogic("La reserva buscada no existe.");
+                    throw new ServerBusinessLogicException("La reserva buscada no existe.");
                 }
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede actualizar la reserva.", e);
+                throw new ServerBusinessLogicException("No se puede actualizar la reserva.", e);
             }
         }
 

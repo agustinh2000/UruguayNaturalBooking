@@ -59,7 +59,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void GetInvalidCategoryByIdTest()
         {
             Guid idForCategory = Guid.NewGuid();
@@ -71,7 +71,7 @@ namespace BusinessLogicTest
 
             var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
 
-            categoryMock.Setup(x => x.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+            categoryMock.Setup(x => x.Get(It.IsAny<Guid>())).Throws(new ServerException());
 
             CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
@@ -109,7 +109,7 @@ namespace BusinessLogicTest
 
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void GetExceptionObteinedAllCategoriesTest()
         {
 
@@ -129,12 +129,39 @@ namespace BusinessLogicTest
 
 
             var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            categoryMock.Setup(m => m.GetAll()).Throws(new ExceptionRepository());
+            categoryMock.Setup(m => m.GetAll()).Throws(new ServerException());
 
             CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
             List<Category> result = categoryLogic.GetAllCategories();
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void GetClientExceptionObteinedAllCategoriesTest()
+        {
+
+            List<Category> listOfCategories = new List<Category>();
+            Category category = new Category
+            {
+                Id = Guid.NewGuid(),
+                Name = "Playita y calor"
+            };
+            listOfCategories.Add(category);
+            Category category2 = new Category
+            {
+                Id = Guid.NewGuid(),
+                Name = "Frio"
+            };
+            listOfCategories.Add(category2);
+
+
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoryMock.Setup(m => m.GetAll()).Throws(new ClientException());
+
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
+
+            List<Category> result = categoryLogic.GetAllCategories();
         }
 
 
@@ -169,7 +196,7 @@ namespace BusinessLogicTest
 
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void GetExceptionGettingAllCategoriesAssociatedTest()
         {
 
@@ -181,7 +208,7 @@ namespace BusinessLogicTest
 
             var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
             categoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(new Category() { Id = guid1 });
-            categoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ExceptionRepository());
+            categoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerException());
 
             CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
@@ -209,7 +236,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionBusinessLogic))]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
         public void CreateInvalidCategory()
         {
             Category category = new Category
@@ -218,7 +245,7 @@ namespace BusinessLogicTest
             };
 
             var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            categoryMock.Setup(m => m.Add(It.IsAny<Category>())).Throws(new ExceptionRepository());
+            categoryMock.Setup(m => m.Add(It.IsAny<Category>())).Throws(new ServerException());
 
             CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 

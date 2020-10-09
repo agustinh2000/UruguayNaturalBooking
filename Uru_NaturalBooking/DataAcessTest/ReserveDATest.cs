@@ -100,7 +100,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void GetReserveDoesntExist()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -110,27 +110,23 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ClientException))]
         public void TestRemoveReserveOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<Reserve> reserveRepository = new BaseRepository<Reserve>(context);
 
             reserveRepository.Add(reserve);
-            List<Reserve> listOfReservefOfDbBeforeRemove = reserveRepository.GetAll().ToList();
             reserveRepository.Remove(reserve);
-
-            List<Reserve> listOfReserveOfDbAfterRemove = reserveRepository.GetAll().ToList();
-
-            CollectionAssert.AreNotEqual(listOfReservefOfDbBeforeRemove, listOfReserveOfDbAfterRemove);
+            reserveRepository.GetAll();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestRemoveReserveDoesntExist()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<Reserve> reserveRepository = new BaseRepository<Reserve>(context);
-
             reserveRepository.Remove(reserve);
         }
 
@@ -150,7 +146,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestUpdateReserveInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());

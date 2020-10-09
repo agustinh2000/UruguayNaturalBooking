@@ -80,7 +80,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestGetUserSessionBad()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -89,18 +89,18 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ClientException))]
         public void TestRemoveUserSessionOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
             userSessionRepo.Add(userSession);
             userSessionRepo.Remove(userSession);
-            List<UserSession> listOfUserSessions = userSessionRepo.GetAll().ToList();
-            Assert.IsTrue(listOfUserSessions.IsNullOrEmpty());
+            userSessionRepo.GetAll(); 
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionRepository))]
+        [ExpectedException(typeof(ServerException))]
         public void TestRemoveUserSessionInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());

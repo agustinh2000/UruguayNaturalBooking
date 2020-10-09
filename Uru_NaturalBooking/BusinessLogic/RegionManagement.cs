@@ -25,9 +25,9 @@ namespace BusinessLogic
                 Region region = regionRepository.Get(identifier);
                 return region;
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("Hubo un error al obtener la region.", e);
+                throw new ServerBusinessLogicException("Hubo un error al obtener la region.", e);
             }
 
         }
@@ -37,11 +37,15 @@ namespace BusinessLogic
             try
             {
                 List<Region> allRegions = regionRepository.GetAll().ToList();
-                return allRegions; 
+                return allRegions;
             }
-            catch(ExceptionRepository e)
+            catch (ClientException e)
             {
-                throw new ExceptionBusinessLogic("Hubo un error al obtener la lista de regiones", e); 
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistRegion, e);
+            }
+            catch (ServerException e)
+            {
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedAllRegion, e);
             }
         }
 

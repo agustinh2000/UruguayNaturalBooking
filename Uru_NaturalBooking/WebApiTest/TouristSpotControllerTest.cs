@@ -170,7 +170,7 @@ namespace WebApiTest
         public void CreateTouristSpotInvalidTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.Create(It.IsAny<TouristSpot>(), It.IsAny<Guid>(), It.IsAny<List<Guid>>())).Throws(new ExceptionBusinessLogic("No se puede crear el punto turistico debido a que no es valido."));
+            touristSpotMock.Setup(m => m.Create(It.IsAny<TouristSpot>(), It.IsAny<Guid>(), It.IsAny<List<Guid>>())).Throws(new ServerBusinessLogicException("No se puede crear el punto turistico debido a que no es valido."));
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             var result = touristSpotController.Post(touristSpotRequestModel);
             var createdResult = result as BadRequestObjectResult;
@@ -207,7 +207,7 @@ namespace WebApiTest
         public void GetTouristSpotByIdInternalErrorTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetTouristSpotById(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("No se puede obtener el punto turistico a traves del Id."));
+            touristSpotMock.Setup(m => m.GetTouristSpotById(It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("No se puede obtener el punto turistico a traves del Id."));
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             var result = touristSpotController.Get(touristSpotResponseModel.Id);
             var createdResult = result as ObjectResult;
@@ -232,7 +232,7 @@ namespace WebApiTest
         public void GetAllTouristSpotsNotFoundTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetAllTouristSpot()).Returns(value:null);
+            touristSpotMock.Setup(m => m.GetAllTouristSpot()).Throws(new ClientBusinessLogicException());
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             var result = touristSpotController.Get();
             var createdResult = result as NotFoundObjectResult;
@@ -244,7 +244,7 @@ namespace WebApiTest
         public void GetAllTouristSpotsInternalErrorTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetAllTouristSpot()).Throws(new ExceptionBusinessLogic("Error. No se pueden obtener todos los puntos turisticos."));
+            touristSpotMock.Setup(m => m.GetAllTouristSpot()).Throws(new ServerBusinessLogicException("Error. No se pueden obtener todos los puntos turisticos."));
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             var result = touristSpotController.Get();
             var createdResult = result as ObjectResult;
@@ -269,7 +269,7 @@ namespace WebApiTest
         public void GetTouristSpotByRegionIdInternalErrorTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetTouristSpotByRegion(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("No se puede obtener el punto turistico por la region."));
+            touristSpotMock.Setup(m => m.GetTouristSpotByRegion(It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("No se puede obtener el punto turistico por la region."));
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             var result = touristSpotController.GetTouristSpotsByRegionId(regionForTouristSpot.Id);
             var createdResult = result as ObjectResult;
@@ -320,7 +320,7 @@ namespace WebApiTest
         public void GetTouristSpotByCategoriesIdInternalErrorTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetTouristSpotsByCategories(It.IsAny<List<Guid>>())).Throws(new ExceptionBusinessLogic("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias."));
+            touristSpotMock.Setup(m => m.GetTouristSpotsByCategories(It.IsAny<List<Guid>>())).Throws(new ServerBusinessLogicException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias."));
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             Guid[] categories = new Guid[] { category.Id };
             var result = touristSpotController.GetTouristSpotsByCategoriesId(categories);
@@ -360,7 +360,7 @@ namespace WebApiTest
         public void GetTouristSpotByCategoriesAndRegionIdInternalErrorTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetTouristSpotsByCategoriesAndRegion(It.IsAny<List<Guid>>(), It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias y region."));
+            touristSpotMock.Setup(m => m.GetTouristSpotsByCategoriesAndRegion(It.IsAny<List<Guid>>(), It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias y region."));
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             Guid[] categories = new Guid[] { category.Id };
             var result = touristSpotController.GetTouristSpotsByCategoriesAndRegionId(categories, regionForTouristSpot.Id);

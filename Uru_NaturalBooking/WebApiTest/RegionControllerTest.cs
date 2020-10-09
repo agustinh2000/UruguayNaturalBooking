@@ -70,7 +70,7 @@ namespace WebApiTest
         public void GetRegionByIdInternalErrorTest()
         {
             var regionMock = new Mock<IRegionManagement>(MockBehavior.Strict);
-            regionMock.Setup(m => m.GetById(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("Hubo un error al obtener la region."));
+            regionMock.Setup(m => m.GetById(It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("Hubo un error al obtener la region."));
             RegionController regionController = new RegionController(regionMock.Object);
             var result = regionController.Get(region.Id);
             var createdResult = result as ObjectResult;
@@ -95,7 +95,7 @@ namespace WebApiTest
         public void GetAllRegionsNotFoundTest()
         {
             var regionMock = new Mock<IRegionManagement>(MockBehavior.Strict);
-            regionMock.Setup(m => m.GetAllRegions()).Returns(value:null);
+            regionMock.Setup(m => m.GetAllRegions()).Throws(new ClientBusinessLogicException());
             RegionController regionController = new RegionController(regionMock.Object);
             var result = regionController.Get();
             var createdResult = result as NotFoundObjectResult;
@@ -107,7 +107,7 @@ namespace WebApiTest
         public void GetAllRegionsInternalErrorTest()
         {
             var regionMock = new Mock<IRegionManagement>(MockBehavior.Strict);
-            regionMock.Setup(m => m.GetAllRegions()).Throws(new ExceptionBusinessLogic("Hubo un error al obtener la lista de regiones."));
+            regionMock.Setup(m => m.GetAllRegions()).Throws(new ServerBusinessLogicException("Hubo un error al obtener la lista de regiones."));
             RegionController regionController = new RegionController(regionMock.Object);
             var result = regionController.Get();
             var createdResult = result as ObjectResult;

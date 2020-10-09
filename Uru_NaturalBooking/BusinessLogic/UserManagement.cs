@@ -32,9 +32,13 @@ namespace BusinessLogic
             {
                 return userRepository.GetAll();
             }
-            catch (ExceptionRepository)
+            catch(ClientException e)
             {
-                throw new ExceptionBusinessLogic("No se pueden obtener los usuarios.");
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistUsers, e); 
+            }
+            catch (ServerException e)
+            {
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedAllUser, e);
             }
             
         }
@@ -54,9 +58,9 @@ namespace BusinessLogic
                 userRepository.Add(user);
                 return user;
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede crear el usuario debido a que ha ocurrido un error.", e);
+                throw new ServerBusinessLogicException("No se puede crear el usuario debido a que ha ocurrido un error.", e);
             }
         }
 
@@ -67,9 +71,9 @@ namespace BusinessLogic
             {
                 user = userRepository.GetUserByEmailAndPassword(email, password);
             }
-            catch (ExceptionRepository)
+            catch (ServerException)
             {
-                throw new ExceptionBusinessLogic("Usuario y/o password incorrecto");
+                throw new ServerBusinessLogicException("Usuario y/o password incorrecto");
             }
             UserSession userSession = sessionRepository.GetAll().Where(x => x.User.Id.Equals(user.Id)).FirstOrDefault();
             if (userSession == null)
@@ -92,9 +96,9 @@ namespace BusinessLogic
                 User userObteined = userRepository.Get(userId);
                 return userObteined;
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede obtener el usuario a traves del Id.", e);
+                throw new ServerBusinessLogicException("No se puede obtener el usuario a traves del Id.", e);
             }
         }
 
@@ -103,15 +107,15 @@ namespace BusinessLogic
             UserSession userSession = sessionRepository.GetAll().Where(x => x.Token == token).FirstOrDefault();
             if (userSession == null)
             {
-                throw new ExceptionBusinessLogic(MessageException.ErrorTokenNotExist);
+                throw new ServerBusinessLogicException(MessageExceptionDomain.ErrorTokenNotExist);
             }
             try
             {
                 sessionRepository.Remove(userSession);
             }
-            catch (ExceptionRepository)
+            catch (ServerException)
             {
-                throw new ExceptionBusinessLogic("No es posible cerrar la sesion.");
+                throw new ServerBusinessLogicException("No es posible cerrar la sesion.");
 
             }
         }
@@ -129,12 +133,12 @@ namespace BusinessLogic
                 }
                 else
                 {
-                    throw new ExceptionBusinessLogic("El usuario buscado no existe");
+                    throw new ServerBusinessLogicException("El usuario buscado no existe");
                 }
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede actualizar el usuario.", e);
+                throw new ServerBusinessLogicException("No se puede actualizar el usuario.", e);
             }
         }
 
@@ -145,9 +149,9 @@ namespace BusinessLogic
                 User userToDelete = userRepository.Get(userId);
                 userRepository.Remove(userToDelete);
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede eliminar el usuario deseado.", e);
+                throw new ServerBusinessLogicException("No se puede eliminar el usuario deseado.", e);
             }
         }
     }

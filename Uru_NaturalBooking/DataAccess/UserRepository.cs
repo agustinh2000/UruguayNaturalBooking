@@ -25,13 +25,13 @@ namespace DataAccess
                 User userObteined = context.Set<User>().Where(x => x.Mail.Equals(email) && x.Password.Equals(password)).FirstOrDefault();
                 if(userObteined == null)
                 {
-                    throw new ExceptionRepository("Email y/o contrasena incorrecta");
+                    throw new ServerException("Email y/o contrasena incorrecta");
                 }
                 return userObteined;
             }
             catch (Exception e)
             {
-                throw new ExceptionRepository(e.Message, e);
+                throw new ServerException(e.Message, e);
             } 
         }
     }

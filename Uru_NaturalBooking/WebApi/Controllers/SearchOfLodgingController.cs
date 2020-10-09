@@ -39,7 +39,7 @@ namespace WebApi.Controllers
                 };
                 return Ok(lodgingForSearchModel.ToModel(lodgingsForTouristSpotSearched)); 
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }

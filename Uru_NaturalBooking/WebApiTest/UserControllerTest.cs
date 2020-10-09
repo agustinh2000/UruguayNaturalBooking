@@ -107,7 +107,7 @@ namespace WebApiTest
         public void LogInUserAndPasswordIncorrectTest()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
-            userMock.Setup(m => m.LogIn(aLoginModel.Email, aLoginModel.Password)).Throws(new ExceptionBusinessLogic());
+            userMock.Setup(m => m.LogIn(aLoginModel.Email, aLoginModel.Password)).Throws(new ServerBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Login(aLoginModel);
             var errorResult = result as BadRequestObjectResult;
@@ -132,7 +132,7 @@ namespace WebApiTest
         public void PostUserInvalid()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
-            userMock.Setup(m => m.Create(invalidUser)).Throws(new ExceptionBusinessLogic());
+            userMock.Setup(m => m.Create(invalidUser)).Throws(new ServerBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Post(invalidUser);
             var errorResult = result as BadRequestObjectResult;
@@ -171,7 +171,7 @@ namespace WebApiTest
         public void GetAllUsersNotFound()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
-            userMock.Setup(m => m.GetAll()).Returns(value:null);
+            userMock.Setup(m => m.GetAll()).Throws(new ClientBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Get();
             var errorResult = result as NotFoundObjectResult;
@@ -183,7 +183,7 @@ namespace WebApiTest
         public void GetAllUsersInternalError()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
-            userMock.Setup(m => m.GetAll()).Throws(new ExceptionBusinessLogic());
+            userMock.Setup(m => m.GetAll()).Throws(new ServerBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Get();
             var errorResult = result as ObjectResult;
@@ -220,7 +220,7 @@ namespace WebApiTest
         public void GetUserByIdInternalError()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
-            userMock.Setup(m => m.GetUser(aUser.Id)).Throws(new ExceptionBusinessLogic());
+            userMock.Setup(m => m.GetUser(aUser.Id)).Throws(new ServerBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Get(aUser.Id);
             var createdResult = result as ObjectResult;
@@ -232,7 +232,7 @@ namespace WebApiTest
         public void PutUserNotExist()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
-            userMock.Setup(m => m.UpdateUser(aUser.Id, aUserModified)).Throws(new ExceptionBusinessLogic());
+            userMock.Setup(m => m.UpdateUser(aUser.Id, aUserModified)).Throws(new ServerBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Put(aUser.Id, aUserModified);
             var createdResult = result as BadRequestObjectResult;
@@ -256,7 +256,7 @@ namespace WebApiTest
         public void DeleteUserInternalError()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
-            userMock.Setup(m => m.RemoveUser(aUser.Id)).Throws(new ExceptionBusinessLogic());
+            userMock.Setup(m => m.RemoveUser(aUser.Id)).Throws(new ServerBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Delete(aUser.Id);
             var createdResult = result as ObjectResult;
@@ -280,7 +280,7 @@ namespace WebApiTest
         public void LogOutInvalidToken()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
-            userMock.Setup(m => m.LogOut(aUserSession.Token)).Throws(new ExceptionBusinessLogic());
+            userMock.Setup(m => m.LogOut(aUserSession.Token)).Throws(new ServerBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Logout(aUserSession.Token);
             var createdResult = result as NotFoundObjectResult;

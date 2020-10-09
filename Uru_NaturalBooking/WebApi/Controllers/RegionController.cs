@@ -27,18 +27,18 @@ namespace WebApi.Controllers
             try
             {
                 List<Region> allRegions = regionManagement.GetAllRegions();
-                if(allRegions == null)
-                {
-                    return NotFound("No se encontraron regiones.");
-                }
                 return Ok(RegionForResponseModel.ToModel(allRegions));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ClientBusinessLogicException)
+            {
+                return NotFound("No se encontraron regiones.");
+            }
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
-                    
+
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
@@ -51,7 +51,7 @@ namespace WebApi.Controllers
                 }
                 return Ok(RegionForResponseModel.ToModel(region));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }

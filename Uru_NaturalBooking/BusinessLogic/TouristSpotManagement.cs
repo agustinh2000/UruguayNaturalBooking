@@ -50,9 +50,9 @@ namespace BusinessLogic
                 touristSpotRepository.Add(touristSpot);
                 return touristSpot;
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede crear el punto turistico debido a que no es valido.", e);
+                throw new ServerBusinessLogicException("No se puede crear el punto turistico debido a que no es valido.", e);
             }
         }
 
@@ -62,9 +62,9 @@ namespace BusinessLogic
             {
                 return touristSpotRepository.GetTouristSpotByRegion(regionId); 
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede obtener el punto turistico por la region.", e);
+                throw new ServerBusinessLogicException("No se puede obtener el punto turistico por la region.", e);
             }
         }
 
@@ -75,9 +75,9 @@ namespace BusinessLogic
                 TouristSpot touristSpotObteined = touristSpotRepository.Get(touristSpotId);
                 return touristSpotObteined;
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede obtener el punto turistico atraves del Id.", e);
+                throw new ServerBusinessLogicException("No se puede obtener el punto turistico atraves del Id.", e);
             }
         }
 
@@ -87,9 +87,9 @@ namespace BusinessLogic
             {
                 return touristSpotRepository.GetTouristSpotsByCategories(listOfCategoriesIdSearched); 
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias.", e);
+                throw new ServerBusinessLogicException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias.", e);
             }
         }
 
@@ -99,9 +99,9 @@ namespace BusinessLogic
             {
                 return touristSpotRepository.GetTouristSpotsByCategoriesAndRegion(listOfCategoriesIdSearched, regionIdSearched); 
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias y region.", e);
+                throw new ServerBusinessLogicException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias y region.", e);
             }
         }
 
@@ -115,9 +115,9 @@ namespace BusinessLogic
                 touristSpotRepository.Update(touristSpotDb);
                 return touristSpotDb;
             }
-            catch (ExceptionRepository e)
+            catch (ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede actualizar el punto turistico.", e);
+                throw new ServerBusinessLogicException("No se puede actualizar el punto turistico.", e);
             }
         }
 
@@ -127,9 +127,9 @@ namespace BusinessLogic
             {
                 TouristSpot touristSpotToDelete = touristSpotRepository.Get(touristSpotId);
                 touristSpotRepository.Remove(touristSpotToDelete);
-            }catch(ExceptionRepository e)
+            }catch(ServerException e)
             {
-                throw new ExceptionBusinessLogic("No se puede eliminar el punto turistico deseado.", e); 
+                throw new ServerBusinessLogicException("No se puede eliminar el punto turistico deseado.", e); 
             }
         }
 
@@ -140,9 +140,13 @@ namespace BusinessLogic
                 List<TouristSpot> allTouristSpot = touristSpotRepository.GetAll().ToList();
                 return allTouristSpot; 
             }
-            catch (ExceptionRepository e)
+            catch(ClientException e)
             {
-                throw new ExceptionBusinessLogic("No se pudieron obtener todos los puntos turisticos", e);
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistTouristSpots, e); 
+            }
+            catch (ServerException e)
+            {
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedAllTouristSpots, e);
             }
         }
     }

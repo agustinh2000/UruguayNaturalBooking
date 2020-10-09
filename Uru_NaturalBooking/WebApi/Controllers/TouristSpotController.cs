@@ -38,7 +38,7 @@ namespace WebApi.Controllers
                 }
                 return Ok(TouristSpotForResponseModel.ToModel(touristSpot));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -50,13 +50,13 @@ namespace WebApi.Controllers
             try
             {
                 List<TouristSpot> allTouristSpots = touristSpotManagement.GetAllTouristSpot();
-                if(allTouristSpots == null)
-                {
-                    return NotFound("No se encontraron puntos turisticos.");
-                }
                 return Ok(TouristSpotForResponseModel.ToModel(allTouristSpots));
             }
-            catch(ExceptionBusinessLogic e)
+            catch(ClientBusinessLogicException)
+            {
+                return NotFound("No se encontraron puntos turisticos.");
+            }
+            catch(ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -74,7 +74,7 @@ namespace WebApi.Controllers
                 }
                 return Ok(TouristSpotForResponseModel.ToModel(touristSpotsInARegion));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -92,7 +92,7 @@ namespace WebApi.Controllers
                 }
                 return Ok(TouristSpotForResponseModel.ToModel(touristSpotsByCategories));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -112,7 +112,7 @@ namespace WebApi.Controllers
                 }
                 return Ok(TouristSpotForResponseModel.ToModel(touristSpotsByRegionAndCategories));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -127,7 +127,7 @@ namespace WebApi.Controllers
                 TouristSpot touristSpotAdded = touristSpotManagement.Create(TouristSpotForRequestModel.ToEntity(aTouristSpot), aTouristSpot.RegionId, aTouristSpot.ListOfCategoriesId);
                 return CreatedAtRoute("GetTouristSpot", new { id = touristSpotAdded.Id }, TouristSpotForResponseModel.ToModel(touristSpotAdded));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return BadRequest(e.Message);
             }

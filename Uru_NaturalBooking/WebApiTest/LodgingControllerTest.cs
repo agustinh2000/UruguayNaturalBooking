@@ -142,7 +142,7 @@ namespace WebApiTest
         public void GetLodgingByIdInternalErrorTest()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.GetLodgingById(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("El hospedaje solicitado no fue encontrado."));
+            lodgingManagementMock.Setup(m => m.GetLodgingById(It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("El hospedaje solicitado no fue encontrado."));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Get(lodgingModelForResponse.Id);
             var createdResult = result as ObjectResult;
@@ -167,7 +167,7 @@ namespace WebApiTest
         public void GetAllLodgingsNotFoundTest()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.GetAllLoadings()).Returns(value: null);
+            lodgingManagementMock.Setup(m => m.GetAllLoadings()).Throws(new ClientBusinessLogicException());
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Get();
             var createdResult = result as NotFoundObjectResult;
@@ -179,7 +179,7 @@ namespace WebApiTest
         public void GetAllLodgingsInternalErrorTest()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.GetAllLoadings()).Throws(new ExceptionBusinessLogic("No se pudo encontrar hospedajes."));
+            lodgingManagementMock.Setup(m => m.GetAllLoadings()).Throws(new ServerBusinessLogicException("No se pudo encontrar hospedajes."));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Get();
             var createdResult = result as ObjectResult;
@@ -204,7 +204,7 @@ namespace WebApiTest
         public void CreateLodgingInvalidTest()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("No se puede crear el hospedaje debido a que no es valido."));
+            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("No se puede crear el hospedaje debido a que no es valido."));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Post(lodgingModelForRequest);
             var createdResult = result as BadRequestObjectResult;
@@ -279,7 +279,7 @@ namespace WebApiTest
 
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
             lodgingManagementMock.Setup(m => m.UpdateLodging(It.IsAny<Guid>(),It.IsAny<Lodging>())).
-                Throws(new ExceptionBusinessLogic("No se puede actualizar el hospedaje deseado."));
+                Throws(new ServerBusinessLogicException("No se puede actualizar el hospedaje deseado."));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Put(lodgingModelForRequestToUpdate.Id, lodgingModelForRequestToUpdate);
             var createdResult = result as BadRequestObjectResult;
@@ -303,7 +303,7 @@ namespace WebApiTest
         public void DeleteLodgingTestWithInternalError()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.RemoveLodging(It.IsAny<Guid>())).Throws(new ExceptionBusinessLogic("No se puede eliminar el hospedaje."));
+            lodgingManagementMock.Setup(m => m.RemoveLodging(It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("No se puede eliminar el hospedaje."));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Delete(lodgingModelForRequest.Id);
             var createdResult = result as ObjectResult;

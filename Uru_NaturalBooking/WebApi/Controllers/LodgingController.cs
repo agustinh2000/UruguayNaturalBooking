@@ -29,12 +29,14 @@ namespace WebApi.Controllers
             try
             {
                 List<Lodging> allLodgings = lodgingManagement.GetAllLoadings();
-                if (allLodgings == null)
-                {
-                    return NotFound("No se pudo encontrar hospedajes");
-                }
+                
                 return Ok(LodgingModelForResponse.ToModel(allLodgings));
-            } catch (ExceptionBusinessLogic e)
+            } 
+            catch(ClientBusinessLogicException)
+            {
+                return NotFound("No se pudo encontrar hospedajes");
+            }
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -52,7 +54,7 @@ namespace WebApi.Controllers
                 }
                 return Ok(LodgingModelForResponse.ToModel(lodging));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
@@ -68,7 +70,7 @@ namespace WebApi.Controllers
                 Lodging lodging = lodgingManagement.Create(LodgingModelForRequest.ToEntity(lodgingModel), lodgingModel.TouristSpotId);
                 return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForResponse.ToModel(lodging));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return BadRequest(e.Message);
             }
@@ -83,7 +85,7 @@ namespace WebApi.Controllers
                 Lodging lodging = lodgingManagement.UpdateLodging(id, LodgingModelForRequest.ToEntity(lodgingModel)); 
                 return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForResponse.ToModel(lodging));
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return BadRequest(e.Message);
             }
@@ -98,7 +100,7 @@ namespace WebApi.Controllers
                 lodgingManagement.RemoveLodging(id);
                 return NoContent();
             }
-            catch (ExceptionBusinessLogic e)
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }

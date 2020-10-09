@@ -20,7 +20,7 @@ namespace Domain
         {
             if (string.IsNullOrEmpty(Name))
             {
-                throw new CategoryException(MessageException.ErrorIsEmpty); 
+                throw new CategoryException(MessageExceptionDomain.ErrorIsEmpty); 
             }
         }
 

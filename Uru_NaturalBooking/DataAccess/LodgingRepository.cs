@@ -26,13 +26,13 @@ namespace DataAccess
                                 && lod.IsAvailable).ToList();
                 if(listOfLodgingInTouristSpot.IsNullOrEmpty())
                 {
-                    throw new ExceptionRepository("No hay hospedajes disponibles para el punto turistico indicado.");
+                    throw new ServerException("No hay hospedajes disponibles para el punto turistico indicado.");
                 }
                 return listOfLodgingInTouristSpot;
             }
             catch(Exception e)
             {
-                throw new ExceptionRepository(e.Message, e);
+                throw new ServerException(e.Message, e);
 
             }
         }
