@@ -1,6 +1,8 @@
 ﻿using BusinessLogicException;
 using BusinessLogicInterface;
+using Castle.Core.Internal;
 using Domain;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Model.ForRequest;
@@ -25,6 +27,10 @@ namespace WebApi.Controllers
             try
             {
                 List<Lodging> lodgingsForTouristSpotSearched = lodgingManagement.GetAvailableLodgingsByTouristSpot(model.TouristSpotIdSearch);
+                if (lodgingsForTouristSpotSearched.IsNullOrEmpty())
+                {
+                    return NotFound("No se encontraron puntos turisticos para los datos seleccionados.");
+                }
                 LodgingForSearchModel lodgingForSearchModel = new LodgingForSearchModel()
                 {
                     CheckIn = model.CheckIn,
@@ -35,9 +41,8 @@ namespace WebApi.Controllers
             }
             catch (ExceptionBusinessLogic e)
             {
-                return BadRequest(e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
-
     }
 }

@@ -122,7 +122,7 @@ namespace WebApiTest
         }
 
         [TestMethod]
-        public void SearchLodgingsTestBadRequest()
+        public void SearchLodgingsTestInternalError()
         {
             List<Lodging> listOfLodgingsAvailables = new List<Lodging>() { lodgingOfCumbres, lodgingOfConrad };
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
@@ -131,9 +131,23 @@ namespace WebApiTest
 
             SearchOfLodgingController searchOfLodgingController = new SearchOfLodgingController(lodgingManagementMock.Object);
             var result = searchOfLodgingController.Post(searchOfLodgingModel);
-            var createdResult = result as BadRequestObjectResult;
+            var createdResult = result as ObjectResult;
             lodgingManagementMock.VerifyAll();
-            Assert.AreEqual(400, createdResult.StatusCode);
+            Assert.AreEqual(500, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void SearchLodgingsTestBadRequest()
+        {
+            List<Lodging> listOfLodgingsAvailables = new List<Lodging>() { lodgingOfCumbres, lodgingOfConrad };
+            var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
+            lodgingManagementMock.Setup(m => m.GetAvailableLodgingsByTouristSpot(It.IsAny<Guid>())).Returns(new List<Lodging>());
+
+            SearchOfLodgingController searchOfLodgingController = new SearchOfLodgingController(lodgingManagementMock.Object);
+            var result = searchOfLodgingController.Post(searchOfLodgingModel);
+            var createdResult = result as NotFoundObjectResult;
+            lodgingManagementMock.VerifyAll();
+            Assert.AreEqual(404, createdResult.StatusCode);
         }
     }
 }
