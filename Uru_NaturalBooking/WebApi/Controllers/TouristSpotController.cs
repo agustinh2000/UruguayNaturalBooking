@@ -14,7 +14,7 @@ using Model.ForResponse;
 
 namespace WebApi.Controllers
 {
-    [Route("api/touristSpot")]
+    [Route("api/touristSpots")]
     [ApiController]
     public class TouristSpotController : ControllerBase
     {
