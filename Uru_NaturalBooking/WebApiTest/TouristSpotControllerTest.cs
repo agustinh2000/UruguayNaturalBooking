@@ -195,7 +195,7 @@ namespace WebApiTest
         public void GetTouristSpotByIdNotFoundTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetTouristSpotById(It.IsAny<Guid>())).Returns(value:null);
+            touristSpotMock.Setup(m => m.GetTouristSpotById(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             var result = touristSpotController.Get(touristSpotResponseModel.Id);
             var createdResult = result as NotFoundObjectResult;

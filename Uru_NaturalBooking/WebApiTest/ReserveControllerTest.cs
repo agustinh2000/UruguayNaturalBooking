@@ -149,7 +149,7 @@ namespace WebApiTest
         public void CantGetReserveByIdBecauseNotExistTest()
         {
             var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
-            reserveManagementMock.Setup(m => m.GetById(It.IsAny<Guid>())).Returns(value: null);
+            reserveManagementMock.Setup(m => m.GetById(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
             ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
 
             var result = reserveController.Get(reserveOfLodging.Id);

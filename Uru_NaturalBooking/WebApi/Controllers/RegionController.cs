@@ -45,11 +45,11 @@ namespace WebApi.Controllers
             try
             {
                 Region region = regionManagement.GetById(id);
-                if (region == null)
-                {
-                    return NotFound("La region solicitada no fue encontrada");
-                }
                 return Ok(RegionForResponseModel.ToModel(region));
+            }
+            catch (ClientBusinessLogicException)
+            {
+                return NotFound("La region solicitada no fue encontrada");
             }
             catch (ServerBusinessLogicException e)
             {

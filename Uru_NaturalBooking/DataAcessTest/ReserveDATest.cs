@@ -100,13 +100,13 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ServerException))]
+        [ExpectedException(typeof(ClientException))]
         public void GetReserveDoesntExist()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<Reserve> reserveRepository = new BaseRepository<Reserve>(context);
-
-            Reserve reserveOfDb = reserveRepository.Get(reserve.Id);
+            
+            reserveRepository.Get(reserve.Id);
         }
 
         [TestMethod]

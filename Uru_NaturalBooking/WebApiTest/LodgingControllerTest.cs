@@ -130,7 +130,7 @@ namespace WebApiTest
         public void GetLodgingByIdNotFound()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.GetLodgingById(It.IsAny<Guid>())).Returns(value: null);
+            lodgingManagementMock.Setup(m => m.GetLodgingById(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Get(lodgingModelForResponse.Id);
             var createdResult = result as NotFoundObjectResult;

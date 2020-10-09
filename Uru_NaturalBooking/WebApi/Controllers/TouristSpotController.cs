@@ -32,11 +32,11 @@ namespace WebApi.Controllers
             try
             {
                 TouristSpot touristSpot = touristSpotManagement.GetTouristSpotById(id);
-                if (touristSpot == null)
-                {
-                    return NotFound("El punto turistico solicitado no fue encontrado");
-                }
                 return Ok(TouristSpotForResponseModel.ToModel(touristSpot));
+            }
+            catch (ClientBusinessLogicException)
+            {
+                return NotFound("El punto turistico solicitado no fue encontrado");
             }
             catch (ServerBusinessLogicException e)
             {

@@ -52,9 +52,13 @@ namespace BusinessLogic
                 Reserve reserve = reserveRepository.Get(idOfReserve);
                 return reserve;
             }
+            catch(ClientException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindReserve, e);
+            }
             catch (ServerException e)
             {
-                throw new ServerBusinessLogicException("Hubo un error al obtener la reserva deseada.", e);
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedReserve, e);
             }
         }
 

@@ -65,9 +65,13 @@ namespace DataAccess
                 T entityObteined = Context.Set<T>().Find(id);
                 if (entityObteined == null)
                 {
-                    throw new ServerException("Error obteniendo el elemento deseado");
+                    throw new ClientException();
                 }
                 return entityObteined;
+            }
+            catch (ClientException e)
+            {
+                throw new ClientException(MessagesExceptionRepository.ErrorGetElementById, e);
             }
             catch (Exception e)
             {

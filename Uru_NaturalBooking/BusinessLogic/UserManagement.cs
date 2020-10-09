@@ -96,9 +96,13 @@ namespace BusinessLogic
                 User userObteined = userRepository.Get(userId);
                 return userObteined;
             }
+            catch(ClientException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindUser, e);
+            }
             catch (ServerException e)
             {
-                throw new ServerBusinessLogicException("No se puede obtener el usuario a traves del Id.", e);
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedUser, e);
             }
         }
 

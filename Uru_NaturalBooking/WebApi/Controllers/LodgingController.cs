@@ -29,10 +29,10 @@ namespace WebApi.Controllers
             try
             {
                 List<Lodging> allLodgings = lodgingManagement.GetAllLoadings();
-                
+
                 return Ok(LodgingModelForResponse.ToModel(allLodgings));
-            } 
-            catch(ClientBusinessLogicException)
+            }
+            catch (ClientBusinessLogicException)
             {
                 return NotFound("No se pudo encontrar hospedajes");
             }
@@ -48,11 +48,11 @@ namespace WebApi.Controllers
             try
             {
                 Lodging lodging = lodgingManagement.GetLodgingById(id);
-                if (lodging == null)
-                {
-                    return NotFound("El hospedaje solicitado no fue encontrado");
-                }
                 return Ok(LodgingModelForResponse.ToModel(lodging));
+            }
+            catch (ClientBusinessLogicException)
+            {
+                return NotFound("El hospedaje solicitado no fue encontrado");
             }
             catch (ServerBusinessLogicException e)
             {
@@ -82,7 +82,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Lodging lodging = lodgingManagement.UpdateLodging(id, LodgingModelForRequest.ToEntity(lodgingModel)); 
+                Lodging lodging = lodgingManagement.UpdateLodging(id, LodgingModelForRequest.ToEntity(lodgingModel));
                 return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForResponse.ToModel(lodging));
             }
             catch (ServerBusinessLogicException e)

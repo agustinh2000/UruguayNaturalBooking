@@ -58,7 +58,7 @@ namespace WebApiTest
         public void GetRegionByIdNotFoundTest()
         {
             var regionMock = new Mock<IRegionManagement>(MockBehavior.Strict);
-            regionMock.Setup(m => m.GetById(It.IsAny<Guid>())).Returns(value: null) ;
+            regionMock.Setup(m => m.GetById(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException()) ;
             RegionController regionController = new RegionController(regionMock.Object);
             var result = regionController.Get(region.Id);
             var createdResult = result as NotFoundObjectResult;

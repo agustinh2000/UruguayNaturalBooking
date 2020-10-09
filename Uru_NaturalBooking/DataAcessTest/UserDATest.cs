@@ -61,12 +61,12 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ServerException))]
+        [ExpectedException(typeof(ClientException))]
         public void TestGetUserBad()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IUserRepository userRepo = new UserRepository(context);
-            User userOfDb = userRepo.Get(userToAdd.Id);
+            userRepo.Get(userToAdd.Id);
         }
 
         [TestMethod]

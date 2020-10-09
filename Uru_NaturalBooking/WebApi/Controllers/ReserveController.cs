@@ -30,11 +30,11 @@ namespace WebApi.Controllers
             try
             {
                 Reserve reserve = reserveManagement.GetById(id);
-                if (reserve == null)
-                {
-                    return NotFound("La reserva solicitada no fue encontrado");
-                }
                 return Ok(ReserveModelForResponse.ToModel(reserve));
+            }
+            catch (ClientBusinessLogicException)
+            {
+                return NotFound("La reserva solicitada no fue encontrado");
             }
             catch (ServerBusinessLogicException e)
             {
@@ -50,9 +50,9 @@ namespace WebApi.Controllers
                 Reserve reserve = reserveManagement.Create(ReserveModelForRequest.ToEntity(aReserveModel), aReserveModel.IdOfLodgingToReserve);
                 return CreatedAtRoute("GetReserve", new { id = reserve.Id }, ReserveModelForResponse.ToModel(reserve));
             }
-            catch(ServerBusinessLogicException e)
+            catch (ServerBusinessLogicException e)
             {
-                return BadRequest(e.Message); 
+                return BadRequest(e.Message);
             }
         }
 
@@ -62,7 +62,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Reserve reserve = reserveManagement.Update(idForUpdateReserve,ReserveModelForRequestUpdate.ToEntity(aReserveModelForUpdate));
+                Reserve reserve = reserveManagement.Update(idForUpdateReserve, ReserveModelForRequestUpdate.ToEntity(aReserveModelForUpdate));
                 return CreatedAtRoute("GetReserve", new { id = reserve.Id }, ReserveModelForResponse.ToModel(reserve));
             }
             catch (ServerBusinessLogicException e)

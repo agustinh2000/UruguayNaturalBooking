@@ -75,9 +75,13 @@ namespace BusinessLogic
                 TouristSpot touristSpotObteined = touristSpotRepository.Get(touristSpotId);
                 return touristSpotObteined;
             }
+            catch(ClientException e)
+            {
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindTouristSpot, e);
+            }
             catch (ServerException e)
             {
-                throw new ServerBusinessLogicException("No se puede obtener el punto turistico atraves del Id.", e);
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedTouristSpot, e);
             }
         }
 

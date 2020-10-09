@@ -326,7 +326,7 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void GetExceptionBySearchReserveWithIdTest()
+        public void GetReserveByIdServerErrorTest()
         {
             Reserve reserve = new Reserve()
             {
@@ -344,6 +344,32 @@ namespace BusinessLogicTest
 
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
             reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerException());
+
+            ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
+
+            Reserve resultOfGetAReserve = reserveLogic.GetById(reserve.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void GetReserveByIdClientErrorTest()
+        {
+            Reserve reserve = new Reserve()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1,
+                LodgingOfReserve = lodging
+            };
+
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientException());
 
             ReserveManagement reserveLogic = new ReserveManagement(reserveRepositoryMock.Object);
 

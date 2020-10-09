@@ -42,9 +42,13 @@ namespace BusinessLogic
                 Category category = categoryRepository.Get(identifier);
                 return category;
             }
+            catch (ClientException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindUser, e);
+            }
             catch (ServerException e)
             {
-                throw new ServerBusinessLogicException("Hubo un error al obtener la categoria.", e);
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedUser, e);
             }
         }
 

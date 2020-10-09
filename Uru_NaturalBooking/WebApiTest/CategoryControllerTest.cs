@@ -57,14 +57,13 @@ namespace WebApiTest
         public void GetCategoryTestFailed()
         {
             var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
-            mock.Setup(m => m.GetById(It.IsAny<Guid>())).Returns(value: null);
+            mock.Setup(m => m.GetById(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
             CategoryController categoryController = new CategoryController(mock.Object);
 
             var result = categoryController.Get(categoryBeachModel.Id);
             var createdResult = result as NotFoundObjectResult;
-            var resultValue = createdResult.Value;
             mock.VerifyAll();
-            Assert.AreEqual("El objeto solicitado no fue encontrado", resultValue);
+            Assert.AreEqual(404, createdResult.StatusCode);
         }
 
         [TestMethod]

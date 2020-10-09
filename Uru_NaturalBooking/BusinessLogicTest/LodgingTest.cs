@@ -290,7 +290,7 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void FailInGetValidLodgingTest()
+        public void ServerErrorInGetLodgingTest()
         {
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerException());
@@ -298,6 +298,18 @@ namespace BusinessLogicTest
 
             Lodging resultOfGetLodging = lodgingLogic.GetLodgingById(lodging.Id); 
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void ClientErrorInGetLodgingTest()
+        {
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientException());
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+
+            Lodging resultOfGetLodging = lodgingLogic.GetLodgingById(lodging.Id);
+        }
+
 
 
         [TestMethod]

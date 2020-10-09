@@ -208,7 +208,7 @@ namespace WebApiTest
         public void GetUserByIdNotFound()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
-            userMock.Setup(m => m.GetUser(aUser.Id)).Returns(value:null);
+            userMock.Setup(m => m.GetUser(aUser.Id)).Throws(new ClientBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Get(aUser.Id);
             var createdResult = result as NotFoundObjectResult;

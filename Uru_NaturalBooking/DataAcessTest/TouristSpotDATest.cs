@@ -84,12 +84,12 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ServerException))]
+        [ExpectedException(typeof(ClientException))]
         public void TestGetTouristSpotBad()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
-            TouristSpot touristSpotOfDb = touristSpotRepo.Get(aTouristSpot.Id);
+            touristSpotRepo.Get(aTouristSpot.Id);
         }
 
         [TestMethod]

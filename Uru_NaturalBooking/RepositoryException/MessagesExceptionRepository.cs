@@ -6,7 +6,8 @@ namespace RepositoryException
 {
     public class MessagesExceptionRepository
     {
-        public static string ErrorGetAllElements = "Error. No se pueden obtener los elementos deseados."; 
+        public static string ErrorGetAllElements = "Error. No se pueden obtener los elementos deseados.";
+        public static string ErrorGetElementById = "Error obteniendo el elemento deseado";
 
     }
 }

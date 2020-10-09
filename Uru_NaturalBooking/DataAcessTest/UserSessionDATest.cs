@@ -80,12 +80,12 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ServerException))]
+        [ExpectedException(typeof(ClientException))]
         public void TestGetUserSessionBad()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
-            UserSession userSessionOfDb = userSessionRepo.Get(userSession.Id);
+            userSessionRepo.Get(userSession.Id);
         }
 
         [TestMethod]

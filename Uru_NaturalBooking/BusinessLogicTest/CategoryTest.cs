@@ -60,7 +60,7 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void GetInvalidCategoryByIdTest()
+        public void GetInvalidCategoryByIdInternalErrorTest()
         {
             Guid idForCategory = Guid.NewGuid();
             Category category = new Category
@@ -77,6 +77,27 @@ namespace BusinessLogicTest
 
             categoryLogic.GetById(idForCategory);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void GetInvalidCategoryByIdNotFoundTest()
+        {
+            Guid idForCategory = Guid.NewGuid();
+            Category category = new Category
+            {
+                Id = idForCategory,
+                Name = "Playita y calor"
+            };
+
+            var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+
+            categoryMock.Setup(x => x.Get(It.IsAny<Guid>())).Throws(new ClientException());
+
+            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
+
+            categoryLogic.GetById(idForCategory);
+        }
+
 
         [TestMethod]
         public void GetAllCategoriesTest()

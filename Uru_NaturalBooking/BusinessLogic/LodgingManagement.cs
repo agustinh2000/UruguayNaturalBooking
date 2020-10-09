@@ -18,12 +18,12 @@ namespace BusinessLogic
         public LodgingManagement(ILodgingRepository repository, ITouristSpotManagement touristSpotLogic)
         {
             lodgingRepository = repository;
-            touristSpotManagementLogic = touristSpotLogic; 
+            touristSpotManagementLogic = touristSpotLogic;
         }
 
         public LodgingManagement(ILodgingRepository repository)
         {
-            lodgingRepository = repository; 
+            lodgingRepository = repository;
         }
 
         public Lodging Create(Lodging lodging, Guid touristSpotId)
@@ -32,7 +32,7 @@ namespace BusinessLogic
             {
                 lodging.Id = Guid.NewGuid();
                 TouristSpot touristSpotForLodging = touristSpotManagementLogic.GetTouristSpotById(touristSpotId);
-                lodging.TouristSpot = touristSpotForLodging; 
+                lodging.TouristSpot = touristSpotForLodging;
                 lodging.VerifyFormat();
                 lodgingRepository.Add(lodging);
                 return lodging;
@@ -48,10 +48,15 @@ namespace BusinessLogic
             try
             {
                 Lodging lodgingObteined = lodgingRepository.Get(lodgingId);
-                return lodgingObteined; 
-            }catch(ServerException e)
+                return lodgingObteined;
+            }
+            catch (ClientException e)
             {
-                throw new ServerBusinessLogicException("No se puede obtener el hospedaje deseado", e); 
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindLodging, e);
+            }
+            catch (ServerException e)
+            {
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedLodging, e);
             }
         }
 
@@ -88,7 +93,7 @@ namespace BusinessLogic
                 if (lodgingDb != null)
                 {
                     lodgingDb.UpdateAttributes(aLodging);
-                    lodgingDb.VerifyFormat(); 
+                    lodgingDb.VerifyFormat();
                     lodgingRepository.Update(lodgingDb);
                     return lodgingDb;
                 }
@@ -110,9 +115,9 @@ namespace BusinessLogic
                 List<Lodging> allLodgings = lodgingRepository.GetAll().ToList();
                 return allLodgings;
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
-                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistLodgigns, e); 
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistLodgigns, e);
             }
             catch (ServerException e)
             {

@@ -274,7 +274,7 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void GetUserByIdInternalError()
+        public void GetUserByIdInternalErrorTest()
         {
             User user = new User()
             {
@@ -287,6 +287,25 @@ namespace BusinessLogicTest
             };
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
             userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerException());
+            UserManagement userLogic = new UserManagement(userRepositoryMock.Object);
+            User userResult = userLogic.GetUser(user.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void GetUserByIdClientErrorTest()
+        {
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "soyelcolobienfachero"
+            };
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientException());
             UserManagement userLogic = new UserManagement(userRepositoryMock.Object);
             User userResult = userLogic.GetUser(user.Id);
         }

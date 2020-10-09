@@ -40,7 +40,7 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void GetInvalidRegionByIdTest()
+        public void GetInvalidRegionByIdTestServerError()
         {
             var regionId = Guid.NewGuid();
             Region region = new Region
@@ -52,6 +52,26 @@ namespace BusinessLogicTest
             var regionMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
 
             regionMock.Setup(x => x.Get(It.IsAny<Guid>())).Throws(new ServerException());
+
+            RegionManagement regionLogic = new RegionManagement(regionMock.Object);
+
+            regionLogic.GetById(regionId);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void GetInvalidRegionByIdTestClientError()
+        {
+            var regionId = Guid.NewGuid();
+            Region region = new Region
+            {
+                Id = regionId,
+                Name = Region.RegionName.Región_Centro_Sur
+            };
+
+            var regionMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
+
+            regionMock.Setup(x => x.Get(It.IsAny<Guid>())).Throws(new ClientException());
 
             RegionManagement regionLogic = new RegionManagement(regionMock.Object);
 

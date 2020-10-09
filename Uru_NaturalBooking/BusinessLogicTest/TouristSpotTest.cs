@@ -448,7 +448,7 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void GetInvalidTouristSpotById()
+        public void GetInvalidTouristSpotByIdServerErrorTest()
         {
             Region region1 = new Region()
             {
@@ -482,6 +482,48 @@ namespace BusinessLogicTest
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerException());
+
+            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            var result = touristSpotLogic.GetTouristSpotById(idForTouristSpot);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void GetInvalidTouristSpotByIdClientErrorTest()
+        {
+            Region region1 = new Region()
+            {
+                Id = Guid.NewGuid(),
+                Name = Region.RegionName.Región_Centro_Sur
+            };
+
+            Category category = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Playa"
+            };
+
+            Guid idForTouristSpot = Guid.NewGuid();
+
+            CategoryTouristSpot categoryTouristSpot = new CategoryTouristSpot()
+            {
+                CategoryId = category.Id,
+                TouristSpotId = idForTouristSpot
+            };
+
+            TouristSpot touristSpot = new TouristSpot
+            {
+                Id = idForTouristSpot,
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar.",
+                Region = region1,
+                ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot },
+                Image = picture
+            };
+
+            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientException());
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 

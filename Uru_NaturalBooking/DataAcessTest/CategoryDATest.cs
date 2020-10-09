@@ -52,13 +52,13 @@ namespace DataAcessTest
             };
 
             categoryRepo.Add(categoryToAdd);
-            Category categoryOfDb = categoryRepo.Get(categoryToAdd.Id); 
+            Category categoryOfDb = categoryRepo.Get(categoryToAdd.Id);
 
             Assert.AreEqual(categoryToAdd, categoryOfDb);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ServerException))]
+        [ExpectedException(typeof(ClientException))]
         public void TestGetCategoryBad()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
@@ -69,9 +69,9 @@ namespace DataAcessTest
                 Id = Guid.NewGuid(),
                 Name = "Playa"
             };
-            
-            Category categoryOfDb = categoryRepo.Get(categoryToAdd.Id);
+            categoryRepo.Get(categoryToAdd.Id);
         }
+
 
         [TestMethod]
         [ExpectedException(typeof(ClientException))]
@@ -131,7 +131,7 @@ namespace DataAcessTest
             };
 
             categoryRepo.Add(categoryToAdd);
-            categoryToAdd.Name = "Piscinas"; 
+            categoryToAdd.Name = "Piscinas";
             categoryRepo.Update(categoryToAdd);
 
             List<Category> listOfCategories = categoryRepo.GetAll().ToList();
@@ -188,7 +188,7 @@ namespace DataAcessTest
 
             List<Category> listTest = new List<Category>();
             listTest.Add(categoryToAdd);
-            listTest.Add(categoryToAdd2); 
+            listTest.Add(categoryToAdd2);
 
             List<Category> listOfCategories = categoryRepo.GetAll().ToList();
 

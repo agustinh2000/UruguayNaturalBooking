@@ -25,9 +25,14 @@ namespace BusinessLogic
                 Region region = regionRepository.Get(identifier);
                 return region;
             }
+            catch(ClientException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindRegion, e);
+
+            }
             catch (ServerException e)
             {
-                throw new ServerBusinessLogicException("Hubo un error al obtener la region.", e);
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedRegion, e);
             }
 
         }

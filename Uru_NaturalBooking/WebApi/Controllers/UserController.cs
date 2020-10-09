@@ -64,11 +64,12 @@ namespace WebApi.Controllers
             try
             {
                 User user = userManagement.GetUser(id);
-                if (user == null)
-                {
-                    return NotFound("El usuario solicitado no fue encontrado");
-                }
                 return Ok(UserModelForResponse.ToModel(user));
+            }
+            catch (ClientBusinessLogicException)
+            {
+                return NotFound("El usuario solicitado no fue encontrado");
+
             }
             catch (ServerBusinessLogicException e)
             {

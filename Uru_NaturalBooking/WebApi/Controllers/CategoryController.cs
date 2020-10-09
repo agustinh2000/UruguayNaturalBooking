@@ -47,12 +47,13 @@ namespace WebApi.Controllers
             try
             {
                 Category category = categoryManagement.GetById(id);
-                if (category == null)
-                {
-                    return NotFound("El objeto solicitado no fue encontrado");
-                }
                 return Ok(CategoryModel.ToModel(category));
-            }catch(ServerBusinessLogicException e)
+            }
+            catch (ClientBusinessLogicException)
+            {
+                return NotFound("El objeto solicitado no fue encontrado.");
+            }
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }

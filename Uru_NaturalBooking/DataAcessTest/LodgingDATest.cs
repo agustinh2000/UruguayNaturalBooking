@@ -73,7 +73,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ServerException))]
+        [ExpectedException(typeof(ClientException))]
         public void GetLodgingDoesntExist()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
