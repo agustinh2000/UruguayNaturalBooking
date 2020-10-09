@@ -14,7 +14,7 @@ namespace Model.ForRequest
 
         public int QuantityOfChilds { get; set; }
 
-        public int QuantityOfBabys { get; set; }
+        public int QuantityOfBabies { get; set; }
 
         public Guid TouristSpotIdSearch { get; set; }
     }

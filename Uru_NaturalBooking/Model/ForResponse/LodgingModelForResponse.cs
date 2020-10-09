@@ -12,6 +12,8 @@ namespace Model.ForResponse
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public int QuantityOfStars { get; set; }
 
         public string Address { get; set; }
@@ -28,6 +30,7 @@ namespace Model.ForResponse
         {
             Id = lodging.Id;
             Name = lodging.Name;
+            Description = lodging.Description;
             QuantityOfStars = lodging.QuantityOfStars;
             Address = lodging.Address;
             Images = lodging.Images.ToArray();

@@ -82,7 +82,7 @@ namespace WebApiTest
                 CheckOut = new DateTime(2020, 10, 07),
                 QuantityOfAdult = 1,
                 QuantityOfChilds = 1,
-                QuantityOfBabys = 1,
+                QuantityOfBabies = 1,
                 TouristSpotIdSearch = touristSpotAdded.Id
             }; 
         }

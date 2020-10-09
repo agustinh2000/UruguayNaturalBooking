@@ -49,6 +49,7 @@ namespace BusinessLogicTest
             {
                 Id = Guid.NewGuid(),
                 Name = "Hotel Las Cumbres",
+                Description = "Magnifico hospedaje",
                 QuantityOfStars = 5,
                 Address = "Ruta 12 km 3.5",
                 PricePerNight = 150,

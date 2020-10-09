@@ -13,6 +13,8 @@ namespace Model.ForRequest
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public int QuantityOfStars { get; set; }
 
         public string Address { get; set; }
@@ -27,6 +29,7 @@ namespace Model.ForRequest
         {
             Id = Id,
             Name = Name,
+            Description = Description,
             QuantityOfStars = QuantityOfStars,
             Address = Address,
             Images = Images.ToList(),

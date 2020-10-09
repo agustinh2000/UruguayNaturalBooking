@@ -8,7 +8,7 @@ using Moq;
 using RepositoryException;
 using System;
 using System.Collections.Generic;
-using System.Text;
+
 
 namespace BusinessLogicTest
 {
@@ -51,6 +51,7 @@ namespace BusinessLogicTest
             {
                 Id = Guid.NewGuid(), 
                 Name = "Hotel Las Cumbres",
+                Description = "Magnifico hospedaje",
                 QuantityOfStars = 5,
                 Address = "Ruta 12 km 3.5",
                 PricePerNight = 150, 
@@ -132,6 +133,25 @@ namespace BusinessLogicTest
         public void CreateInvalidLodgingWithoutAddressTest()
         {
             lodging.Address = "";
+
+            var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.Save());
+
+            var touristSpotRepositoryMock = new Mock<IRepository<TouristSpot>>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
+            TouristSpotManagement touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LodgingException))]
+        public void CreateInvalidLodgingWithoutDescriptionTest()
+        {
+            lodging.Description = "";
 
             var lodgingRepositoryMock = new Mock<IRepository<Lodging>>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));

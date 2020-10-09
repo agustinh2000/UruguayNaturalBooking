@@ -15,6 +15,8 @@ namespace Domain
 
         public string Address { get; set; }
 
+        public string Description { get; set; }
+
         public virtual List <Picture> Images { get; set; }
         
         public double PricePerNight { get; set; }
@@ -25,7 +27,7 @@ namespace Domain
 
         public void VerifyFormat()
         {
-            if (IsInvalidNameOrAddress())
+            if (IsInvalidNameOrAddressOrDesription())
             {
                 throw new LodgingException(MessageException.ErrorIsEmpty); 
             }
@@ -43,9 +45,9 @@ namespace Domain
             TouristSpot.VerifyFormat(); 
         }
 
-        private bool IsInvalidNameOrAddress()
+        private bool IsInvalidNameOrAddressOrDesription()
         {
-            return String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(Address); 
+            return String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(Address) || String.IsNullOrEmpty(Description); 
         }
 
         private bool IsInvalidQuantityOfStars()
