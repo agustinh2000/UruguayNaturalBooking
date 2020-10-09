@@ -199,7 +199,6 @@ namespace BusinessLogicTest
 
             var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
             categoryMock.Setup(m => m.Add(It.IsAny<Category>()));
-            categoryMock.Setup(m => m.Save()); 
 
             CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
@@ -220,7 +219,6 @@ namespace BusinessLogicTest
 
             var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
             categoryMock.Setup(m => m.Add(It.IsAny<Category>())).Throws(new ExceptionRepository());
-            categoryMock.Setup(m => m.Save());
 
             CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 
@@ -238,7 +236,6 @@ namespace BusinessLogicTest
 
             var categoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
             categoryMock.Setup(m => m.Add(It.IsAny<Category>()));
-            categoryMock.Setup(m => m.Save());
 
             CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
 

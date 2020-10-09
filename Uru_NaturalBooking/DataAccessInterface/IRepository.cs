@@ -15,7 +15,5 @@ namespace DataAccessInterface
         IEnumerable<T> GetAll();
 
         T Get(Guid id);
-
-        void Save();
     }
 }

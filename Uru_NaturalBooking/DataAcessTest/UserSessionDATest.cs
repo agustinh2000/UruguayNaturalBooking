@@ -65,7 +65,6 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
             userSessionRepo.Add(userSession);
-            userSessionRepo.Save();
             List<UserSession> listOfUserSessions = userSessionRepo.GetAll().ToList();
             Assert.AreEqual(userSession, listOfUserSessions[0]);
         }
@@ -76,7 +75,6 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
             userSessionRepo.Add(userSession);
-            userSessionRepo.Save();
             UserSession userSessionOfDb = userSessionRepo.Get(userSession.Id);
             Assert.AreEqual(userSession, userSessionOfDb);
         }
@@ -96,9 +94,7 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
             userSessionRepo.Add(userSession);
-            userSessionRepo.Save();
             userSessionRepo.Remove(userSession);
-            userSessionRepo.Save();
             List<UserSession> listOfUserSessions = userSessionRepo.GetAll().ToList();
             Assert.IsTrue(listOfUserSessions.IsNullOrEmpty());
         }
@@ -110,7 +106,6 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
             userSessionRepo.Remove(userSession);
-            userSessionRepo.Save();
         }
 
         [TestMethod]
@@ -120,7 +115,6 @@ namespace DataAcessTest
             IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
             userSessionRepo.Add(userSession);
             userSessionRepo.Add(userSession2);
-            userSessionRepo.Save();
             List<UserSession> listTest = new List<UserSession>();
             listTest.Add(userSession);
             listTest.Add(userSession2);

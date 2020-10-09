@@ -52,7 +52,6 @@ namespace BusinessLogic
                 user.Id = Guid.NewGuid();
                 user.VerifyFormat();
                 userRepository.Add(user);
-                userRepository.Save();
                 return user;
             }
             catch (ExceptionRepository e)
@@ -82,7 +81,6 @@ namespace BusinessLogic
                     Token = token.ToString()
                 };
                 sessionRepository.Add(userSession);
-                sessionRepository.Save();
             }
             return userSession;
         }
@@ -116,7 +114,6 @@ namespace BusinessLogic
                 throw new ExceptionBusinessLogic("No es posible cerrar la sesion.");
 
             }
-            sessionRepository.Save();
         }
 
         public User UpdateUser(Guid userToModifyId, User aUser)
@@ -128,7 +125,6 @@ namespace BusinessLogic
                 {
                     userDb.UpdateAttributes(aUser);
                     userRepository.Update(userDb);
-                    userRepository.Save();
                     return userDb;
                 }
                 else
@@ -148,7 +144,6 @@ namespace BusinessLogic
             {
                 User userToDelete = userRepository.Get(userId);
                 userRepository.Remove(userToDelete);
-                userRepository.Save();
             }
             catch (ExceptionRepository e)
             {

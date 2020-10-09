@@ -24,10 +24,7 @@ namespace DataAcessTest
                 Id = Guid.NewGuid(),
                 Name = "Playa"
             };
-
             categoryRepo.Add(categoryToAdd);
-            categoryRepo.Save(); 
-            
             List<Category> listOfCategories = categoryRepo.GetAll().ToList();
 
             Assert.AreEqual(categoryToAdd, listOfCategories[0]);
@@ -55,7 +52,6 @@ namespace DataAcessTest
             };
 
             categoryRepo.Add(categoryToAdd);
-            categoryRepo.Save();
             Category categoryOfDb = categoryRepo.Get(categoryToAdd.Id); 
 
             Assert.AreEqual(categoryToAdd, categoryOfDb);
@@ -90,9 +86,7 @@ namespace DataAcessTest
             };
 
             categoryRepo.Add(categoryToAdd);
-            categoryRepo.Save();
             categoryRepo.Remove(categoryToAdd);
-            categoryRepo.Save(); 
 
             List<Category> listOfCategories = categoryRepo.GetAll().ToList();
 
@@ -113,7 +107,6 @@ namespace DataAcessTest
             };
 
             categoryRepo.Remove(categoryToAdd);
-            categoryRepo.Save();
         }
 
         [TestMethod]
@@ -139,12 +132,8 @@ namespace DataAcessTest
             };
 
             categoryRepo.Add(categoryToAdd);
-            categoryRepo.Save();
-
             categoryToAdd.Name = "Piscinas"; 
-
             categoryRepo.Update(categoryToAdd);
-            categoryRepo.Save();
 
             List<Category> listOfCategories = categoryRepo.GetAll().ToList();
 
@@ -165,7 +154,6 @@ namespace DataAcessTest
             };
 
             categoryRepo.Update(categoryToAdd);
-            categoryRepo.Save();
         }
 
         [TestMethod]
@@ -197,8 +185,7 @@ namespace DataAcessTest
             };
 
             categoryRepo.Add(categoryToAdd);
-            categoryRepo.Add(categoryToAdd2); 
-            categoryRepo.Save();
+            categoryRepo.Add(categoryToAdd2);
 
             List<Category> listTest = new List<Category>();
             listTest.Add(categoryToAdd);

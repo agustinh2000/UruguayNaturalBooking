@@ -81,7 +81,6 @@ namespace DataAcessTest
             IRepository<Reserve> reserveRepository = new BaseRepository<Reserve>(context);
 
             reserveRepository.Add(reserve);
-            reserveRepository.Save();
 
             List<Reserve> listOfReserves = reserveRepository.GetAll().ToList();
 
@@ -95,7 +94,6 @@ namespace DataAcessTest
             IRepository<Reserve> reserveRepository = new BaseRepository<Reserve>(context);
 
             reserveRepository.Add(reserve);
-            reserveRepository.Save();
             Reserve reserveOfDb = reserveRepository.Get(reserve.Id);
 
             Assert.AreEqual(reserve, reserveOfDb);
@@ -118,10 +116,8 @@ namespace DataAcessTest
             IRepository<Reserve> reserveRepository = new BaseRepository<Reserve>(context);
 
             reserveRepository.Add(reserve);
-            reserveRepository.Save();
             List<Reserve> listOfReservefOfDbBeforeRemove = reserveRepository.GetAll().ToList();
             reserveRepository.Remove(reserve);
-            reserveRepository.Save();
 
             List<Reserve> listOfReserveOfDbAfterRemove = reserveRepository.GetAll().ToList();
 
@@ -136,7 +132,6 @@ namespace DataAcessTest
             IRepository<Reserve> reserveRepository = new BaseRepository<Reserve>(context);
 
             reserveRepository.Remove(reserve);
-            reserveRepository.Save();
         }
 
         [TestMethod]
@@ -146,12 +141,8 @@ namespace DataAcessTest
             IRepository<Reserve> reserveRepository = new BaseRepository<Reserve>(context);
 
             reserveRepository.Add(reserve);
-            reserveRepository.Save();
-
             reserve.Name = "Martin Gutman";
-
             reserveRepository.Update(reserve);
-            reserveRepository.Save();
 
             List<Reserve> listOfReserve = reserveRepository.GetAll().ToList();
 
@@ -166,7 +157,6 @@ namespace DataAcessTest
             IRepository<Reserve> reserveRepository = new BaseRepository<Reserve>(context);
 
             reserveRepository.Update(reserve);
-            reserveRepository.Save();
         }
 
         [TestMethod]
@@ -194,7 +184,6 @@ namespace DataAcessTest
 
             reserveRepository.Add(reserve);
             reserveRepository.Add(reserveForAFamily);
-            reserveRepository.Save();
 
             List<Reserve> listWithOriginalsReserves = new List<Reserve>();
             listWithOriginalsReserves.Add(reserve);

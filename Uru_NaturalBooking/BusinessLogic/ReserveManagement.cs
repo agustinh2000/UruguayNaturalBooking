@@ -38,7 +38,6 @@ namespace BusinessLogic
                 reserve.StateOfReserve = Reserve.ReserveState.Creada; 
                 reserve.VerifyFormat();
                 reserveRepository.Add(reserve);
-                reserveRepository.Save(); 
                 return reserve; 
             }catch(ExceptionRepository e)
             {
@@ -69,7 +68,6 @@ namespace BusinessLogic
                     reserveOfDb.UpdateAttributes(aReserve);
                     reserveOfDb.VerifyFormat(); 
                     reserveRepository.Update(reserveOfDb);
-                    reserveRepository.Save();
                     return reserveOfDb;
                 }
                 else

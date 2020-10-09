@@ -63,7 +63,6 @@ namespace BusinessLogic
                 categoryToCreate.Id = Guid.NewGuid();
                 categoryToCreate.VerifyFormat();
                 categoryRepository.Add(categoryToCreate);
-                categoryRepository.Save();
                 return categoryToCreate; 
 
             }catch(ExceptionRepository e)

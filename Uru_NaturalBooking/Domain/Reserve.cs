@@ -117,14 +117,8 @@ namespace Domain
         public string GetEnumDescription()
         {
             FieldInfo fi = StateOfReserve.GetType().GetField(StateOfReserve.ToString());
-
             DescriptionAttribute[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
-
-            if (attributes != null && attributes.Any())
-            {
-                return attributes.First().Description;
-            }
-            return StateOfReserve.ToString();
+            return attributes.First().Description;
         }
 
         public override bool Equals(object obj)

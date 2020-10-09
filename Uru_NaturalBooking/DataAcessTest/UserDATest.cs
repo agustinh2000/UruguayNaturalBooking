@@ -46,7 +46,6 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IUserRepository userRepo = new UserRepository(context);
             userRepo.Add(userToAdd);
-            userRepo.Save();
             List<User> listOfUsers = userRepo.GetAll().ToList();
             Assert.AreEqual(userToAdd, listOfUsers[0]);
         }
@@ -57,7 +56,6 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IUserRepository userRepo = new UserRepository(context);
             userRepo.Add(userToAdd);
-            userRepo.Save();
             User userOfDb = userRepo.Get(userToAdd.Id);
             Assert.AreEqual(userToAdd, userOfDb);
         }
@@ -77,9 +75,7 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IUserRepository userRepo = new UserRepository(context);
             userRepo.Add(userToAdd);
-            userRepo.Save();
             userRepo.Remove(userToAdd);
-            userRepo.Save();
             List<User> listOfUsers = userRepo.GetAll().ToList();
             Assert.IsTrue(listOfUsers.IsNullOrEmpty());
         }
@@ -92,7 +88,6 @@ namespace DataAcessTest
             IUserRepository userRepo = new UserRepository(context);
             User userToAdd = new User();
             userRepo.Remove(userToAdd);
-            userRepo.Save();
         }
 
         [TestMethod]
@@ -102,7 +97,6 @@ namespace DataAcessTest
             IUserRepository userRepo = new UserRepository(context);
             userRepo.Add(userToAdd);
             userRepo.Add(userToAdd2);
-            userRepo.Save();
             List<User> listTest = new List<User>();
             listTest.Add(userToAdd);
             listTest.Add(userToAdd2);
@@ -116,7 +110,6 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IUserRepository userRepo = new UserRepository(context);
             userRepo.Add(userToAdd);
-            userRepo.Save();
             User userObtained = userRepo.GetUserByEmailAndPassword("colo2020@gmail.com", "martin1234");
             Assert.AreEqual(userToAdd, userObtained);
         }
