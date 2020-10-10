@@ -141,7 +141,7 @@ namespace WebApiTest
         {
             List<Lodging> listOfLodgingsAvailables = new List<Lodging>() { lodgingOfCumbres, lodgingOfConrad };
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.GetAvailableLodgingsByTouristSpot(It.IsAny<Guid>())).Returns(new List<Lodging>());
+            lodgingManagementMock.Setup(m => m.GetAvailableLodgingsByTouristSpot(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
 
             SearchOfLodgingController searchOfLodgingController = new SearchOfLodgingController(lodgingManagementMock.Object);
             var result = searchOfLodgingController.Post(searchOfLodgingModel);

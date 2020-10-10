@@ -20,6 +20,8 @@ namespace BusinessLogicTest
         CategoryTouristSpot categoryTouristSpot;
         Category aCategory;
         Picture picture;
+        TouristSpot touristSpotOfPuntaDelEste;
+        Lodging lodgingConrad; 
 
 
         [TestInitialize]
@@ -64,6 +66,23 @@ namespace BusinessLogicTest
                 PricePerNight = 150,
                 TouristSpot = touristSpot,
                 Images = new List<Picture> { picture }
+            };
+
+             touristSpotOfPuntaDelEste = new TouristSpot()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Punta del este",
+                Description = "Donde el lujo y la naturaleza convergen, las mejores playas del Uruguay."
+            };
+
+             lodgingConrad = new Lodging()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Hotel Enjoy Conrad",
+                QuantityOfStars = 5,
+                Address = "Ruta 12 km 3.5",
+                PricePerNight = 1500,
+                TouristSpot = touristSpotOfPuntaDelEste
             };
 
         }
@@ -331,25 +350,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void GetLodgingsByTouristSpotTest()
         {
-            TouristSpot touristSpotOfPuntaDelEste = new TouristSpot()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Punta del este",
-                Description = "Donde el lujo y la naturaleza convergen, las mejores playas del Uruguay."
-            }; 
-
-            Lodging lodgingConrad = new Lodging()
-            {
-                Id = Guid.NewGuid(), 
-                Name = "Hotel Enjoy Conrad",
-                QuantityOfStars = 5,
-                Address = "Ruta 12 km 3.5",
-                PricePerNight = 1500, 
-                TouristSpot= touristSpotOfPuntaDelEste
-            };
-
             lodging.TouristSpot = touristSpot; 
-
             List<Lodging> listOfLodgings = new List<Lodging>() { lodging, lodgingConrad }; 
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
@@ -363,35 +364,25 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void FailInGetLodgingByTouristSpotTest()
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void FailInGetLodgingByTouristSpotNotFoundTest()
         {
-            TouristSpot touristSpotOfPuntaDelEste = new TouristSpot()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Punta del este",
-                Description = "Donde el lujo y la naturaleza convergen, las mejores playas del Uruguay."
-            };
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.GetAvailableLodgingsByTouristSpot(touristSpot.Id)).Throws(new ClientException());
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
 
-            Lodging lodgingConrad = new Lodging()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Hotel Enjoy Conrad",
-                QuantityOfStars = 5,
-                Address = "Ruta 12 km 3.5",
-                PricePerNight = 1500,
-                TouristSpot = touristSpotOfPuntaDelEste
-            };
+            lodgingLogic.GetAvailableLodgingsByTouristSpot(touristSpot.Id);
+        }
 
-            lodging.TouristSpot = touristSpot;
-
-            List<Lodging> listOfLodgings = new List<Lodging>() { lodging, lodgingConrad };
-
+        [TestMethod]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
+        public void FailInGetLodgingByTouristSpotInternalErrorTest()
+        {
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.GetAvailableLodgingsByTouristSpot(touristSpot.Id)).Throws(new ServerException());
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
 
-            List<Lodging> resultOfSearchLodgingByTouristSpot = lodgingLogic.GetAvailableLodgingsByTouristSpot(touristSpot.Id);
+            lodgingLogic.GetAvailableLodgingsByTouristSpot(touristSpot.Id);
         }
 
         [TestMethod]

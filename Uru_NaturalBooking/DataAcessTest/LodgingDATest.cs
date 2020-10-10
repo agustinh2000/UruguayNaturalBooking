@@ -205,7 +205,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ServerException))]
+        [ExpectedException(typeof(ClientException))]
 
         public void GetAvailableLodgingsByTouristSpotNotFound()
         {
