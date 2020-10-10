@@ -63,7 +63,7 @@ namespace DataAcessTest
         public void TestAddUserSessionOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
+            IUserSessionRepository userSessionRepo = new UserSessionRepository(context);
             userSessionRepo.Add(userSession);
             List<UserSession> listOfUserSessions = userSessionRepo.GetAll().ToList();
             Assert.AreEqual(userSession, listOfUserSessions[0]);
@@ -73,7 +73,7 @@ namespace DataAcessTest
         public void TestGetUserSessionOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
+            IUserSessionRepository userSessionRepo = new UserSessionRepository(context);
             userSessionRepo.Add(userSession);
             UserSession userSessionOfDb = userSessionRepo.Get(userSession.Id);
             Assert.AreEqual(userSession, userSessionOfDb);
@@ -84,7 +84,7 @@ namespace DataAcessTest
         public void TestGetUserSessionBad()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
+            IUserSessionRepository userSessionRepo = new UserSessionRepository(context);
             userSessionRepo.Get(userSession.Id);
         }
 
@@ -93,7 +93,7 @@ namespace DataAcessTest
         public void TestRemoveUserSessionOK()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
+            IUserSessionRepository userSessionRepo = new UserSessionRepository(context);
             userSessionRepo.Add(userSession);
             userSessionRepo.Remove(userSession);
             userSessionRepo.GetAll(); 
@@ -104,15 +104,36 @@ namespace DataAcessTest
         public void TestRemoveUserSessionInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
+            IUserSessionRepository userSessionRepo = new UserSessionRepository(context);
             userSessionRepo.Remove(userSession);
         }
 
         [TestMethod]
-        public void TestGetAllUsersOK()
+        public void TestGetUserSessionByUserId()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
-            IRepository<UserSession> userSessionRepo = new BaseRepository<UserSession>(context);
+            IUserSessionRepository userSessionRepo = new UserSessionRepository(context);
+            userSessionRepo.Add(userSession);
+            UserSession userSessionResult = userSessionRepo.GetUserSessionByUserId(user.Id);
+            Assert.AreEqual(user, userSessionResult.User);
+        }
+
+        [TestMethod]
+        public void TestGetUserSessionByToken()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            IUserSessionRepository userSessionRepo = new UserSessionRepository(context);
+            userSessionRepo.Add(userSession);
+            UserSession userSessionResult = userSessionRepo.GetUserSessionByToken(userSession.Token);
+            Assert.AreEqual(user, userSessionResult.User);
+        }
+
+
+        [TestMethod]
+        public void TestGetAllUsersSessionsOK()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            IUserSessionRepository userSessionRepo = new UserSessionRepository(context);
             userSessionRepo.Add(userSession);
             userSessionRepo.Add(userSession2);
             List<UserSession> listTest = new List<UserSession>();

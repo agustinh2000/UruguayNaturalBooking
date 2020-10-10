@@ -12,7 +12,7 @@ namespace DataAccess
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
         private readonly DbContext context;
-        
+
         public UserRepository(DbContext context) : base(context)
         {
             this.context = context;
@@ -23,16 +23,20 @@ namespace DataAccess
             try
             {
                 User userObteined = context.Set<User>().Where(x => x.Mail.Equals(email) && x.Password.Equals(password)).FirstOrDefault();
-                if(userObteined == null)
+                if (userObteined == null)
                 {
-                    throw new ServerException("Email y/o contrasena incorrecta");
+                    throw new ClientException();
                 }
                 return userObteined;
             }
+            catch (ClientException e)
+            {
+                throw new ClientException(MessagesExceptionRepository.ErrorEmailOrPasswordIncorrect, e);
+            }
             catch (Exception e)
             {
-                throw new ServerException(e.Message, e);
-            } 
+                throw new ServerException(MessagesExceptionRepository.ErrorCheckingEmailAndPassword, e);
+            }
         }
     }
 }

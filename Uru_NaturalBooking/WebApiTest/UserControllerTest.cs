@@ -107,12 +107,24 @@ namespace WebApiTest
         public void LogInUserAndPasswordIncorrectTest()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
-            userMock.Setup(m => m.LogIn(aLoginModel.Email, aLoginModel.Password)).Throws(new ServerBusinessLogicException());
+            userMock.Setup(m => m.LogIn(aLoginModel.Email, aLoginModel.Password)).Throws(new ClientBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Login(aLoginModel);
             var errorResult = result as BadRequestObjectResult;
             userMock.VerifyAll();
             Assert.AreEqual(400, errorResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void LogInFailInternalServerErrorTest()
+        {
+            var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
+            userMock.Setup(m => m.LogIn(aLoginModel.Email, aLoginModel.Password)).Throws(new ServerBusinessLogicException());
+            UserController userController = new UserController(userMock.Object);
+            var result = userController.Login(aLoginModel);
+            var errorResult = result as ObjectResult;
+            userMock.VerifyAll();
+            Assert.AreEqual(500, errorResult.StatusCode);
         }
 
         [TestMethod]
@@ -312,10 +324,10 @@ namespace WebApiTest
         }
 
         [TestMethod]
-        public void LogOutInvalidToken()
+        public void LogOutInvalidTokenTest()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
-            userMock.Setup(m => m.LogOut(aUserSession.Token)).Throws(new ServerBusinessLogicException());
+            userMock.Setup(m => m.LogOut(aUserSession.Token)).Throws(new ClientBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Logout(aUserSession.Token);
             var createdResult = result as NotFoundObjectResult;
@@ -323,11 +335,16 @@ namespace WebApiTest
             Assert.AreEqual(404, createdResult.StatusCode);
         }
 
-
-
-
-
-
-
+        [TestMethod]
+        public void LogOutInternalErrorTest()
+        {
+            var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
+            userMock.Setup(m => m.LogOut(aUserSession.Token)).Throws(new ServerBusinessLogicException());
+            UserController userController = new UserController(userMock.Object);
+            var result = userController.Logout(aUserSession.Token);
+            var createdResult = result as ObjectResult;
+            userMock.VerifyAll();
+            Assert.AreEqual(500, createdResult.StatusCode);
+        }
     }
 }

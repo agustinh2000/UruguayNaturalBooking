@@ -115,7 +115,7 @@ namespace DataAcessTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ServerException))]
+        [ExpectedException(typeof(ClientException))]
         public void TestGetUserByNicknameAndPasswordInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());

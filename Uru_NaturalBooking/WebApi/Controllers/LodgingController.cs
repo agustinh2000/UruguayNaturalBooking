@@ -29,7 +29,6 @@ namespace WebApi.Controllers
             try
             {
                 List<Lodging> allLodgings = lodgingManagement.GetAllLoadings();
-
                 return Ok(LodgingModelForResponse.ToModel(allLodgings));
             }
             catch (ClientBusinessLogicException)

@@ -17,11 +17,11 @@ namespace WebApi.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryManagement categoryManagement; 
+        private readonly ICategoryManagement categoryManagement;
 
         public CategoryController(ICategoryManagement categoryLogic)
         {
-            categoryManagement = categoryLogic; 
+            categoryManagement = categoryLogic;
         }
 
         [HttpGet]
@@ -29,19 +29,20 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<Category> allCategories = categoryManagement.GetAllCategories(); 
+                List<Category> allCategories = categoryManagement.GetAllCategories();
                 return Ok(CategoryModel.ToModel(allCategories));
-            }catch(ClientBusinessLogicException)
+            }
+            catch (ClientBusinessLogicException)
             {
                 return NotFound("No se pudo encontrar hospedajes");
             }
-            catch(ServerBusinessLogicException e)
+            catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
 
-        [HttpGet("{id}", Name="Get")]
+        [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(Guid id)
         {
             try
@@ -57,7 +58,7 @@ namespace WebApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
-            
+
         }
 
         [ServiceFilter(typeof(AuthorizationFilter))]
@@ -69,7 +70,7 @@ namespace WebApi.Controllers
                 Category category = categoryManagement.Create(CategoryModel.ToEntity(categoryModel));
                 return CreatedAtRoute("Get", new { id = category.Id }, CategoryModel.ToModel(category));
             }
-            catch(DomainBusinessLogicException e)
+            catch (DomainBusinessLogicException e)
             {
                 return BadRequest(e.Message);
             }

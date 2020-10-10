@@ -59,7 +59,7 @@ namespace Domain
         public override bool Equals(object obj)
         {
             return obj is User user &&
-                   Mail == user.Mail;
+                   Mail.Equals(user.Mail);
         }
     }
 

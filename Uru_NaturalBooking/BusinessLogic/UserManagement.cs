@@ -13,9 +13,9 @@ namespace BusinessLogic
     public class UserManagement : IUserManagement
     {
         private readonly IUserRepository userRepository;
-        private readonly IRepository<UserSession> sessionRepository;
+        private readonly IUserSessionRepository sessionRepository;
 
-        public UserManagement(IUserRepository aUserRepository, IRepository<UserSession> aSessionRepository)
+        public UserManagement(IUserRepository aUserRepository, IUserSessionRepository aSessionRepository)
         {
             userRepository = aUserRepository;
             sessionRepository = aSessionRepository;
@@ -45,7 +45,7 @@ namespace BusinessLogic
 
         public bool IsLogued(string token)
         {
-            UserSession userSession = sessionRepository.GetAll().Where(x => x.Token == token).FirstOrDefault();
+            UserSession userSession = sessionRepository.GetUserSessionByToken(token);
             return userSession != null;
         }
 
@@ -75,11 +75,15 @@ namespace BusinessLogic
             {
                 user = userRepository.GetUserByEmailAndPassword(email, password);
             }
-            catch (ServerException)
+            catch (ClientException e)
             {
-                throw new ServerBusinessLogicException("Usuario y/o password incorrecto");
+                throw new ClientBusinessLogicException(e.Message);
             }
-            UserSession userSession = sessionRepository.GetAll().Where(x => x.User.Id.Equals(user.Id)).FirstOrDefault();
+            catch (ServerException e)
+            {
+                throw new ServerBusinessLogicException(e.Message);
+            }
+            UserSession userSession = sessionRepository.GetUserSessionByUserId(user.Id);
             if (userSession == null)
             {
                 Guid token = Guid.NewGuid();
@@ -112,10 +116,10 @@ namespace BusinessLogic
 
         public void LogOut(string token)
         {
-            UserSession userSession = sessionRepository.GetAll().Where(x => x.Token == token).FirstOrDefault();
+            UserSession userSession = sessionRepository.GetUserSessionByToken(token);
             if (userSession == null)
             {
-                throw new ServerBusinessLogicException(MessageExceptionDomain.ErrorTokenNotExist);
+                throw new ClientBusinessLogicException(MessageExceptionDomain.ErrorTokenNotExist);
             }
             try
             {

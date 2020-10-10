@@ -32,9 +32,13 @@ namespace WebApi.Controllers
                 UserSession userSession = userManagement.LogIn(loginModel.Email, loginModel.Password);
                 return Ok(UserModelForResponse.ToModel(userSession.User));
             }
-            catch (ServerBusinessLogicException e)
+            catch (ClientBusinessLogicException e)
             {
                 return BadRequest(e.Message);
+            }
+            catch (ServerBusinessLogicException e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
 
@@ -79,7 +83,6 @@ namespace WebApi.Controllers
 
         [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
-
         public IActionResult Post([FromBody]User user)
         {
             try
@@ -89,7 +92,6 @@ namespace WebApi.Controllers
             }
             catch (DomainBusinessLogicException e)
             {
-
                 return BadRequest(e.Message);
             }
             catch (ServerBusinessLogicException e)
@@ -145,9 +147,13 @@ namespace WebApi.Controllers
                 userManagement.LogOut(token);
                 return Ok();
             }
-            catch (ServerBusinessLogicException e)
+            catch (ClientBusinessLogicException e)
             {
                 return NotFound(e.Message);
+            }
+            catch (ServerBusinessLogicException e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
     }

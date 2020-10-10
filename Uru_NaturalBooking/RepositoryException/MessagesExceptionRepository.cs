@@ -14,5 +14,8 @@ namespace RepositoryException
         public static string ErrorGettingTouristSpotByCategories = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias."; 
         public static string ErrorObteinedTouristSpotByCategoriesAndRegion = "Error. No se puede obtener los puntos turisticos por las categorias buscadas y la region buscada.";
         public static string ErrorGettingTouristSpotByCategoriesAndRegion = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias y region.";
+        public static string ErrorEmailOrPasswordIncorrect = "Error. Email y/o contrasena incorrecto";
+        public static string ErrorCheckingEmailAndPassword = "Error. Ha ocurrido un error al verificar el Email y/o la contrasena";
+    
     }
 }
