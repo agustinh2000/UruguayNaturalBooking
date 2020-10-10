@@ -68,11 +68,11 @@ namespace WebApi.Controllers
             try
             {
                 List<TouristSpot> touristSpotsInARegion = touristSpotManagement.GetTouristSpotByRegion(regionId);
-                if(touristSpotsInARegion == null)
-                {
-                    return NotFound("No se encontraron puntos turisticos asociados a la region indicada.");
-                }
                 return Ok(TouristSpotForResponseModel.ToModel(touristSpotsInARegion));
+            }
+            catch(ClientBusinessLogicException e)
+            {
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
@@ -86,11 +86,11 @@ namespace WebApi.Controllers
             try
             {
                 List<TouristSpot> touristSpotsByCategories = touristSpotManagement.GetTouristSpotsByCategories(categoriesId.ToList());
-                if(touristSpotsByCategories == null)
-                {
-                    return NotFound("No se encontraron puntos turisticos para las categorias seleccionadas");
-                }
                 return Ok(TouristSpotForResponseModel.ToModel(touristSpotsByCategories));
+            }
+            catch(ClientBusinessLogicException e)
+            {
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
@@ -106,11 +106,11 @@ namespace WebApi.Controllers
             {
                 List<TouristSpot> touristSpotsByRegionAndCategories = touristSpotManagement.
                     GetTouristSpotsByCategoriesAndRegion(categoriesId.ToList(), regionId);
-                if (touristSpotsByRegionAndCategories == null)
-                {
-                    return NotFound("No se encontraron puntos turisticos para las categorias y region seleccionadas");
-                }
                 return Ok(TouristSpotForResponseModel.ToModel(touristSpotsByRegionAndCategories));
+            }
+            catch(ClientBusinessLogicException e)
+            {
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {

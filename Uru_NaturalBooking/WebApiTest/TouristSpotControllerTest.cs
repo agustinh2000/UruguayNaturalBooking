@@ -308,7 +308,7 @@ namespace WebApiTest
         public void GetTouristSpotByRegionIdNotFoundTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetTouristSpotByRegion(It.IsAny<Guid>())).Returns(value:null);
+            touristSpotMock.Setup(m => m.GetTouristSpotByRegion(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             var result = touristSpotController.GetTouristSpotsByRegionId(regionForTouristSpot.Id);
             var createdResult = result as NotFoundObjectResult;
@@ -334,7 +334,7 @@ namespace WebApiTest
         public void GetTouristSpotByCategoriesIdNotFoundTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetTouristSpotsByCategories(It.IsAny<List<Guid>>())).Returns(value:null);
+            touristSpotMock.Setup(m => m.GetTouristSpotsByCategories(It.IsAny<List<Guid>>())).Throws(new ClientBusinessLogicException());
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             Guid[] categories = new Guid[] { category.Id };
             var result = touristSpotController.GetTouristSpotsByCategoriesId(categories);
@@ -347,7 +347,8 @@ namespace WebApiTest
         public void GetTouristSpotByCategoriesIdInternalErrorTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetTouristSpotsByCategories(It.IsAny<List<Guid>>())).Throws(new ServerBusinessLogicException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias."));
+            touristSpotMock.Setup(m => m.GetTouristSpotsByCategories(It.IsAny<List<Guid>>())).
+                Throws(new ServerBusinessLogicException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias."));
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             Guid[] categories = new Guid[] { category.Id };
             var result = touristSpotController.GetTouristSpotsByCategoriesId(categories);
@@ -374,7 +375,8 @@ namespace WebApiTest
         public void GetTouristSpotByCategoriesAndRegionIdNotFoundTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetTouristSpotsByCategoriesAndRegion(It.IsAny<List<Guid>>(), It.IsAny<Guid>())).Returns(value: null) ;
+            touristSpotMock.Setup(m => m.GetTouristSpotsByCategoriesAndRegion(It.IsAny<List<Guid>>(), It.IsAny<Guid>()))
+                .Throws(new ClientBusinessLogicException());
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             Guid[] categories = new Guid[] { category.Id };
             var result = touristSpotController.GetTouristSpotsByCategoriesAndRegionId(categories, regionForTouristSpot.Id);
@@ -387,7 +389,8 @@ namespace WebApiTest
         public void GetTouristSpotByCategoriesAndRegionIdInternalErrorTest()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.GetTouristSpotsByCategoriesAndRegion(It.IsAny<List<Guid>>(), It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias y region."));
+            touristSpotMock.Setup(m => m.GetTouristSpotsByCategoriesAndRegion(It.IsAny<List<Guid>>(), It.IsAny<Guid>()))
+                .Throws(new ServerBusinessLogicException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias y region."));
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             Guid[] categories = new Guid[] { category.Id };
             var result = touristSpotController.GetTouristSpotsByCategoriesAndRegionId(categories, regionForTouristSpot.Id);

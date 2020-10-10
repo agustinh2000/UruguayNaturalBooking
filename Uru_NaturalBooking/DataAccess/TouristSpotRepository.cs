@@ -26,13 +26,17 @@ namespace DataAccess
                 List<TouristSpot> listOfTouristSpot= context.Set<TouristSpot>().Where(m => m.Region.Id.Equals(regionId)).ToList();
                 if (listOfTouristSpot.IsNullOrEmpty())
                 {
-                    throw new ServerException("Error obteniendo los elementos deseados");
+                    throw new ClientException();
                 }
                 return listOfTouristSpot;
             }
+            catch(ClientException e)
+            {
+                throw new ClientException(MessagesExceptionRepository.ErrorObteinedTouristSpotByRegionId, e); 
+            }
             catch (Exception e)
             {
-                throw new ServerException("No se puede obtener el punto turistico por la region.", e);
+                throw new ServerException(MessagesExceptionRepository.ErrorGettingTouristSpotByRegionId, e);
             }
         }
 
@@ -43,13 +47,17 @@ namespace DataAccess
                 List<TouristSpot> listOfTouristSpot = context.Set<TouristSpot>().AsEnumerable().Where(m => m.HasCategoriesSearched(listOfCategoriesIdSearched)).ToList();
                 if (listOfTouristSpot.IsNullOrEmpty())
                 {
-                    throw new ServerException("Error obteniendo los elementos deseados");
+                    throw new ClientException("Error obteniendo los elementos deseados");
                 }
                 return listOfTouristSpot;
             }
+            catch(ClientException e)
+            {
+                throw new ClientException(MessagesExceptionRepository.ErrorObteinedTouristSpotByCategories, e); 
+            }
             catch (Exception e)
             {
-                throw new ServerException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias.", e);
+                throw new ServerException(MessagesExceptionRepository.ErrorGettingTouristSpotByCategories, e);
             }
         }
 
@@ -61,13 +69,17 @@ namespace DataAccess
                 && m.HasCategoriesSearched(listOfCategoriesIdSearched)).ToList();
                 if (listOfTouristSpot.IsNullOrEmpty())
                 {
-                    throw new ServerException("Error obteniendo los elementos deseados");
+                    throw new ClientException("Error obteniendo los elementos deseados");
                 }
                 return listOfTouristSpot;
             }
+            catch(ClientException e)
+            {
+                throw new ClientException(MessagesExceptionRepository.ErrorObteinedTouristSpotByCategoriesAndRegion, e);
+            }
             catch (Exception e)
             {
-                throw new ServerException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias y region.", e);
+                throw new ServerException(MessagesExceptionRepository.ErrorGettingTouristSpotByCategoriesAndRegion, e);
             }
         }
 

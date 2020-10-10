@@ -31,6 +31,9 @@ namespace BusinessLogicException
         public static string ErrorCreatingTouristSpot = "Error. No se ha podido encontrar la region y/o las categorias asociadas al punto turistico.";
         public static string ErrorUpdatingReserve = "Error. No se ha podido actualizar la reserva.";
         public static string ErrorUpdatingReserveNotFound = "Error. No se ha podido encontrar la reserva que se desea actualizar";
-
+        public static string ErrorObteinedTouristSpotByCategories = "Error. No se puede obtener los puntos turisticos por las categorias buscadas.";
+        public static string ErrorGettingTouristSpotByCategories = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias.";
+        public static string ErrorObteinedTouristSpotByCategoriesAndRegion = "Error. No se puede obtener los puntos turisticos por las categorias buscadas y la region buscada.";
+        public static string ErrorGettingTouristSpotByCategoriesAndRegion = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias y region.";
     }
 }

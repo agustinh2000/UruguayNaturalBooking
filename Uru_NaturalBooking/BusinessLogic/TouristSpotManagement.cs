@@ -71,9 +71,13 @@ namespace BusinessLogic
             {
                 return touristSpotRepository.GetTouristSpotByRegion(regionId); 
             }
+            catch(ClientException e)
+            {
+                throw new ClientBusinessLogicException(e.Message, e); 
+            }
             catch (ServerException e)
             {
-                throw new ServerBusinessLogicException("No se puede obtener el punto turistico por la region.", e);
+                throw new ServerBusinessLogicException(e.Message, e);
             }
         }
 
@@ -100,9 +104,13 @@ namespace BusinessLogic
             {
                 return touristSpotRepository.GetTouristSpotsByCategories(listOfCategoriesIdSearched); 
             }
+            catch(ClientException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedTouristSpotByCategories, e); 
+            }
             catch (ServerException e)
             {
-                throw new ServerBusinessLogicException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias.", e);
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorGettingTouristSpotByCategories, e);
             }
         }
 
@@ -112,9 +120,13 @@ namespace BusinessLogic
             {
                 return touristSpotRepository.GetTouristSpotsByCategoriesAndRegion(listOfCategoriesIdSearched, regionIdSearched); 
             }
+            catch(ClientException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedTouristSpotByCategoriesAndRegion, e); 
+            }
             catch (ServerException e)
             {
-                throw new ServerBusinessLogicException("No se puede obtener los puntos turisticos que se estan buscando por dichas categorias y region.", e);
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorGettingTouristSpotByCategoriesAndRegion, e);
             }
         }
 
