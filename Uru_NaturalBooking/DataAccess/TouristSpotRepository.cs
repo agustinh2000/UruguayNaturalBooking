@@ -6,7 +6,6 @@ using RepositoryException;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccess
 {
@@ -23,16 +22,16 @@ namespace DataAccess
         {
             try
             {
-                List<TouristSpot> listOfTouristSpot= context.Set<TouristSpot>().Where(m => m.Region.Id.Equals(regionId)).ToList();
+                List<TouristSpot> listOfTouristSpot = context.Set<TouristSpot>().Where(m => m.Region.Id.Equals(regionId)).ToList();
                 if (listOfTouristSpot.IsNullOrEmpty())
                 {
                     throw new ClientException();
                 }
                 return listOfTouristSpot;
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
-                throw new ClientException(MessagesExceptionRepository.ErrorObteinedTouristSpotByRegionId, e); 
+                throw new ClientException(MessagesExceptionRepository.ErrorObteinedTouristSpotByRegionId, e);
             }
             catch (Exception e)
             {
@@ -51,9 +50,9 @@ namespace DataAccess
                 }
                 return listOfTouristSpot;
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
-                throw new ClientException(MessagesExceptionRepository.ErrorObteinedTouristSpotByCategories, e); 
+                throw new ClientException(MessagesExceptionRepository.ErrorObteinedTouristSpotByCategories, e);
             }
             catch (Exception e)
             {
@@ -65,7 +64,7 @@ namespace DataAccess
         {
             try
             {
-                List<TouristSpot> listOfTouristSpot = context.Set<TouristSpot>().AsEnumerable().Where(m => m.Region.Id.Equals(regionIdSearched) 
+                List<TouristSpot> listOfTouristSpot = context.Set<TouristSpot>().AsEnumerable().Where(m => m.Region.Id.Equals(regionIdSearched)
                 && m.HasCategoriesSearched(listOfCategoriesIdSearched)).ToList();
                 if (listOfTouristSpot.IsNullOrEmpty())
                 {
@@ -73,7 +72,7 @@ namespace DataAccess
                 }
                 return listOfTouristSpot;
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
                 throw new ClientException(MessagesExceptionRepository.ErrorObteinedTouristSpotByCategoriesAndRegion, e);
             }
@@ -83,5 +82,17 @@ namespace DataAccess
             }
         }
 
+        public TouristSpot GetTouristSpotByName(string touristSpotName)
+        {
+            try
+            {
+                TouristSpot touristSpotObteined = context.Set<TouristSpot>().Where(x => x.Name.Equals(touristSpotName)).FirstOrDefault();
+                return touristSpotObteined;
+            }
+            catch (Exception e)
+            {
+                throw new ServerException(MessagesExceptionRepository.ErrorCheckingEmail, e);
+            }
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace DataAcessTest
         Region aRegion;
         TouristSpot aTouristSpot;
         Category aCategory;
-        CategoryTouristSpot categoryTouristSpot; 
+        CategoryTouristSpot categoryTouristSpot;
 
         [TestInitialize]
         public void SetUp()
@@ -140,7 +140,6 @@ namespace DataAcessTest
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
             touristSpotRepo.Update(aTouristSpot);
-            TouristSpot touristSpot = touristSpotRepo.Get(aTouristSpot.Id);
         }
 
         [TestMethod]
@@ -186,11 +185,11 @@ namespace DataAcessTest
                 Region = aRegion
             };
             touristSpotRepo.Add(aTouristSpot);
-            touristSpotRepo.Add(aTouristSpot2); 
+            touristSpotRepo.Add(aTouristSpot2);
             List<TouristSpot> listToCompare = new List<TouristSpot>();
             listToCompare.Add(aTouristSpot);
             listToCompare.Add(aTouristSpot2);
-            List<TouristSpot> touristSpotsByRegion = touristSpotRepo.GetTouristSpotByRegion(aRegion.Id); 
+            List<TouristSpot> touristSpotsByRegion = touristSpotRepo.GetTouristSpotByRegion(aRegion.Id);
             CollectionAssert.AreEqual(listToCompare, touristSpotsByRegion);
         }
 
@@ -219,10 +218,10 @@ namespace DataAcessTest
             };
             categoryTouristSpot.TouristSpot = aTouristSpot2;
             categoryTouristSpot.TouristSpotId = aTouristSpot2.Id;
-            aTouristSpot2.ListOfCategories.Add(categoryTouristSpot); 
+            aTouristSpot2.ListOfCategories.Add(categoryTouristSpot);
             touristSpotRepo.Add(aTouristSpot2);
             List<TouristSpot> listToCompare = new List<TouristSpot>() { aTouristSpot2 };
-            List<Guid> listOfCategoriesIdToSearch = new List<Guid>() { categoryTouristSpot.CategoryId }; 
+            List<Guid> listOfCategoriesIdToSearch = new List<Guid>() { categoryTouristSpot.CategoryId };
 
             List<TouristSpot> touristSpotsByCategories = touristSpotRepo.GetTouristSpotsByCategories(listOfCategoriesIdToSearch);
             CollectionAssert.AreEqual(listToCompare, touristSpotsByCategories);
@@ -255,7 +254,7 @@ namespace DataAcessTest
             categoryTouristSpot.TouristSpotId = aTouristSpot2.Id;
             aTouristSpot2.ListOfCategories.Add(categoryTouristSpot);
             touristSpotRepo.Add(aTouristSpot2);
-            List<TouristSpot> listToCompare = new List<TouristSpot>() { aTouristSpot2};
+            List<TouristSpot> listToCompare = new List<TouristSpot>() { aTouristSpot2 };
             List<Guid> listOfCategoriesIdToSearch = new List<Guid>() { categoryTouristSpot.CategoryId };
 
             List<TouristSpot> touristSpotsByRegionAndCategories = touristSpotRepo.GetTouristSpotsByCategoriesAndRegion(listOfCategoriesIdToSearch, aRegion.Id);
@@ -271,5 +270,14 @@ namespace DataAcessTest
             List<TouristSpot> touristSpotsByCategoriesAndRegion = touristSpotRepo.GetTouristSpotsByCategoriesAndRegion(null, aRegion.Id);
         }
 
+        [TestMethod]
+        public void TestGetTouristSpotByNameOk()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
+            touristSpotRepo.Add(aTouristSpot);
+            TouristSpot touristSpotResult = touristSpotRepo.GetTouristSpotByName(aTouristSpot.Name);
+            Assert.AreEqual(aTouristSpot, touristSpotResult);
+        }
     }
 }

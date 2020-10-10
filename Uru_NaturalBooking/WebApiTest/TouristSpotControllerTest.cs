@@ -206,6 +206,19 @@ namespace WebApiTest
         }
 
         [TestMethod]
+        public void CreateInvalidTouristSpotAlredyExistTest()
+        {
+            var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
+            touristSpotMock.Setup(m => m.Create(It.IsAny<TouristSpot>(), It.IsAny<Guid>(), It.IsAny<List<Guid>>())).
+                Throws(new DomainBusinessLogicException("El punto turistico a crear ya existe."));
+            TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
+            var result = touristSpotController.Post(touristSpotRequestModel);
+            var createdResult = result as BadRequestObjectResult;
+            touristSpotMock.VerifyAll();
+            Assert.AreEqual(400, createdResult.StatusCode);
+        }
+
+        [TestMethod]
         public void GetTouristSpotByIdTestOk()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);

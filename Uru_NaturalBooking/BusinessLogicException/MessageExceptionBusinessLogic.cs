@@ -7,7 +7,7 @@ namespace BusinessLogicException
     public class MessageExceptionBusinessLogic
     {
         public static string ErrorObteinedAllCategories = "Error. Ocurrio un error al intentar obtener todas las categorias.";
-        public static string ErrorNotExistCategories = "Error. No se han encontrado categorias."; 
+        public static string ErrorNotExistCategories = "Error. No se han encontrado categorias.";
         public static string ErrorObteinedAllRegion = "Error. Ocurrio un error al intentar obtener todas las regiones.";
         public static string ErrorNotExistRegion = "Error. No se han encontrado regiones.";
         public static string ErrorObteinedAllLodgings = "Error. Ocurrio un error al intentar obtener todos los hospedajes.";
@@ -36,7 +36,6 @@ namespace BusinessLogicException
         public static string ErrorObteinedTouristSpotByCategoriesAndRegion = "Error. No se puede obtener los puntos turisticos por las categorias buscadas y la region buscada.";
         public static string ErrorGettingTouristSpotByCategoriesAndRegion = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias y region.";
         public static string ErrorUserAlredyExist = "Error. El mail del usuario que desea crear ya existe.";
-
-
+        public static string ErrorTouristSpotAlredyExist = "Error. El punto turistico que desea crear ya existe.";
     }
 }

@@ -13,5 +13,6 @@ namespace DataAccessInterface
 
         List<TouristSpot> GetTouristSpotsByCategoriesAndRegion(List<Guid> listOfCategoriesIdSearched, Guid regionIdSearched);
 
+        TouristSpot GetTouristSpotByName(string touristSpotName);
     }
 }

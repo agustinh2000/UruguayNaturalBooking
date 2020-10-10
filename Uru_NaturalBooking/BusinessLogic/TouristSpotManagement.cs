@@ -32,6 +32,7 @@ namespace BusinessLogic
         {
             try
             {
+                VerifyIfTouristSpotExist(touristSpot);
                 touristSpot.Id = Guid.NewGuid();
                 Region regionForTouristSpot = regionManagementLogic.GetById(regionId);
                 touristSpot.Region = regionForTouristSpot;
@@ -51,13 +52,17 @@ namespace BusinessLogic
                 touristSpotRepository.Add(touristSpot);
                 return touristSpot;
             }
-            catch(TouristSpotException e)
+            catch (TouristSpotException e)
             {
-                throw new DomainBusinessLogicException(e.Message); 
+                throw new DomainBusinessLogicException(e.Message);
             }
-            catch(ClientBusinessLogicException e)
+            catch (DomainBusinessLogicException e)
             {
-                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorCreatingTouristSpot, e); 
+                throw new DomainBusinessLogicException(e.Message);
+            }
+            catch (ClientBusinessLogicException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorCreatingTouristSpot, e);
             }
             catch (ServerException e)
             {
@@ -65,15 +70,32 @@ namespace BusinessLogic
             }
         }
 
+        private void VerifyIfTouristSpotExist(TouristSpot touristSpot)
+        {
+            try
+            {
+                TouristSpot touristSpotObteined = touristSpotRepository.GetTouristSpotByName(touristSpot.Name);
+                if (touristSpotObteined != null)
+                {
+                    throw new DomainBusinessLogicException(MessageExceptionBusinessLogic.ErrorTouristSpotAlredyExist);
+                }
+            }
+            catch (ServerException e)
+            {
+                throw new ServerException("No se puede crear el usuario debido a que ha ocurrido un error.", e);
+            }
+        }
+
+
         public List<TouristSpot> GetTouristSpotByRegion(Guid regionId)
         {
             try
             {
-                return touristSpotRepository.GetTouristSpotByRegion(regionId); 
+                return touristSpotRepository.GetTouristSpotByRegion(regionId);
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
-                throw new ClientBusinessLogicException(e.Message, e); 
+                throw new ClientBusinessLogicException(e.Message, e);
             }
             catch (ServerException e)
             {
@@ -88,7 +110,7 @@ namespace BusinessLogic
                 TouristSpot touristSpotObteined = touristSpotRepository.Get(touristSpotId);
                 return touristSpotObteined;
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
                 throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindTouristSpot, e);
             }
@@ -102,11 +124,11 @@ namespace BusinessLogic
         {
             try
             {
-                return touristSpotRepository.GetTouristSpotsByCategories(listOfCategoriesIdSearched); 
+                return touristSpotRepository.GetTouristSpotsByCategories(listOfCategoriesIdSearched);
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
-                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedTouristSpotByCategories, e); 
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedTouristSpotByCategories, e);
             }
             catch (ServerException e)
             {
@@ -118,11 +140,11 @@ namespace BusinessLogic
         {
             try
             {
-                return touristSpotRepository.GetTouristSpotsByCategoriesAndRegion(listOfCategoriesIdSearched, regionIdSearched); 
+                return touristSpotRepository.GetTouristSpotsByCategoriesAndRegion(listOfCategoriesIdSearched, regionIdSearched);
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
-                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedTouristSpotByCategoriesAndRegion, e); 
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedTouristSpotByCategoriesAndRegion, e);
             }
             catch (ServerException e)
             {
@@ -136,7 +158,7 @@ namespace BusinessLogic
             {
                 TouristSpot touristSpotDb = touristSpotRepository.Get(touristSpot.Id);
                 touristSpotDb.UpdateAttributes(touristSpot);
-                touristSpotDb.VerifyFormat(); 
+                touristSpotDb.VerifyFormat();
                 touristSpotRepository.Update(touristSpotDb);
                 return touristSpotDb;
             }
@@ -152,9 +174,10 @@ namespace BusinessLogic
             {
                 TouristSpot touristSpotToDelete = touristSpotRepository.Get(touristSpotId);
                 touristSpotRepository.Remove(touristSpotToDelete);
-            }catch(ServerException e)
+            }
+            catch (ServerException e)
             {
-                throw new ServerBusinessLogicException("No se puede eliminar el punto turistico deseado.", e); 
+                throw new ServerBusinessLogicException("No se puede eliminar el punto turistico deseado.", e);
             }
         }
 
@@ -163,11 +186,11 @@ namespace BusinessLogic
             try
             {
                 List<TouristSpot> allTouristSpot = touristSpotRepository.GetAll().ToList();
-                return allTouristSpot; 
+                return allTouristSpot;
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
-                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistTouristSpots, e); 
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistTouristSpots, e);
             }
             catch (ServerException e)
             {
