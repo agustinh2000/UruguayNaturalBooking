@@ -31,6 +31,7 @@ namespace BusinessLogic
         {
             try
             {
+                VerifyIfLodgingExist(lodging, touristSpotId);
                 lodging.Id = Guid.NewGuid();
                 TouristSpot touristSpotForLodging = touristSpotManagementLogic.GetTouristSpotById(touristSpotId);
                 lodging.TouristSpot = touristSpotForLodging;
@@ -39,6 +40,10 @@ namespace BusinessLogic
                 return lodging;
             }
             catch (LodgingException e)
+            {
+                throw new DomainBusinessLogicException(e.Message);
+            }
+            catch (DomainBusinessLogicException e)
             {
                 throw new DomainBusinessLogicException(e.Message);
             }
@@ -51,6 +56,23 @@ namespace BusinessLogic
                 throw new ServerBusinessLogicException("No se puede crear el hospedaje debido a que ha ocurrido un error.", e);
             }
         }
+
+        private void VerifyIfLodgingExist(Lodging lodging, Guid touristSpotId)
+        {
+            try
+            {
+                Lodging lodgingObteined = lodgingRepository.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpotId);
+                if (lodgingObteined != null)
+                {
+                    throw new DomainBusinessLogicException(MessageExceptionBusinessLogic.ErrorLodgingAlredyExist);
+                }
+            }
+            catch (ServerException e)
+            {
+                throw new ServerException("No se puede crear el hospedaje debido a que ha ocurrido un error.", e);
+            }
+        }
+
 
         public Lodging GetLodgingById(Guid lodgingId)
         {
@@ -75,9 +97,9 @@ namespace BusinessLogic
             {
                 return lodgingRepository.GetAvailableLodgingsByTouristSpot(touristSpotId);
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
-                throw new ClientBusinessLogicException(e.Message, e); 
+                throw new ClientBusinessLogicException(e.Message, e);
             }
             catch (ServerException e)
             {

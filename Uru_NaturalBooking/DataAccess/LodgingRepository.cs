@@ -24,20 +24,32 @@ namespace DataAccess
             {
                 List<Lodging> listOfLodgingInTouristSpot = context.Set<Lodging>().Where(lod => lod.TouristSpot.Id.Equals(touristSpotId)
                                 && lod.IsAvailable).ToList();
-                if(listOfLodgingInTouristSpot.IsNullOrEmpty())
+                if (listOfLodgingInTouristSpot.IsNullOrEmpty())
                 {
                     throw new ClientException("No hay hospedajes disponibles para el punto turistico indicado.");
                 }
                 return listOfLodgingInTouristSpot;
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
                 throw new ClientException(MessagesExceptionRepository.ErrorObteinedAvailableLodgingsByTouristSpotId, e);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ServerException(MessagesExceptionRepository.ErrorGettingAvailableLodgingsByTouristSpotId, e);
+            }
+        }
 
+        public Lodging GetLodgingByNameAndTouristSpot(string lodgingName, Guid touristSpotId)
+        {
+            try
+            {
+                Lodging lodgingObteined = context.Set<Lodging>().Where(x => x.Name.Equals(lodgingName) && x.TouristSpot.Id.Equals(touristSpotId)).FirstOrDefault();
+                return lodgingObteined;
+            }
+            catch (Exception e)
+            {
+                throw new ServerException(MessagesExceptionRepository.ErrorObteinedLodgingByNameAndTouristSpotId, e);
             }
         }
     }

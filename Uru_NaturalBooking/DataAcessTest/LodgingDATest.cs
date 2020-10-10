@@ -14,9 +14,9 @@ namespace DataAcessTest
     [TestClass]
     public class LodgingDATest
     {
-        TouristSpot touristSpot; 
-        Lodging lodging; 
-        
+        TouristSpot touristSpot;
+        Lodging lodging;
+
 
         [TestInitialize]
         public void SetUp()
@@ -30,7 +30,7 @@ namespace DataAcessTest
 
             lodging = new Lodging()
             {
-                Id = Guid.NewGuid(), 
+                Id = Guid.NewGuid(),
                 Name = "Hotel Las Cumbres",
                 QuantityOfStars = 5,
                 Address = "Ruta 12 km 3.5",
@@ -206,13 +206,21 @@ namespace DataAcessTest
 
         [TestMethod]
         [ExpectedException(typeof(ClientException))]
-
         public void GetAvailableLodgingsByTouristSpotNotFound()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             ILodgingRepository lodgingRepository = new LodgingRepository(context);
-            List<Lodging> listOfLodgingOfDb = lodgingRepository.GetAvailableLodgingsByTouristSpot(touristSpot.Id).ToList();
+            lodgingRepository.GetAvailableLodgingsByTouristSpot(touristSpot.Id).ToList();
         }
 
+        [TestMethod]
+        public void GetLodgingByNameAndTouristSpotTest()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ILodgingRepository lodgingRepository = new LodgingRepository(context);
+            lodgingRepository.Add(lodging);
+            Lodging lodgingObteined = lodgingRepository.GetLodgingByNameAndTouristSpot(lodging.Name, lodging.TouristSpot.Id);
+            Assert.AreEqual(lodging, lodgingObteined);
+        }
     }
 }

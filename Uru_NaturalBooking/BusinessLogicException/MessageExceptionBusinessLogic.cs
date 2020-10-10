@@ -37,5 +37,6 @@ namespace BusinessLogicException
         public static string ErrorGettingTouristSpotByCategoriesAndRegion = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias y region.";
         public static string ErrorUserAlredyExist = "Error. El mail del usuario que desea crear ya existe.";
         public static string ErrorTouristSpotAlredyExist = "Error. El punto turistico que desea crear ya existe.";
+        public static string ErrorLodgingAlredyExist = "Error. El hospedaje que desea crear ya existe.";
     }
 }

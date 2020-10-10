@@ -21,7 +21,7 @@ namespace BusinessLogicTest
         Category aCategory;
         Picture picture;
         TouristSpot touristSpotOfPuntaDelEste;
-        Lodging lodgingConrad; 
+        Lodging lodgingConrad;
 
 
         [TestInitialize]
@@ -50,7 +50,7 @@ namespace BusinessLogicTest
                 Name = "Maldonado",
                 Description = "Departamento donde la naturaleza y la tranquilidad desborda.",
                 ListOfCategories = new List<CategoryTouristSpot>() { categoryTouristSpot },
-                Image= picture  
+                Image = picture
             };
 
             categoryTouristSpot.TouristSpot = touristSpot;
@@ -68,14 +68,14 @@ namespace BusinessLogicTest
                 Images = new List<Picture> { picture }
             };
 
-             touristSpotOfPuntaDelEste = new TouristSpot()
+            touristSpotOfPuntaDelEste = new TouristSpot()
             {
                 Id = Guid.NewGuid(),
                 Name = "Punta del este",
                 Description = "Donde el lujo y la naturaleza convergen, las mejores playas del Uruguay."
             };
 
-             lodgingConrad = new Lodging()
+            lodgingConrad = new Lodging()
             {
                 Id = Guid.NewGuid(),
                 Name = "Hotel Enjoy Conrad",
@@ -92,6 +92,7 @@ namespace BusinessLogicTest
         {
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
@@ -111,7 +112,7 @@ namespace BusinessLogicTest
                 PricePerNight = resultOfCreateALodging.PricePerNight,
                 IsAvailable = resultOfCreateALodging.IsAvailable,
                 TouristSpot = resultOfCreateALodging.TouristSpot
-            }; 
+            };
 
             lodgingRepositoryMock.VerifyAll();
             Assert.AreEqual(lodging, lodgingToCompare);
@@ -125,6 +126,7 @@ namespace BusinessLogicTest
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
@@ -143,6 +145,7 @@ namespace BusinessLogicTest
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
@@ -157,10 +160,11 @@ namespace BusinessLogicTest
         [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidLodgingWithoutNameTest()
         {
-            lodging.Name = ""; 
+            lodging.Name = "";
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
@@ -178,6 +182,7 @@ namespace BusinessLogicTest
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>())).Throws(new ServerException());
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
@@ -196,6 +201,7 @@ namespace BusinessLogicTest
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
@@ -214,6 +220,7 @@ namespace BusinessLogicTest
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
@@ -232,6 +239,7 @@ namespace BusinessLogicTest
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
@@ -250,6 +258,7 @@ namespace BusinessLogicTest
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
@@ -268,6 +277,7 @@ namespace BusinessLogicTest
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
@@ -286,6 +296,8 @@ namespace BusinessLogicTest
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
+
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
@@ -302,6 +314,41 @@ namespace BusinessLogicTest
         {
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
+
+            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
+            TouristSpotManagement touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
+        public void CreateInvalidLodgingAlredyExistTest()
+        {
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(lodging);
+
+            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
+            TouristSpotManagement touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
+        public void CreateInvalidLodgingInternalErrorWhenSearchLodgingByNameTest()
+        {
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+            lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Throws(new ServerException());
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
@@ -320,7 +367,7 @@ namespace BusinessLogicTest
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
 
             Lodging resultOfGetTheLodging = lodgingLogic.GetLodgingById(lodging.Id);
-            Assert.AreEqual(lodging, resultOfGetTheLodging); 
+            Assert.AreEqual(lodging, resultOfGetTheLodging);
         }
 
         [TestMethod]
@@ -331,7 +378,7 @@ namespace BusinessLogicTest
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerException());
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
 
-            Lodging resultOfGetLodging = lodgingLogic.GetLodgingById(lodging.Id); 
+            Lodging resultOfGetLodging = lodgingLogic.GetLodgingById(lodging.Id);
         }
 
         [TestMethod]
@@ -350,8 +397,8 @@ namespace BusinessLogicTest
         [TestMethod]
         public void GetLodgingsByTouristSpotTest()
         {
-            lodging.TouristSpot = touristSpot; 
-            List<Lodging> listOfLodgings = new List<Lodging>() { lodging, lodgingConrad }; 
+            lodging.TouristSpot = touristSpot;
+            List<Lodging> listOfLodgings = new List<Lodging>() { lodging, lodgingConrad };
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.GetAvailableLodgingsByTouristSpot(It.IsAny<Guid>())).Returns(listOfLodgings);
@@ -360,7 +407,7 @@ namespace BusinessLogicTest
             List<Lodging> resultOfSearchLodgingByTouristSpot = lodgingLogic.GetAvailableLodgingsByTouristSpot(touristSpot.Id);
 
             lodgingRepositoryMock.VerifyAll();
-            Assert.AreEqual(lodging, resultOfSearchLodgingByTouristSpot[0]); 
+            Assert.AreEqual(lodging, resultOfSearchLodgingByTouristSpot[0]);
         }
 
         [TestMethod]
@@ -444,7 +491,7 @@ namespace BusinessLogicTest
             lodgingLogic.RemoveLodging(lodging.Id);
             List<Lodging> listOfLodging = lodgingLogic.GetAllLoadings();
             lodgingRepositoryMock.VerifyAll();
-            Assert.IsTrue(listOfLodging.Count==0); 
+            Assert.IsTrue(listOfLodging.Count == 0);
         }
 
         [TestMethod]
@@ -462,7 +509,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void GetAllLodgingsTestOk()
         {
-            List<Lodging> lodgingsToReturn = new List<Lodging>() {lodging};
+            List<Lodging> lodgingsToReturn = new List<Lodging>() { lodging };
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.GetAll()).Returns(lodgingsToReturn);
@@ -480,7 +527,7 @@ namespace BusinessLogicTest
         [ExpectedException(typeof(ServerBusinessLogicException))]
         public void FailAboutGetAllLodgingsTest()
         {
-            List<Lodging> lodgingsToReturn = new List<Lodging>() {lodging};
+            List<Lodging> lodgingsToReturn = new List<Lodging>() { lodging };
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.GetAll()).Throws(new ServerException());
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);

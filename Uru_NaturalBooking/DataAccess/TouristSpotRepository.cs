@@ -91,7 +91,7 @@ namespace DataAccess
             }
             catch (Exception e)
             {
-                throw new ServerException(MessagesExceptionRepository.ErrorCheckingEmail, e);
+                throw new ServerException(MessagesExceptionRepository.ErrorObteinedTouristSpotByName, e);
             }
         }
     }
