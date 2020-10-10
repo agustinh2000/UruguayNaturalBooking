@@ -70,9 +70,17 @@ namespace WebApi.Controllers
                 Lodging lodging = lodgingManagement.Create(LodgingModelForRequest.ToEntity(lodgingModel), lodgingModel.TouristSpotId);
                 return CreatedAtRoute("GetLodging", new { id = lodging.Id }, LodgingModelForResponse.ToModel(lodging));
             }
-            catch (ServerBusinessLogicException e)
+            catch(DomainBusinessLogicException e)
             {
                 return BadRequest(e.Message);
+            }
+            catch(ClientBusinessLogicException e)
+            {
+                return NotFound(e.Message);  
+            }
+            catch (ServerBusinessLogicException e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
 

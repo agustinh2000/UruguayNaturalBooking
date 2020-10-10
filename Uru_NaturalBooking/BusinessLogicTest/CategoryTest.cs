@@ -274,7 +274,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(CategoryException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidCategoryWithoutName()
         {
             Category category = new Category

@@ -157,14 +157,29 @@ namespace WebApiTest
         }
 
         [TestMethod]
-        public void TestPostIncorrectCategory()
+        public void TestPostCategoryWithInternalServerError()
         {
             var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
             mock.Setup(m => m.Create(It.IsAny<Category>())).Throws(new ServerBusinessLogicException());
             CategoryController categoryController = new CategoryController(mock.Object);
 
             var result = categoryController.Post(categoryBeachModel);
-            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            var createdResult = result as ObjectResult;
+            mock.VerifyAll(); 
+            Assert.AreEqual(500, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void TestPostCategoryWithDomainErrorError()
+        {
+            var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
+            mock.Setup(m => m.Create(It.IsAny<Category>())).Throws(new DomainBusinessLogicException());
+            CategoryController categoryController = new CategoryController(mock.Object);
+
+            var result = categoryController.Post(categoryBeachModel);
+            var createdResult = result as BadRequestObjectResult;
+            mock.VerifyAll();
+            Assert.AreEqual(400, createdResult.StatusCode);
         }
 
     }

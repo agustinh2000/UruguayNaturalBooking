@@ -147,7 +147,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TouristSpotException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidTouristSpotWithoutPicture()
         {
             TouristSpot touristSpot = new TouristSpot
@@ -180,7 +180,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TouristSpotException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInValidTouristSpot()
         {
             TouristSpot touristSpot = new TouristSpot
@@ -213,7 +213,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TouristSpotException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidTouristSpotWithoutDesc()
         {
             TouristSpot touristSpot = new TouristSpot
@@ -246,8 +246,8 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TouristSpotException))]
-        public void CreateInValidTouristSpotExtendDesc()
+        [ExpectedException(typeof(DomainBusinessLogicException))]
+        public void CreateInvalidTouristSpotExtendDesc()
         {
             TouristSpot touristSpot = new TouristSpot
             {
@@ -305,7 +305,7 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void CreateInValidTouristSpotWithErrorInAdd()
+        public void CreateInvalidTouristSpotWithErrorInAdd()
         {
             TouristSpot touristSpot = new TouristSpot
             {
@@ -337,8 +337,8 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TouristSpotException))]
-        public void CreateValidTouristSpotWithoutCategories()
+        [ExpectedException(typeof(DomainBusinessLogicException))]
+        public void CreateInvalidTouristSpotWithoutCategories()
         {
             TouristSpot touristSpot = new TouristSpot
             {
@@ -369,6 +369,76 @@ namespace BusinessLogicTest
 
             touristSpotRepositoryMock.VerifyAll();
            Assert.AreEqual(result.Id, touristSpot.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void CreateInvalidTouristSpotWithoutRegion()
+        {
+            TouristSpot touristSpot = new TouristSpot
+            {
+                Id = Guid.NewGuid(),
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar.",
+                Image = picture
+            };
+            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
+
+            Guid regionId = Guid.NewGuid();
+            List<Guid> listIdCategories = new List<Guid>();
+            Guid id = Guid.NewGuid();
+
+            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
+
+            var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
+            regionsRepositoryMock.Setup(m => m.Get(regionId)).Throws(new ClientBusinessLogicException("Error en obtener la region."));
+
+            var categoryLogic = new CategoryManagement(categoriesRepositoryMock.Object);
+            var regionLogic = new RegionManagement(regionsRepositoryMock.Object);
+
+            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object, regionLogic, categoryLogic);
+
+            var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
+
+            touristSpotRepositoryMock.VerifyAll();
+            Assert.AreEqual(result.Id, touristSpot.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
+        public void CreateInvalidTouristSpotWithClientError()
+        {
+            TouristSpot touristSpot = new TouristSpot
+            {
+                Id = Guid.NewGuid(),
+                Name = "Punta del este",
+                Description = "Lo mejor para gastar.",
+                Image = picture
+            };
+            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Add(It.IsAny<TouristSpot>()));
+
+            Guid regionId = Guid.NewGuid();
+            List<Guid> listIdCategories = new List<Guid>();
+            Guid id = Guid.NewGuid();
+
+            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            categoriesRepositoryMock.Setup(m => m.Get(id)).Throws(new ClientBusinessLogicException());
+
+            var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
+            regionsRepositoryMock.Setup(m => m.Get(regionId)).Returns(new Region() { Id = regionId });
+
+            var categoryLogic = new CategoryManagement(categoriesRepositoryMock.Object);
+            var regionLogic = new RegionManagement(regionsRepositoryMock.Object);
+
+            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object, regionLogic, categoryLogic);
+
+            var result = touristSpotLogic.Create(touristSpot, regionId, listIdCategories);
+
+            touristSpotRepositoryMock.VerifyAll();
+            Assert.AreEqual(result.Id, touristSpot.Id);
         }
 
         [TestMethod]

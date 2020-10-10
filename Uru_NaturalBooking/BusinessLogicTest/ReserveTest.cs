@@ -133,7 +133,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ReserveException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidReserveWithoutNameTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
@@ -167,7 +167,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ReserveException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidReserveWithoutLastNameTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
@@ -199,7 +199,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ReserveException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidReserveWithInvalidDateTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
@@ -231,7 +231,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ReserveException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidReserveWithoutGuestTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
@@ -264,7 +264,7 @@ namespace BusinessLogicTest
 
 
         [TestMethod]
-        [ExpectedException(typeof(ReserveException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidReserveWithInvalidMailTest()
         {
             var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
@@ -291,6 +291,39 @@ namespace BusinessLogicTest
                 QuantityOfChild = 0,
                 QuantityOfBaby = 0
 
+            };
+
+            Reserve resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void CreateInvalidReserveWithoutLodgingTest()
+        {
+            var reserveRepositoryMock = new Mock<IRepository<Reserve>>(MockBehavior.Strict);
+            reserveRepositoryMock.Setup(m => m.Add(It.IsAny<Reserve>()));
+
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
+
+            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
+            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+            var reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
+            reserveLogic = new ReserveManagement(reserveRepositoryMock.Object, lodgingLogic);
+
+            Reserve reserve = new Reserve()
+            {
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela@hotmail.com",
+                CheckIn = new DateTime(2020, 05, 25),
+                CheckOut = new DateTime(2020, 06, 10),
+                QuantityOfAdult = 2,
+                QuantityOfChild = 2,
+                QuantityOfBaby = 1
             };
 
             Reserve resultOfCreateAReserve = reserveLogic.Create(reserve, lodging.Id);

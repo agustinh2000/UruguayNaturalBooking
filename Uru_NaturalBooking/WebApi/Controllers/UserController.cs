@@ -87,9 +87,14 @@ namespace WebApi.Controllers
                 User userCreated = userManagement.Create(user);
                 return CreatedAtRoute("GetUser", new { id = user.Id }, UserModelForResponse.ToModel(userCreated));
             }
+            catch(DomainBusinessLogicException e)
+            {
+
+                return BadRequest(e.Message);
+            }
             catch (ServerBusinessLogicException e)
             {
-                return BadRequest(e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
 

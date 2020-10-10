@@ -2,6 +2,7 @@
 using BusinessLogicInterface;
 using DataAccessInterface;
 using Domain;
+using DomainException;
 using RepositoryException;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,16 @@ namespace BusinessLogic
                 reserve.VerifyFormat();
                 reserveRepository.Add(reserve);
                 return reserve; 
-            }catch(ServerException e)
+            }
+            catch(ReserveException e)
+            {
+                throw new DomainBusinessLogicException(e.Message); 
+            }
+            catch(ClientBusinessLogicException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorCreatingReserve, e); 
+            }
+            catch(ServerException e)
             {
                 throw new ServerBusinessLogicException("No se puede crear la reserva deseada.", e); 
             }

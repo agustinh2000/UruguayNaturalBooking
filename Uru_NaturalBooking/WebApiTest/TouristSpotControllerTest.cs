@@ -167,15 +167,42 @@ namespace WebApiTest
         }
 
         [TestMethod]
-        public void CreateTouristSpotInvalidTest()
+        public void InvalidCreateTouristSpotTestFormatError()
         {
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
-            touristSpotMock.Setup(m => m.Create(It.IsAny<TouristSpot>(), It.IsAny<Guid>(), It.IsAny<List<Guid>>())).Throws(new ServerBusinessLogicException("No se puede crear el punto turistico debido a que no es valido."));
+            touristSpotMock.Setup(m => m.Create(It.IsAny<TouristSpot>(), It.IsAny<Guid>(), It.IsAny<List<Guid>>())).
+                Throws(new DomainBusinessLogicException("No se puede crear el punto turistico debido a que no es valido."));
             TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
             var result = touristSpotController.Post(touristSpotRequestModel);
             var createdResult = result as BadRequestObjectResult;
             touristSpotMock.VerifyAll();
             Assert.AreEqual(400, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void InvalidCreateTouristSpotTestWithoutCategoriesAndRegions()
+        {
+            var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
+            touristSpotMock.Setup(m => m.Create(It.IsAny<TouristSpot>(), It.IsAny<Guid>(), It.IsAny<List<Guid>>())).
+                Throws(new ClientBusinessLogicException("No se pudo encontrar la region y/o las categorias asociadas"));
+            TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
+            var result = touristSpotController.Post(touristSpotRequestModel);
+            var createdResult = result as NotFoundObjectResult;
+            touristSpotMock.VerifyAll();
+            Assert.AreEqual(404, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void InvalidCreateTouristSpotTestInternalServerError()
+        {
+            var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);
+            touristSpotMock.Setup(m => m.Create(It.IsAny<TouristSpot>(), It.IsAny<Guid>(), It.IsAny<List<Guid>>())).
+                Throws(new ServerBusinessLogicException());
+            TouristSpotController touristSpotController = new TouristSpotController(touristSpotMock.Object);
+            var result = touristSpotController.Post(touristSpotRequestModel);
+            var createdResult = result as ObjectResult;
+            touristSpotMock.VerifyAll();
+            Assert.AreEqual(500, createdResult.StatusCode);
         }
 
         [TestMethod]

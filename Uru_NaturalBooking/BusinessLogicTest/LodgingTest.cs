@@ -99,7 +99,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(LodgingException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidLodgingWithoutPicturesTest()
         {
             lodging.Images = null;
@@ -117,7 +117,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(LodgingException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidLodgingWithNewListOfPicturesTest()
         {
             lodging.Images = new List<Picture>();
@@ -135,7 +135,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(LodgingException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidLodgingWithoutNameTest()
         {
             lodging.Name = ""; 
@@ -170,7 +170,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(LodgingException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidLodgingWithoutAddressTest()
         {
             lodging.Address = "";
@@ -188,7 +188,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(LodgingException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidLodgingWithoutDescriptionTest()
         {
             lodging.Description = "";
@@ -206,7 +206,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(LodgingException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidLodgingWithoutQuantityOfStarsTest()
         {
             lodging.QuantityOfStars = 0;
@@ -224,7 +224,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(LodgingException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidLodgingWithMoreStarsTest()
         {
             lodging.QuantityOfStars = 15;
@@ -242,7 +242,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(LodgingException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidLodgingWithInvalidPriceTest()
         {
             lodging.PricePerNight = -10;
@@ -260,7 +260,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(LodgingException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidLodgingWithExpensivePriceTest()
         {
             lodging.PricePerNight = 15000000;
@@ -270,6 +270,22 @@ namespace BusinessLogicTest
 
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(touristSpot);
+            TouristSpotManagement touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
+
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void CreateInvalidLodgingWithoutTouristSpotTest()
+        {
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
+
+            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
             TouristSpotManagement touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);

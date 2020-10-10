@@ -2,6 +2,7 @@ using BusinessLogicException;
 using BusinessLogicInterface;
 using DataAccessInterface;
 using Domain;
+using DomainException;
 using RepositoryException;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,14 @@ namespace BusinessLogic
                 touristSpotRepository.Add(touristSpot);
                 return touristSpot;
             }
+            catch(TouristSpotException e)
+            {
+                throw new DomainBusinessLogicException(e.Message); 
+            }
+            catch(ClientBusinessLogicException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorCreatingTouristSpot, e); 
+            }
             catch (ServerException e)
             {
                 throw new ServerBusinessLogicException("No se puede crear el punto turistico debido a que no es valido.", e);
@@ -77,7 +86,7 @@ namespace BusinessLogic
             }
             catch(ClientException e)
             {
-                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindTouristSpot, e);
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindTouristSpot, e);
             }
             catch (ServerException e)
             {

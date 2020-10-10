@@ -2,6 +2,7 @@
 using BusinessLogicInterface;
 using DataAccessInterface;
 using Domain;
+using DomainException;
 using RepositoryException;
 using System;
 using System.Collections.Generic;
@@ -72,8 +73,12 @@ namespace BusinessLogic
                 categoryToCreate.VerifyFormat();
                 categoryRepository.Add(categoryToCreate);
                 return categoryToCreate; 
-
-            }catch(ServerException e)
+            }
+            catch(CategoryException e)
+            {
+                throw new DomainBusinessLogicException(e.Message); 
+            }
+            catch(ServerException e)
             {
                 throw new ServerBusinessLogicException("No se puede crear la categoria deseada", e); 
             }

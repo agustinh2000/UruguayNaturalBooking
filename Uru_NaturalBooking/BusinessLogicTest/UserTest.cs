@@ -71,7 +71,7 @@ namespace BusinessLogicTest
 
 
         [TestMethod]
-        [ExpectedException(typeof(UserException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidUserEmptyNameTest()
         {
             User user = new User()
@@ -91,7 +91,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UserException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidUserEmptyLastNameTest()
         {
             User user = new User()
@@ -111,7 +111,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UserException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidUserEmptyUserNameTest()
         {
             User user = new User()
@@ -131,7 +131,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UserException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidUserNotValidMailTest()
         {
             User user = new User()
@@ -151,7 +151,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UserException))]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidUserEmptyPasswordTest()
         {
             User user = new User()

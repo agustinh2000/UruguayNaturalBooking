@@ -26,5 +26,8 @@ namespace BusinessLogicException
         public static string ErrorObteinedReserve = "Error. Ha ocurrido un error al intentar encontrar la reserva buscada.";
         public static string ErrorNotFindTouristSpot = "Error. No se ha encontrado el punto turistico buscado.";
         public static string ErrorObteinedTouristSpot = "Error. Ha ocurrido un error al intentar encontrar el punto turistico buscado.";
+        public static string ErrorCreatingLodging = "Error. No se ha podido encontrar el punto turistico asociado al hospedaje a crear.";
+        public static string ErrorCreatingReserve = "Error. No se ha podido encontrar el hospedaje asociado a la reserva a crear.";
+        public static string ErrorCreatingTouristSpot = "Error. No se ha podido encontrar la region y/o las categorias asociadas al punto turistico.";
     }
 }

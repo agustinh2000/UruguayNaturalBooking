@@ -127,9 +127,17 @@ namespace WebApi.Controllers
                 TouristSpot touristSpotAdded = touristSpotManagement.Create(TouristSpotForRequestModel.ToEntity(aTouristSpot), aTouristSpot.RegionId, aTouristSpot.ListOfCategoriesId);
                 return CreatedAtRoute("GetTouristSpot", new { id = touristSpotAdded.Id }, TouristSpotForResponseModel.ToModel(touristSpotAdded));
             }
-            catch (ServerBusinessLogicException e)
+            catch(DomainBusinessLogicException e)
             {
                 return BadRequest(e.Message);
+            }
+            catch(ClientBusinessLogicException e)
+            {
+                return NotFound(e.Message); 
+            }
+            catch (ServerBusinessLogicException e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
     }

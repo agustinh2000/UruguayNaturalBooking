@@ -204,12 +204,38 @@ namespace WebApiTest
         public void CreateLodgingInvalidTest()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("No se puede crear el hospedaje debido a que no es valido."));
+            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>())).
+                Throws(new DomainBusinessLogicException("No se puede crear el hospedaje debido a que no es valido."));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Post(lodgingModelForRequest);
             var createdResult = result as BadRequestObjectResult;
             lodgingManagementMock.VerifyAll();
             Assert.AreEqual(400, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void CreateLodgingWithoutTouristSpotTest()
+        {
+            var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
+            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>())).
+                Throws(new ClientBusinessLogicException("No se puede crear el hospedaje debido a que no se encontro el punto turistico"));
+            LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
+            var result = lodgingController.Post(lodgingModelForRequest);
+            var createdResult = result as NotFoundObjectResult;
+            lodgingManagementMock.VerifyAll();
+            Assert.AreEqual(404, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void CreateLodgingInternalServerErrorTest()
+        {
+            var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
+            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("Error interno"));
+            LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
+            var result = lodgingController.Post(lodgingModelForRequest);
+            var createdResult = result as ObjectResult;
+            lodgingManagementMock.VerifyAll();
+            Assert.AreEqual(500, createdResult.StatusCode);
         }
 
         [TestMethod]

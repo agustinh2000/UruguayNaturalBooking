@@ -58,6 +58,10 @@ namespace BusinessLogic
                 userRepository.Add(user);
                 return user;
             }
+            catch(UserException e)
+            {
+                throw new DomainBusinessLogicException(e.Message); 
+            }
             catch (ServerException e)
             {
                 throw new ServerBusinessLogicException("No se puede crear el usuario debido a que ha ocurrido un error.", e);

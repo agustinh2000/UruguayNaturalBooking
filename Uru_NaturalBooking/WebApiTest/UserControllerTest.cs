@@ -129,10 +129,21 @@ namespace WebApiTest
         }
 
         [TestMethod]
-        public void PostUserInvalid()
+        public void PostUserInvalidInternalServerError()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
             userMock.Setup(m => m.Create(invalidUser)).Throws(new ServerBusinessLogicException());
+            UserController userController = new UserController(userMock.Object);
+            var result = userController.Post(invalidUser);
+            var errorResult = result as ObjectResult;
+            Assert.AreEqual(500, errorResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void PostUserInvalidInformation()
+        {
+            var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
+            userMock.Setup(m => m.Create(invalidUser)).Throws(new DomainBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Post(invalidUser);
             var errorResult = result as BadRequestObjectResult;

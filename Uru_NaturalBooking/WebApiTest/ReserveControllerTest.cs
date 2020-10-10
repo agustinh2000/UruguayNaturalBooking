@@ -108,7 +108,7 @@ namespace WebApiTest
         {
             var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
             reserveManagementMock.Setup(m => m.Create(It.IsAny<Reserve>(), It.IsAny<Guid>())).
-                Throws(new ServerBusinessLogicException("No se pudo crear correctamente la reserva"));
+                Throws(new DomainBusinessLogicException("No se pudo crear correctamente la reserva"));
             ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
 
             ReserveModelForRequest reserveModelForRequest = new ReserveModelForRequest()
@@ -128,6 +128,60 @@ namespace WebApiTest
             var createdResult = result as BadRequestObjectResult;
             reserveManagementMock.VerifyAll();
             Assert.AreEqual(400, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void CreateInvalidReserveWithClientExceptionTest()
+        {
+            var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
+            reserveManagementMock.Setup(m => m.Create(It.IsAny<Reserve>(), It.IsAny<Guid>())).
+                Throws(new ClientBusinessLogicException("No se pudo crear correctamente la reserva"));
+            ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
+
+            ReserveModelForRequest reserveModelForRequest = new ReserveModelForRequest()
+            {
+                Name = "",
+                LastName = "Lamela",
+                Email = "joaquin.lamela00@gmail.com",
+                CheckIn = new DateTime(2020, 10, 05),
+                CheckOut = new DateTime(2020, 10, 07),
+                QuantityOfAdult = 1,
+                QuantityOfBaby = 1,
+                QuantityOfChild = 1,
+                IdOfLodgingToReserve = lodgingForReserve.Id
+            };
+
+            var result = reserveController.Post(reserveModelForRequest);
+            var createdResult = result as ObjectResult;
+            reserveManagementMock.VerifyAll();
+            Assert.AreEqual(404, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void InvalidCreateReserveInternalServerErrorTest()
+        {
+            var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
+            reserveManagementMock.Setup(m => m.Create(It.IsAny<Reserve>(), It.IsAny<Guid>())).
+                Throws(new ServerBusinessLogicException());
+            ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
+
+            ReserveModelForRequest reserveModelForRequest = new ReserveModelForRequest()
+            {
+                Name = "",
+                LastName = "Lamela",
+                Email = "joaquin.lamela00@gmail.com",
+                CheckIn = new DateTime(2020, 10, 05),
+                CheckOut = new DateTime(2020, 10, 07),
+                QuantityOfAdult = 1,
+                QuantityOfBaby = 1,
+                QuantityOfChild = 1,
+                IdOfLodgingToReserve = lodgingForReserve.Id
+            };
+
+            var result = reserveController.Post(reserveModelForRequest);
+            var createdResult = result as ObjectResult;
+            reserveManagementMock.VerifyAll();
+            Assert.AreEqual(500, createdResult.StatusCode);
         }
 
         [TestMethod]

@@ -2,6 +2,7 @@
 using BusinessLogicInterface;
 using DataAccessInterface;
 using Domain;
+using DomainException;
 using RepositoryException;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,14 @@ namespace BusinessLogic
                 lodging.VerifyFormat();
                 lodgingRepository.Add(lodging);
                 return lodging;
+            }
+            catch(LodgingException e)
+            {
+                throw new DomainBusinessLogicException(e.Message); 
+            }
+            catch(ClientBusinessLogicException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorCreatingLodging, e); 
             }
             catch (ServerException e)
             {

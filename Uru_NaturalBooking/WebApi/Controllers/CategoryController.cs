@@ -69,9 +69,13 @@ namespace WebApi.Controllers
                 Category category = categoryManagement.Create(CategoryModel.ToEntity(categoryModel));
                 return CreatedAtRoute("Get", new { id = category.Id }, CategoryModel.ToModel(category));
             }
-            catch (ServerBusinessLogicException e)
+            catch(DomainBusinessLogicException e)
             {
                 return BadRequest(e.Message);
+            }
+            catch (ServerBusinessLogicException e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
     }
