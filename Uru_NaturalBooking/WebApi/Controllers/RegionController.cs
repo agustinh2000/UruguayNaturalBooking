@@ -29,13 +29,13 @@ namespace WebApi.Controllers
                 List<Region> allRegions = regionManagement.GetAllRegions();
                 return Ok(RegionForResponseModel.ToModel(allRegions));
             }
-            catch (ClientBusinessLogicException)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound("No se encontraron regiones.");
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -47,13 +47,13 @@ namespace WebApi.Controllers
                 Region region = regionManagement.GetById(id);
                 return Ok(RegionForResponseModel.ToModel(region));
             }
-            catch (ClientBusinessLogicException)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound("La region solicitada no fue encontrada");
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
     }

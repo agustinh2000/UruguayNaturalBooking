@@ -32,13 +32,13 @@ namespace WebApi.Controllers
                 Reserve reserve = reserveManagement.GetById(id);
                 return Ok(ReserveModelForResponse.ToModel(reserve));
             }
-            catch (ClientBusinessLogicException)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound("La reserva solicitada no fue encontrado");
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -60,7 +60,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -83,7 +83,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
     }

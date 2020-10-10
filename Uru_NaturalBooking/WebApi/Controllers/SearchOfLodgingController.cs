@@ -42,7 +42,7 @@ namespace WebApi.Controllers
 
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
     }

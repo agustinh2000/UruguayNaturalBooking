@@ -329,7 +329,7 @@ namespace WebApiTest
             userMock.Setup(m => m.LogOut(aUserSession.Token));
             UserController userController = new UserController(userMock.Object);
             var result = userController.Logout(aUserSession.Token);
-            var createdResult = result as OkResult;
+            var createdResult = result as OkObjectResult;
             userMock.VerifyAll();
             Assert.AreEqual(200, createdResult.StatusCode);
         }

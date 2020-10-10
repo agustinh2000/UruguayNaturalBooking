@@ -34,13 +34,13 @@ namespace WebApi.Controllers
                 TouristSpot touristSpot = touristSpotManagement.GetTouristSpotById(id);
                 return Ok(TouristSpotForResponseModel.ToModel(touristSpot));
             }
-            catch (ClientBusinessLogicException)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound("El punto turistico solicitado no fue encontrado");
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -52,13 +52,13 @@ namespace WebApi.Controllers
                 List<TouristSpot> allTouristSpots = touristSpotManagement.GetAllTouristSpot();
                 return Ok(TouristSpotForResponseModel.ToModel(allTouristSpots));
             }
-            catch (ClientBusinessLogicException)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound("No se encontraron puntos turisticos.");
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -76,7 +76,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -94,7 +94,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -114,7 +114,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -137,7 +137,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
     }

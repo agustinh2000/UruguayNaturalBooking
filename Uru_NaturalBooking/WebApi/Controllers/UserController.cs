@@ -38,7 +38,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -52,13 +52,13 @@ namespace WebApi.Controllers
                 IEnumerable<User> allUsers = userManagement.GetAll();
                 return Ok(UserModelForResponse.ToModel(allUsers));
             }
-            catch (ClientBusinessLogicException)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound("No se encontraron usuarios.");
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -70,14 +70,14 @@ namespace WebApi.Controllers
                 User user = userManagement.GetUser(id);
                 return Ok(UserModelForResponse.ToModel(user));
             }
-            catch (ClientBusinessLogicException)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound("El usuario solicitado no fue encontrado");
+                return NotFound(e.Message);
 
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -96,7 +96,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -119,7 +119,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -134,7 +134,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -145,7 +145,7 @@ namespace WebApi.Controllers
             try
             {
                 userManagement.LogOut(token);
-                return Ok();
+                return Ok("La sesion se ha cerrado con exito.");
             }
             catch (ClientBusinessLogicException e)
             {
@@ -153,7 +153,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
     }

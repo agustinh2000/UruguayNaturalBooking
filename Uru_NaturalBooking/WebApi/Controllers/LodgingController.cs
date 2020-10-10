@@ -31,13 +31,13 @@ namespace WebApi.Controllers
                 List<Lodging> allLodgings = lodgingManagement.GetAllLoadings();
                 return Ok(LodgingModelForResponse.ToModel(allLodgings));
             }
-            catch (ClientBusinessLogicException)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound("No se pudo encontrar hospedajes");
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -49,13 +49,13 @@ namespace WebApi.Controllers
                 Lodging lodging = lodgingManagement.GetLodgingById(id);
                 return Ok(LodgingModelForResponse.ToModel(lodging));
             }
-            catch (ClientBusinessLogicException)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound("El hospedaje solicitado no fue encontrado");
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -79,7 +79,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -102,7 +102,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -117,7 +117,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
     }

@@ -32,13 +32,13 @@ namespace WebApi.Controllers
                 List<Category> allCategories = categoryManagement.GetAllCategories();
                 return Ok(CategoryModel.ToModel(allCategories));
             }
-            catch (ClientBusinessLogicException)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound("No se pudo encontrar hospedajes");
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
@@ -50,13 +50,13 @@ namespace WebApi.Controllers
                 Category category = categoryManagement.GetById(id);
                 return Ok(CategoryModel.ToModel(category));
             }
-            catch (ClientBusinessLogicException)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound("El objeto solicitado no fue encontrado.");
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
 
         }
@@ -76,7 +76,7 @@ namespace WebApi.Controllers
             }
             catch (ServerBusinessLogicException e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
     }
