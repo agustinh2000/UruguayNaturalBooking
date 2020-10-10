@@ -15,9 +15,9 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/users")]
-    public class UserController: ControllerBase
+    public class UserController : ControllerBase
     {
-        private  readonly IUserManagement userManagement;
+        private readonly IUserManagement userManagement;
 
         public UserController(IUserManagement logic)
         {
@@ -29,7 +29,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                UserSession userSession = userManagement.LogIn(loginModel.Email, loginModel.Password); 
+                UserSession userSession = userManagement.LogIn(loginModel.Email, loginModel.Password);
                 return Ok(UserModelForResponse.ToModel(userSession.User));
             }
             catch (ServerBusinessLogicException e)
@@ -48,7 +48,7 @@ namespace WebApi.Controllers
                 IEnumerable<User> allUsers = userManagement.GetAll();
                 return Ok(UserModelForResponse.ToModel(allUsers));
             }
-            catch(ClientBusinessLogicException)
+            catch (ClientBusinessLogicException)
             {
                 return NotFound("No se encontraron usuarios.");
             }
@@ -87,7 +87,7 @@ namespace WebApi.Controllers
                 User userCreated = userManagement.Create(user);
                 return CreatedAtRoute("GetUser", new { id = user.Id }, UserModelForResponse.ToModel(userCreated));
             }
-            catch(DomainBusinessLogicException e)
+            catch (DomainBusinessLogicException e)
             {
 
                 return BadRequest(e.Message);
@@ -107,9 +107,17 @@ namespace WebApi.Controllers
                 User userUpdated = userManagement.UpdateUser(id, user);
                 return CreatedAtRoute("GetUser", new { id = userUpdated.Id }, UserModelForResponse.ToModel(userUpdated));
             }
-            catch (ServerBusinessLogicException e)
+            catch (DomainBusinessLogicException e)
             {
                 return BadRequest(e.Message);
+            }
+            catch (ClientBusinessLogicException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (ServerBusinessLogicException e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
 

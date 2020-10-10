@@ -283,7 +283,7 @@ namespace WebApiTest
         }
 
         [TestMethod]
-        public void UpdateInvalidLodgingTest()
+        public void UpdateInvalidLodgingInternalErrorTest()
         {
             Lodging lodgingUpdated = new Lodging()
             {
@@ -306,6 +306,68 @@ namespace WebApiTest
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
             lodgingManagementMock.Setup(m => m.UpdateLodging(It.IsAny<Guid>(),It.IsAny<Lodging>())).
                 Throws(new ServerBusinessLogicException("No se puede actualizar el hospedaje deseado."));
+            LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
+            var result = lodgingController.Put(lodgingModelForRequestToUpdate.Id, lodgingModelForRequestToUpdate);
+            var createdResult = result as ObjectResult;
+            lodgingManagementMock.VerifyAll();
+            Assert.AreEqual(500, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void UpdateInvalidLodgingNotFoundTestTest()
+        {
+            Lodging lodgingUpdated = new Lodging()
+            {
+                Id = lodgingModelForRequest.Id,
+                Name = "",
+                Images = new List<Picture>() { image },
+                Address = "En la punta de punta del este",
+                QuantityOfStars = 5,
+                PricePerNight = 150,
+                TouristSpot = touristSpotAdded
+            };
+
+            LodgingModelForRequest lodgingModelForRequestToUpdate = new LodgingModelForRequest()
+            {
+                Id = lodgingModelForRequest.Id,
+                Name = "Prueba",
+                Images = new Picture[] { image },
+            };
+
+            var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
+            lodgingManagementMock.Setup(m => m.UpdateLodging(It.IsAny<Guid>(), It.IsAny<Lodging>())).
+                Throws(new ClientBusinessLogicException("No se puede actualizar el hospedaje deseado."));
+            LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
+            var result = lodgingController.Put(lodgingModelForRequestToUpdate.Id, lodgingModelForRequestToUpdate);
+            var createdResult = result as NotFoundObjectResult;
+            lodgingManagementMock.VerifyAll();
+            Assert.AreEqual(404, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void UpdateInvalidLodgingWithAnyErrorFieldTest()
+        {
+            Lodging lodgingUpdated = new Lodging()
+            {
+                Id = lodgingModelForRequest.Id,
+                Name = "",
+                Images = new List<Picture>() { image },
+                Address = "En la punta de punta del este",
+                QuantityOfStars = 5,
+                PricePerNight = 150,
+                TouristSpot = touristSpotAdded
+            };
+
+            LodgingModelForRequest lodgingModelForRequestToUpdate = new LodgingModelForRequest()
+            {
+                Id = lodgingModelForRequest.Id,
+                Name = "",
+                Images = new Picture[] { image },
+            };
+
+            var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
+            lodgingManagementMock.Setup(m => m.UpdateLodging(It.IsAny<Guid>(), It.IsAny<Lodging>())).
+                Throws(new DomainBusinessLogicException("No se puede actualizar el hospedaje deseado."));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Put(lodgingModelForRequestToUpdate.Id, lodgingModelForRequestToUpdate);
             var createdResult = result as BadRequestObjectResult;

@@ -614,7 +614,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ServerBusinessLogicException))]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
         public void UpdateNotExistUser()
         {
 
@@ -629,7 +629,29 @@ namespace BusinessLogicTest
             };
             user.Name = "Gonzalo";
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
-            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(value: null);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientException());
+            var userLogic = new UserManagement(userRepositoryMock.Object);
+            var result = userLogic.UpdateUser(user.Id, user);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
+        public void UpdateInvalidUserWithEmptyName()
+        {
+
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "martin1234"
+            };
+            user.Name = "";
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
             var userLogic = new UserManagement(userRepositoryMock.Object);
             var result = userLogic.UpdateUser(user.Id, user);
         }

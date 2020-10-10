@@ -50,13 +50,13 @@ namespace WebApi.Controllers
                 Reserve reserve = reserveManagement.Create(ReserveModelForRequest.ToEntity(aReserveModel), aReserveModel.IdOfLodgingToReserve);
                 return CreatedAtRoute("GetReserve", new { id = reserve.Id }, ReserveModelForResponse.ToModel(reserve));
             }
-            catch(DomainBusinessLogicException e)
+            catch (DomainBusinessLogicException e)
             {
                 return BadRequest(e.Message);
             }
-            catch(ClientBusinessLogicException e)
+            catch (ClientBusinessLogicException e)
             {
-                return NotFound(e.Message); 
+                return NotFound(e.Message);
             }
             catch (ServerBusinessLogicException e)
             {
@@ -73,9 +73,17 @@ namespace WebApi.Controllers
                 Reserve reserve = reserveManagement.Update(idForUpdateReserve, ReserveModelForRequestUpdate.ToEntity(aReserveModelForUpdate));
                 return CreatedAtRoute("GetReserve", new { id = reserve.Id }, ReserveModelForResponse.ToModel(reserve));
             }
-            catch (ServerBusinessLogicException e)
+            catch (DomainBusinessLogicException e)
             {
                 return BadRequest(e.Message);
+            }
+            catch (ClientBusinessLogicException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (ServerBusinessLogicException e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
     }

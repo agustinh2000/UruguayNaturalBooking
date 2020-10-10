@@ -243,7 +243,31 @@ namespace WebApiTest
         public void PutUserNotExist()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
+            userMock.Setup(m => m.UpdateUser(aUser.Id, aUserModified)).Throws(new ClientBusinessLogicException());
+            UserController userController = new UserController(userMock.Object);
+            var result = userController.Put(aUser.Id, aUserModified);
+            var createdResult = result as NotFoundObjectResult;
+            userMock.VerifyAll();
+            Assert.AreEqual(404, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void PutUserInternalErrorTest()
+        {
+            var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
             userMock.Setup(m => m.UpdateUser(aUser.Id, aUserModified)).Throws(new ServerBusinessLogicException());
+            UserController userController = new UserController(userMock.Object);
+            var result = userController.Put(aUser.Id, aUserModified);
+            var createdResult = result as ObjectResult;
+            userMock.VerifyAll();
+            Assert.AreEqual(500, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void PutUserWithAnyErrorFieldTest()
+        {
+            var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
+            userMock.Setup(m => m.UpdateUser(aUser.Id, aUserModified)).Throws(new DomainBusinessLogicException());
             UserController userController = new UserController(userMock.Object);
             var result = userController.Put(aUser.Id, aUserModified);
             var createdResult = result as BadRequestObjectResult;

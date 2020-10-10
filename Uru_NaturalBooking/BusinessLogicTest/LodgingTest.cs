@@ -412,22 +412,35 @@ namespace BusinessLogicTest
         public void FailInUpdateLodgingTest()
         {
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
-            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerException());
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
+            lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>())).Throws(new ServerException());
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+            Lodging resultOfUpdate = lodgingLogic.UpdateLodging(lodging.Id, lodging);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void FailInUpdateNotExistLodgingTest()
+        {
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientException());
             lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
             Lodging resultOfUpdate = lodgingLogic.UpdateLodging(lodging.Id, lodging);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void FailInUpdateNullLodgingTest()
+        [ExpectedException(typeof(DomainBusinessLogicException))]
+        public void FailInUpdateLodgingWithAnyErrorFieldTest()
         {
+            lodging.Address = "";
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
-            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(value: null);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(lodging);
             lodgingRepositoryMock.Setup(m => m.Update(It.IsAny<Lodging>()));
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
             Lodging resultOfUpdate = lodgingLogic.UpdateLodging(lodging.Id, lodging);
         }
+
 
         [TestMethod]
         public void RemoveValidLodgingTest()

@@ -32,15 +32,15 @@ namespace BusinessLogic
             {
                 return userRepository.GetAll();
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
-                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistUsers, e); 
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistUsers, e);
             }
             catch (ServerException e)
             {
                 throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedAllUser, e);
             }
-            
+
         }
 
         public bool IsLogued(string token)
@@ -58,9 +58,9 @@ namespace BusinessLogic
                 userRepository.Add(user);
                 return user;
             }
-            catch(UserException e)
+            catch (UserException e)
             {
-                throw new DomainBusinessLogicException(e.Message); 
+                throw new DomainBusinessLogicException(e.Message);
             }
             catch (ServerException e)
             {
@@ -100,7 +100,7 @@ namespace BusinessLogic
                 User userObteined = userRepository.Get(userId);
                 return userObteined;
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
                 throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindUser, e);
             }
@@ -132,17 +132,19 @@ namespace BusinessLogic
         {
             try
             {
-                User userDb = userRepository.Get(userToModifyId);
-                if (userDb != null)
-                {
-                    userDb.UpdateAttributes(aUser);
-                    userRepository.Update(userDb);
-                    return userDb;
-                }
-                else
-                {
-                    throw new ServerBusinessLogicException("El usuario buscado no existe");
-                }
+                User userDb = GetUser(userToModifyId);
+                userDb.UpdateAttributes(aUser);
+                userDb.VerifyFormat();
+                userRepository.Update(userDb);
+                return userDb;
+            }
+            catch (UserException e)
+            {
+                throw new DomainBusinessLogicException(e.Message);
+            }
+            catch (ClientBusinessLogicException e)
+            {
+                throw new ClientBusinessLogicException(e.Message);
             }
             catch (ServerException e)
             {

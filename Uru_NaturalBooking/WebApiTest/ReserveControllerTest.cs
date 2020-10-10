@@ -282,10 +282,51 @@ namespace WebApiTest
             };
 
             var result = reserveController.Put(reserveOfLodging.Id, reserveModelForRequestUpdate);
+            var createdResult = result as ObjectResult;
+            reserveManagementMock.VerifyAll();
+            Assert.AreEqual(500, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void FailInUpdateClientErrorTest()
+        {
+            var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
+            reserveManagementMock.Setup(m => m.Update(It.IsAny<Guid>(), It.IsAny<Reserve>())).
+                Throws(new ClientBusinessLogicException("No se ha podido actualizar correctamente la reserva"));
+            ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
+
+            ReserveModelForRequestUpdate reserveModelForRequestUpdate = new ReserveModelForRequestUpdate()
+            {
+                Id = reserveOfLodging.Id,
+                Description = "Su reserva ha sido aceptada correctamente, por favor verifique el nuevo estado",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            var result = reserveController.Put(reserveOfLodging.Id, reserveModelForRequestUpdate);
+            var createdResult = result as NotFoundObjectResult;
+            reserveManagementMock.VerifyAll();
+            Assert.AreEqual(404, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void FailInUpdateEmptyDescriptionTest()
+        {
+            var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
+            reserveManagementMock.Setup(m => m.Update(It.IsAny<Guid>(), It.IsAny<Reserve>())).
+                Throws(new DomainBusinessLogicException("No se ha podido actualizar correctamente la reserva"));
+            ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
+
+            ReserveModelForRequestUpdate reserveModelForRequestUpdate = new ReserveModelForRequestUpdate()
+            {
+                Id = reserveOfLodging.Id,
+                Description = "Su reserva ha sido aceptada correctamente, por favor verifique el nuevo estado",
+                StateOfReserve = Reserve.ReserveState.Aceptada
+            };
+
+            var result = reserveController.Put(reserveOfLodging.Id, reserveModelForRequestUpdate);
             var createdResult = result as BadRequestObjectResult;
             reserveManagementMock.VerifyAll();
             Assert.AreEqual(400, createdResult.StatusCode);
         }
-
     }
 }

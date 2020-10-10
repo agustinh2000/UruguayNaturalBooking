@@ -38,13 +38,13 @@ namespace BusinessLogic
                 lodgingRepository.Add(lodging);
                 return lodging;
             }
-            catch(LodgingException e)
+            catch (LodgingException e)
             {
-                throw new DomainBusinessLogicException(e.Message); 
+                throw new DomainBusinessLogicException(e.Message);
             }
-            catch(ClientBusinessLogicException e)
+            catch (ClientBusinessLogicException e)
             {
-                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorCreatingLodging, e); 
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorCreatingLodging, e);
             }
             catch (ServerException e)
             {
@@ -98,18 +98,19 @@ namespace BusinessLogic
         {
             try
             {
-                Lodging lodgingDb = lodgingRepository.Get(aIdOfLodging);
-                if (lodgingDb != null)
-                {
-                    lodgingDb.UpdateAttributes(aLodging);
-                    lodgingDb.VerifyFormat();
-                    lodgingRepository.Update(lodgingDb);
-                    return lodgingDb;
-                }
-                else
-                {
-                    throw new ServerBusinessLogicException("El hospedaje buscado no existe");
-                }
+                Lodging lodgingDb = GetLodgingById(aIdOfLodging);
+                lodgingDb.UpdateAttributes(aLodging);
+                lodgingDb.VerifyFormat();
+                lodgingRepository.Update(lodgingDb);
+                return lodgingDb;
+            }
+            catch (LodgingException e)
+            {
+                throw new DomainBusinessLogicException(e.Message);
+            }
+            catch (ClientBusinessLogicException e)
+            {
+                throw new ClientBusinessLogicException(e.Message);
             }
             catch (ServerException e)
             {
