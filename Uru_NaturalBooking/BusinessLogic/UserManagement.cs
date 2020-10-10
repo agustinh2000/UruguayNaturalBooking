@@ -55,6 +55,7 @@ namespace BusinessLogic
             {
                 user.Id = Guid.NewGuid();
                 user.VerifyFormat();
+                VerifyIfUserExist(user);
                 userRepository.Add(user);
                 return user;
             }
@@ -62,9 +63,29 @@ namespace BusinessLogic
             {
                 throw new DomainBusinessLogicException(e.Message);
             }
+            catch (DomainBusinessLogicException e)
+            {
+                throw new DomainBusinessLogicException(e.Message);
+            }
             catch (ServerException e)
             {
                 throw new ServerBusinessLogicException("No se puede crear el usuario debido a que ha ocurrido un error.", e);
+            }
+        }
+
+        private void VerifyIfUserExist(User user)
+        {
+            try
+            {
+                User userObteined = userRepository.GetUserByEmail(user.Mail);
+                if (userObteined != null)
+                {
+                    throw new DomainBusinessLogicException(MessageExceptionBusinessLogic.ErrorUserAlredyExist);
+                }
+            }
+            catch (ServerException e)
+            {
+                throw new ServerException("No se puede crear el usuario debido a que ha ocurrido un error.", e);
             }
         }
 

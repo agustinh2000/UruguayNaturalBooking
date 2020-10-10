@@ -38,5 +38,18 @@ namespace DataAccess
                 throw new ServerException(MessagesExceptionRepository.ErrorCheckingEmailAndPassword, e);
             }
         }
+
+        public User GetUserByEmail(string email)
+        {
+            try
+            {
+                User userObteined = context.Set<User>().Where(x => x.Mail.Equals(email)).FirstOrDefault();
+                return userObteined;
+            }
+            catch (Exception e)
+            {
+                throw new ServerException(MessagesExceptionRepository.ErrorCheckingEmail, e);
+            }
+        }
     }
 }

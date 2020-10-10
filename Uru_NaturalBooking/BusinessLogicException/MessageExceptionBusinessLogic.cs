@@ -35,5 +35,8 @@ namespace BusinessLogicException
         public static string ErrorGettingTouristSpotByCategories = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias.";
         public static string ErrorObteinedTouristSpotByCategoriesAndRegion = "Error. No se puede obtener los puntos turisticos por las categorias buscadas y la region buscada.";
         public static string ErrorGettingTouristSpotByCategoriesAndRegion = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias y region.";
+        public static string ErrorUserAlredyExist = "Error. El mail del usuario que desea crear ya existe.";
+
+
     }
 }

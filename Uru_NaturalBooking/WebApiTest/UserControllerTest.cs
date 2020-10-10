@@ -163,6 +163,17 @@ namespace WebApiTest
         }
 
         [TestMethod]
+        public void PostUserAlredyExist()
+        {
+            var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
+            userMock.Setup(m => m.Create(aUser)).Throws(new DomainBusinessLogicException());
+            UserController userController = new UserController(userMock.Object);
+            var result = userController.Post(invalidUser);
+            var errorResult = result as BadRequestObjectResult;
+            Assert.AreEqual(400, errorResult.StatusCode);
+        }
+
+        [TestMethod]
         public void PutUserOk()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);

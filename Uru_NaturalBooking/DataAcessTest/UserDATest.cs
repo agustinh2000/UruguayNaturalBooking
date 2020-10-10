@@ -116,11 +116,21 @@ namespace DataAcessTest
 
         [TestMethod]
         [ExpectedException(typeof(ClientException))]
-        public void TestGetUserByNicknameAndPasswordInvalid()
+        public void TestGetUserByEmailAndPasswordInvalid()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
             IUserRepository userRepo = new UserRepository(context);
             User userObtained = userRepo.GetUserByEmailAndPassword("colo2020@gmail.com", "martin1234");
+        }
+
+        [TestMethod]
+        public void TestGetUserByEmailOk()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            IUserRepository userRepo = new UserRepository(context);
+            userRepo.Add(userToAdd);
+            User userObtained = userRepo.GetUserByEmail("colo2020@gmail.com");
+            Assert.AreEqual(userToAdd, userObtained);
         }
     }
 }
