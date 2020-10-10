@@ -75,9 +75,13 @@ namespace BusinessLogic
             {
                 return lodgingRepository.GetAvailableLodgingsByTouristSpot(touristSpotId);
             }
+            catch(ClientException e)
+            {
+                throw new ClientBusinessLogicException(e.Message, e); 
+            }
             catch (ServerException e)
             {
-                throw new ServerBusinessLogicException("No se puede obtener el hospedaje deseado", e);
+                throw new ServerBusinessLogicException(e.Message, e);
             }
         }
 

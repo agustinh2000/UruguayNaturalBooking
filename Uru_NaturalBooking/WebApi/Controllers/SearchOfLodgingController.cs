@@ -27,10 +27,6 @@ namespace WebApi.Controllers
             try
             {
                 List<Lodging> lodgingsForTouristSpotSearched = lodgingManagement.GetAvailableLodgingsByTouristSpot(model.TouristSpotIdSearch);
-                if (lodgingsForTouristSpotSearched.IsNullOrEmpty())
-                {
-                    return NotFound("No se encontraron puntos turisticos para los datos seleccionados.");
-                }
                 LodgingForSearchModel lodgingForSearchModel = new LodgingForSearchModel()
                 {
                     CheckIn = model.CheckIn,
@@ -39,6 +35,11 @@ namespace WebApi.Controllers
                 };
                 return Ok(lodgingForSearchModel.ToModel(lodgingsForTouristSpotSearched)); 
             }
+            catch (ClientBusinessLogicException e)
+            {
+                return NotFound(e.Message);
+            }
+
             catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
