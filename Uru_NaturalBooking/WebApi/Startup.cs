@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace WebApi
 {
@@ -45,9 +47,9 @@ namespace WebApi
             services.AddScoped(typeof(IRepository<Reserve>), typeof(BaseRepository<Reserve>));
             services.AddScoped(typeof(IRepository<UserSession>), typeof(BaseRepository<UserSession>));
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ITouristSpotRepository, TouristSpotRepository>(); 
-
-
+            services.AddScoped<ITouristSpotRepository, TouristSpotRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IUserSessionRepository, UserSessionRepository>();
             services.AddScoped<ILodgingRepository, LodgingRepository>();
 
             services.AddScoped<ITouristSpotManagement, TouristSpotManagement>();
@@ -58,6 +60,25 @@ namespace WebApi
             services.AddScoped<IUserManagement, UserManagement>(); 
 
             services.AddScoped<AuthorizationFilter>();
+
+            services.AddSwaggerGen(options =>
+            {
+                var groupName = "v1";
+
+                options.SwaggerDoc(groupName, new OpenApiInfo
+                {
+                    Title = $"Obligatorio {groupName}",
+                    Version = groupName,
+                    Description = "Obligatorio",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Obligatorio",
+                        Email = string.Empty,
+                        Url = new Uri("https://www.turismo.gub.uy/"),
+                    }
+                });
+            });
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -66,6 +87,12 @@ namespace WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Obligatorio API");
+            });
 
             app.UseHttpsRedirection();
 

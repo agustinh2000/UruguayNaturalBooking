@@ -45,11 +45,11 @@ namespace BusinessLogic
             }
             catch (ClientException e)
             {
-                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindUser, e);
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindCategory, e);
             }
             catch (ServerException e)
             {
-                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedUser, e);
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorGettingCategory, e);
             }
         }
 
