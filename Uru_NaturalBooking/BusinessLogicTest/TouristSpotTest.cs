@@ -131,7 +131,7 @@ namespace BusinessLogicTest
             Guid id = Guid.NewGuid();
             listIdCategories.Add(id);
 
-            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoriesRepositoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
             categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
 
             var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
@@ -169,7 +169,7 @@ namespace BusinessLogicTest
             Guid id = Guid.NewGuid();
             listIdCategories.Add(id);
 
-            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoriesRepositoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
             categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
 
             var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
@@ -202,7 +202,7 @@ namespace BusinessLogicTest
             Guid id = Guid.NewGuid();
             listIdCategories.Add(id);
 
-            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoriesRepositoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
             categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
 
             var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
@@ -236,7 +236,7 @@ namespace BusinessLogicTest
             Guid id = Guid.NewGuid();
             listIdCategories.Add(id);
 
-            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoriesRepositoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
             categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
 
             var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
@@ -295,7 +295,7 @@ namespace BusinessLogicTest
             Guid id = Guid.NewGuid();
             listIdCategories.Add(id);
 
-            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoriesRepositoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
             categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
 
             var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
@@ -329,7 +329,7 @@ namespace BusinessLogicTest
             Guid id = Guid.NewGuid();
             listIdCategories.Add(id);
 
-            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoriesRepositoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
             categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
 
             var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
@@ -363,7 +363,7 @@ namespace BusinessLogicTest
             List<Guid> listIdCategories = new List<Guid>();
             Guid id = Guid.NewGuid();
 
-            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoriesRepositoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
             categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
 
             var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
@@ -397,7 +397,7 @@ namespace BusinessLogicTest
             List<Guid> listIdCategories = new List<Guid>();
             Guid id = Guid.NewGuid();
 
-            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoriesRepositoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
             categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
 
             var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
@@ -431,7 +431,7 @@ namespace BusinessLogicTest
             List<Guid> listIdCategories = new List<Guid>();
             Guid id = Guid.NewGuid();
 
-            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoriesRepositoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
             categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
 
             var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
@@ -465,7 +465,7 @@ namespace BusinessLogicTest
             List<Guid> listIdCategories = new List<Guid>();
             Guid id = Guid.NewGuid();
 
-            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoriesRepositoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
             categoriesRepositoryMock.Setup(m => m.Get(id)).Returns(new Category() { Id = id });
 
             var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);
@@ -500,7 +500,7 @@ namespace BusinessLogicTest
             List<Guid> listIdCategories = new List<Guid>();
             Guid id = Guid.NewGuid();
 
-            var categoriesRepositoryMock = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            var categoriesRepositoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
             categoriesRepositoryMock.Setup(m => m.Get(id)).Throws(new ClientBusinessLogicException());
 
             var regionsRepositoryMock = new Mock<IRepository<Region>>(MockBehavior.Strict);

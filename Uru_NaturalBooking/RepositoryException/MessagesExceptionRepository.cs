@@ -11,7 +11,7 @@ namespace RepositoryException
         public static string ErrorObteinedTouristSpotByRegionId = "Error. No se puede obtener los puntos turisticos por el Id de region buscado.";
         public static string ErrorGettingTouristSpotByRegionId = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por el Id de region.";
         public static string ErrorObteinedTouristSpotByCategories = "Error. No se puede obtener los puntos turisticos por las categorias buscadas.";
-        public static string ErrorGettingTouristSpotByCategories = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias."; 
+        public static string ErrorGettingTouristSpotByCategories = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias.";
         public static string ErrorObteinedTouristSpotByCategoriesAndRegion = "Error. No se puede obtener los puntos turisticos por las categorias buscadas y la region buscada.";
         public static string ErrorGettingTouristSpotByCategoriesAndRegion = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias y region.";
         public static string ErrorEmailOrPasswordIncorrect = "Error. Email y/o contrasena incorrecto";
@@ -21,5 +21,7 @@ namespace RepositoryException
         public static string ErrorGettingAvailableLodgingsByTouristSpotId = "Error. Ha ocurrido un error al tratar de obtener los hospedajes disponibles buscados segun el punto turistico.";
         public static string ErrorObteinedLodgingByNameAndTouristSpotId = "Error. Ha ocurrido un error al tratar de obtener un hospedaje por el nombre y punto turistico indicado.";
         public static string ErrorObteinedTouristSpotByName = "Error. Ha ocurrido un error al tratar de obtener un punto turistico por el nombre indicado.";
+        public static string ErrorObteinedCategoryByName = "Error. Ha ocurrido un error al tratar de obtener una categoria por el nombre indicado.";
+
     }
 }

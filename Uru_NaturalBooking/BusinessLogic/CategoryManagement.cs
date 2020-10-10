@@ -12,9 +12,9 @@ namespace BusinessLogic
 {
     public class CategoryManagement : ICategoryManagement
     {
-        private IRepository<Category> categoryRepository;
+        private ICategoryRepository categoryRepository;
 
-        public CategoryManagement(IRepository<Category> repository)
+        public CategoryManagement(ICategoryRepository repository)
         {
             categoryRepository = repository;
         }
@@ -26,9 +26,9 @@ namespace BusinessLogic
                 List<Category> allCategories = categoryRepository.GetAll().ToList();
                 return allCategories;
             }
-            catch(ClientException e)
+            catch (ClientException e)
             {
-                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistCategories, e); 
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotExistCategories, e);
             }
             catch (ServerException e)
             {
@@ -55,33 +55,55 @@ namespace BusinessLogic
 
         public List<Category> GetAssociatedCategories(List<Guid> categoriesId)
         {
-            List<Category> listOfCategoriesToAssociated = new List<Category>(); 
-            
-             foreach(Guid identifierCategory in categoriesId)
-             {
-                    Category category = GetById(identifierCategory);
-                    listOfCategoriesToAssociated.Add(category); 
-             }
-             return listOfCategoriesToAssociated;   
+            List<Category> listOfCategoriesToAssociated = new List<Category>();
+
+            foreach (Guid identifierCategory in categoriesId)
+            {
+                Category category = GetById(identifierCategory);
+                listOfCategoriesToAssociated.Add(category);
+            }
+            return listOfCategoriesToAssociated;
         }
 
         public Category Create(Category categoryToCreate)
         {
             try
             {
+                VerifyIfCategoryExist(categoryToCreate);
                 categoryToCreate.Id = Guid.NewGuid();
                 categoryToCreate.VerifyFormat();
                 categoryRepository.Add(categoryToCreate);
-                return categoryToCreate; 
+                return categoryToCreate;
             }
-            catch(CategoryException e)
+            catch (CategoryException e)
             {
-                throw new DomainBusinessLogicException(e.Message); 
+                throw new DomainBusinessLogicException(e.Message);
             }
-            catch(ServerException e)
+            catch (DomainBusinessLogicException e)
             {
-                throw new ServerBusinessLogicException("No se puede crear la categoria deseada", e); 
+                throw new DomainBusinessLogicException(e.Message);
+            }
+            catch (ServerException e)
+            {
+                throw new ServerBusinessLogicException("No se puede crear la categoria deseada", e);
             }
         }
+
+        private void VerifyIfCategoryExist(Category category)
+        {
+            try
+            {
+                Category catgegoryObteined = categoryRepository.GetCategoryByName(category.Name);
+                if (catgegoryObteined != null)
+                {
+                    throw new DomainBusinessLogicException(MessageExceptionBusinessLogic.ErrorCategoryAlredyExist);
+                }
+            }
+            catch (ServerException e)
+            {
+                throw new ServerException("No se puede crear la categoria debido a que ha ocurrido un error.", e);
+            }
+        }
+
     }
 }

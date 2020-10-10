@@ -38,5 +38,6 @@ namespace BusinessLogicException
         public static string ErrorUserAlredyExist = "Error. El mail del usuario que desea crear ya existe.";
         public static string ErrorTouristSpotAlredyExist = "Error. El punto turistico que desea crear ya existe.";
         public static string ErrorLodgingAlredyExist = "Error. El hospedaje que desea crear ya existe.";
+        public static string ErrorCategoryAlredyExist = "Error. La categoria que desea crear ya existe.";
     }
 }
