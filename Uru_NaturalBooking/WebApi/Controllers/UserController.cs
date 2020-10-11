@@ -132,6 +132,10 @@ namespace WebApi.Controllers
                 userManagement.RemoveUser(id);
                 return NoContent();
             }
+            catch (ClientBusinessLogicException e)
+            {
+                return NotFound(e.Message);
+            }
             catch (ServerBusinessLogicException e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);

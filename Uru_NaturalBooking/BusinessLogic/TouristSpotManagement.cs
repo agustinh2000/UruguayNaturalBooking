@@ -175,6 +175,10 @@ namespace BusinessLogic
                 TouristSpot touristSpotToDelete = touristSpotRepository.Get(touristSpotId);
                 touristSpotRepository.Remove(touristSpotToDelete);
             }
+            catch (ClientException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindTouristSpot, e);
+            }
             catch (ServerException e)
             {
                 throw new ServerBusinessLogicException("No se puede eliminar el punto turistico deseado.", e);

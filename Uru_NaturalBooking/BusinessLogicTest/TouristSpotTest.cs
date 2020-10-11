@@ -967,12 +967,25 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void RemoveInvalidTouristSpot()
+        public void RemoveInvalidTouristSpotInternalError()
         {
             var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
             touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerException());
             touristSpotRepositoryMock.Setup(m => m.Remove(It.IsAny<TouristSpot>()));
             touristSpotRepositoryMock.Setup(m => m.GetAll()).Returns(new List<TouristSpot>());
+
+            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
+
+            touristSpotLogic.RemoveTouristSpot(touristSpot1.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void RemoveInvalidTouristSpotNotExist()
+        {
+            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
+            touristSpotRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientException());
+            touristSpotRepositoryMock.Setup(m => m.Remove(It.IsAny<TouristSpot>()));
 
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 

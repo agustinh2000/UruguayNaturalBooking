@@ -703,5 +703,25 @@ namespace BusinessLogicTest
             var userLogic = new UserManagement(userRepositoryMock.Object);
             userLogic.RemoveUser(user.Id);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void DeleteUserNotExist()
+        {
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "martin1234"
+            };
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientException());
+            userRepositoryMock.Setup(m => m.Remove(It.IsAny<User>()));
+            var userLogic = new UserManagement(userRepositoryMock.Object);
+            userLogic.RemoveUser(user.Id);
+        }
     }
 }

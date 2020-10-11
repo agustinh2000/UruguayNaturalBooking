@@ -496,12 +496,22 @@ namespace BusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void RemoveInvalidLodgingTests()
+        public void RemoveInvalidLodgingInternalErrorTest()
         {
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ServerException());
             lodgingRepositoryMock.Setup(m => m.Remove(It.IsAny<Lodging>()));
-            lodgingRepositoryMock.Setup(m => m.GetAll()).Returns(new List<Lodging>());
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+            lodgingLogic.RemoveLodging(lodging.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void RemoveInvalidLodgingNotExistTest()
+        {
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientException());
+            lodgingRepositoryMock.Setup(m => m.Remove(It.IsAny<Lodging>()));
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
             lodgingLogic.RemoveLodging(lodging.Id);
         }

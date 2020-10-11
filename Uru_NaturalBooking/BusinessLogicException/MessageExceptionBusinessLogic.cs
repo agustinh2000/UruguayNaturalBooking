@@ -40,6 +40,6 @@ namespace BusinessLogicException
         public static string ErrorLodgingAlredyExist = "Error. El hospedaje que desea crear ya existe.";
         public static string ErrorCategoryAlredyExist = "Error. La categoria que desea crear ya existe.";
         public static string ErrorNotFindCategory = "Error. No se ha encontrado la categoria buscada.";
-        public static string ErrorGettingCategory = "Error. Ha ocurrido un error al intentar obtener la categoria buscada."; 
+        public static string ErrorGettingCategory = "Error. Ha ocurrido un error al intentar obtener la categoria buscada.";
     }
 }

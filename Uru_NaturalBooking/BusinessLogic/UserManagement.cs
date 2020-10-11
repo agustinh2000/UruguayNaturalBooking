@@ -184,6 +184,10 @@ namespace BusinessLogic
                 User userToDelete = userRepository.Get(userId);
                 userRepository.Remove(userToDelete);
             }
+            catch (ClientException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindUser, e);
+            }
             catch (ServerException e)
             {
                 throw new ServerBusinessLogicException("No se puede eliminar el usuario deseado.", e);

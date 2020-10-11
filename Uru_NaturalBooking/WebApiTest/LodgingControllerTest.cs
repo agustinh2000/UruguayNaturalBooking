@@ -22,7 +22,7 @@ namespace WebApiTest
         LodgingModelForResponse lodgingModelForResponse;
         LodgingModelForRequest lodgingModelForRequest;
         Lodging lodgingOfficial;
-        Lodging lodgingForGet; 
+        Lodging lodgingForGet;
         Region regionForTouristSpot;
         Category category;
         TouristSpot touristSpotAdded;
@@ -38,10 +38,10 @@ namespace WebApiTest
 
             lodgingTouristSpotModel = new TouristSpotModelForLodgingResponseModel()
             {
-                
+
                 Id = Guid.NewGuid(),
                 Name = "Punta del este",
-                
+
             };
 
             lodgingModelForResponse = new LodgingModelForResponse()
@@ -82,7 +82,7 @@ namespace WebApiTest
             {
                 Id = Guid.NewGuid(),
                 Name = "Punta del Este",
-                Image =  image,
+                Image = image,
                 Description = "Un lugar increible",
                 Region = regionForTouristSpot,
                 ListOfCategories = new List<CategoryTouristSpot>() { new CategoryTouristSpot() { Category = category } }
@@ -92,7 +92,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "Hotel las cumbres",
-                Images = new List <Picture> () {image},
+                Images = new List<Picture>() { image },
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
@@ -254,14 +254,14 @@ namespace WebApiTest
 
             LodgingModelForRequest lodgingModelForRequestToUpdate = new LodgingModelForRequest()
             {
-                Id= lodgingModelForRequest.Id, 
+                Id = lodgingModelForRequest.Id,
                 Name = "Hotel Enjoy Conrad",
-                Images = new Picture [] { image },
+                Images = new Picture[] { image },
 
-            }; 
+            };
 
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.UpdateLodging(It.IsAny<Guid>(),It.IsAny<Lodging>())).Returns(lodgingUpdated);
+            lodgingManagementMock.Setup(m => m.UpdateLodging(It.IsAny<Guid>(), It.IsAny<Lodging>())).Returns(lodgingUpdated);
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Put(lodgingModelForRequestToUpdate.Id, lodgingModelForRequestToUpdate);
             var createdResult = result as CreatedAtRouteResult;
@@ -289,7 +289,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "",
-                Images = new List <Picture> (){ image },
+                Images = new List<Picture>() { image },
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
@@ -300,11 +300,11 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "",
-                Images = new Picture [] { image },
+                Images = new Picture[] { image },
             };
 
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.UpdateLodging(It.IsAny<Guid>(),It.IsAny<Lodging>())).
+            lodgingManagementMock.Setup(m => m.UpdateLodging(It.IsAny<Guid>(), It.IsAny<Lodging>())).
                 Throws(new ServerBusinessLogicException("No se puede actualizar el hospedaje deseado."));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Put(lodgingModelForRequestToUpdate.Id, lodgingModelForRequestToUpdate);
@@ -381,10 +381,22 @@ namespace WebApiTest
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
             lodgingManagementMock.Setup(m => m.RemoveLodging(It.IsAny<Guid>()));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
-            var result = lodgingController.Delete(lodgingModelForRequest.Id); 
+            var result = lodgingController.Delete(lodgingModelForRequest.Id);
             var createdResult = result as NoContentResult;
             lodgingManagementMock.VerifyAll();
             Assert.AreEqual(204, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void DeleteLodgingNotFountTest()
+        {
+            var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
+            lodgingManagementMock.Setup(m => m.RemoveLodging(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException("El hospedaje a eliminar no ha sido encontrado."));
+            LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
+            var result = lodgingController.Delete(lodgingModelForRequest.Id);
+            var createdResult = result as NotFoundObjectResult;
+            lodgingManagementMock.VerifyAll();
+            Assert.AreEqual(404, createdResult.StatusCode);
         }
 
         [TestMethod]

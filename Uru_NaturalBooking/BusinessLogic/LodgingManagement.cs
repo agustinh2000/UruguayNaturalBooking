@@ -114,6 +114,10 @@ namespace BusinessLogic
                 Lodging lodgingToDelete = lodgingRepository.Get(lodgingId);
                 lodgingRepository.Remove(lodgingToDelete);
             }
+            catch (ClientException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorNotFindLodging, e);
+            }
             catch (ServerException e)
             {
                 throw new ServerBusinessLogicException("No se puede eliminar el hospedaje deseado.", e);

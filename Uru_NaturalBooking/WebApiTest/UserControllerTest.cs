@@ -323,6 +323,18 @@ namespace WebApiTest
         }
 
         [TestMethod]
+        public void DeleteUserNotExist()
+        {
+            var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
+            userMock.Setup(m => m.RemoveUser(aUser.Id)).Throws(new ClientBusinessLogicException());
+            UserController userController = new UserController(userMock.Object);
+            var result = userController.Delete(aUser.Id);
+            var createdResult = result as NotFoundObjectResult;
+            userMock.VerifyAll();
+            Assert.AreEqual(404, createdResult.StatusCode);
+        }
+
+        [TestMethod]
         public void LogOutOk()
         {
             var userMock = new Mock<IUserManagement>(MockBehavior.Strict);
