@@ -26,7 +26,7 @@ namespace WebApi.Controllers
             touristSpotManagement = touristSpotLogic;
         }
 
-        [HttpGet("{id}", Name = "GetTouristSpot")]
+        [HttpGet("{id}", Name = "getTouristSpot")]
         public IActionResult Get(Guid id)
         {
             try
@@ -62,7 +62,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("findByRegion")]
+        [HttpGet("getByRegion")]
         public IActionResult GetTouristSpotsByRegionId([FromQuery] Guid regionId)
         {
             try
@@ -80,7 +80,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("findByCategories")]
+        [HttpGet("getByCategories")]
         public IActionResult GetTouristSpotsByCategoriesId([FromQuery] Guid[] categoriesId)
         {
             try
@@ -99,7 +99,7 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpGet("findByCategoriesAndRegion")]
+        [HttpGet("getByCategoriesAndRegion")]
         public IActionResult GetTouristSpotsByCategoriesAndRegionId([FromQuery] Guid[] categoriesId, [FromQuery] Guid regionId)
         {
             try
@@ -125,7 +125,7 @@ namespace WebApi.Controllers
             try
             {
                 TouristSpot touristSpotAdded = touristSpotManagement.Create(TouristSpotForRequestModel.ToEntity(aTouristSpot), aTouristSpot.RegionId, aTouristSpot.ListOfCategoriesId);
-                return CreatedAtRoute("GetTouristSpot", new { id = touristSpotAdded.Id }, TouristSpotForResponseModel.ToModel(touristSpotAdded));
+                return CreatedAtRoute("getTouristSpot", new { id = touristSpotAdded.Id }, TouristSpotForResponseModel.ToModel(touristSpotAdded));
             }
             catch (DomainBusinessLogicException e)
             {

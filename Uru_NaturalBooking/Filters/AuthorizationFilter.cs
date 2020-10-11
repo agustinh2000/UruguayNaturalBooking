@@ -22,7 +22,7 @@ namespace Filters
                 context.Result = new ContentResult()
                 {
                     StatusCode = 401,
-                    Content = "No esta logueado."
+                    Content = "Error. Debe estar logueado para poder realizar esta operación."
                 };
                 return;
             }
@@ -31,7 +31,7 @@ namespace Filters
                 context.Result = new ContentResult()
                 {
                     StatusCode = 403,
-                    Content = "No esta logueado correctamente."
+                    Content = "Error. No esta logueado correctamente."
                 };
                 return;
             }

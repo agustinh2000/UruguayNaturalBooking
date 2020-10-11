@@ -42,7 +42,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "get")]
         public IActionResult Get(Guid id)
         {
             try
@@ -68,7 +68,7 @@ namespace WebApi.Controllers
             try
             {
                 Category category = categoryManagement.Create(CategoryModel.ToEntity(categoryModel));
-                return CreatedAtRoute("Get", new { id = category.Id }, CategoryModel.ToModel(category));
+                return CreatedAtRoute("get", new { id = category.Id }, CategoryModel.ToModel(category));
             }
             catch (DomainBusinessLogicException e)
             {

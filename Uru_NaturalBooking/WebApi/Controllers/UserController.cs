@@ -62,7 +62,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "GetUser")]
+        [HttpGet("{id}", Name = "getUser")]
         public IActionResult Get(Guid id)
         {
             try
@@ -88,7 +88,7 @@ namespace WebApi.Controllers
             try
             {
                 User userCreated = userManagement.Create(user);
-                return CreatedAtRoute("GetUser", new { id = user.Id }, UserModelForResponse.ToModel(userCreated));
+                return CreatedAtRoute("getUser", new { id = user.Id }, UserModelForResponse.ToModel(userCreated));
             }
             catch (DomainBusinessLogicException e)
             {
@@ -107,7 +107,7 @@ namespace WebApi.Controllers
             try
             {
                 User userUpdated = userManagement.UpdateUser(id, user);
-                return CreatedAtRoute("GetUser", new { id = userUpdated.Id }, UserModelForResponse.ToModel(userUpdated));
+                return CreatedAtRoute("getUser", new { id = userUpdated.Id }, UserModelForResponse.ToModel(userUpdated));
             }
             catch (DomainBusinessLogicException e)
             {
