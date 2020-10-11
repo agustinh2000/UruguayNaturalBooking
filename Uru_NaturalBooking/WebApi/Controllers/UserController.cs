@@ -62,6 +62,8 @@ namespace WebApi.Controllers
             }
         }
 
+
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpGet("{id}", Name = "getUser")]
         public IActionResult Get(Guid id)
         {
