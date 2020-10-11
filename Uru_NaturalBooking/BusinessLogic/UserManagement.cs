@@ -182,6 +182,11 @@ namespace BusinessLogic
             try
             {
                 User userToDelete = userRepository.Get(userId);
+                UserSession userSession = sessionRepository.GetUserSessionByUserId(userId);
+                if (userSession != null)
+                {
+                    sessionRepository.Remove(userSession);
+                }
                 userRepository.Remove(userToDelete);
             }
             catch (ClientException e)

@@ -677,12 +677,42 @@ namespace BusinessLogicTest
                 Password = "martin1234"
             };
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            var userSessionRepositoryMock = new Mock<IUserSessionRepository>(MockBehavior.Strict);
             userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            userSessionRepositoryMock.Setup(m => m.GetUserSessionByUserId(It.IsAny<Guid>())).Returns(value: null);
             userRepositoryMock.Setup(m => m.Remove(It.IsAny<User>()));
-            var userLogic = new UserManagement(userRepositoryMock.Object);
+            var userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
             userLogic.RemoveUser(user.Id);
             userRepositoryMock.VerifyAll();
         }
+
+        [TestMethod]
+        public void DeleteValidUserWithUserSessionAssociated()
+        {
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "martin1234"
+            };
+            UserSession userSessionAssociated = new UserSession()
+            {
+                User = user
+            };
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            var userSessionRepositoryMock = new Mock<IUserSessionRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            userSessionRepositoryMock.Setup(m => m.GetUserSessionByUserId(It.IsAny<Guid>())).Returns(userSessionAssociated);
+            userRepositoryMock.Setup(m => m.Remove(It.IsAny<User>()));
+            userSessionRepositoryMock.Setup(m => m.Remove(It.IsAny<UserSession>()));
+            var userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
+            userLogic.RemoveUser(user.Id);
+            userRepositoryMock.VerifyAll();
+        }
+
 
         [TestMethod]
         [ExpectedException(typeof(ServerBusinessLogicException))]
@@ -698,9 +728,11 @@ namespace BusinessLogicTest
                 Password = "martin1234"
             };
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            var userSessionRepositoryMock = new Mock<IUserSessionRepository>(MockBehavior.Strict);
             userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            userSessionRepositoryMock.Setup(m => m.GetUserSessionByUserId(It.IsAny<Guid>())).Returns(value: null);
             userRepositoryMock.Setup(m => m.Remove(It.IsAny<User>())).Throws(new ServerException());
-            var userLogic = new UserManagement(userRepositoryMock.Object);
+            var userLogic = new UserManagement(userRepositoryMock.Object, userSessionRepositoryMock.Object);
             userLogic.RemoveUser(user.Id);
         }
 
