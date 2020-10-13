@@ -23,6 +23,8 @@ namespace Model.ForRequest
 
         public double PricePerNight { get; set; }
 
+        public bool IsAvailable { get; set; }
+
         public Guid TouristSpotId { get; set; }
 
         public override Lodging ToEntity() => new Lodging()
@@ -33,7 +35,8 @@ namespace Model.ForRequest
             QuantityOfStars = QuantityOfStars,
             Address = Address,
             Images = Images.ToList(),
-            PricePerNight = PricePerNight
+            PricePerNight = PricePerNight, 
+            IsAvailable= IsAvailable
         }; 
     }
 }

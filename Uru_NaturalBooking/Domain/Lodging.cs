@@ -85,10 +85,10 @@ namespace Domain
         {
             Name = aLodging.Name;
             QuantityOfStars = aLodging.QuantityOfStars;
+            Description = aLodging.Description; 
             Address = aLodging.Address;
             Images = aLodging.Images;
             PricePerNight = aLodging.PricePerNight;
-            TouristSpot = aLodging.TouristSpot;
             IsAvailable = aLodging.IsAvailable; 
         }
 
