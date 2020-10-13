@@ -16,17 +16,5 @@ namespace Domain
         public virtual TouristSpot TouristSpot { get; set; }
 
         public CategoryTouristSpot() { }
-
-		public override bool Equals(object obj)
-		{
-
-			CategoryTouristSpot categoryTouristSpot = obj as CategoryTouristSpot;
-			if(categoryTouristSpot == null || Convert.IsDBNull(categoryTouristSpot))
-			{
-				return false;
-			}			
-			return CategoryId.Equals(categoryTouristSpot.CategoryId);
-		}
-
 	}
 }

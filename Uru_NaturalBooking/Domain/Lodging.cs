@@ -17,13 +17,18 @@ namespace Domain
 
         public string Description { get; set; }
 
-        public virtual List <Picture> Images { get; set; }
+        public virtual List <LodgingPicture> Images { get; set; }
         
         public double PricePerNight { get; set; }
 
         public bool IsAvailable { get; set; } = true; 
 
         public virtual TouristSpot TouristSpot { get; set; }
+
+        public Lodging()
+        {
+            Images = new List<LodgingPicture>();
+        }
 
         public void VerifyFormat()
         {
@@ -83,13 +88,24 @@ namespace Domain
 
         public void UpdateAttributes(Lodging aLodging)
         {
-            Name = aLodging.Name;
-            QuantityOfStars = aLodging.QuantityOfStars;
-            Description = aLodging.Description; 
-            Address = aLodging.Address;
-            Images = aLodging.Images;
-            PricePerNight = aLodging.PricePerNight;
-            IsAvailable = aLodging.IsAvailable; 
+            if (!String.IsNullOrEmpty(aLodging.Name))
+            {
+                Name = aLodging.Name;
+            }
+            if (aLodging.QuantityOfStars > 0 && aLodging.QuantityOfStars <= 5)
+            {
+                QuantityOfStars = aLodging.QuantityOfStars;
+            }
+
+            if (!String.IsNullOrEmpty(aLodging.Description))
+            {
+                Description = aLodging.Description;
+            }
+            if (!String.IsNullOrEmpty(aLodging.Address))
+            {
+                Address = aLodging.Address;
+            }
+            IsAvailable = aLodging.IsAvailable;
         }
 
         public override bool Equals(object obj)

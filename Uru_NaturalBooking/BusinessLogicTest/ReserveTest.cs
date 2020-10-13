@@ -20,6 +20,7 @@ namespace BusinessLogicTest
         CategoryTouristSpot categoryTouristSpot;
         Category aCategory;
         Picture picture;
+        LodgingPicture lodgingPicture; 
 
         [TestInitialize]
         public void SetUp()
@@ -37,7 +38,14 @@ namespace BusinessLogicTest
 
             picture = new Picture()
             {
+                Id= Guid.NewGuid(),
                 Path = "Desktop/foto.jpg"
+            };
+
+            lodgingPicture = new LodgingPicture()
+            {
+                Picture = picture,
+                PictureId = picture.Id
             }; 
 
             touristSpot = new TouristSpot
@@ -61,7 +69,7 @@ namespace BusinessLogicTest
                 Address = "Ruta 12 km 3.5",
                 PricePerNight = 150,
                 TouristSpot = touristSpot,
-                Images= new List<Picture>() {picture}
+                Images= new List<LodgingPicture>() {lodgingPicture}
             };
         }
 

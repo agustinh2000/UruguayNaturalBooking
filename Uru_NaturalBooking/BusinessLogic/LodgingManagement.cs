@@ -27,7 +27,7 @@ namespace BusinessLogic
             lodgingRepository = repository;
         }
 
-        public Lodging Create(Lodging lodging, Guid touristSpotId)
+        public Lodging Create(Lodging lodging, Guid touristSpotId, List<Picture> pictures)
         {
             try
             {
@@ -35,6 +35,17 @@ namespace BusinessLogic
                 lodging.Id = Guid.NewGuid();
                 TouristSpot touristSpotForLodging = touristSpotManagementLogic.GetTouristSpotById(touristSpotId);
                 lodging.TouristSpot = touristSpotForLodging;
+                foreach (Picture picture in pictures)
+                {
+                    LodgingPicture lodgingPicture = new LodgingPicture()
+                    {
+                        Lodging = lodging,
+                        LodgingId = lodging.Id,
+                        Picture = picture,
+                        PictureId = picture.Id
+                    };
+                    lodging.Images.Add(lodgingPicture);
+                }
                 lodging.VerifyFormat();
                 lodgingRepository.Add(lodging);
                 return lodging;

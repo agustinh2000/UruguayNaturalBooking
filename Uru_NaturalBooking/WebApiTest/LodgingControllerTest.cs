@@ -27,14 +27,24 @@ namespace WebApiTest
         Category category;
         TouristSpot touristSpotAdded;
         Picture image;
+        LodgingPicture lodgingPicture; 
+
 
         [TestInitialize]
         public void SetUp()
         {
             image = new Picture()
             {
+                Id= Guid.NewGuid(), 
                 Path = "c:/MiDirectorio/Imagenes/Paisaje.png"
             };
+
+            lodgingPicture = new LodgingPicture()
+            {
+                Picture = image,
+                PictureId = image.Id
+            }; 
+
 
             lodgingTouristSpotModel = new TouristSpotModelForLodgingResponseModel()
             {
@@ -48,7 +58,7 @@ namespace WebApiTest
             {
                 Id = Guid.NewGuid(),
                 Name = "Hotel las cumbres",
-                Images = new Picture[] { image },
+                ImagesPath = new List<string> { image.Path },
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
@@ -59,7 +69,7 @@ namespace WebApiTest
             {
                 Id = Guid.NewGuid(),
                 Name = "Hotel las cumbres",
-                Images = new Picture[] { image },
+                Images = new List<Picture> {image},
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
@@ -92,7 +102,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "Hotel las cumbres",
-                Images = new List<Picture>() { image },
+                Images = new List<LodgingPicture>() { lodgingPicture },
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
@@ -103,7 +113,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForResponse.Id,
                 Name = "Hotel las cumbres",
-                Images = new List<Picture>() { image },
+                Images = new List<LodgingPicture>() { lodgingPicture },
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
@@ -191,7 +201,7 @@ namespace WebApiTest
         public void CreateLodgingTestOk()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>())).Returns(lodgingOfficial);
+            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>(), It.IsAny<List<Picture>>())).Returns(lodgingOfficial);
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Post(lodgingModelForRequest);
             var createdResult = result as CreatedAtRouteResult;
@@ -204,7 +214,7 @@ namespace WebApiTest
         public void CreateLodgingInvalidTest()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>())).
+            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>(), It.IsAny<List<Picture>>())).
                 Throws(new DomainBusinessLogicException("No se puede crear el hospedaje debido a que no es valido."));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Post(lodgingModelForRequest);
@@ -217,7 +227,7 @@ namespace WebApiTest
         public void CreateLodgingWithoutTouristSpotTest()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>())).
+            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>(), It.IsAny<List<Picture>>())).
                 Throws(new ClientBusinessLogicException("No se puede crear el hospedaje debido a que no se encontro el punto turistico"));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Post(lodgingModelForRequest);
@@ -230,7 +240,7 @@ namespace WebApiTest
         public void CreateLodgingInternalServerErrorTest()
         {
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
-            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("Error interno"));
+            lodgingManagementMock.Setup(m => m.Create(It.IsAny<Lodging>(), It.IsAny<Guid>(), It.IsAny<List<Picture>>())).Throws(new ServerBusinessLogicException("Error interno"));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Post(lodgingModelForRequest);
             var createdResult = result as ObjectResult;
@@ -245,7 +255,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "Hotel Enjoy Conrad",
-                Images = new List<Picture> { image },
+                Images = new List<LodgingPicture> { lodgingPicture },
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
@@ -256,7 +266,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "Hotel Enjoy Conrad",
-                Images = new Picture[] { image },
+                Images = new List<Picture> { image },
 
             };
 
@@ -272,7 +282,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "Hotel Enjoy Conrad",
-                Images = new Picture[] { image },
+                ImagesPath = new List<string>{ image.Path },
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
@@ -289,7 +299,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "",
-                Images = new List<Picture>() { image },
+                Images = new List<LodgingPicture>() { lodgingPicture },
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
@@ -300,7 +310,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "",
-                Images = new Picture[] { image },
+                Images = new List<Picture> { image },
             };
 
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
@@ -320,7 +330,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "",
-                Images = new List<Picture>() { image },
+                Images = new List<LodgingPicture>() { lodgingPicture },
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
@@ -331,7 +341,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "Prueba",
-                Images = new Picture[] { image },
+                Images = new List<Picture> { image },
             };
 
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
@@ -351,7 +361,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "",
-                Images = new List<Picture>() { image },
+                Images = new List<LodgingPicture>() { lodgingPicture },
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
@@ -362,7 +372,7 @@ namespace WebApiTest
             {
                 Id = lodgingModelForRequest.Id,
                 Name = "",
-                Images = new Picture[] { image },
+                Images = new List<Picture> { image },
             };
 
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);

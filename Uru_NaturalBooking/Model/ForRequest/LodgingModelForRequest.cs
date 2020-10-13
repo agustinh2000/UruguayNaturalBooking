@@ -19,11 +19,11 @@ namespace Model.ForRequest
 
         public string Address { get; set; }
 
-        public Picture[] Images { get; set; }
+        public List<Picture> Images { get; set; }
 
         public double PricePerNight { get; set; }
 
-        public bool IsAvailable { get; set; }
+        public bool IsAvailable { get; set; } = true; 
 
         public Guid TouristSpotId { get; set; }
 
@@ -34,7 +34,6 @@ namespace Model.ForRequest
             Description = Description,
             QuantityOfStars = QuantityOfStars,
             Address = Address,
-            Images = Images.ToList(),
             PricePerNight = PricePerNight, 
             IsAvailable= IsAvailable
         }; 

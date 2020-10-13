@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ContextObl))]
-    partial class ContextOblModelSnapshot : ModelSnapshot
+    [Migration("20201013184503_ObligatorioMigrationv12")]
+    partial class ObligatorioMigrationv12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,11 +92,16 @@ namespace DataAccess.Migrations
                     b.Property<Guid>("LodgingId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("LodgingId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("PictureId", "LodgingId");
 
                     b.HasIndex("LodgingId");
 
-                    b.ToTable("LodgingPictures");
+                    b.HasIndex("LodgingId1");
+
+                    b.ToTable("LodgingPicture");
                 });
 
             modelBuilder.Entity("Domain.Picture", b =>
@@ -274,10 +281,14 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Domain.LodgingPicture", b =>
                 {
                     b.HasOne("Domain.Lodging", "Lodging")
-                        .WithMany("Images")
+                        .WithMany()
                         .HasForeignKey("LodgingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Domain.Lodging", null)
+                        .WithMany("Images")
+                        .HasForeignKey("LodgingId1");
 
                     b.HasOne("Domain.Picture", "Picture")
                         .WithMany("LodgingPictures")

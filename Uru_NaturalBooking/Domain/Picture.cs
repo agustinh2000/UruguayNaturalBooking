@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Domain
 {
@@ -8,5 +7,7 @@ namespace Domain
     {
         public Guid Id { get; set; }
         public string Path { get; set; }
+
+        public virtual List<LodgingPicture> LodgingPictures { get; set;}
     }
 }

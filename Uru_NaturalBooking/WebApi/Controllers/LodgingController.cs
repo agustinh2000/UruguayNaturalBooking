@@ -66,7 +66,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Lodging lodging = lodgingManagement.Create(LodgingModelForRequest.ToEntity(lodgingModel), lodgingModel.TouristSpotId);
+                Lodging lodging = lodgingManagement.Create(LodgingModelForRequest.ToEntity(lodgingModel), lodgingModel.TouristSpotId, lodgingModel.Images);
                 return CreatedAtRoute("getLodging", new { id = lodging.Id }, LodgingModelForResponse.ToModel(lodging));
             }
             catch (DomainBusinessLogicException e)

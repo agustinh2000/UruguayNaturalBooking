@@ -22,6 +22,8 @@ namespace BusinessLogicTest
         Picture picture;
         TouristSpot touristSpotOfPuntaDelEste;
         Lodging lodgingConrad;
+        LodgingPicture lodgingPicture;
+        List<Picture> listOfPictures; 
 
 
         [TestInitialize]
@@ -37,12 +39,14 @@ namespace BusinessLogicTest
             {
                 Category = aCategory,
                 CategoryId = aCategory.Id,
-            };
+            }; 
 
             picture = new Picture()
             {
                 Path = "Desktop/joaco/foto.jpg"
             };
+
+            listOfPictures = new List<Picture>() { picture };
 
             touristSpot = new TouristSpot
             {
@@ -56,6 +60,12 @@ namespace BusinessLogicTest
             categoryTouristSpot.TouristSpot = touristSpot;
             categoryTouristSpot.TouristSpotId = touristSpot.Id;
 
+            lodgingPicture = new LodgingPicture()
+            {
+                Picture = picture,
+                PictureId = picture.Id
+            }; 
+
             lodging = new Lodging()
             {
                 Id = Guid.NewGuid(),
@@ -65,7 +75,7 @@ namespace BusinessLogicTest
                 Address = "Ruta 12 km 3.5",
                 PricePerNight = 150,
                 TouristSpot = touristSpot,
-                Images = new List<Picture> { picture }
+                Images = new List<LodgingPicture> { lodgingPicture }
             };
 
             touristSpotOfPuntaDelEste = new TouristSpot()
@@ -100,7 +110,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
 
             Lodging lodgingToCompare = new Lodging()
             {
@@ -124,6 +134,8 @@ namespace BusinessLogicTest
         {
             lodging.Images = null;
 
+            List<Picture> listOfPictures = new List<Picture>(); 
+
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
             lodgingRepositoryMock.Setup(m => m.GetLodgingByNameAndTouristSpot(lodging.Name, touristSpot.Id)).Returns(value: null);
@@ -134,14 +146,16 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
         [ExpectedException(typeof(DomainBusinessLogicException))]
         public void CreateInvalidLodgingWithNewListOfPicturesTest()
         {
-            lodging.Images = new List<Picture>();
+            lodging.Images = new List<LodgingPicture>();
+
+            List<Picture> listOfPictures = new List<Picture>();
 
             var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
             lodgingRepositoryMock.Setup(m => m.Add(It.IsAny<Lodging>()));
@@ -153,7 +167,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
@@ -172,7 +186,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
@@ -190,7 +204,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
@@ -209,7 +223,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
@@ -228,7 +242,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
@@ -247,7 +261,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
@@ -266,7 +280,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
@@ -285,7 +299,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
@@ -305,7 +319,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
@@ -322,7 +336,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
@@ -339,7 +353,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]
@@ -356,7 +370,7 @@ namespace BusinessLogicTest
 
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object, touristSpotLogic);
 
-            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id);
+            Lodging resultOfCreateALodging = lodgingLogic.Create(lodging, touristSpot.Id, listOfPictures);
         }
 
         [TestMethod]

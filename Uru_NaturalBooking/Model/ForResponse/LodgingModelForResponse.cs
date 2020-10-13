@@ -18,7 +18,7 @@ namespace Model.ForResponse
 
         public string Address { get; set; }
 
-        public Picture[] Images { get; set; }
+        public List<String> ImagesPath { get; set; }
 
         public double PricePerNight { get; set; }
 
@@ -33,7 +33,7 @@ namespace Model.ForResponse
             Description = lodging.Description;
             QuantityOfStars = lodging.QuantityOfStars;
             Address = lodging.Address;
-            Images = lodging.Images.ToArray();
+            ImagesPath = lodging.Images.ConvertAll(p => p.Picture.Path);
             PricePerNight = lodging.PricePerNight;
             LodgingTouristSpotModel = TouristSpotModelForLodgingResponseModel.ToModel(lodging.TouristSpot); 
             return this;

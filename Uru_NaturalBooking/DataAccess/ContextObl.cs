@@ -17,6 +17,8 @@ namespace DataAccess
 
         public DbSet<CategoryTouristSpot> CategoriesTouristSpots { get; set; }
 
+        public DbSet<LodgingPicture> LodgingPictures { get; set; }
+
         public DbSet<Lodging> Lodgings { get; set;}
 
         public DbSet<Reserve> Reserves { get; set;}
@@ -55,7 +57,19 @@ namespace DataAccess
                 .WithOne(l => l.LodgingOfReserve)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Picture>().HasAlternateKey("Path");
+            modelBuilder.Entity<LodgingPicture>()
+                .HasKey(lp => new { lp.PictureId, lp.LodgingId });
+
+            modelBuilder.Entity<LodgingPicture>()
+                .HasOne<Lodging>(l => l.Lodging)
+                .WithMany(p => p.Images)
+                .HasForeignKey(l => l.LodgingId)
+                .OnDelete(DeleteBehavior.Cascade); 
+
+            modelBuilder.Entity<LodgingPicture>()
+                .HasOne(p => p.Picture)
+                .WithMany(l => l.LodgingPictures)
+                .HasForeignKey(p => p.PictureId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

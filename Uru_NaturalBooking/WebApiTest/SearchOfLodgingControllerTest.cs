@@ -23,15 +23,24 @@ namespace WebApiTest
         Region regionForTouristSpot;
         Category category;
         TouristSpot touristSpotAdded;
-        SearchOfLodgingModelForRequest searchOfLodgingModel; 
+        SearchOfLodgingModelForRequest searchOfLodgingModel;
+        LodgingPicture lodgingPicture; 
 
         [TestInitialize]
         public void SetUp()
         {
             image = new Picture()
             {
+                Id= Guid.NewGuid(),
                 Path = "c:/MiDirectorio/Imagenes/Paisaje.png"
             };
+
+            lodgingPicture = new LodgingPicture()
+            {
+                Picture = image,
+                PictureId = image.Id
+            }; 
+
             regionForTouristSpot = new Region()
             {
                 Id = Guid.NewGuid(),
@@ -55,7 +64,7 @@ namespace WebApiTest
 
             lodgingOfConrad = new Lodging()
             {
-                Images = new List<Picture>() { image },
+                Images = new List<LodgingPicture>() { lodgingPicture },
                 Id = Guid.NewGuid(),
                 Name = "Hotel Enjoy Conrad",
                 Address = "En la punta de punta del este",
@@ -67,7 +76,7 @@ namespace WebApiTest
 
             lodgingOfCumbres = new Lodging()
             {
-                Images = new List<Picture>() { image },
+                Images = new List<LodgingPicture>() { lodgingPicture },
                 Id = Guid.NewGuid(),
                 Name = "Hotel Las Cumbres",
                 Address = "Un lugar para descansar con la pareja",
