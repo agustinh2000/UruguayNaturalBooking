@@ -10,7 +10,5 @@ namespace BusinessLogicException
 
         public DomainBusinessLogicException(String message) : base(message) { }
 
-        public DomainBusinessLogicException(String message, Exception exception) : base(message, exception) { }
-
     }
 }

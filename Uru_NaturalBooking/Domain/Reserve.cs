@@ -63,10 +63,15 @@ namespace Domain
 
             if (IsInvalidQuantityGuest())
             {
-                throw new ReserveException(MessageExceptionDomain.ErrorQuantityOfGuest);
+                throw new ReserveException(MessageExceptionDomain.ErrorQuantityGuestNegative);
             }
 
-            if (!IsValidEmail())
+            if (NotHasGuest())
+            {
+                throw new ReserveException(MessageExceptionDomain.ErrorQuantityOfGuest); 
+            }
+
+            if (string.IsNullOrEmpty(Email) || !IsValidEmail())
             {
                 throw new ReserveException(MessageExceptionDomain.ErrorEmail); 
             }
@@ -85,7 +90,12 @@ namespace Domain
 
         private bool IsInvalidQuantityGuest()
         {
-            return QuantityOfAdult <= 0 && QuantityOfBaby <= 0 && QuantityOfChild <= 0; 
+            return QuantityOfAdult < 0 || QuantityOfBaby < 0 || QuantityOfChild < 0; 
+        }
+
+        private bool NotHasGuest()
+        {
+            return QuantityOfAdult == 0 && QuantityOfBaby == 0 && QuantityOfChild == 0;
         }
 
         private bool IsValidEmail()
@@ -103,7 +113,7 @@ namespace Domain
 
         public void UpdateAttributes(Reserve infoReserveToUpdate)
         {
-            if(infoReserveToUpdate.DescriptionForGuest != null)
+            if(!String.IsNullOrEmpty(infoReserveToUpdate.DescriptionForGuest))
             {
                 DescriptionForGuest = infoReserveToUpdate.DescriptionForGuest; 
             }

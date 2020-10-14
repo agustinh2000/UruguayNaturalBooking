@@ -158,5 +158,56 @@ namespace WebApiTest
             lodgingManagementMock.VerifyAll();
             Assert.AreEqual(404, createdResult.StatusCode);
         }
+
+        [TestMethod]
+        public void SearchLodgingsWithErrorsTestBadRequest()
+        {
+            List<Lodging> listOfLodgingsAvailables = new List<Lodging>() { lodgingOfCumbres, lodgingOfConrad };
+            var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
+            lodgingManagementMock.Setup(m => m.GetAvailableLodgingsByTouristSpot(It.IsAny<Guid>())).Returns(listOfLodgingsAvailables);
+
+            SearchOfLodgingController searchOfLodgingController = new SearchOfLodgingController(lodgingManagementMock.Object);
+            searchOfLodgingModel.QuantityOfAdult = 0;
+            searchOfLodgingModel.QuantityOfBabies = 0;
+            searchOfLodgingModel.QuantityOfChilds = 0; 
+            var result = searchOfLodgingController.Post(searchOfLodgingModel);
+            var createdResult = result as BadRequestObjectResult;
+            lodgingManagementMock.VerifyAll();
+            Assert.AreEqual(400, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void SearchLodgingsWithErrorsInQuantityGuestTestBadRequest()
+        {
+            List<Lodging> listOfLodgingsAvailables = new List<Lodging>() { lodgingOfCumbres, lodgingOfConrad };
+            var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
+            lodgingManagementMock.Setup(m => m.GetAvailableLodgingsByTouristSpot(It.IsAny<Guid>())).Returns(listOfLodgingsAvailables);
+
+            SearchOfLodgingController searchOfLodgingController = new SearchOfLodgingController(lodgingManagementMock.Object);
+            searchOfLodgingModel.QuantityOfAdult = -5;
+            var result = searchOfLodgingController.Post(searchOfLodgingModel);
+            var createdResult = result as BadRequestObjectResult;
+            lodgingManagementMock.VerifyAll();
+            Assert.AreEqual(400, createdResult.StatusCode);
+        }
+
+        [TestMethod]
+        public void SearchLodgingsWithDateWrongInQuantityGuestTestBadRequest()
+        {
+            List<Lodging> listOfLodgingsAvailables = new List<Lodging>() { lodgingOfCumbres, lodgingOfConrad };
+            var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
+            lodgingManagementMock.Setup(m => m.GetAvailableLodgingsByTouristSpot(It.IsAny<Guid>())).Returns(listOfLodgingsAvailables);
+
+            SearchOfLodgingController searchOfLodgingController = new SearchOfLodgingController(lodgingManagementMock.Object);
+
+            searchOfLodgingModel.CheckIn = new DateTime(2020, 10, 14);
+            searchOfLodgingModel.CheckOut = new DateTime(2020, 9, 14); 
+
+            var result = searchOfLodgingController.Post(searchOfLodgingModel);
+            var createdResult = result as BadRequestObjectResult;
+            lodgingManagementMock.VerifyAll();
+            Assert.AreEqual(400, createdResult.StatusCode);
+        }
+
     }
 }

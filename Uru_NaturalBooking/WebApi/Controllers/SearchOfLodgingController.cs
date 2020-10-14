@@ -2,6 +2,7 @@
 using BusinessLogicInterface;
 using Castle.Core.Internal;
 using Domain;
+using DomainException;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
@@ -27,6 +28,7 @@ namespace WebApi.Controllers
             try
             {
                 List<Lodging> lodgingsForTouristSpotSearched = lodgingManagement.GetAvailableLodgingsByTouristSpot(model.TouristSpotIdSearch);
+                model.VerifyFormat(); 
                 LodgingForSearchModel lodgingForSearchModel = new LodgingForSearchModel()
                 {
                     CheckIn = model.CheckIn,
@@ -34,6 +36,10 @@ namespace WebApi.Controllers
                     QuantityOfGuest = new int[3] { model.QuantityOfAdult, model.QuantityOfChilds, model.QuantityOfBabies }
                 };
                 return Ok(lodgingForSearchModel.ToModel(lodgingsForTouristSpotSearched)); 
+            }
+            catch(SearchException e)
+            {
+                return BadRequest(e.Message); 
             }
             catch (ClientBusinessLogicException e)
             {

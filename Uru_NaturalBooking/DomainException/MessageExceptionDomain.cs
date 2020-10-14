@@ -18,6 +18,7 @@ namespace DomainException
         public static string ErrorTokenNotExist = "Error. El token no existe";
         public static string ErrorInvalidEmail = "Error. El email es invalido.";
         public static string ErrorPicture = "Error. El path de la foto no debe ser vacio.";
-        public static string ErrorListPictures = "Error. Debe introducir al menos una imagen."; 
+        public static string ErrorListPictures = "Error. Debe introducir al menos una imagen.";
+        public static string ErrorQuantityGuestNegative = "Error. La cantidad de cualquier tipo de huespuedes debe ser mayor a cero."; 
     }
 }

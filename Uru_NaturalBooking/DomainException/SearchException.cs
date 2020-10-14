@@ -4,8 +4,8 @@ using System.Text;
 
 namespace DomainException
 {
-    public class UserException: Exception
+    public class SearchException : Exception
     {
-        public UserException(String message) : base(message) { }
+        public SearchException(String message) : base(message) { }
     }
 }
