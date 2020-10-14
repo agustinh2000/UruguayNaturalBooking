@@ -31,6 +31,7 @@ namespace Model
                 {
                     CheckIn = CheckIn,
                     CheckOut=CheckOut,
+                    QuantityOfGuest= QuantityOfGuest, 
                     Lodging = LodgingModelForResponse.ToModel(entity),
                     TotalPriceForSearch = entity.CalculateTotalPrice(totalDays, QuantityOfGuest)
                 };

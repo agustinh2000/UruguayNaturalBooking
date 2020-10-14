@@ -66,7 +66,7 @@ namespace WebApi.Controllers
 
         [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPut("{id}")]
-        public IActionResult Put(Guid idForUpdateReserve, ReserveModelForRequestUpdate aReserveModelForUpdate)
+        public IActionResult Put(Guid idForUpdateReserve, [FromBody] ReserveModelForRequestUpdate aReserveModelForUpdate)
         {
             try
             {
