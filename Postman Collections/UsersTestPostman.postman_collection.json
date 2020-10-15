@@ -1,0 +1,1626 @@
+{
+	"info": {
+		"_postman_id": "f1fa776c-12d9-4d85-99dc-47a4aaa15ac7",
+		"name": "UsersTestPostman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obteniendo todos los usuarios",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion de un usuario sin el token activado",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "4613e881-d147-4269-9d22-d0f6d80c89bf",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\",\r\n  \"mail\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un usuario con nombre vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"\",\r\n  \"lastName\": \"Gutman\",\r\n  \"userName\": \"Ricardinho\",\r\n  \"password\": \"123456789\",\r\n  \"mail\": \"ricardo.gut@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion de un usuario con el body vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion de un usuario valido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Ricardo\",\r\n  \"lastName\": \"Gutman\",\r\n  \"userName\": \"Ricardinho\",\r\n  \"password\": \"123456789\",\r\n  \"mail\": \"ricardo.gut@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion de un usuario ya existente",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Ricardo\",\r\n  \"lastName\": \"Gutman\",\r\n  \"userName\": \"Ricardinho\",\r\n  \"password\": \"123456789\",\r\n  \"mail\": \"ricardo.gut@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inicio de sesion con body vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inicio de sesion con email vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"\",\r\n    \"password\" : \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inicio de sesion correcto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"joaquin.lamela00@gmail.com\",\r\n    \"password\" : \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cierre de sesión, sin sesion iniciada",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/logout",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cierre de sesión correctamente",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/logout",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obteniendo usuario existente por id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/02757C60-EA89-4452-8D99-940106C82413",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"02757C60-EA89-4452-8D99-940106C82413"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tratando de obtener usuario por id sin tener una sesion iniciada",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/02757C60-EA89-4452-8D99-940106C82413",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"02757C60-EA89-4452-8D99-940106C82413"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tratando de obtener un usuario que no existe por id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/02757C60-EA89-4452-8D99-940106C82415",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"02757C60-EA89-4452-8D99-940106C82415"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualización valida de usuario pasada por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Hernandorena\",\r\n  \"userName\": \"agus\",\r\n  \"password\": \"holacomoandas\",\r\n  \"mail\": \"agustinhernandorena@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualización sin sesion iniciada",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualización invalida debido a nombre vacio, de usuario existente pasado por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"\",\r\n  \"lastName\": \"Hernandorena\",\r\n  \"userName\": \"agus\",\r\n  \"password\": \"holacomoandas\",\r\n  \"mail\": \"agustinhernandorena@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualización de un usuario inexistente",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"\",\r\n  \"lastName\": \"Hernandorena\",\r\n  \"userName\": \"agus\",\r\n  \"password\": \"holacomoandas\",\r\n  \"mail\": \"agustinhernandorena@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminacion de un usuario sin sesion iniciada",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tratando de eliminar un usuario que no existe por id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE9",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminando un usuario existente correctamente",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/02757C60-EA89-4452-8D99-940106C82413",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"02757C60-EA89-4452-8D99-940106C82413"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un usuario con nombre nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": null,\r\n  \"lastName\": \"Gutman\",\r\n  \"userName\": \"Ricardinho\",\r\n  \"password\": \"123456789\",\r\n  \"mail\": \"ricardo.gut@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un usuario con apellido vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Martin\",\r\n  \"lastName\": \"\",\r\n  \"userName\": \"Ricardinho\",\r\n  \"password\": \"123456789\",\r\n  \"mail\": \"ricardo.gut@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un usuario con apellido nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Martin\",\r\n  \"lastName\": null,\r\n  \"userName\": \"Ricardinho\",\r\n  \"password\": \"123456789\",\r\n  \"mail\": \"ricardo.gut@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un usuario con username vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Martin\",\r\n  \"lastName\": \"Gutman\",\r\n  \"userName\": \"\",\r\n  \"password\": \"123456789\",\r\n  \"mail\": \"ricardo.gut@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un usuario con username nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Martin\",\r\n  \"lastName\": \"Gutman\",\r\n  \"userName\": null,\r\n  \"password\": \"123456789\",\r\n  \"mail\": \"ricardo.gut@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un usuario con contraseña vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Martin\",\r\n  \"lastName\": \"Gutman\",\r\n  \"userName\": \"Ricardinho\",\r\n  \"password\": \"\",\r\n  \"mail\": \"ricardo.gut@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un usuario con contraseña nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Martin\",\r\n  \"lastName\": \"Gutman\",\r\n  \"userName\": \"Ricardinho\",\r\n  \"password\": null,\r\n  \"mail\": \"ricardo.gut@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un usuario con mail vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Martin\",\r\n  \"lastName\": \"Gutman\",\r\n  \"userName\": \"Ricardinho\",\r\n  \"password\": \"123456\",\r\n  \"mail\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un usuario con mail nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Martin\",\r\n  \"lastName\": \"Gutman\",\r\n  \"userName\": \"Ricardinho\",\r\n  \"password\": \"123456\",\r\n  \"mail\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inicio de sesion con email nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : null,\r\n    \"password\" : \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inicio de sesion con contraseña vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"joaquin.lamela00@gmail.com\",\r\n    \"password\" : \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inicio de sesion con contraseña nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"joaquin.lamela00@gmail.com\",\r\n    \"password\" : null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inicio de sesion con contraseña y mail vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"\",\r\n    \"password\" : \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inicio de sesion con contraseña y mail nulos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : null,\r\n    \"password\" : null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualización con nombre vacio de usuario pasada por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"\",\r\n  \"lastName\": \"Hernandorena\",\r\n  \"userName\": \"agus\",\r\n  \"password\": \"holacomoandas\",\r\n  \"mail\": \"agustinhernandorena@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualización con nombre nulo de usuario pasada por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": null,\r\n  \"lastName\": \"Hernandorena\",\r\n  \"userName\": \"agus\",\r\n  \"password\": \"holacomoandas\",\r\n  \"mail\": \"agustinhernandorena@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualización con apellido vacio de usuario pasada por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"\",\r\n  \"userName\": \"agus\",\r\n  \"password\": \"holacomoandas\",\r\n  \"mail\": \"agustinhernandorena@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualización con apellido nulo de usuario pasado por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": null,\r\n  \"userName\": \"agus\",\r\n  \"password\": \"holacomoandas\",\r\n  \"mail\": \"agustinhernandorena@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualización con username vacio de usuario pasado por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Hernandorena\",\r\n  \"userName\": \"\",\r\n  \"password\": \"holacomoandas\",\r\n  \"mail\": \"agustinhernandorena@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualización con username nulo de usuario pasado por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Hernandorena\",\r\n  \"userName\": null,\r\n  \"password\": \"holacomoandas\",\r\n  \"mail\": \"agustinhernandorena@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualización con contraseña vacia de usuario pasado por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Hernandorena\",\r\n  \"userName\": \"agus\",\r\n  \"password\": \"\",\r\n  \"mail\": \"agustinhernandorena@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualización con contraseña nula de usuario pasado por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Hernandorena\",\r\n  \"userName\": \"agus\",\r\n  \"password\": null,\r\n  \"mail\": \"agustinhernandorena@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualización con email vacio de usuario pasado por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Hernandorena\",\r\n  \"userName\": \"agus\",\r\n  \"password\": \"12345678\",\r\n  \"mail\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualización con email nulo de usuario pasado por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Hernandorena\",\r\n  \"userName\": \"agus\",\r\n  \"password\": \"12345678\",\r\n  \"mail\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/users/FCE521A3-C389-4BFD-8DED-A0B2D133CAE1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"users",
+						"FCE521A3-C389-4BFD-8DED-A0B2D133CAE1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

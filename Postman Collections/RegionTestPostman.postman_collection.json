@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "6d39dfd3-d9e6-4cf3-a236-f622603b7264",
+		"name": "RegionTestPostman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtener todas las regiones",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n  \"Name\" : \"Hotel las cumbres\",\r\n  \"QuantityOfStars\" : \"5\",\r\n  \"Address\": \"En plena rambla de punta del este\",\r\n  \"PricePerNight\": \"200\",\r\n   \"TouristSpotId\": \"457A590E-DCC2-419E-8649-7464F14F9765\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/regions/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"regions",
+						""
+					]
+				},
+				"description": "En particular si ejecutamos esta request, encontramos que lo que realiza es devolvernos todas las regiones existentes. "
+			},
+			"response": []
+		},
+		{
+			"name": "Obteniendo una region existe por id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/regions/9F1F0E4C-7685-403A-97DB-51D21E4563AD",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"regions",
+						"9F1F0E4C-7685-403A-97DB-51D21E4563AD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tratando de obtener una region no existe por id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/regions/3A849B7F-50D5-46A3-8387-289C5628D77A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"regions",
+						"3A849B7F-50D5-46A3-8387-289C5628D77A"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

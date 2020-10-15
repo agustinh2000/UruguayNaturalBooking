@@ -1,0 +1,1761 @@
+{
+	"info": {
+		"_postman_id": "09d35627-0c4a-4868-bd8f-0d1efb64159a",
+		"name": "LodgingTestPostman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obteniendo todos los hospedajes existentes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creación de hospedaje sin sesión iniciada",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de hospedaje con body vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de hospedaje con nombre vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"string\",\r\n  \"quantityOfStars\": 0,\r\n  \"address\": \"string\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de hospedaje con nombre nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": null,\r\n  \"description\": \"string\",\r\n  \"quantityOfStars\": 0,\r\n  \"address\": \"string\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de hospedaje con descripcion vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy\",\r\n  \"description\": \"\",\r\n  \"quantityOfStars\": 0,\r\n  \"address\": \"string\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de hospedaje con descripcion nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy\",\r\n  \"description\": null,\r\n  \"quantityOfStars\": 0,\r\n  \"address\": \"string\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con cantidad de estrellas vacías",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy \",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": \"\",\r\n  \"address\": \"string\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con cantidad de estrellas nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy \",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": null,\r\n  \"address\": \"string\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con direccion vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy \",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con direccion nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy \",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": null,\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje sin imagenes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n  \"images\": [],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con lista de imagenes nulas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy \",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n  \"images\": null,\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con el precio vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": \"\",\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con el precio nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": null,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con punto turistico vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy Conrad\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 150,\r\n  \"touristSpotId\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con punto turistico nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 150,\r\n  \"touristSpotId\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con una cantidad de estrellas mayor a 5",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy \",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 8,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 150,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con una cantidad de estrellas menor o igual 0",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy \",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 0,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n   \"images\": [\"string\"],\r\n  \"pricePerNight\": 150,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con un precio menor a  0",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": -50,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con un precio mayor a 100000",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy \",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 100001,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creación de un hospedaje con un punto turístico no existente",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy Conrad\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 150,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAB\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creación de un hospedaje con datos correctos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel San Ramon City\",\r\n  \"description\": \"Hotel posicionado internacionalmente\",\r\n  \"quantityOfStars\": 4,\r\n  \"address\": \"En canelones San Ramon \",\r\n  \"images\": [\"Desktop/onlySanRamon.png\"],\r\n  \"pricePerNight\": 250,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creación de un hospedaje con campos repetidos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy Conrad\",\r\n  \"name\": \"Hotel Las Cumbres\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 4,\r\n  \"address\": \"Ruta 12 km 3.5, 20100 Punta Ballena\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 250,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creación de un hospedaje con campos repetidos y uno de ellos vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"The Grand Hotel \",\r\n  \"name\": \"\",\r\n  \"description\": \"Un hotel donde el lujo no falta\",\r\n  \"quantityOfStars\": 3,\r\n  \"address\": \"Rambla Lorenzo Batlle Pacheco, 20100\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 500,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creación de un hospedaje ya existente en la base de datos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy Conrad\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 4,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 50,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obteniendo un hospedaje existente por id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tratando de obtener un hospedaje no existente por id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990113",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990113"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualización de hospedaje sin sesión iniciada",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de hospedaje con body vacio",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de hospedaje con nombre vacio",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"string\",\r\n  \"quantityOfStars\": 0,\r\n  \"address\": \"string\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de hospedaje con nombre nulo",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": null,\r\n  \"description\": \"string\",\r\n  \"quantityOfStars\": 0,\r\n  \"address\": \"string\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de hospedaje con descripcion vacia",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy Conrad\",\r\n  \"description\": \"\",\r\n  \"quantityOfStars\": 0,\r\n  \"address\": \"string\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de hospedaje con descripcion nula",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel prueba\",\r\n  \"description\": null,\r\n  \"quantityOfStars\": 0,\r\n  \"address\": \"string\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de un hospedaje con cantidad de estrellas vacías",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy Conrad\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": \"\",\r\n  \"address\": \"string\",\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de un hospedaje con cantidad de estrellas nula",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy Conrad\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": null,\r\n  \"address\": \"string\",\r\n \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de un hospedaje con direccion vacia",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy Conrad\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"\",\r\n \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de un hospedaje con direccion nula",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy Conrad\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": null,\r\n    \"images\": [\"string\"],\r\n  \"pricePerNight\": 0,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de un hospedaje con una cantidad de estrellas mayor a 5",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy Conrad\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 8,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 150,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de un hospedaje con una cantidad de estrellas menor o igual 0",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Enjoy Conrad\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 0,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 150,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizacion de un hospedaje con datos correctos",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"The Grand Hotel \",\r\n  \"description\": \"Donde los baños son de oro\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n  \"images\": [\"Desktop/fotoNueva.jpg\"],\r\n  \"pricePerNight\": 500,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\",\r\n  \"IsAvailable\" : 0 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualización de un hospedaje no existente",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel The Grand Prueba\",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 150,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990113",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990113"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminación de hospedaje sin sesión iniciada",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tratando de eliminar un hospedaje que no existe por id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990113",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990113"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminacion de un hospedaje existente",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/6FA20F7C-70B7-49E3-9A59-9FC43A538D05",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"6FA20F7C-70B7-49E3-9A59-9FC43A538D05"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un hospedaje con disponibilidad vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Paso \",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 3,\r\n  \"address\": \"San Ramon City\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 5000,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\",\r\n  \"isavailable\" : \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un hospedaje con disponibilidad nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Hotel Paso \",\r\n  \"description\": \"El mejor hotel del Uruguay\",\r\n  \"quantityOfStars\": 3,\r\n  \"address\": \"San Ramon City\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 5000,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\",\r\n  \"isavailable\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de un hospedaje con disponibilidad vacia",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"The Grand Hotel \",\r\n  \"description\": \"Donde los baños son de oro\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 500,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\",\r\n  \"IsAvailable\" : \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizacion de un hospedaje con disponibilidad nula",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"The Grand Hotel \",\r\n  \"description\": \"Donde los baños son de oro\",\r\n  \"quantityOfStars\": 5,\r\n  \"address\": \"Parada 4 Playa Mansa, Rambla Claudio Williman\",\r\n  \"images\": [\"string\"],\r\n  \"pricePerNight\": 500,\r\n  \"touristSpotId\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\",\r\n  \"IsAvailable\" : null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/lodgings/0ac30836-4b30-45f0-9315-925864990111",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"lodgings",
+						"0ac30836-4b30-45f0-9315-925864990111"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

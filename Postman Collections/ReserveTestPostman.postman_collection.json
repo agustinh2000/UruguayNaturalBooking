@@ -1,0 +1,1314 @@
+{
+	"info": {
+		"_postman_id": "ac325c1c-9a90-476b-ba47-b5d5e76a2b84",
+		"name": "ReserveTestPostman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Intento de reservar un hospedaje con nombre vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela@gmail.com\",\r\n  \"checkIn\": \"2020-10-14\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con nombre nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": null,\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela@gmail.com\",\r\n  \"checkIn\": \"2020-10-14\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con apellido vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"\",\r\n  \"email\": \"joaquin.lamela@gmail.com\",\r\n  \"checkIn\": \"2020-10-14\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con apellido nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": null,\r\n  \"email\": \"joaquin.lamela@gmail.com\",\r\n  \"checkIn\": \"2020-10-14\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con email vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"\",\r\n  \"checkIn\": \"2020-10-14\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con email nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": null,\r\n  \"checkIn\": \"2020-10-14\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con fecha CheckIn vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con fecha CheckIn nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": null,\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con fecha CheckIn mayor a la de CheckOut",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con fecha CheckOut vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con fecha CheckOut nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": null,\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con cantidad adultos vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": \"\",\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con cantidad adultos nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": null,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con cantidad adultos negativa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": -5,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con cantidad niños vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": \"\",\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con cantidad niños nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": null,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con cantidad niños negativa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": -4,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con cantidad bebes vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": \"\",\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con cantidad bebes nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": null,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con cantidad bebes negativa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": -3,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con id vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con id nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con id no existente en la BD",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de reservar un hospedaje con body vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reservar con datos correctos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Joaquin\",\r\n  \"lastName\": \"Lamela\",\r\n  \"email\": \"joaquin.lamela00@gmail.com\",\r\n  \"checkIn\": \"2020-11-19\",\r\n  \"checkOut\": \"2020-12-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChild\": 1,\r\n  \"quantityOfBaby\": 1,\r\n  \"idOfLodgingToReserve\": \"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una reserva no existente en la bd",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una reserva existente de la bd",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves/2376025A-443F-4582-8887-2E0CF7E933EF",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves",
+						"2376025A-443F-4582-8887-2E0CF7E933EF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizar una reserva sin sesión iniciada",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves/ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves",
+						"ED45A4CD-4A5D-4C62-8C39-0AD7B819D7C5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizar una reserva con id de parametro inexistente en BD",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves/2376025A-443F-4582-8887-2E0CF7E933EE",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves",
+						"2376025A-443F-4582-8887-2E0CF7E933EE"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizar una reserva con descripcion vacia",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves/2376025A-443F-4582-8887-2E0CF7E933EF",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves",
+						"2376025A-443F-4582-8887-2E0CF7E933EF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizar una reserva con descripcion nula",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves/2376025A-443F-4582-8887-2E0CF7E933EF",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves",
+						"2376025A-443F-4582-8887-2E0CF7E933EF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizar una reserva con estado de reserva mayor a 4",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves/2376025A-443F-4582-8887-2E0CF7E933EF",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves",
+						"2376025A-443F-4582-8887-2E0CF7E933EF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizar una reserva con estado de reserva vacio",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": \"Su reserva ha modificado su estado a Aceptada. Disfrute de su estadía\",\r\n  \"stateOfReserve\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves/2376025A-443F-4582-8887-2E0CF7E933EF",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves",
+						"2376025A-443F-4582-8887-2E0CF7E933EF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizar una reserva con estado de reserva nulo",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": \"Su reserva ha modificado su estado a Aceptada. Disfrute de su estadía\",\r\n  \"stateOfReserve\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves/2376025A-443F-4582-8887-2E0CF7E933EF",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves",
+						"2376025A-443F-4582-8887-2E0CF7E933EF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de actualizar una reserva con body vacio",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves/2376025A-443F-4582-8887-2E0CF7E933EF",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves",
+						"2376025A-443F-4582-8887-2E0CF7E933EF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualización de una reserva con datos validos",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": \"Su reserva ha modificado su estado a Aceptada. Disfrute de su estadía\",\r\n  \"stateOfReserve\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/reserves/2376025A-443F-4582-8887-2E0CF7E933EF",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"reserves",
+						"2376025A-443F-4582-8887-2E0CF7E933EF"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
