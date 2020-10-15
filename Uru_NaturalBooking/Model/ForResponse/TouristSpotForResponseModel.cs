@@ -17,7 +17,7 @@ namespace Model.ForResponse
 
         public RegionForResponseModel RegionModel { get; set; }
 
-        public Picture Image { get; set; }
+        public String ImagePath { get; set; }
 
         public List<CategoryModel> ListOfCategoriesModel { get; set; }
 
@@ -27,7 +27,7 @@ namespace Model.ForResponse
             Name = touristSpot.Name;
             Description = touristSpot.Description;
             RegionModel = RegionForResponseModel.ToModel(touristSpot.Region);
-            Image = touristSpot.Image;
+            ImagePath = touristSpot.Image.Path;
             ListOfCategoriesModel = touristSpot.ListOfCategories.ConvertAll(m => CategoryModel.ToModel(m.Category));
             return this;
         }

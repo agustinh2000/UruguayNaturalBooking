@@ -27,7 +27,7 @@ namespace BusinessLogic
             lodgingRepository = repository;
         }
 
-        public Lodging Create(Lodging lodging, Guid touristSpotId, List<Picture> pictures)
+        public Lodging Create(Lodging lodging, Guid touristSpotId, List<string> pathOfPictures)
         {
             try
             {
@@ -35,16 +35,26 @@ namespace BusinessLogic
                 lodging.Id = Guid.NewGuid();
                 TouristSpot touristSpotForLodging = touristSpotManagementLogic.GetTouristSpotById(touristSpotId);
                 lodging.TouristSpot = touristSpotForLodging;
-                foreach (Picture picture in pictures)
+
+                if (pathOfPictures != null)
                 {
-                    LodgingPicture lodgingPicture = new LodgingPicture()
+                    foreach (string picturePath in pathOfPictures)
                     {
-                        Lodging = lodging,
-                        LodgingId = lodging.Id,
-                        Picture = picture,
-                        PictureId = picture.Id
-                    };
-                    lodging.Images.Add(lodgingPicture);
+                        Picture pictureOfLodging = new Picture()
+                        {
+                            Path = picturePath,
+                            Id = Guid.NewGuid()
+                        };
+
+                        LodgingPicture lodgingPicture = new LodgingPicture()
+                        {
+                            Lodging = lodging,
+                            LodgingId = lodging.Id,
+                            Picture = pictureOfLodging,
+                            PictureId = pictureOfLodging.Id
+                        };
+                        lodging.Images.Add(lodgingPicture);
+                    }
                 }
                 lodging.VerifyFormat();
                 lodgingRepository.Add(lodging);

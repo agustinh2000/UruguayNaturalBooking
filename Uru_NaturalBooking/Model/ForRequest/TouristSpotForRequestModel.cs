@@ -15,7 +15,7 @@ namespace Model.ForRequest
 
         public Guid RegionId{ get; set; }
 
-        public Picture Image { get; set; }
+        public string ImagePath { get; set; }
 
         public List<Guid> ListOfCategoriesId { get; set; }
 
@@ -24,7 +24,11 @@ namespace Model.ForRequest
             Id = Id,
             Name = Name,
             Description = Description,
-            Image = Image
+            Image = new Picture()
+            {
+                Id= Guid.NewGuid(),
+                Path=ImagePath
+            }
         };
     }
 }

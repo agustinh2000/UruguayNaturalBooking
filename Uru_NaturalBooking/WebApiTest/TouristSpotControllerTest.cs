@@ -48,7 +48,8 @@ namespace WebApiTest
                 Name = "Punta del Este",
                 Description = "Un lugar increible",
                 Region = regionForTouristSpot,
-                ListOfCategories = new List<CategoryTouristSpot>() { new CategoryTouristSpot() { Category = category } }
+                ListOfCategories = new List<CategoryTouristSpot>() { new CategoryTouristSpot() { Category = category } },
+                Image= new Picture() { Path= "Desktop/joaco.jpg"}
             };
 
             touristSpotRequestModel = new TouristSpotForRequestModel()
@@ -57,7 +58,8 @@ namespace WebApiTest
                 Name = "Punta del Este",
                 Description = "Un lugar increible",
                 RegionId = regionForTouristSpot.Id,
-                ListOfCategoriesId = new List<Guid>() { category.Id }
+                ListOfCategoriesId = new List<Guid>() { category.Id }, 
+                ImagePath= "Desktop/joaco.jpg"
             };
 
             touristSpotResponseModel = new TouristSpotForResponseModel
@@ -66,7 +68,8 @@ namespace WebApiTest
                 Name = "Punta del Este",
                 Description = "Un lugar increible",
                 RegionModel = RegionForResponseModel.ToModel(regionForTouristSpot),
-                ListOfCategoriesModel = new List<CategoryModel>() { CategoryModel.ToModel(category) }
+                ListOfCategoriesModel = new List<CategoryModel>() { CategoryModel.ToModel(category) },
+                ImagePath= "Desktop/joaco.jpg"
             };
         }
 
@@ -144,6 +147,7 @@ namespace WebApiTest
                 Name = "Punta del Este",
                 Description = "Un lugar increible",
                 RegionId = regionForTouristSpot.Id,
+                ImagePath="Desktop/joaco.jpg",
                 ListOfCategoriesId = new List<Guid>() { category.Id }
             };
             var touristSpotMock = new Mock<ITouristSpotManagement>(MockBehavior.Strict);

@@ -19,7 +19,7 @@ namespace Model.ForRequest
 
         public string Address { get; set; }
 
-        public List<Picture> Images { get; set; }
+        public List<string> Images { get; set; }
 
         public double PricePerNight { get; set; }
 

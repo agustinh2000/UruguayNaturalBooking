@@ -17,11 +17,11 @@ namespace Domain
 
         public string Description { get; set; }
 
-        public virtual List <LodgingPicture> Images { get; set; }
-        
+        public virtual List<LodgingPicture> Images { get; set; }
+
         public double PricePerNight { get; set; }
 
-        public bool IsAvailable { get; set; } = true; 
+        public bool IsAvailable { get; set; } = true;
 
         public virtual TouristSpot TouristSpot { get; set; }
 
@@ -34,45 +34,45 @@ namespace Domain
         {
             if (IsInvalidNameOrAddressOrDesription())
             {
-                throw new LodgingException(MessageExceptionDomain.ErrorIsEmpty); 
+                throw new LodgingException(MessageExceptionDomain.ErrorIsEmpty);
             }
 
             if (IsInvalidQuantityOfStars())
             {
-                throw new LodgingException(MessageExceptionDomain.ErrorQuantity); 
+                throw new LodgingException(MessageExceptionDomain.ErrorQuantity);
             }
 
             if (IsInvalidadPricePerNight())
             {
-                throw new LodgingException(MessageExceptionDomain.ErrorPrice); 
+                throw new LodgingException(MessageExceptionDomain.ErrorPrice);
             }
 
             if (IsInvalidListOfPictures())
             {
-                throw new LodgingException(MessageExceptionDomain.ErrorListPictures); 
+                throw new LodgingException(MessageExceptionDomain.ErrorListPictures);
             }
 
-            TouristSpot.VerifyFormat(); 
+            TouristSpot.VerifyFormat();
         }
 
         private bool IsInvalidNameOrAddressOrDesription()
         {
-            return String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(Address) || String.IsNullOrEmpty(Description); 
+            return String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(Address) || String.IsNullOrEmpty(Description);
         }
 
         private bool IsInvalidQuantityOfStars()
         {
-            return QuantityOfStars <= 0 || QuantityOfStars > 5; 
+            return QuantityOfStars <= 0 || QuantityOfStars > 5;
         }
 
         private bool IsInvalidadPricePerNight()
         {
-            return PricePerNight < 0 || PricePerNight > 100000; 
+            return PricePerNight < 0 || PricePerNight > 100000;
         }
 
         private bool IsInvalidListOfPictures()
         {
-            return Images==null || Images.Count == 0 ; 
+            return Images == null || Images.Count == 0;
         }
 
         public double CalculateTotalPrice(int totalDaysToStay, int[] quantityOfGuest)
@@ -82,29 +82,16 @@ namespace Domain
             int quantityOfBabys = quantityOfGuest[2];
             const double discountForChilds = 0.50;
             const double discountForBabys = 0.25;
-            return (PricePerNight * totalDaysToStay) * (quantityOfAdults + (quantityOfChilds * discountForChilds) 
-                + (quantityOfBabys * discountForBabys)); 
+            return (PricePerNight * totalDaysToStay) * (quantityOfAdults + (quantityOfChilds * discountForChilds)
+                + (quantityOfBabys * discountForBabys));
         }
 
         public void UpdateAttributes(Lodging aLodging)
         {
-            if (!String.IsNullOrEmpty(aLodging.Name))
-            {
-                Name = aLodging.Name;
-            }
-            if (aLodging.QuantityOfStars > 0 && aLodging.QuantityOfStars <= 5)
-            {
-                QuantityOfStars = aLodging.QuantityOfStars;
-            }
-
-            if (!String.IsNullOrEmpty(aLodging.Description))
-            {
-                Description = aLodging.Description;
-            }
-            if (!String.IsNullOrEmpty(aLodging.Address))
-            {
-                Address = aLodging.Address;
-            }
+            Name = aLodging.Name;
+            QuantityOfStars = aLodging.QuantityOfStars;
+            Description = aLodging.Description;
+            Address = aLodging.Address;
             IsAvailable = aLodging.IsAvailable;
         }
 
