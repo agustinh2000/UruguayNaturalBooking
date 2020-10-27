@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Model.ForRequest
 {
-    public class SearchOfLodgingModelForRequest 
+    public class SearchOfLodgingModelForRequest
     {
         public DateTime CheckIn { get; set; }
 
@@ -17,6 +17,8 @@ namespace Model.ForRequest
 
         public int QuantityOfBabies { get; set; }
 
+        public int QuantityOfRetireds { get; set; }
+
         public Guid TouristSpotIdSearch { get; set; }
 
         public void VerifyFormat()
@@ -27,27 +29,27 @@ namespace Model.ForRequest
             }
             if (HasNotGuest())
             {
-                throw new SearchException(MessageExceptionDomain.ErrorQuantityOfGuest); 
+                throw new SearchException(MessageExceptionDomain.ErrorQuantityOfGuest);
             }
             if (CheckInIsAfterCheckOut())
             {
-                throw new SearchException(MessageExceptionDomain.ErrorDate); 
+                throw new SearchException(MessageExceptionDomain.ErrorDate);
             }
         }
 
         private bool IsInvalidQuantityOfGuest()
         {
-            return QuantityOfAdult < 0 || QuantityOfBabies < 0 || QuantityOfChilds < 0; 
+            return QuantityOfAdult < 0 || QuantityOfBabies < 0 || QuantityOfChilds < 0 || QuantityOfRetireds < 0;
         }
 
         private bool HasNotGuest()
         {
-            return QuantityOfAdult == 0 && QuantityOfBabies == 0 && QuantityOfChilds == 0; 
+            return QuantityOfAdult == 0 && QuantityOfBabies == 0 && QuantityOfChilds == 0 && QuantityOfRetireds == 0;
         }
 
         private bool CheckInIsAfterCheckOut()
         {
-            return CheckIn > CheckOut; 
+            return CheckIn > CheckOut;
         }
 
     }

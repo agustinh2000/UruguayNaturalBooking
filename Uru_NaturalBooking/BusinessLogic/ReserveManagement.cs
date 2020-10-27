@@ -35,8 +35,12 @@ namespace BusinessLogic
                 reserve.Id = Guid.NewGuid();
                 reserve.PhoneNumberOfContact = Int32.Parse(RandomPhoneNumber(8));
                 reserve.DescriptionForGuest = RandomDescription(50);
-                reserve.LodgingOfReserve = lodgingManagement.GetLodgingById(lodgingId);
+                Lodging lodgingOfReserve = lodgingManagement.GetLodgingById(lodgingId);
+                int totalDays = (reserve.CheckOut - reserve.CheckIn).Days;
+                int[] QuantityOfGuest = new int[4] { reserve.QuantityOfAdult, reserve.QuantityOfChild, reserve.QuantityOfBaby, reserve.QuantityOfRetired };
+                reserve.LodgingOfReserve = lodgingOfReserve;
                 reserve.StateOfReserve = Reserve.ReserveState.Creada;
+                reserve.TotalPrice = lodgingOfReserve.CalculateTotalPrice(totalDays, QuantityOfGuest);
                 reserve.VerifyFormat();
                 reserveRepository.Add(reserve);
                 return reserve;

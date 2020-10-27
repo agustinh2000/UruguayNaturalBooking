@@ -21,7 +21,7 @@ namespace WebApiTest
         Category catogoryForTouristSpot;
         TouristSpot touristSpotForLodging;
         Lodging lodgingForReserve;
-        Reserve reserveOfLodging; 
+        Reserve reserveOfLodging;
 
         [TestInitialize]
         public void SetUp()
@@ -63,16 +63,18 @@ namespace WebApiTest
                 Name = "Joaquin",
                 LastName = "Lamela",
                 Email = "joaquin.lamela00@gmail.com",
-                DescriptionForGuest= "Se ha registrado correctamente la reserva", 
-                PhoneNumberOfContact= 29082733, 
+                DescriptionForGuest = "Se ha registrado correctamente la reserva",
+                PhoneNumberOfContact = 29082733,
                 CheckIn = new DateTime(2020, 10, 05),
                 CheckOut = new DateTime(2020, 10, 07),
                 QuantityOfAdult = 1,
                 QuantityOfBaby = 1,
-                QuantityOfChild = 1, 
-                LodgingOfReserve= lodgingForReserve,
-                StateOfReserve= Reserve.ReserveState.Creada
-            }; 
+                QuantityOfChild = 1,
+                QuantityOfRetired = 2,
+                LodgingOfReserve = lodgingForReserve,
+                StateOfReserve = Reserve.ReserveState.Creada,
+                TotalPrice = 660
+            };
         }
 
         [TestMethod]
@@ -92,8 +94,39 @@ namespace WebApiTest
                 QuantityOfAdult = 1,
                 QuantityOfBaby = 1,
                 QuantityOfChild = 1,
+                QuantityOfRetired = 2,
                 IdOfLodgingToReserve = lodgingForReserve.Id
-            }; 
+            };
+
+            var result = reserveController.Post(reserveModelForRequest);
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as ReserveModelForResponse;
+            reserveManagementMock.VerifyAll();
+
+            Assert.AreEqual(ReserveModelForResponse.ToModel(reserveOfLodging), model);
+        }
+
+
+        [TestMethod]
+        public void CreateReserveTestWithRetiredGuestOk()
+        {
+            var reserveManagementMock = new Mock<IReserveManagement>(MockBehavior.Strict);
+            reserveManagementMock.Setup(m => m.Create(It.IsAny<Reserve>(), It.IsAny<Guid>())).Returns(reserveOfLodging);
+            ReserveController reserveController = new ReserveController(reserveManagementMock.Object);
+
+            ReserveModelForRequest reserveModelForRequest = new ReserveModelForRequest()
+            {
+                Name = "Joaquin",
+                LastName = "Lamela",
+                Email = "joaquin.lamela00@gmail.com",
+                CheckIn = new DateTime(2020, 10, 05),
+                CheckOut = new DateTime(2020, 10, 07),
+                QuantityOfAdult = 1,
+                QuantityOfBaby = 1,
+                QuantityOfChild = 1,
+                QuantityOfRetired = 2,
+                IdOfLodgingToReserve = lodgingForReserve.Id
+            };
 
             var result = reserveController.Post(reserveModelForRequest);
             var createdResult = result as CreatedAtRouteResult;
@@ -196,7 +229,7 @@ namespace WebApiTest
             var model = createdResult.Value as ReserveModelForResponse;
 
             reserveManagementMock.VerifyAll();
-            Assert.AreEqual(ReserveModelForResponse.ToModel(reserveOfLodging), model); 
+            Assert.AreEqual(ReserveModelForResponse.ToModel(reserveOfLodging), model);
         }
 
         [TestMethod]
@@ -239,7 +272,7 @@ namespace WebApiTest
                 Id = reserveOfLodging.Id,
                 Description = "Su reserva ha sido aceptada correctamente, por favor verifique el nuevo estado",
                 StateOfReserve = Reserve.ReserveState.Aceptada
-            }; 
+            };
 
             var result = reserveController.Put(reserveOfLodging.Id, reserveModelForRequestUpdate);
             var createdResult = result as CreatedAtRouteResult;
@@ -259,8 +292,10 @@ namespace WebApiTest
                 QuantityOfAdult = 1,
                 QuantityOfBaby = 1,
                 QuantityOfChild = 1,
+                QuantityOfRetired = 2,
                 LodgingOfReserve = lodgingForReserve,
-                StateOfReserve = Reserve.ReserveState.Aceptada
+                StateOfReserve = Reserve.ReserveState.Aceptada,
+                TotalPrice = 660
             };
 
             Assert.AreEqual(ReserveModelForResponse.ToModel(reserveToCompare), model);
