@@ -18,5 +18,7 @@ namespace BusinessLogicInterface
         void RemoveLodging(Guid lodgingId);
 
         Lodging UpdateLodging(Guid idOfLodgingToUpdate, Lodging aLodging);
+
+        List<Lodging> GetLodgingsWithReservesBetweenDates(Guid idOfTouristSpot, DateTime dateCheckInMax, DateTime dateCheckOutMax);
     }
 }

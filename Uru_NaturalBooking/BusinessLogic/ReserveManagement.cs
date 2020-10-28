@@ -35,7 +35,8 @@ namespace BusinessLogic
                 reserve.Id = Guid.NewGuid();
                 reserve.PhoneNumberOfContact = Int32.Parse(RandomPhoneNumber(8));
                 reserve.DescriptionForGuest = RandomDescription(50);
-                reserve.LodgingOfReserve = lodgingManagement.GetLodgingById(lodgingId);
+                Lodging lodgingOfReserve = lodgingManagement.GetLodgingById(lodgingId);
+                reserve.LodgingOfReserve = lodgingOfReserve;
                 reserve.StateOfReserve = Reserve.ReserveState.Creada;
                 reserve.VerifyFormat();
                 reserveRepository.Add(reserve);

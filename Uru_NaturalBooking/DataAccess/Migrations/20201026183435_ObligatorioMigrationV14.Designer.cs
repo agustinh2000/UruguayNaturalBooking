@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ContextObl))]
-    partial class ContextOblModelSnapshot : ModelSnapshot
+    [Migration("20201026183435_ObligatorioMigrationV14")]
+    partial class ObligatorioMigrationV14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,9 +58,6 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -149,6 +148,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("LodgingId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("LodgingOfReserveId")
                         .HasColumnType("uniqueidentifier");
 
@@ -171,6 +173,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LodgingId");
 
                     b.HasIndex("LodgingOfReserveId");
 
@@ -291,8 +295,12 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Domain.Reserve", b =>
                 {
-                    b.HasOne("Domain.Lodging", "LodgingOfReserve")
+                    b.HasOne("Domain.Lodging", null)
                         .WithMany("ReservesForLodging")
+                        .HasForeignKey("LodgingId");
+
+                    b.HasOne("Domain.Lodging", "LodgingOfReserve")
+                        .WithMany()
                         .HasForeignKey("LodgingOfReserveId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

@@ -52,5 +52,30 @@ namespace DataAccess
                 throw new ServerException(MessagesExceptionRepository.ErrorObteinedLodgingByNameAndTouristSpotId, e);
             }
         }
+
+        public List<Lodging> GetLodgingsWithReserves(Guid idOfTouristSpot, DateTime dateCheckInMax, DateTime dateCheckOutMax)
+        {
+            try
+            {
+                List<Lodging> listOfLodgingsWithReserves = context.Set<Lodging>().AsEnumerable().Where(x => x.TouristSpot.Id.Equals(idOfTouristSpot)
+                && x.QuantityOfReserveForThePeriod(dateCheckInMax, dateCheckOutMax) > 0)
+                    .OrderByDescending(x => x.QuantityOfReserveForThePeriod(dateCheckInMax, dateCheckOutMax))
+                    .ThenByDescending(x => x.CreationDate).ToList();
+
+                if (listOfLodgingsWithReserves.IsNullOrEmpty())
+                {
+                    throw new ClientException("No se pudo obtener los hospedajes con reservas."); 
+                }
+                return listOfLodgingsWithReserves; 
+
+            }catch(ClientException e)
+            {
+                throw new ClientException(MessagesExceptionRepository.ErrorGettingLodgingWithReserves, e); 
+            }
+            catch (Exception e)
+            {
+                throw new ServerException(MessagesExceptionRepository.ErrorObteinedLodgingWithReserves, e); 
+            }
+        }
     }
 }

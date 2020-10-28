@@ -1,6 +1,7 @@
 ﻿using DomainException;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Domain
@@ -23,11 +24,17 @@ namespace Domain
 
         public bool IsAvailable { get; set; } = true;
 
+        public DateTime CreationDate { get; set; }
+
         public virtual TouristSpot TouristSpot { get; set; }
+
+        public virtual List <Reserve> ReservesForLodging { get;  set; }
 
         public Lodging()
         {
             Images = new List<LodgingPicture>();
+            ReservesForLodging = new List<Reserve>();
+            CreationDate = DateTime.Now; 
         }
 
         public void VerifyFormat()
@@ -92,7 +99,7 @@ namespace Domain
             QuantityOfStars = aLodging.QuantityOfStars;
             Description = aLodging.Description;
             Address = aLodging.Address;
-            IsAvailable = aLodging.IsAvailable;
+            IsAvailable = aLodging.IsAvailable; 
         }
 
         public override bool Equals(object obj)
@@ -104,5 +111,12 @@ namespace Domain
                    Address.Equals(lodging.Address) &&
                    PricePerNight == lodging.PricePerNight;
         }
+
+        public int QuantityOfReserveForThePeriod(DateTime dateCheckIn, DateTime dateCheckOut)
+        {
+            return ReservesForLodging.Where(x => x.CheckIn >= dateCheckIn && x.CheckOut <= dateCheckOut 
+            && x.StateOfReserve != Reserve.ReserveState.Expirada && x.StateOfReserve != Reserve.ReserveState.Rechazada).Count();
+        }
+
     }
 }
