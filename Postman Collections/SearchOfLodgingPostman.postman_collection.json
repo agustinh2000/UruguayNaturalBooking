@@ -1,0 +1,658 @@
+{
+	"info": {
+		"_postman_id": "23bf00d2-1151-4875-8082-9034316a4e87",
+		"name": "SearchOfLodgingPostman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Intento de buscar hospedajes con ChechIn vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"\",\r\n  \"checkOut\": \"2020-10-13T23:56:52.942Z\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar hospedajes con ChechIn nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": null,\r\n  \"checkOut\": \"2020-10-13T23:56:52.942Z\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar hospedajes con ChechOut vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar hospedajes con ChechOut nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": null,\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar un hospedaje con punto turístico vacío",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar un hospedaje con punto turístico nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar un hospedaje con cantidad de adultos vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": \"\",\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar hospedajes con cantidad de adultos nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": null,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar hospedajes con cantidad de niños vacíos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": \"\",\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar hospedajes con cantidad de niños nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": null,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar hospedajes con cantidad de bebés vacíos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": \"\",\r\n  \"touristSpotIdSearch\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar hospedajes con cantidad de bebés nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": null,\r\n  \"touristSpotIdSearch\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de buscar hospedajes con punto turístico no existente",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar hospedajes con datos correctos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar hospedajes con CheckIn mayor CheckOut",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-10-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar hospedajes con cantidad de adultos negativa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-9-19\",\r\n  \"quantityOfAdult\": -5,\r\n  \"quantityOfChilds\": 1,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar hospedajes con cantidad de niños negativa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-9-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": -5,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar hospedajes con cantidad de bebes negativa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkIn\": \"2020-10-13\",\r\n  \"checkOut\": \"2020-9-19\",\r\n  \"quantityOfAdult\": 1,\r\n  \"quantityOfChilds\": -5,\r\n  \"quantityOfBabies\": 1,\r\n  \"touristSpotIdSearch\": \"C10DB403-CFCC-470B-8B86-8B77F21EDAAA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/searchOfLodgings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"searchOfLodgings"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

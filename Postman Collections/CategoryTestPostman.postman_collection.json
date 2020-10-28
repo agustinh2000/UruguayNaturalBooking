@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "44f98cff-1b66-4574-95ce-fe164a4fdac6",
+		"name": "CategoryTestPostman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obteniendo todas las categorias",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "4613e881-d147-4269-9d22-d0f6d80c89bf",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/categories",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion de categoria sin header (no valido)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "4613e881-d147-4269-9d22-d0f6d80c89bf",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/categories",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion de categoria sin body",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/categories",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion de categoria con nombre nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/categories",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion de categoria con nombre vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/categories",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion de categoria con datos validos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Playa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/categories",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obteniendo una categoria existente por Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "4613e881-d147-4269-9d22-d0f6d80c89bf",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/categories/cf8b4787-e67b-4bdb-990d-1d21f12a9fa7",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"categories",
+						"cf8b4787-e67b-4bdb-990d-1d21f12a9fa7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tratando de obtener una categoría que no existe por id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "4613e881-d147-4269-9d22-d0f6d80c89bf",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/categories/cf8b4787-e67b-4bdb-990d-1d21f12a9fa8",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"categories",
+						"cf8b4787-e67b-4bdb-990d-1d21f12a9fa8"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

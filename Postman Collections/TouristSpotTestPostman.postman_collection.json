@@ -1,0 +1,1315 @@
+{
+	"info": {
+		"_postman_id": "64e78023-de49-43f3-b320-78fffde11529",
+		"name": "TouristSpotTestPostman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Creacion de un punto turistico valido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Punta del Espino\",\r\n  \"description\": \"Lugar de tala de arboles\",\r\n  \"regionId\": \"7871F173-2962-4A26-B024-59BC6076DFAA\",\r\n  \"imagepath\": \"Desktop/pdel.jpg\",\r\n  \"listOfCategoriesId\": [\r\n    \"CF8B4787-E67B-4BDB-990D-1D21F12A9FA7\", \r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de todos los puntos turisticos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de punto turistico por id no existente en la BD",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/c10db403-cfcc-470b-8b86-8b77f21edaab",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"c10db403-cfcc-470b-8b86-8b77f21edaab"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de punto turistico por id existente en la BD",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/c10db403-cfcc-470b-8b86-8b77f21edaaa",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"c10db403-cfcc-470b-8b86-8b77f21edaaa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por id de region no existente en BD",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByRegion?regionId=c10db403-cfcc-470b-8b86-8b77f21edaaa",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByRegion"
+					],
+					"query": [
+						{
+							"key": "regionId",
+							"value": "c10db403-cfcc-470b-8b86-8b77f21edaaa"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por id de region existente en BD",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByRegion?regionId=9f1f0e4c-7685-403a-97db-51d21e4563ad",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByRegion"
+					],
+					"query": [
+						{
+							"key": "regionId",
+							"value": "9f1f0e4c-7685-403a-97db-51d21e4563ad"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por id de region sin pasar",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByRegion?",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByRegion"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por lista de id de categorias no pasadas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByCategories?",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByCategories"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por lista de id de categorias no existentes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByCategories?categoriesId=9F1F0E4C-7685-403A-97DB-51D21E4563AD",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByCategories"
+					],
+					"query": [
+						{
+							"key": "categoriesId",
+							"value": "9F1F0E4C-7685-403A-97DB-51D21E4563AD"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por lista de id de categorias no existentes v2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByCategories?categoriesId=9F1F0E4C-7685-403A-97DB-51D21E4563AD&categoriesId=9F1F0E4C-7685-403A-97DB-51D21E4563AA",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByCategories"
+					],
+					"query": [
+						{
+							"key": "categoriesId",
+							"value": "9F1F0E4C-7685-403A-97DB-51D21E4563AD"
+						},
+						{
+							"key": "categoriesId",
+							"value": "9F1F0E4C-7685-403A-97DB-51D21E4563AA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por lista de id de categorias existentes v1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByCategories?categoriesId=CF8B4787-E67B-4BDB-990D-1D21F12A9FA7",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByCategories"
+					],
+					"query": [
+						{
+							"key": "categoriesId",
+							"value": "CF8B4787-E67B-4BDB-990D-1D21F12A9FA7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por lista de id de categorias existentes y que no todos los tengan",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByCategories?categoriesId=CF8B4787-E67B-4BDB-990D-1D21F12A9FA7&categoriesId=CF8B4787-E67B-4BDB-990D-1D21F12A9FAA",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByCategories"
+					],
+					"query": [
+						{
+							"key": "categoriesId",
+							"value": "CF8B4787-E67B-4BDB-990D-1D21F12A9FA7"
+						},
+						{
+							"key": "categoriesId",
+							"value": "CF8B4787-E67B-4BDB-990D-1D21F12A9FAA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por lista de id de categorias existentes y que no todos los tengan v2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByCategories?categoriesId=CF8B4787-E67B-4BDB-990D-1D21F12A9FA7&categoriesId=F264E552-A946-48E5-9B47-B30B1E6328FF",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByCategories"
+					],
+					"query": [
+						{
+							"key": "categoriesId",
+							"value": "CF8B4787-E67B-4BDB-990D-1D21F12A9FA7"
+						},
+						{
+							"key": "categoriesId",
+							"value": "F264E552-A946-48E5-9B47-B30B1E6328FF"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por id de region y categorias no existentes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByCategoriesAndRegion?categoriesId=CF8B4787-E67B-4BDB-990D-1D21F12A9FA8&regionId=CF8B4787-E67B-4BDB-990D-1D21F12A9FA9",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByCategoriesAndRegion"
+					],
+					"query": [
+						{
+							"key": "categoriesId",
+							"value": "CF8B4787-E67B-4BDB-990D-1D21F12A9FA8"
+						},
+						{
+							"key": "regionId",
+							"value": "CF8B4787-E67B-4BDB-990D-1D21F12A9FA9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por id de region NO EXISTENTE y categorias existentes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByCategoriesAndRegion?categoriesId=CF8B4787-E67B-4BDB-990D-1D21F12A9FA7&regionId=CF8B4787-E67B-4BDB-990D-1D21F12A9FA9",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByCategoriesAndRegion"
+					],
+					"query": [
+						{
+							"key": "categoriesId",
+							"value": "CF8B4787-E67B-4BDB-990D-1D21F12A9FA7"
+						},
+						{
+							"key": "regionId",
+							"value": "CF8B4787-E67B-4BDB-990D-1D21F12A9FA9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por id de region EXISTENTE y categorias NO EXISTENTES",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByCategoriesAndRegion?categoriesId=CF8B4787-E67B-4BDB-990D-1D21F12A9FB9&regionId=7871F173-2962-4A26-B024-59BC6076DFAA",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByCategoriesAndRegion"
+					],
+					"query": [
+						{
+							"key": "categoriesId",
+							"value": "CF8B4787-E67B-4BDB-990D-1D21F12A9FB9"
+						},
+						{
+							"key": "regionId",
+							"value": "7871F173-2962-4A26-B024-59BC6076DFAA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtencion de puntos turisticos por id de region EXISTENTE y categorias EXISTENTES",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots/getByCategoriesAndRegion?categoriesId=CF8B4787-E67B-4BDB-990D-1D21F12A9FA7&regionId=7871F173-2962-4A26-B024-59BC6076DFAA",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots",
+						"getByCategoriesAndRegion"
+					],
+					"query": [
+						{
+							"key": "categoriesId",
+							"value": "CF8B4787-E67B-4BDB-990D-1D21F12A9FA7"
+						},
+						{
+							"key": "regionId",
+							"value": "7871F173-2962-4A26-B024-59BC6076DFAA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico con nombre vacio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"Lugar de tala de arboles\",\r\n  \"regionId\": \"7871F173-2962-4A26-B024-59BC6076DFAA\",\r\n  \"imagepath\": \"Desktop/pdel.jpg\",\r\n  \"listOfCategoriesId\": [\r\n    \"CF8B4787-E67B-4BDB-990D-1D21F12A9FA7\", \r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico con descripcion vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"\",\r\n  \"regionId\": \"7871F173-2962-4A26-B024-59BC6076DFAA\",\r\n  \"imagepath\": \"Desktop/pdel.jpg\",\r\n  \"listOfCategoriesId\": [\r\n    \"CF8B4787-E67B-4BDB-990D-1D21F12A9FA7\", \r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico con descripcion mayor a 2000 caracteres",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibul\",\r\n  \"regionId\": \"7871F173-2962-4A26-B024-59BC6076DFAA\",\r\n  \"imagepath\": \"Desktop/pdel.jpg\",\r\n  \"listOfCategoriesId\": [\r\n    \"CF8B4787-E67B-4BDB-990D-1D21F12A9FA7\", \r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico con nombre nulo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": null,\r\n  \"description\": \"Lugar de tala de arboles\",\r\n  \"regionId\": \"7871F173-2962-4A26-B024-59BC6076DFAA\",\r\n  \"imagepath\": \"Desktop/pdel.jpg\",\r\n  \"listOfCategoriesId\": [\r\n    \"CF8B4787-E67B-4BDB-990D-1D21F12A9FA7\", \r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico con descripcion nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": null,\r\n  \"regionId\": \"7871F173-2962-4A26-B024-59BC6076DFAA\",\r\n  \"imagepath\": \"Desktop/pdel.jpg\",\r\n  \"listOfCategoriesId\": [\r\n    \"CF8B4787-E67B-4BDB-990D-1D21F12A9FA7\", \r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico con region vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"HOlA\",\r\n  \"regionId\": \"\",\r\n  \"imagepath\": \"Desktop/pdel.jpg\",\r\n  \"listOfCategoriesId\": [\r\n    \"CF8B4787-E67B-4BDB-990D-1D21F12A9FA7\", \r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico con region nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"HOlA\",\r\n  \"regionId\": null,\r\n  \"imagepath\": \"Desktop/pdel.jpg\",\r\n  \"listOfCategoriesId\": [\r\n    \"CF8B4787-E67B-4BDB-990D-1D21F12A9FA7\", \r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico con region no existente en la BD",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"HOlA\",\r\n  \"regionId\": \"9F1F0E4C-7685-403A-97DB-51D21E4563AA\",\r\n  \"imagepath\": \"Desktop/pdel.jpg\",\r\n  \"listOfCategoriesId\": [\r\n    \"CF8B4787-E67B-4BDB-990D-1D21F12A9FA7\", \r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico con imagen vacia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"HOlA\",\r\n  \"regionId\": \"9F1F0E4C-7685-403A-97DB-51D21E4563AD\",\r\n  \"imagepath\": \"\",\r\n  \"listOfCategoriesId\": [\r\n    \"CF8B4787-E67B-4BDB-990D-1D21F12A9FA7\", \r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico con imagen nula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"HOlA\",\r\n  \"regionId\": \"9F1F0E4C-7685-403A-97DB-51D21E4563AD\",\r\n  \"imagepath\": null,\r\n  \"listOfCategoriesId\": [\r\n    \"CF8B4787-E67B-4BDB-990D-1D21F12A9FA7\", \r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico sin categorias",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"HOlA\",\r\n  \"regionId\": \"9F1F0E4C-7685-403A-97DB-51D21E4563AD\",\r\n  \"imagepath\": \"Desktop/joaco.jpg\",\r\n  \"listOfCategoriesId\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico sin categorias nulas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"HOlA\",\r\n  \"regionId\": \"9F1F0E4C-7685-403A-97DB-51D21E4563AD\",\r\n  \"imagepath\": \"Desktop/joaco.jpg\",\r\n  \"listOfCategoriesId\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico sin categorias validas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"HOlA\",\r\n  \"regionId\": \"9F1F0E4C-7685-403A-97DB-51D21E4563AD\",\r\n  \"imagepath\": \"Desktop/joaco.jpg\",\r\n  \"listOfCategoriesId\": [\"CF8B4787-E67B-4BDB-990D-1D21F12A9FA8\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Intento de creacion de un punto turistico sin categorias validas con mas de una",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"HOlA\",\r\n  \"regionId\": \"9F1F0E4C-7685-403A-97DB-51D21E4563AD\",\r\n  \"imagepath\": \"Desktop/joaco.jpg\",\r\n  \"listOfCategoriesId\": [\"CF8B4787-E67B-4BDB-990D-1D21F12A9FA8\", \"F264E552-A946-48E5-9B47-B30B1E6328FF\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion de un punto turistico valido con una sola categoria",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "a15c3264-7e30-478e-9af2-493cab22c8cc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Colonia del Sacramento\",\r\n  \"description\": \"Un lugar para pasar el rato con la familia\",\r\n  \"regionId\": \"7871F173-2962-4A26-B024-59BC6076DFAA\",\r\n  \"imagepath\": \"Desktop/pdel.jpg\",\r\n  \"listOfCategoriesId\": [\r\n    \"F264E552-A946-48E5-9B47-B30B1E6328FF\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44353/api/touristSpots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44353",
+					"path": [
+						"api",
+						"touristSpots"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

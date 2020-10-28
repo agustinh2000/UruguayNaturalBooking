@@ -56,11 +56,13 @@ namespace BusinessLogic
         public List<Category> GetAssociatedCategories(List<Guid> categoriesId)
         {
             List<Category> listOfCategoriesToAssociated = new List<Category>();
-
-            foreach (Guid identifierCategory in categoriesId)
+            if (categoriesId != null)
             {
-                Category category = GetById(identifierCategory);
-                listOfCategoriesToAssociated.Add(category);
+                foreach (Guid identifierCategory in categoriesId)
+                {
+                    Category category = GetById(identifierCategory);
+                    listOfCategoriesToAssociated.Add(category);
+                }
             }
             return listOfCategoriesToAssociated;
         }
