@@ -28,6 +28,8 @@ namespace Model.ForResponse
 
         public int QuantityOfBaby { get; set; }
 
+        public int QuantityOfRetired { get; set; }
+
         public ReserveState StateOfReserve { get; set; }
 
         public string DescriptionOfState { get; set; }
@@ -36,7 +38,7 @@ namespace Model.ForResponse
 
         public double TotalPrice { get; set; }
 
-        public ReserveModelForResponse() {}
+        public ReserveModelForResponse() { }
 
         protected override ReserveModelForResponse SetModel(Reserve entity)
         {
@@ -50,13 +52,12 @@ namespace Model.ForResponse
             QuantityOfAdult = entity.QuantityOfAdult;
             QuantityOfChild = entity.QuantityOfChild;
             QuantityOfBaby = entity.QuantityOfBaby;
+            QuantityOfRetired = entity.QuantityOfRetired;
             StateOfReserve = entity.StateOfReserve;
-            DescriptionOfState = entity.GetEnumDescription(); 
-            Lodging = LodgingModelForReserveResponseModel.ToModel(entity.LodgingOfReserve); 
-            int totalDays = (CheckOut - CheckIn).Days;
-            int[] QuantityOfGuest = new int[3]{ QuantityOfAdult, QuantityOfChild, QuantityOfBaby }; 
-            TotalPrice = entity.LodgingOfReserve.CalculateTotalPrice(totalDays, QuantityOfGuest);
-            return this; 
+            DescriptionOfState = entity.GetEnumDescription();
+            Lodging = LodgingModelForReserveResponseModel.ToModel(entity.LodgingOfReserve);
+            TotalPrice = entity.TotalPrice;
+            return this;
         }
 
         public override bool Equals(object obj)
@@ -70,6 +71,8 @@ namespace Model.ForResponse
                    QuantityOfAdult == response.QuantityOfAdult &&
                    QuantityOfChild == response.QuantityOfChild &&
                    QuantityOfBaby == response.QuantityOfBaby &&
+                   QuantityOfRetired == response.QuantityOfRetired &&
+                   TotalPrice == response.TotalPrice &&
                    EqualityComparer<LodgingModelForReserveResponseModel>.Default.Equals(Lodging, response.Lodging);
         }
     }

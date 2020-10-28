@@ -21,6 +21,8 @@ namespace Model.ForRequest
 
         public int QuantityOfChild { get; set; }
 
+        public int QuantityOfRetired { get; set; }
+
         public int QuantityOfBaby { get; set; }
 
         public Guid IdOfLodgingToReserve { get; set; }
@@ -36,7 +38,8 @@ namespace Model.ForRequest
             CheckOut = CheckOut,
             QuantityOfAdult = QuantityOfAdult,
             QuantityOfChild = QuantityOfChild,
-            QuantityOfBaby = QuantityOfBaby
-        }; 
+            QuantityOfBaby = QuantityOfBaby,
+            QuantityOfRetired = QuantityOfRetired
+        };
     }
 }

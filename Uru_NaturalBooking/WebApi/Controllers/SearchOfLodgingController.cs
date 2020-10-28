@@ -33,7 +33,7 @@ namespace WebApi.Controllers
                 {
                     CheckIn = model.CheckIn,
                     CheckOut = model.CheckOut,
-                    QuantityOfGuest = new int[3] { model.QuantityOfAdult, model.QuantityOfChilds, model.QuantityOfBabies }
+                    QuantityOfGuest = new int[4] { model.QuantityOfAdult, model.QuantityOfChilds, model.QuantityOfBabies, model.QuantityOfRetireds }
                 };
                 return Ok(lodgingForSearchModel.ToModel(lodgingsForTouristSpotSearched)); 
             }

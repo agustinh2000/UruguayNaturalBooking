@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net.Mail;
 using System.Reflection;
-using System.Text;
 
 namespace Domain
 {
@@ -25,40 +24,46 @@ namespace Domain
 
         public virtual Lodging LodgingOfReserve { get; set; }
 
+        public double TotalPrice { get; set; }
+
         public DateTime CheckIn { get; set; }
 
         public DateTime CheckOut { get; set; }
 
         public int QuantityOfAdult { get; set; }
 
-        public int QuantityOfChild { get; set;  }
+        public int QuantityOfChild { get; set; }
 
         public int QuantityOfBaby { get; set; }
 
-        public enum ReserveState { 
+        public int QuantityOfRetired { get; set; }
+
+        public enum ReserveState
+        {
             [Description("Creada")]
             Creada,
             [Description("Pendiente de pago")]
             Pendiente_Pago,
             [Description("Aceptada")]
-            Aceptada, 
+            Aceptada,
             [Description("Rechazada")]
-            Rechazada, 
+            Rechazada,
             [Description("Expirada")]
-            Expirada }
+            Expirada
+        }
 
-        public ReserveState StateOfReserve {get; set; }
+        public ReserveState StateOfReserve { get; set; }
 
         public void VerifyFormat()
         {
             if (IsInvalidNameOrLastName())
             {
-                throw new ReserveException(MessageExceptionDomain.ErrorIsEmpty); 
+                throw new ReserveException(MessageExceptionDomain.ErrorIsEmpty);
             }
 
             if (IsInvalidDate())
             {
-                throw new ReserveException(MessageExceptionDomain.ErrorDate); 
+                throw new ReserveException(MessageExceptionDomain.ErrorDate);
             }
 
             if (IsInvalidQuantityGuest())
@@ -68,29 +73,29 @@ namespace Domain
 
             if (NotHasGuest())
             {
-                throw new ReserveException(MessageExceptionDomain.ErrorQuantityOfGuest); 
+                throw new ReserveException(MessageExceptionDomain.ErrorQuantityOfGuest);
             }
 
             if (string.IsNullOrEmpty(Email) || !IsValidEmail())
             {
-                throw new ReserveException(MessageExceptionDomain.ErrorEmail); 
+                throw new ReserveException(MessageExceptionDomain.ErrorEmail);
             }
-            LodgingOfReserve.VerifyFormat(); 
+            LodgingOfReserve.VerifyFormat();
         }
 
         private bool IsInvalidNameOrLastName()
         {
-            return string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(LastName); 
+            return string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(LastName);
         }
 
         private bool IsInvalidDate()
         {
-            return CheckIn > CheckOut; 
+            return CheckIn > CheckOut;
         }
 
         private bool IsInvalidQuantityGuest()
         {
-            return QuantityOfAdult < 0 || QuantityOfBaby < 0 || QuantityOfChild < 0; 
+            return QuantityOfAdult < 0 || QuantityOfBaby < 0 || QuantityOfChild < 0;
         }
 
         private bool NotHasGuest()
@@ -113,14 +118,14 @@ namespace Domain
 
         public void UpdateAttributes(Reserve infoReserveToUpdate)
         {
-            if(!String.IsNullOrEmpty(infoReserveToUpdate.DescriptionForGuest))
+            if (!String.IsNullOrEmpty(infoReserveToUpdate.DescriptionForGuest))
             {
-                DescriptionForGuest = infoReserveToUpdate.DescriptionForGuest; 
+                DescriptionForGuest = infoReserveToUpdate.DescriptionForGuest;
             }
 
-            if(Enum.IsDefined(typeof(ReserveState), infoReserveToUpdate.StateOfReserve))
+            if (Enum.IsDefined(typeof(ReserveState), infoReserveToUpdate.StateOfReserve))
             {
-                StateOfReserve = infoReserveToUpdate.StateOfReserve; 
+                StateOfReserve = infoReserveToUpdate.StateOfReserve;
             }
         }
 
@@ -137,6 +142,7 @@ namespace Domain
                    Name.Equals(reserve.Name) &&
                    LastName.Equals(reserve.LastName) &&
                    Email.Equals(reserve.Email) &&
+                   TotalPrice.Equals(reserve.TotalPrice) &&
                    EqualityComparer<Lodging>.Default.Equals(LodgingOfReserve, reserve.LodgingOfReserve)
                    && DateTime.Compare(CheckIn, reserve.CheckIn) == 0
                    && DateTime.Compare(CheckOut, reserve.CheckOut) == 0
