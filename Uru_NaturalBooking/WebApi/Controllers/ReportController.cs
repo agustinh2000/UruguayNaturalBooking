@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BusinessLogicException;
 using BusinessLogicInterface;
 using Domain;
+using Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.ForResponse;
@@ -20,6 +21,7 @@ namespace WebApi.Controllers
             lodgingManagement = lodgingLogic;
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpGet("generateReport")]
         public IActionResult Get([FromQuery] Guid idOfTouristSpot, [FromQuery] DateTime checkInMax, [FromQuery] DateTime checkOutMax)
         {
