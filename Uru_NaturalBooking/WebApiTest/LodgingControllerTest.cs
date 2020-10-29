@@ -304,8 +304,6 @@ namespace WebApiTest
                 Name = "Hotel Enjoy Conrad",
                 Images = new List<string> { image.Path },
                
-               
-
             };
 
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);

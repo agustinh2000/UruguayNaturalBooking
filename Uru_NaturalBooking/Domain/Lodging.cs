@@ -37,6 +37,7 @@ namespace Domain
         public Lodging()
         {
             Images = new List<LodgingPicture>();
+            Reviews = new List<Review>();
             ReservesForLodging = new List<Reserve>();
             CreationDate = DateTime.Now; 
         }
