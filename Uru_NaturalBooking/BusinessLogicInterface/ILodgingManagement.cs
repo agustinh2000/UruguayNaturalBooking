@@ -17,6 +17,8 @@ namespace BusinessLogicInterface
 
         void RemoveLodging(Guid lodgingId);
 
+        void UpdateAverageReviewScore(Lodging lodgingToUpdate, double newAverageReviewScore);
+
         Lodging UpdateLodging(Guid idOfLodgingToUpdate, Lodging aLodging);
     }
 }

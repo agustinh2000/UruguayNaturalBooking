@@ -114,7 +114,7 @@ namespace WebApiTest
             {
                 CheckIn = searchOfLodgingModel.CheckIn,
                 CheckOut = searchOfLodgingModel.CheckOut,
-                Lodging = LodgingModelForResponse.ToModel(lodgingOfCumbres),
+                Lodging = LodgingModelForSearchResponse.ToModel(lodgingOfCumbres),
                 TotalPriceForSearch = 700.0
             };
 
@@ -122,7 +122,7 @@ namespace WebApiTest
             {
                 CheckIn = searchOfLodgingModel.CheckIn,
                 CheckOut = searchOfLodgingModel.CheckOut,
-                Lodging = LodgingModelForResponse.ToModel(lodgingOfConrad),
+                Lodging = LodgingModelForSearchResponse.ToModel(lodgingOfConrad),
                 TotalPriceForSearch = 350.0
             };
             listOfModelOfSearch.Add(lodgingModelOfCumbres);

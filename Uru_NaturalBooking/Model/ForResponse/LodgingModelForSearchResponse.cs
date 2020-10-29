@@ -1,12 +1,10 @@
 ﻿using Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Model.ForResponse
 {
-    public class LodgingModelForResponse : ModelBaseForResponse<Lodging, LodgingModelForResponse>
+    public class LodgingModelForSearchResponse : ModelBaseForResponse<Lodging, LodgingModelForSearchResponse>
     {
         public Guid Id { get; set; }
 
@@ -24,16 +22,11 @@ namespace Model.ForResponse
 
         public double ReviewsAverageScore { get; set; }
 
-        public List<ReviewModelForResponse> ReviewsForLodging { get; set; }
-
         public TouristSpotModelForLodgingResponseModel LodgingTouristSpotModel { get; set; }
 
-        public LodgingModelForResponse()
-        {
-            ReviewsForLodging = new List<ReviewModelForResponse>();
-        }
+        public LodgingModelForSearchResponse() { }
 
-        protected override LodgingModelForResponse SetModel(Lodging lodging)
+        protected override LodgingModelForSearchResponse SetModel(Lodging lodging)
         {
             Id = lodging.Id;
             Name = lodging.Name;
@@ -44,22 +37,17 @@ namespace Model.ForResponse
             PricePerNight = lodging.PricePerNight;
             ReviewsAverageScore = Math.Round(lodging.ReviewsAverageScore, 2);
             LodgingTouristSpotModel = TouristSpotModelForLodgingResponseModel.ToModel(lodging.TouristSpot);
-            ReviewsForLodging = lodging.Reviews.ConvertAll(r => ReviewModelForResponse.ToModel(r));
             return this;
         }
 
         public override bool Equals(object obj)
         {
-            return obj is LodgingModelForResponse response &&
+            return obj is LodgingModelForSearchResponse response &&
+                   Id.Equals(response.Id) &&
                    Name == response.Name &&
-                   Description == response.Description &&
                    QuantityOfStars == response.QuantityOfStars &&
                    Address == response.Address &&
-                   ImagesPath.SequenceEqual(response.ImagesPath) &&
-                   PricePerNight == response.PricePerNight &&
-                   ReviewsAverageScore == response.ReviewsAverageScore &&
-                   ReviewsForLodging.SequenceEqual(response.ReviewsForLodging) &&
-                   LodgingTouristSpotModel.Equals(response.LodgingTouristSpotModel);
+                   PricePerNight == response.PricePerNight;
         }
     }
 }

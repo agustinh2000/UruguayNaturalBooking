@@ -29,7 +29,7 @@ namespace WebApi.Controllers
             try
             {
                 List<Lodging> allLodgings = lodgingManagement.GetAllLoadings();
-                return Ok(LodgingModelForResponse.ToModel(allLodgings));
+                return Ok(LodgingModelForSearchResponse.ToModel(allLodgings));
             }
             catch (ClientBusinessLogicException e)
             {
@@ -67,7 +67,7 @@ namespace WebApi.Controllers
             try
             {
                 Lodging lodging = lodgingManagement.Create(LodgingModelForRequest.ToEntity(lodgingModel), lodgingModel.TouristSpotId, lodgingModel.Images);
-                return CreatedAtRoute("getLodging", new { id = lodging.Id }, LodgingModelForResponse.ToModel(lodging));
+                return CreatedAtRoute("getLodging", new { id = lodging.Id }, LodgingModelForSearchResponse.ToModel(lodging));
             }
             catch (DomainBusinessLogicException e)
             {

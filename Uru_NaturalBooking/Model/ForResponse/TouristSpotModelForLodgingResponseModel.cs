@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Model.ForResponse
 {
-    public class TouristSpotModelForLodgingResponseModel: ModelBaseForResponse<TouristSpot, TouristSpotModelForLodgingResponseModel>
+    public class TouristSpotModelForLodgingResponseModel : ModelBaseForResponse<TouristSpot, TouristSpotModelForLodgingResponseModel>
     {
         public Guid Id { get; set; }
 
@@ -18,6 +18,12 @@ namespace Model.ForResponse
             Id = touristSpot.Id;
             Name = touristSpot.Name;
             return this;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is TouristSpotModelForLodgingResponseModel model &&
+                   Name.Equals(model.Name);
         }
     }
 }

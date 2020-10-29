@@ -1,6 +1,6 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer; 
+using Microsoft.EntityFrameworkCore.SqlServer;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,15 +19,17 @@ namespace DataAccess
 
         public DbSet<LodgingPicture> LodgingPictures { get; set; }
 
-        public DbSet<Lodging> Lodgings { get; set;}
+        public DbSet<Lodging> Lodgings { get; set; }
 
-        public DbSet<Reserve> Reserves { get; set;}
+        public DbSet<Reserve> Reserves { get; set; }
 
         public DbSet<User> Users { get; set; }
 
         public DbSet<UserSession> UserSessions { get; set; }
 
         public DbSet<Picture> Pictures { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
 
         public ContextObl(DbContextOptions options) : base(options)
         {
@@ -64,12 +66,17 @@ namespace DataAccess
                 .HasOne<Lodging>(l => l.Lodging)
                 .WithMany(p => p.Images)
                 .HasForeignKey(l => l.LodgingId)
-                .OnDelete(DeleteBehavior.Cascade); 
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<LodgingPicture>()
                 .HasOne(p => p.Picture)
                 .WithMany(l => l.LodgingPictures)
                 .HasForeignKey(p => p.PictureId);
+
+            modelBuilder.Entity<Review>()
+                .HasOne(r => r.LodgingOfReview)
+                .WithMany(l => l.Reviews)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

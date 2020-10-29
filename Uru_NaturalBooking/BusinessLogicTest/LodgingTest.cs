@@ -568,5 +568,16 @@ namespace BusinessLogicTest
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
             List<Lodging> loadgingsObteinedOfGetAll = lodgingLogic.GetAllLoadings();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
+        public void FailAboutUpdateAverageReviewScoreTest()
+        {
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(m => m.Update(lodging)).Throws(new ServerException());
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+            lodgingLogic.UpdateAverageReviewScore(lodging, 4.5);
+        }
+
     }
 }

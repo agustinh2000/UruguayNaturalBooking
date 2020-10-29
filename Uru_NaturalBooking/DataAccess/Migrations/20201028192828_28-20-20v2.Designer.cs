@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ContextObl))]
-    partial class ContextOblModelSnapshot : ModelSnapshot
+    [Migration("20201028192828_28-20-20v2")]
+    partial class _282020v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,9 +194,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("IdOfReserve")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("LastNameOfWhoComments")
                         .HasColumnType("nvarchar(max)");
 
@@ -211,7 +210,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("LodgingOfReviewId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("Domain.TouristSpot", b =>

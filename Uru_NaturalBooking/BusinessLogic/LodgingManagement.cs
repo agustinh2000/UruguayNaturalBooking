@@ -78,6 +78,20 @@ namespace BusinessLogic
             }
         }
 
+        public void UpdateAverageReviewScore(Lodging aLodging, double newAverageReviewScore)
+        {
+            try
+            {
+                aLodging.ReviewsAverageScore = newAverageReviewScore;
+                lodgingRepository.Update(aLodging);
+            }
+            catch(ServerException e)
+            {
+                throw new ServerBusinessLogicException("No se ha podido actualizar el promedio del puntaje de reviews del hospedaje " +
+                    "debido a que ha ocurrido un error.", e);
+            }
+        }
+
         private void VerifyIfLodgingExist(Lodging lodging, Guid touristSpotId)
         {
             try

@@ -26,8 +26,11 @@ namespace BusinessLogicException
         public static string ErrorObteinedReserve = "Error. Ha ocurrido un error al intentar encontrar la reserva buscada.";
         public static string ErrorNotFindTouristSpot = "Error. No se ha encontrado el punto turistico buscado.";
         public static string ErrorObteinedTouristSpot = "Error. Ha ocurrido un error al intentar encontrar el punto turistico buscado.";
+        public static string ErrorNotFindReview = "Error. No se ha encontrado la review buscada.";
+        public static string ErrorObteinedReview = "Error. Ha ocurrido un error al intentar encontrar la review buscada.";
         public static string ErrorCreatingLodging = "Error. No se ha podido encontrar el punto turistico asociado al hospedaje a crear.";
         public static string ErrorCreatingReserve = "Error. No se ha podido encontrar el hospedaje asociado a la reserva a crear.";
+        public static string ErrorCreatingReview = "Error. No se ha podido encontrar la reserva asociada a la review a crear.";
         public static string ErrorCreatingTouristSpot = "Error. No se ha podido encontrar la region y/o las categorias asociadas al punto turistico.";
         public static string ErrorUpdatingReserve = "Error. No se ha podido actualizar la reserva.";
         public static string ErrorUpdatingReserveNotFound = "Error. No se ha podido encontrar la reserva que se desea actualizar";
@@ -36,6 +39,7 @@ namespace BusinessLogicException
         public static string ErrorObteinedTouristSpotByCategoriesAndRegion = "Error. No se puede obtener los puntos turisticos por las categorias buscadas y la region buscada.";
         public static string ErrorGettingTouristSpotByCategoriesAndRegion = "Error. Ha ocurrido un error al tratar de obtener los puntos turisticos buscados por las categorias y region.";
         public static string ErrorUserAlredyExist = "Error. El mail del usuario que desea crear ya existe.";
+        public static string ErrorReviewAlredyExistForThisReserveCode = "Error. Ya ha ingresado una reseña para el codigo de reserva dado.";
         public static string ErrorTouristSpotAlredyExist = "Error. El punto turistico que desea crear ya existe.";
         public static string ErrorLodgingAlredyExist = "Error. El hospedaje que desea crear ya existe.";
         public static string ErrorCategoryAlredyExist = "Error. La categoria que desea crear ya existe.";

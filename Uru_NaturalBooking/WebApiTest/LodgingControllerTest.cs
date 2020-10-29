@@ -3,14 +3,12 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Model;
 using Model.ForRequest;
 using Model.ForResponse;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using WebApi.Controllers;
 
 namespace WebApiTest
@@ -19,15 +17,18 @@ namespace WebApiTest
     public class LodgingControllerTest
     {
         TouristSpotModelForLodgingResponseModel lodgingTouristSpotModel;
+        LodgingModelForSearchResponse lodgingModelForSearchResponse;
         LodgingModelForResponse lodgingModelForResponse;
         LodgingModelForRequest lodgingModelForRequest;
+        ReviewModelForResponse reviewModelForResponse;
         Lodging lodgingOfficial;
         Lodging lodgingForGet;
         Region regionForTouristSpot;
         Category category;
         TouristSpot touristSpotAdded;
         Picture image;
-        LodgingPicture lodgingPicture; 
+        LodgingPicture lodgingPicture;
+        Review review;
 
 
         [TestInitialize]
@@ -50,8 +51,39 @@ namespace WebApiTest
             {
 
                 Id = Guid.NewGuid(),
-                Name = "Punta del este",
+                Name = "Punta del Este",
 
+            };
+
+            lodgingModelForSearchResponse = new LodgingModelForSearchResponse()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Hotel las cumbres",
+                ImagesPath = new List<string> { image.Path },
+                Address = "En la punta de punta del este",
+                QuantityOfStars = 5,
+                PricePerNight = 150,
+                LodgingTouristSpotModel = lodgingTouristSpotModel,
+                ReviewsAverageScore = 4.3
+            };
+
+            review = new Review()
+            {
+                Description = "Muy buena",
+                Id = Guid.NewGuid(),
+                LastNameOfWhoComments = "Her",
+                NameOfWhoComments = "Agustin",
+                Score = 3
+            };
+
+
+            reviewModelForResponse = new ReviewModelForResponse()
+            {
+                Description = "Muy buena",
+                Id = Guid.NewGuid(),
+                LastNameOfWhoComments = "Her",
+                NameOfWhoComments = "Agustin",
+                Score = 3
             };
 
             lodgingModelForResponse = new LodgingModelForResponse()
@@ -62,7 +94,9 @@ namespace WebApiTest
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
-                LodgingTouristSpotModel = lodgingTouristSpotModel
+                LodgingTouristSpotModel = lodgingTouristSpotModel,
+                ReviewsAverageScore = 4.3,
+                ReviewsForLodging = new List<ReviewModelForResponse> { reviewModelForResponse }
             };
 
             lodgingModelForRequest = new LodgingModelForRequest()
@@ -111,13 +145,15 @@ namespace WebApiTest
 
             lodgingForGet = new Lodging()
             {
-                Id = lodgingModelForResponse.Id,
+                Id = lodgingModelForSearchResponse.Id,
                 Name = "Hotel las cumbres",
                 Images = new List<LodgingPicture>() { lodgingPicture },
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
-                TouristSpot = touristSpotAdded
+                TouristSpot = touristSpotAdded,
+                ReviewsAverageScore = 4.3,
+                Reviews = new List<Review> { review }
             };
         }
 
@@ -128,7 +164,7 @@ namespace WebApiTest
             lodgingManagementMock.Setup(m => m.GetLodgingById(It.IsAny<Guid>())).Returns(lodgingForGet);
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
 
-            var result = lodgingController.Get(lodgingModelForResponse.Id);
+            var result = lodgingController.Get(lodgingModelForSearchResponse.Id);
             var createdResult = result as OkObjectResult;
             var model = createdResult.Value as LodgingModelForResponse;
 
@@ -142,7 +178,7 @@ namespace WebApiTest
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
             lodgingManagementMock.Setup(m => m.GetLodgingById(It.IsAny<Guid>())).Throws(new ClientBusinessLogicException());
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
-            var result = lodgingController.Get(lodgingModelForResponse.Id);
+            var result = lodgingController.Get(lodgingModelForSearchResponse.Id);
             var createdResult = result as NotFoundObjectResult;
             lodgingManagementMock.VerifyAll();
             Assert.AreEqual(404, createdResult.StatusCode);
@@ -154,7 +190,7 @@ namespace WebApiTest
             var lodgingManagementMock = new Mock<ILodgingManagement>(MockBehavior.Strict);
             lodgingManagementMock.Setup(m => m.GetLodgingById(It.IsAny<Guid>())).Throws(new ServerBusinessLogicException("El hospedaje solicitado no fue encontrado."));
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
-            var result = lodgingController.Get(lodgingModelForResponse.Id);
+            var result = lodgingController.Get(lodgingModelForSearchResponse.Id);
             var createdResult = result as ObjectResult;
             lodgingManagementMock.VerifyAll();
             Assert.AreEqual(500, createdResult.StatusCode);
@@ -168,9 +204,9 @@ namespace WebApiTest
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Get();
             var createdResult = result as OkObjectResult;
-            var model = createdResult.Value as List<LodgingModelForResponse>;
+            var model = createdResult.Value as List<LodgingModelForSearchResponse>;
             lodgingManagementMock.VerifyAll();
-            Assert.AreEqual(lodgingModelForResponse, model.First());
+            Assert.AreEqual(lodgingModelForSearchResponse, model.First());
         }
 
         [TestMethod]
@@ -205,9 +241,9 @@ namespace WebApiTest
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Post(lodgingModelForRequest);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as LodgingModelForResponse;
+            var model = createdResult.Value as LodgingModelForSearchResponse;
             lodgingManagementMock.VerifyAll();
-            Assert.AreEqual(LodgingModelForResponse.ToModel(lodgingOfficial), model);
+            Assert.AreEqual(LodgingModelForSearchResponse.ToModel(lodgingOfficial), model);
         }
 
         [TestMethod]
@@ -267,6 +303,8 @@ namespace WebApiTest
                 Id = lodgingModelForRequest.Id,
                 Name = "Hotel Enjoy Conrad",
                 Images = new List<string> { image.Path },
+               
+               
 
             };
 
@@ -286,9 +324,9 @@ namespace WebApiTest
                 Address = "En la punta de punta del este",
                 QuantityOfStars = 5,
                 PricePerNight = 150,
-                LodgingTouristSpotModel = TouristSpotModelForLodgingResponseModel.ToModel(touristSpotAdded)
+                LodgingTouristSpotModel = TouristSpotModelForLodgingResponseModel.ToModel(touristSpotAdded),
             };
-
+            
             Assert.AreEqual(lodgingModelForResponse, model);
         }
 

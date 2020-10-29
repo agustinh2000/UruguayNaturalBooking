@@ -14,7 +14,7 @@ namespace Model
 
         public int[] QuantityOfGuest { get; set; }
 
-        public LodgingModelForResponse Lodging { get; set; }
+        public LodgingModelForSearchResponse Lodging { get; set; }
 
         public double TotalPriceForSearch { get; set; }
 
@@ -32,7 +32,7 @@ namespace Model
                     CheckIn = CheckIn,
                     CheckOut=CheckOut,
                     QuantityOfGuest= QuantityOfGuest, 
-                    Lodging = LodgingModelForResponse.ToModel(entity),
+                    Lodging = LodgingModelForSearchResponse.ToModel(entity),
                     TotalPriceForSearch = entity.CalculateTotalPrice(totalDays, QuantityOfGuest)
                 };
                 toReturn.Add(lodging);
@@ -46,7 +46,7 @@ namespace Model
             return obj is LodgingForSearchModel model &&
                    CheckIn == model.CheckIn &&
                    CheckOut == model.CheckOut &&
-                   EqualityComparer<LodgingModelForResponse>.Default.Equals(Lodging, model.Lodging);
+                   EqualityComparer<LodgingModelForSearchResponse>.Default.Equals(Lodging, model.Lodging);
         }
     }
 }

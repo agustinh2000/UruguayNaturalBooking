@@ -25,9 +25,14 @@ namespace Domain
 
         public virtual TouristSpot TouristSpot { get; set; }
 
+        public virtual List<Review> Reviews { get; set; }
+
+        public double ReviewsAverageScore { get; set; }
+
         public Lodging()
         {
             Images = new List<LodgingPicture>();
+            Reviews = new List<Review>();
         }
 
         public void VerifyFormat()
@@ -107,7 +112,8 @@ namespace Domain
                    Name.Equals(lodging.Name) &&
                    QuantityOfStars == lodging.QuantityOfStars &&
                    Address.Equals(lodging.Address) &&
-                   PricePerNight == lodging.PricePerNight;
+                   PricePerNight == lodging.PricePerNight &&
+                   ReviewsAverageScore == lodging.ReviewsAverageScore;
         }
     }
 }
