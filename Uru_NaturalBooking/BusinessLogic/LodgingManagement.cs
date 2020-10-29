@@ -108,7 +108,6 @@ namespace BusinessLogic
             }
         }
 
-
         public Lodging GetLodgingById(Guid lodgingId)
         {
             try
@@ -156,6 +155,22 @@ namespace BusinessLogic
             catch (ServerException e)
             {
                 throw new ServerBusinessLogicException("No se puede eliminar el hospedaje deseado.", e);
+            }
+        }
+
+        public List<Lodging> GetLodgingsWithReservesBetweenDates(Guid idOfTouristSpot, DateTime checkInMax, DateTime checkOutMax)
+        {
+            try
+            {
+                return lodgingRepository.GetLodgingsWithReserves(idOfTouristSpot, checkInMax, checkOutMax);
+            }
+            catch (ClientException e)
+            {
+                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorGettingLodgingWithReserves, e);
+            }
+            catch (ServerException e)
+            {
+                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedLodgingWithReserves, e);
             }
         }
 

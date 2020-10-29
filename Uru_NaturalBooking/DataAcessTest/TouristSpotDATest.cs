@@ -271,6 +271,31 @@ namespace DataAcessTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ClientException))]
+        public void TestGetTouristSpotsByCategoriesIdAndRegionIdBad()
+        {
+            ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());
+            ITouristSpotRepository touristSpotRepo = new TouristSpotRepository(context);
+
+            TouristSpot aTouristSpot2 = new TouristSpot()
+            {
+                Id = Guid.NewGuid(),
+                Name = "La Paloma",
+                Description = "Un gran lugar",
+                Region = aRegion,
+                ListOfCategories = new List<CategoryTouristSpot>() { }
+            };
+            categoryTouristSpot.TouristSpot = aTouristSpot2;
+            categoryTouristSpot.TouristSpotId = aTouristSpot2.Id;
+            aTouristSpot2.ListOfCategories.Add(categoryTouristSpot);
+            touristSpotRepo.Add(aTouristSpot2);
+            List<TouristSpot> listToCompare = new List<TouristSpot>() { aTouristSpot2 };
+            List<Guid> listOfCategoriesIdToSearch = new List<Guid>() { categoryTouristSpot.CategoryId };
+
+            List<TouristSpot> touristSpotsByRegionAndCategories = touristSpotRepo.GetTouristSpotsByCategoriesAndRegion(listOfCategoriesIdToSearch, Guid.NewGuid());
+        }
+
+        [TestMethod]
         public void TestGetTouristSpotByNameOk()
         {
             ContextObl context = ContextFactory.GetMemoryContext(Guid.NewGuid().ToString());

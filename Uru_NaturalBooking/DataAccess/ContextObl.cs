@@ -55,7 +55,7 @@ namespace DataAccess
                 .HasForeignKey(cat => cat.CategoryId);
 
             modelBuilder.Entity<Lodging>()
-                .HasMany<Reserve>()
+                .HasMany(l =>l.ReservesForLodging)
                 .WithOne(l => l.LodgingOfReserve)
                 .OnDelete(DeleteBehavior.Cascade);
 

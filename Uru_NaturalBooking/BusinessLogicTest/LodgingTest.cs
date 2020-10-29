@@ -406,8 +406,6 @@ namespace BusinessLogicTest
             Lodging resultOfGetLodging = lodgingLogic.GetLodgingById(lodging.Id);
         }
 
-
-
         [TestMethod]
         public void GetLodgingsByTouristSpotTest()
         {
@@ -444,6 +442,51 @@ namespace BusinessLogicTest
             LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
 
             lodgingLogic.GetAvailableLodgingsByTouristSpot(touristSpot.Id);
+        }
+
+
+        [TestMethod]
+        public void GetLodgingsWithReservesBetweenDatesTestOK()
+        {
+            lodging.TouristSpot = touristSpotOfPuntaDelEste;
+            List<Lodging> listOfLodgings = new List<Lodging>() { lodging, lodgingConrad };
+
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(l => l.GetLodgingsWithReserves(It.IsAny<Guid>(), It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(listOfLodgings);
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+
+            DateTime dateCheckIn = new DateTime(2020, 05, 10);
+            DateTime dateCheckOut = new DateTime(2020, 06, 10);
+            List<Lodging> resultOfGetLodgingsWithReserves = lodgingLogic.GetLodgingsWithReservesBetweenDates(touristSpotOfPuntaDelEste.Id, dateCheckIn, dateCheckOut);
+
+            lodgingRepositoryMock.VerifyAll();
+            CollectionAssert.AreEqual(listOfLodgings, resultOfGetLodgingsWithReserves);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientBusinessLogicException))]
+        public void FailInGetLodgingWithReservesBetweenDatesTest()
+        {
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(l => l.GetLodgingsWithReserves(It.IsAny<Guid>(), It.IsAny<DateTime>(), It.IsAny<DateTime>())).Throws(new ClientException());
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+
+            DateTime dateCheckIn = new DateTime(2020, 05, 10);
+            DateTime dateCheckOut = new DateTime(2020, 06, 10);
+            List<Lodging> resultOfGetLodgingsWithReserves = lodgingLogic.GetLodgingsWithReservesBetweenDates(touristSpotOfPuntaDelEste.Id, dateCheckIn, dateCheckOut);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ServerBusinessLogicException))]
+        public void FailInGetLodgingsWithReservesInternalErrorTest()
+        {
+            var lodgingRepositoryMock = new Mock<ILodgingRepository>(MockBehavior.Strict);
+            lodgingRepositoryMock.Setup(l => l.GetLodgingsWithReserves(It.IsAny<Guid>(), It.IsAny<DateTime>(), It.IsAny<DateTime>())).Throws(new ServerException());
+            LodgingManagement lodgingLogic = new LodgingManagement(lodgingRepositoryMock.Object);
+
+            DateTime dateCheckIn = new DateTime(2020, 05, 10);
+            DateTime dateCheckOut = new DateTime(2020, 06, 10);
+            List<Lodging> resultOfGetLodgingsWithReserves = lodgingLogic.GetLodgingsWithReservesBetweenDates(touristSpotOfPuntaDelEste.Id, dateCheckIn, dateCheckOut);
         }
 
         [TestMethod]

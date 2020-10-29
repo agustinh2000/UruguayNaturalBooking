@@ -59,7 +59,6 @@ namespace WebApi.Controllers
             }
         }
 
-
         [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
         public IActionResult Post([FromBody] LodgingModelForRequest lodgingModel)

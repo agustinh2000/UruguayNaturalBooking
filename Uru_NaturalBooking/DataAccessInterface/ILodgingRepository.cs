@@ -1,7 +1,6 @@
 ﻿using Domain;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DataAccessInterface
 {
@@ -10,5 +9,7 @@ namespace DataAccessInterface
         List<Lodging> GetAvailableLodgingsByTouristSpot(Guid touristSpotId);
 
         Lodging GetLodgingByNameAndTouristSpot(string lodgingName, Guid touristSpotId);
+
+        List<Lodging> GetLodgingsWithReserves(Guid idOfTouristSpot, DateTime dateCheckInMax, DateTime dateCheckOutMax); 
     }
 }

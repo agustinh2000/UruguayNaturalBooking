@@ -24,6 +24,8 @@ namespace RepositoryException
         public static string ErrorObteinedLodgingByNameAndTouristSpotId = "Error. Ha ocurrido un error al tratar de obtener un hospedaje por el nombre y punto turistico indicado.";
         public static string ErrorObteinedTouristSpotByName = "Error. Ha ocurrido un error al tratar de obtener un punto turistico por el nombre indicado.";
         public static string ErrorObteinedCategoryByName = "Error. Ha ocurrido un error al tratar de obtener una categoria por el nombre indicado.";
+        public static string ErrorGettingLodgingWithReserves = "Error. No se pudo obtener hospedajes con reservas.";
+        public static string ErrorObteinedLodgingWithReserves = "Error. Ha ocurrido un error al tratar de obtener los hospedajes con reservas."; 
 
     }
 }

@@ -20,5 +20,7 @@ namespace BusinessLogicInterface
         void UpdateAverageReviewScore(Lodging lodgingToUpdate, double newAverageReviewScore);
 
         Lodging UpdateLodging(Guid idOfLodgingToUpdate, Lodging aLodging);
+
+        List<Lodging> GetLodgingsWithReservesBetweenDates(Guid idOfTouristSpot, DateTime dateCheckInMax, DateTime dateCheckOutMax);
     }
 }
