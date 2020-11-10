@@ -1,7 +1,23 @@
 <div class="padre">
     <form [formGroup]="formGroup" class="formulario">
-        <h1> Inicio sesión </h1>
+        <h1> Registro de usuario </h1>
         <div class="contenedor">
+
+            <div class="input-contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" placeholder="Nombre" name="name" class="name" formControlName="name">
+            </div>
+
+            <div class="input-contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" placeholder="Apellido" name="lastName" class="lastName" formControlName="lastName">
+            </div>
+
+            <div class="input-contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" placeholder="Nombre de usuario" name="userName" class="userName"
+                    formControlName="userName">
+            </div>
 
             <div class="input-contenedor">
                 <i class="fas fa-envelope icon"></i>
@@ -15,11 +31,38 @@
             </div>
 
             <ng-container
-                *ngIf="formGroup.controls.email.errors?.required && (formGroup.controls.email.touched); else EmailInvalid">
+                *ngIf="formGroup.controls.name.errors?.required && (formGroup.controls.name.touched); else LastNameRequired">
                 <div>
-                    El email es requerido.
+                    El nombre es requerido.
                 </div>
             </ng-container>
+
+            <ng-template #LastNameRequired>
+                <ng-container
+                    *ngIf="formGroup.controls.lastName.errors?.required && (formGroup.controls.lastName.touched);else UserNameRequired">
+                    <div>
+                        El apellido es requerido.
+                    </div>
+                </ng-container>
+            </ng-template>
+
+            <ng-template #UserNameRequired>
+                <ng-container
+                    *ngIf="formGroup.controls.userName.errors?.required && (formGroup.controls.userName.touched);else EmailRequired">
+                    <div>
+                        El nombre de usuario es requerido.
+                    </div>
+                </ng-container>
+            </ng-template>
+
+            <ng-template #EmailRequired>
+                <ng-container
+                    *ngIf="formGroup.controls.email.errors?.required && (formGroup.controls.email.touched);else EmailInvalid">
+                    <div>
+                        El email es requerido.
+                    </div>
+                </ng-container>
+            </ng-template>
 
             <ng-template #EmailInvalid>
                 <ng-container
@@ -31,15 +74,15 @@
             </ng-template>
 
             <ng-template #PasswordRequired>
-                <div *ngIf="formGroup.controls.password.errors?.required && (formGroup.controls.password.touched)">La
-                    contraseña es requerida
+                <div *ngIf="formGroup.controls.password.errors?.required && (formGroup.controls.password.touched)">
+                    La contraseña es requerida.
                 </div>
             </ng-template>
 
-            <button class="button" [disabled]="formGroup.invalid">Iniciar sesión</button>
+            <button class="button" (click)="Register()" [disabled]="formGroup.invalid">Registrar usuario</button>
 
-            <p class="linea">Al iniciar sesión, aceptas nuestras <a href="#">Condiciones de Uso y Politica de
-                    Privacidad</a></p>
+            <p class="linea">Al registrar al usuario, el mismo acepta nuestras <a href="#">Condiciones de Uso y Politica
+                    de Privacidad</a></p>
 
         </div>
     </form>

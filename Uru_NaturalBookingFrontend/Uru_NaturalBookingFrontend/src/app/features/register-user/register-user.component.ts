@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserModelForLoginRequest } from '../../models/UserModelForLoginRequest';
 import { UserService } from '../services/user.service';
+import { UserModelForRequest } from '../../models/UserModelForRequest';
 
 @Component({
   selector: 'app-register-user',
@@ -10,7 +10,7 @@ import { UserService } from '../services/user.service';
 })
 export class RegisterUserComponent implements OnInit {
 
-  informationOfUserToLogin: UserModelForLoginRequest;
+  informationOfUserToRegister: UserModelForRequest;
 
   public formGroup: FormGroup;
 
@@ -19,12 +19,20 @@ export class RegisterUserComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private serviceUserPassed: UserService) {
     this.serviceUser = serviceUserPassed;
     this.formGroup = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
+  }
+
+  public Register(): void {
+    this.informationOfUserToRegister = new UserModelForRequest(this.formGroup.value);
+    this.serviceUser.Register(this.informationOfUserToRegister);
   }
 
 }

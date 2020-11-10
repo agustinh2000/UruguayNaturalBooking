@@ -17,7 +17,7 @@
     font-size: 40px;
   }
   
-  .email, .contraseña {
+  .name, .lastName, .userName, .email, .contraseña {
     font-size: 20px;
     width: 96%;
     padding: 2%;

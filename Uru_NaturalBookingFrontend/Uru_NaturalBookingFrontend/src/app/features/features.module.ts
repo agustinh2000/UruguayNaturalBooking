@@ -13,10 +13,12 @@ import { ReviewComponent } from './review/review.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
+import { UserService } from './services/user.service';
+import { ModifyUserComponent } from './modify-user/modify-user.component';
 
 
 @NgModule({
-  declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent],
+  declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -29,7 +31,7 @@ import { RegisterUserComponent } from './register-user/register-user.component';
     ReactiveFormsModule
   ],
   exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent],
-  providers: [RegionServiceService]
+  providers: [RegionServiceService, UserService]
 })
 
 export class FeaturesModule { }
