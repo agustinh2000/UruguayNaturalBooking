@@ -59,7 +59,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\Importers\ImporterJson.dll";
+            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
 
             var result = importerController.GetParameters(sourcePathJson);
             var createdResult = result as OkObjectResult;
@@ -78,7 +78,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\Importers\ImporterDrive";
+            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterDrive";
 
             var result = importerController.GetParameters(sourcePathJson);
             var createdResult = result as ObjectResult;
@@ -97,7 +97,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\Importers\ImporterJson.dll";
+            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
 
             List<Parameter> listOfParameters = new List<Parameter>()
             {
@@ -105,7 +105,7 @@ namespace WebApiTest
                 {
                     Name= "pathOfJsonFile",
                     Type= "file",
-                    Value= @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\FilesToImport\Lodgings.json"
+                    Value=  Directory.GetCurrentDirectory() + "\\FilesToImport\\Lodgings.json"
                 }
             };
 
@@ -127,7 +127,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\Importers\ImporterJson.dll";
+            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
 
             List<Parameter> listOfParameters = new List<Parameter>()
             {
@@ -135,7 +135,7 @@ namespace WebApiTest
                 {
                     Name= "pathOfJsonFile",
                     Type= "file",
-                    Value= @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\FilesToImport\Lodgings.json"
+                    Value=  Directory.GetCurrentDirectory() + "\\FilesToImport\\Lodgings.json"
                 }
             };
 
@@ -155,7 +155,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\Importers\ImporterJson.dll";
+            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
 
             List<Parameter> listOfParameters = new List<Parameter>()
             {
@@ -163,7 +163,7 @@ namespace WebApiTest
                 {
                     Name= "pathOfJsonFile",
                     Type= "file",
-                    Value= @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\FilesToImport\LodgingsV2.json"
+                    Value=  Directory.GetCurrentDirectory() + "\\FilesToImport\\LodgingsV2.json"
                 }
             };
 
@@ -180,7 +180,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\Importers\ImporterJson.dll";
+            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
 
             List<Parameter> listOfParameters = new List<Parameter>()
             {
@@ -188,7 +188,7 @@ namespace WebApiTest
                 {
                     Name= "pathOfJsonFile",
                     Type= "file",
-                    Value= @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\FilesToImport\LodgingsV4.json"
+                    Value=  Directory.GetCurrentDirectory() + "\\FilesToImport\\LodgingsV4.json"
                 }
             };
 
@@ -205,7 +205,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\ImporterWithoutConstructor\ImporterJsonWithoutConstructor.dll";
+            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJsonWithoutConstructor.dll";
 
             List<Parameter> listOfParameters = new List<Parameter>()
             {
@@ -213,7 +213,7 @@ namespace WebApiTest
                 {
                     Name= "pathOfJsonFile",
                     Type= "file",
-                    Value= @"C:\Users\user\Desktop\DA2\233375-233361Obl\Uru_NaturalBooking\WebApiTest\bin\Debug\netcoreapp3.1\FilesToImport\LodgingsV4.json"
+                    Value=  Directory.GetCurrentDirectory() + "\\FilesToImport\\LodgingsV4.json"
                 }
             };
 
