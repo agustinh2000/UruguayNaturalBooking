@@ -5,6 +5,7 @@ using DataAccess;
 using DataAccessInterface;
 using Domain;
 using Filters;
+using Importation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -65,6 +66,8 @@ namespace WebApi
             services.AddScoped<IReviewManagement, ReviewManagement>();
 
             services.AddScoped<AuthorizationFilter>();
+            services.AddScoped<ReflectionLogic>();
+            services.AddScoped<ILodgingManagementForImportation, LodgingManagementForImportation>(); 
 
             services.AddSwaggerGen(options =>
             {

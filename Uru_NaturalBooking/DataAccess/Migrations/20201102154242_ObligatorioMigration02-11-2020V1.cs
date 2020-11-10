@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace DataAccess.Migrations
 {
     [ExcludeFromCodeCoverage]
-    public partial class _29102020v1 : Migration
+    public partial class ObligatorioMigration02112020V1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

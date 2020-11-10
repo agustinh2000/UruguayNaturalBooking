@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DataAccess.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class _281020v3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
