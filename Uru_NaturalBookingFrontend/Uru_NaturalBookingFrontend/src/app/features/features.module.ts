@@ -12,10 +12,11 @@ import { RegionServiceService } from './services/region-service.service';
 import { ReviewComponent } from './review/review.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { RegisterUserComponent } from './register-user/register-user.component';
 
 
 @NgModule({
-  declarations: [RegionComponent, ReviewComponent, LoginComponent],
+  declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -27,7 +28,7 @@ import { LoginComponent } from './login/login.component';
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  exports: [RegionComponent, ReviewComponent, LoginComponent],
+  exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent],
   providers: [RegionServiceService]
 })
 

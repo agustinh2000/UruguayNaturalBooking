@@ -1,0 +1,46 @@
+<div class="padre">
+    <form [formGroup]="formGroup" class="formulario">
+        <h1> Inicio sesión </h1>
+        <div class="contenedor">
+
+            <div class="input-contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input type="email" placeholder="Correo electronico" name="email" class="email" formControlName="email">
+            </div>
+
+            <div class="input-contenedor">
+                <i class="fas fa-key icon"></i>
+                <input type="password" placeholder="Contraseña" name="password" class="contraseña"
+                    formControlName="password">
+            </div>
+
+            <ng-container
+                *ngIf="formGroup.controls.email.errors?.required && (formGroup.controls.email.touched); else EmailInvalid">
+                <div>
+                    El email es requerido.
+                </div>
+            </ng-container>
+
+            <ng-template #EmailInvalid>
+                <ng-container
+                    *ngIf="formGroup.controls.email.errors?.email && (formGroup.controls.email.touched);else PasswordRequired">
+                    <div>
+                        El email es invalido.
+                    </div>
+                </ng-container>
+            </ng-template>
+
+            <ng-template #PasswordRequired>
+                <div *ngIf="formGroup.controls.password.errors?.required && (formGroup.controls.password.touched)">La
+                    contraseña es requerida
+                </div>
+            </ng-template>
+
+            <button class="button" [disabled]="formGroup.invalid">Iniciar sesión</button>
+
+            <p class="linea">Al iniciar sesión, aceptas nuestras <a href="#">Condiciones de Uso y Politica de
+                    Privacidad</a></p>
+
+        </div>
+    </form>
+</div>

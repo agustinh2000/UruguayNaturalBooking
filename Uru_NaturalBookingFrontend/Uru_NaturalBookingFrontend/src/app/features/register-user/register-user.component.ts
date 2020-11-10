@@ -4,11 +4,11 @@ import { UserModelForLoginRequest } from '../../models/UserModelForLoginRequest'
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register-user',
+  templateUrl: './register-user.component.html',
+  styleUrls: ['./register-user.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterUserComponent implements OnInit {
 
   informationOfUserToLogin: UserModelForLoginRequest;
 
@@ -27,8 +27,4 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public Login(): void {
-    this.informationOfUserToLogin = new UserModelForLoginRequest(this.formGroup.value);
-    this.serviceUser.Login(this.informationOfUserToLogin);
-  }
 }

@@ -10,12 +10,14 @@ import { Region } from '../../models/region';
 export class RegionComponent implements OnInit {
 
   regions: Region[];
+  private service: RegionServiceService;
 
-  constructor(private service: RegionServiceService) {
-    this.regions = service.getRegions();
+  constructor(private servicePassed: RegionServiceService) {
+    this.service = servicePassed;
   }
 
   ngOnInit(): void {
+    this.regions = this.service.getRegions();
   }
 
 }
