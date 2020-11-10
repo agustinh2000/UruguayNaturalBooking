@@ -1,0 +1,22 @@
+.example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .mat-toolbar-multiple-rows {
+    height: 10vh;
+  }
+
+  .logo {
+    position: relative;
+    bottom: -1vh; 
+    left: 8vh;
+  }
+
+  .navigation{
+    position: relative;
+    bottom:  -1vh;
+  }

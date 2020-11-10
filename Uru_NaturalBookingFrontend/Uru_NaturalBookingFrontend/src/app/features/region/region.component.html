@@ -1,0 +1,8 @@
+<ul class="containerOfRegions">
+    <li *ngFor="let region of regions" class="item">
+        <a href="#">
+            <img class="regionImage" [src]="region.pathOfPhoto" alt="Foto de la region">
+            <h3 class="descriptionOfRegion">{{region.NameOfRegion}}</h3>
+        </a>  
+    </li>
+</ul>

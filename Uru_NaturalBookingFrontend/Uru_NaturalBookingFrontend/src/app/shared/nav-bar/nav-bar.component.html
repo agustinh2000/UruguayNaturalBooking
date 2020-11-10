@@ -1,0 +1,27 @@
+
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <button mat-icon-button fxShow="true" fxHide.gt-sm>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="logo">
+          <a href="/"> <img [src]="pathLogo" width="200px" alt="Logo de la empresa"></a>
+        </div>
+        <span class="example-spacer"></span>
+        <div class="navigation" fxShow="true" fxHide.lt-md="true">
+          <a href="#" class="button" mat-button>
+            <mat-icon>home</mat-icon>
+            Inicio
+          </a>
+          <a href="#" class="button" mat-button>
+            <mat-icon>details</mat-icon>
+            Categorias
+          </a>
+          <a href="#" class= "button" mat-button>
+            <mat-icon>account_box</mat-icon>
+            My Account
+          </a>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>  
+
