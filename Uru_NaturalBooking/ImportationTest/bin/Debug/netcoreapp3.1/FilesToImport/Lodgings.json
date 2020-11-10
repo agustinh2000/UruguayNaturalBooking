@@ -1,0 +1,17 @@
+[{
+  "name": "Hotel Enjoy Conrad",
+  "description": "Un lugar magico donde podes vivir.",
+  "quantityOfStars": 5,
+  "address": "Playa Mansa parada 21",
+  "images": ["Desktop\\conrad.jpg"],
+  "pricePerNight": 200.0,
+  "isAvailable": true,
+  "touristSpot": {
+                    "id": "7cb8a7ab-8511-473f-803f-6b39118e79c1",
+                    "name": "Punta del Este",
+                    "description": "La naturaleza abunda",
+                    "regionId": "fc775bb9-8cc8-4fdc-bca6-16e06bcd322b",
+                    "imagePath": "Desktop\\pde.jpg",
+                    "listOfCategoriesId": ["baa98b33-eafe-4d62-bb62-859a8e36d3a9"]
+                }
+}]

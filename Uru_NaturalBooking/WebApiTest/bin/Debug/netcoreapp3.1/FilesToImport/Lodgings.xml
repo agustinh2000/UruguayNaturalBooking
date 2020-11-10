@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Lodgings>
+  <LodgingModelForImport>
+    <Name>Hotel Enjoy Conrad</Name>
+    <Description>Un lugar magico donde podes vivir.</Description>
+    <QuantityOfStars>5</QuantityOfStars>
+    <Address>Playa Mansa parada 21</Address>
+    <Images>
+        <ImagePath>Desktop\conrad.jpg</ImagePath>
+    </Images>
+    <PricePerNight>200</PricePerNight>
+    <IsAvailable>true</IsAvailable>
+    <TouristSpot>
+      <Id>7cb8a7ab-8511-473f-803f-6b39118e79c1</Id>
+      <Name>Punta del Este</Name>
+      <Description>La naturaleza abunda</Description>
+      <RegionId>fc775bb9-8cc8-4fdc-bca6-16e06bcd322b</RegionId>
+      <ImagePath>Desktop\pde.jpg</ImagePath>
+      <ListOfCategoriesId>
+        <CategoryId> baa98b33-eafe-4d62-bb62-859a8e36d3a9 </CategoryId>
+      </ListOfCategoriesId>
+    </TouristSpot>
+  </LodgingModelForImport>
+</Lodgings>
