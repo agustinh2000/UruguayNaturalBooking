@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Region } from '../region/region';
+import { Region } from '../../models/region';
+
 
 @Injectable({
   providedIn: 'root'

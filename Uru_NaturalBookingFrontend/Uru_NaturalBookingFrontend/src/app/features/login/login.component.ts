@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginUser } from './loginUser';
-import { element } from 'protractor';
+import { LoginUser } from '../../models/loginUser';
 
 @Component({
   selector: 'app-login',
@@ -17,14 +16,14 @@ export class LoginComponent implements OnInit {
   constructor( private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
   }
 
-  public Register(): void{
+  public Login(): void{
     this.informationOfUserToLogin = new LoginUser(this.formGroup.value);
 
     window.alert(JSON.parse(this.informationOfUserToLogin.Email));

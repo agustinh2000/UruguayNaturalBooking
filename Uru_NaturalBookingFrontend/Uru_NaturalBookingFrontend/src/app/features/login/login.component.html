@@ -14,9 +14,29 @@
                     formControlName="password">
             </div>
 
-            <div *ngIf="formGroup.controls.name.errors?.required && (formGroup.controls.name.touched)">Name is required</div>
+            <ng-container
+                *ngIf="formGroup.controls.email.errors?.required && (formGroup.controls.email.touched); else EmailInvalid">
+                <div>
+                    El email es requerido.
+                </div>
+            </ng-container>
 
-            <button class="button" (click)="Register()" [disabled]="formGroup.invalid">Iniciar sesión</button>
+            <ng-template #EmailInvalid>
+                <ng-container
+                    *ngIf="formGroup.controls.email.errors?.email && (formGroup.controls.email.touched);else PasswordRequired">
+                    <div>
+                        El email es invalido.
+                    </div>
+                </ng-container>
+            </ng-template>
+
+            <ng-template #PasswordRequired>
+                <div *ngIf="formGroup.controls.password.errors?.required && (formGroup.controls.password.touched)">La
+                    contraseña es requerida
+                </div>
+            </ng-template>
+
+            <button class="button" (click)="Login()" [disabled]="formGroup.invalid">Iniciar sesión</button>
 
             <p class="linea">Al iniciar sesión, aceptas nuestras <a href="#">Condiciones de Uso y Politica de
                     Privacidad</a></p>
