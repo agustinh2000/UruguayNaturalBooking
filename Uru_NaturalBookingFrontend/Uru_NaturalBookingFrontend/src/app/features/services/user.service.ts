@@ -57,6 +57,11 @@ export class UserService {
     // this is a call to the service in the webAPI to the method Get(Guid id)
   }
 
+  deleteUser(userId: string): void{
+    return;
+      // this is a call to the service in the webAPI to the method Delete(Guid id);
+  }
+
 
 
 }

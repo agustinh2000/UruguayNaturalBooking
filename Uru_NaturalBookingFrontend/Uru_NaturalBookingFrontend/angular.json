@@ -122,5 +122,8 @@
       }
     }
   },
-  "defaultProject": "Uru_NaturalBookingFrontend"
+  "defaultProject": "Uru_NaturalBookingFrontend",
+  "cli": {
+    "analytics": "54149966-9142-4e2d-9e13-1d61b4cb82ea"
+  }
 }

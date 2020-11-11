@@ -17,10 +17,11 @@ import { UserService } from './services/user.service';
 import { ModifyUserComponent } from './modify-user/modify-user.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { DeleteUserComponent } from './delete-user/delete-user.component';
 
 
 @NgModule({
-  declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent],
+  declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent, DeleteUserComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -34,7 +35,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     ReactiveFormsModule,
   ],
-  exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent],
+  exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent, DeleteUserComponent],
   providers: [RegionServiceService, UserService]
 })
 
