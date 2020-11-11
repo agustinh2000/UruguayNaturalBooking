@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { RegionComponent } from './region/region.component';
 import { RegionServiceService } from './services/region-service.service';
 import { ReviewComponent } from './review/review.component';
@@ -15,6 +15,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
 import { UserService } from './services/user.service';
 import { ModifyUserComponent } from './modify-user/modify-user.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -27,10 +29,12 @@ import { ModifyUserComponent } from './modify-user/modify-user.component';
     MatIconModule,
     MatListModule,
     MatSidenavModule,
+    MatSelectModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    MatFormFieldModule,
+    ReactiveFormsModule,
   ],
-  exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent],
+  exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent],
   providers: [RegionServiceService, UserService]
 })
 

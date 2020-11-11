@@ -10,8 +10,11 @@ namespace Model.ForResponse
         public string UserName { get; set; }
         public string Mail { get; set; }
 
+        public Guid Id { get; set; }
+
         protected override UserModelForResponse SetModel(User entity)
         {
+            Id = entity.Id;
             UserName = entity.UserName;
             Mail = entity.Mail;
             return this;

@@ -1,1 +1,97 @@
-<p>modify-user works!</p>
+<div class="padre">
+    <form [formGroup]="formGroup" class="formulario">
+        <h1> Modificación de usuario </h1>
+        <div class="contenedor">
+
+            <div class="optionSelector">
+                <h2>Seleccione un usuario </h2>
+                <mat-form-field appearance="fill">
+                    <mat-label>Elija un usuario</mat-label>
+                    <mat-select [(value)]="selectedUser">
+                        <mat-option *ngFor="let user of usersOfTheSystem" [value]="user" (click)="ChargeInfoInFields()">
+                            {{user.UserName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+
+            <div class="input-contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" placeholder="Nombre" name="name" class="name" formControlName="name">
+            </div>
+
+            <div class="input-contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" placeholder="Apellido" name="lastName" class="lastName" formControlName="lastName">
+            </div>
+
+            <div class="input-contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" placeholder="Nombre de usuario" name="userName" class="userName"
+                    formControlName="userName">
+            </div>
+
+            <div class="input-contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input type="email" placeholder="Correo electronico" name="email" class="email" formControlName="email">
+            </div>
+
+            <div class="input-contenedor">
+                <i class="fas fa-key icon"></i>
+                <input type="password" placeholder="Contraseña" name="password" class="contraseña"
+                    formControlName="password">
+            </div>
+
+            <ng-container
+                *ngIf="formGroup.controls.name.errors?.required && (formGroup.controls.name.touched); else LastNameRequired">
+                <div>
+                    El nombre es requerido.
+                </div>
+            </ng-container>
+
+            <ng-template #LastNameRequired>
+                <ng-container
+                    *ngIf="formGroup.controls.lastName.errors?.required && (formGroup.controls.lastName.touched);else UserNameRequired">
+                    <div>
+                        El apellido es requerido.
+                    </div>
+                </ng-container>
+            </ng-template>
+
+            <ng-template #UserNameRequired>
+                <ng-container
+                    *ngIf="formGroup.controls.userName.errors?.required && (formGroup.controls.userName.touched);else EmailRequired">
+                    <div>
+                        El nombre de usuario es requerido.
+                    </div>
+                </ng-container>
+            </ng-template>
+
+            <ng-template #EmailRequired>
+                <ng-container
+                    *ngIf="formGroup.controls.email.errors?.required && (formGroup.controls.email.touched);else EmailInvalid">
+                    <div>
+                        El email es requerido.
+                    </div>
+                </ng-container>
+            </ng-template>
+
+            <ng-template #EmailInvalid>
+                <ng-container
+                    *ngIf="formGroup.controls.email.errors?.email && (formGroup.controls.email.touched);else PasswordRequired">
+                    <div>
+                        El email es invalido.
+                    </div>
+                </ng-container>
+            </ng-template>
+
+            <ng-template #PasswordRequired>
+                <div *ngIf="formGroup.controls.password.errors?.required && (formGroup.controls.password.touched)">
+                    La contraseña es requerida.
+                </div>
+            </ng-template>
+
+            <button class="button" (click)="Register()" [disabled]="formGroup.invalid">Modificar</button>
+        </div>
+    </form>
+</div>
