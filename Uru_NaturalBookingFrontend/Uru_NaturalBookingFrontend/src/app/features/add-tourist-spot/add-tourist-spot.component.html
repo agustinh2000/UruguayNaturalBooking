@@ -35,16 +35,16 @@
               </div>
 
               <ng-container
+              *ngIf= "formGroup.controls.name.errors?.required && (formGroup.controls.name.touched)">
               <div>
                   El nombre es requerido.
               </div>
             </ng-container>
 
 
-
             <ng-template #DescriptionRequired>
                 <ng-container
-                    *ngIf="formGroup.controls.decription.errors?.required;else CategoriesRequired">
+                    *ngIf="formGroup.controls.decription.errors?.required">
                     <div>
                         La descripcion es requerida.
                     </div>

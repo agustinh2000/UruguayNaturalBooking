@@ -20,10 +20,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { AddTouristSpotComponent } from './add-tourist-spot/add-tourist-spot.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
-     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent],
+     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, ReportComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -39,7 +40,7 @@ import { AddTouristSpotComponent } from './add-tourist-spot/add-tourist-spot.com
     BarRatingModule
   ],
   exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
-    ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent],
+    ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, ReportComponent],
   providers: [RegionServiceService, UserService]
 })
 
