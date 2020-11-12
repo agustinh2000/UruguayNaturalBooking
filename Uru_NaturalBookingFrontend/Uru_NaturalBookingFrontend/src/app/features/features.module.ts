@@ -26,13 +26,21 @@ import { NgbModule, NgbRating, NgbRatingModule } from '@ng-bootstrap/ng-bootstra
 import { SharedModule } from '../shared/shared.module';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AddTouristSpotComponent } from './add-tourist-spot/add-tourist-spot.component';
+import { TableComponent } from './table/table.component';
+import { MatTableModule } from '@angular/material/table';
+import { ReportService } from './services/report.service';
 import { ReportComponent } from './report/report.component';
+import { FormForReportComponent } from './form-for-report/form-for-report.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent,
     DeleteUserComponent, AddLodgingComponent],
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
-     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, ReportComponent],
+     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent, ReportComponent,
+      FormForReportComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -45,9 +53,18 @@ import { ReportComponent } from './report/report.component';
     BrowserAnimationsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    BarRatingModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent, DeleteUserComponent],
   providers: [RegionServiceService, UserService]
+  exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
+    ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent, ReportComponent,
+    FormForReportComponent],
+  providers: [RegionServiceService, UserService, ReportService]
 })
 
 export class FeaturesModule { }
