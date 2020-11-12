@@ -53,7 +53,7 @@ export class UserService {
   }
 
   getUserById(userId: string): UserModelForRequest{
-    return;
+    return ;
     // this is a call to the service in the webAPI to the method Get(Guid id)
   }
 

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BarRatingModule } from 'ngx-bar-rating';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -18,10 +19,11 @@ import { ModifyUserComponent } from './modify-user/modify-user.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
-
+import { AddTouristSpotComponent } from './add-tourist-spot/add-tourist-spot.component';
 
 @NgModule({
-  declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent, DeleteUserComponent],
+  declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
+     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -34,8 +36,10 @@ import { DeleteUserComponent } from './delete-user/delete-user.component';
     BrowserAnimationsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    BarRatingModule
   ],
-  exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent, DeleteUserComponent],
+  exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
+    ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent],
   providers: [RegionServiceService, UserService]
 })
 

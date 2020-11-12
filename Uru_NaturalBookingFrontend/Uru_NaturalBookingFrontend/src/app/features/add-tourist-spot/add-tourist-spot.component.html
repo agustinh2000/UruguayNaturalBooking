@@ -1,0 +1,57 @@
+
+    <form [formGroup]="formGroup" class="formulario">
+        <h1> Alta de punto turistico </h1>
+        <div class="contenedor">
+
+            <div class="input-contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" placeholder="Nombre" name="name" class="name" formControlName="name" required>
+            </div>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Elija una region</mat-label>
+                    <mat-select [formControl]="selectedRegion">
+                        <mat-option *ngFor="let region of regionsOfTheSystem" [value]="region.Id">
+                            {{region.NameOfRegion}} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            <div class="input-text-area">
+                <i class="fas fa-envelope icon"></i>
+                <textarea placeholder="Ingrese una descripcion aqui." textarea style="resize: none;" formControlName="description" rows="13" cols="55" required></textarea>
+            </div>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Categorias</mat-label>
+                <mat-select [formControl]="selectedCategories" multiple>
+                  <mat-option *ngFor="let category of categoriesOfTheSystem" [value]="category.Id">{{category.Name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+              <div class="form-group">
+                <label for="file">Choose File</label>
+                <input type="file" id="file" multiple accept="image/*" (change)="selectFiles($event)">
+              </div>
+
+              <ng-container
+              <div>
+                  El nombre es requerido.
+              </div>
+            </ng-container>
+
+
+
+            <ng-template #DescriptionRequired>
+                <ng-container
+                    *ngIf="formGroup.controls.decription.errors?.required;else CategoriesRequired">
+                    <div>
+                        La descripcion es requerida.
+                    </div>
+                </ng-container>
+            </ng-template>
+
+            <button class="button" (click)="Add()">Agregar</button>
+        </div>
+
+    </form>
