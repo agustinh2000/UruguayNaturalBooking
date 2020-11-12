@@ -1,0 +1,15 @@
+ngb-rating{
+    visibility: visible;
+    width: 15vh;
+    height: 6vh;
+}
+
+.star {
+    font-size: 1.5rem;
+    color: #ddd999;
+    visibility: visible;
+}
+
+.filled {
+    color: #fbff00;
+}

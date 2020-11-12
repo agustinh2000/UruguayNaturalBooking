@@ -1,0 +1,57 @@
+<form [formGroup]="formGroup" class="formulario">
+    <h1> Agregar hospedaje </h1>
+    <div class="contenedor">
+
+        <div class="input-contenedor">
+            <i class="fas fa-user icon"></i>
+            <input type="text" placeholder="Nombre" name="name" class="name" formControlName="name">
+        </div>
+
+        <div class="input-contenedor-stars">
+            <p class="textStars">Cantidad de estrellas</p>
+            <ngb-rating [(rate)]="currentRate" [max]="5">
+                <ng-template let-fill="fill" let-index="index">
+                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                </ng-template>
+            </ngb-rating>
+        </div>
+
+        <!--
+            <div class="input-contenedor-stars">
+                <p class="textStars">Cantidad de estrellas</p>
+                <app-star-rating class="starsDrawed" (ratingToSent)="modifyEmit($event)"></app-star-rating>
+            </div>
+        -->
+
+        <div class="input-contenedor">
+            <i class="fas fa-user icon"></i>
+            <input type="text" placeholder="Dirección" name="address" class="address" formControlName="address">
+        </div>
+
+        <h5 class="touristSpotAssocied">Punto turistico asociado: </h5>
+        <mat-form-field appearance="fill">
+            <mat-label>Seleccione un punto turistico</mat-label>
+            <mat-select [(value)]="selectedTouristSpot">
+                <mat-option *ngFor="let touristSpot of touristSpotExisting" [value]="touristSpot.Id">
+                    {{touristSpot.Name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <h5 class="isAvailable">Disponible: </h5>
+        <h6 class="textAvailable"> No disponible </h6>
+        <mat-slide-toggle color="primary" (click)="ChangeStateOfAvailability()"></mat-slide-toggle>
+        <h6 class="textNoAvailable"> Disponible </h6>
+
+        <div class="input-contenedor-price">
+            <i class="fas fa-user icon"></i>
+            <input type="number" placeholder="Ingrese el precio en USD" name="pricePerNight" class="pricePerNight" formControlName="pricePerNight">
+        </div>
+
+        <div class="input-text-area">
+            <i class="fas fa-envelope icon"></i>
+            <textarea placeholder="Ingrese una descripcion aqui." textarea style="resize: none;" formControlName="description" rows="5" cols="68" required></textarea>
+        </div>
+
+        <button class="button" (click)="Create()">Crear hospedaje</button>
+    </div>
+</form>

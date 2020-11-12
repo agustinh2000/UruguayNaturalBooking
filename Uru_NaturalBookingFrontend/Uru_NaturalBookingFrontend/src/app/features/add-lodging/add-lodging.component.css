@@ -1,0 +1,195 @@
+.contenedor {
+  width: 100%;
+  padding: 3%;
+  box-sizing: border-box;
+}
+
+.formulario {
+  position: relative;
+  top: -5vh;
+  background: #fff;
+  margin-top: 4%;
+  padding: 0.1%;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  color: #1a2537;
+  font-size: 40px;
+}
+
+.name, .address, .pricePerNight{
+  font-size: 20px;
+  width: 100%;
+  padding: 2%;
+  border: none;
+}
+
+.input-contenedor {
+  margin-bottom: 3.5%;
+  border: 1px solid #aaa;
+}
+
+.icon {
+  min-width: 8.5%;
+  text-align: center;
+  color: #999;
+}
+
+.button {
+  position: relative;
+  top:-12vh;
+  border: none;
+  width: 100%;
+  color: white;
+  font-size: 135%;
+  background: #1a2537;
+  padding: 3.5% 5%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: cadetblue;
+}
+
+p {
+  text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #1a2537;
+  font-weight: 600;
+}
+
+.link:hover {
+  color: cadetblue;
+}
+
+.linea {
+  border-bottom: 1px solid black;
+}
+
+@media(min-width:768px) {
+  .formulario {
+    margin: auto;
+    height: 105vh;
+    width: 40%;
+    margin-top: 4%;
+    border-radius: 2%;
+    box-sizing: border-box;
+  }
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #ddd999;
+  visibility: visible;
+}
+
+ngb-rating{
+  position: relative;
+  top: -5.5vh;
+  left: 30vh;
+}
+
+.filled {
+  color: #fbff00;
+}
+
+.textStars{
+  font-size: 20px;
+  position: relative;
+  left: -24.5vh;
+  top: 1.5vh;
+  color:  rgb(112, 112, 112);
+  font: Arial;
+}
+
+.input-contenedor-stars {
+  height: 7vh; 
+  margin-bottom: 3.5%;
+  border: 1px solid #aaa;
+}
+
+.star{
+  width: 4vh;
+}
+
+.touristSpotAssocied{
+  position: relative;
+  top: 3vh;
+  color: rgb(112, 112, 112);
+}
+
+.isAvailable{
+  position: relative;
+  top: -3vh;
+  color: rgb(112, 112, 112);
+}
+
+mat-form-field{
+  position: relative;
+  top: -4vh;
+  left: 34vh;
+  width: 45vh;
+  border-radius: 8px;
+}
+
+mat-slide-toggle{
+  position: relative;
+  left: 30vh;
+  top: -11.5vh;
+}
+
+/deep/ .mat-slide-toggle-bar {
+  height: 28px !important;
+  width: 112px !important;
+}
+
+/deep/ .mat-slide-toggle-thumb {
+  position: relative;
+  left: -1vh;
+  height: 34px !important;
+  width: 34px !important;
+}
+
+/deep/ .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-container {
+  transform: translate3d(100px,0,0) !important;
+}
+
+.textAvailable{
+ position: relative;
+ top: -6.7vh;
+ left: 15vh;
+}
+
+.textNoAvailable{
+  position: relative;
+  top: -15vh;
+  left: 48vh;
+}
+
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.input-contenedor-price{
+  margin-bottom: 3.5%;
+  border: 1px solid #aaa;
+  position: relative;
+  top: -12vh; 
+}
+
+.input-text-area{
+  margin-bottom: 3.5%;
+  position: relative;
+  top: -12vh; 
+}

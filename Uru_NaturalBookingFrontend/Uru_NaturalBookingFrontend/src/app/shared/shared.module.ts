@@ -8,11 +8,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { StarRatingComponent } from './star-rating/star-rating.component';
+import { NgbModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [NavBarComponent],
+  declarations: [NavBarComponent, StarRatingComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -21,8 +24,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    NgbModule,
+    NgbRatingModule,
+    ReactiveFormsModule
   ],
-  exports: [NavBarComponent]
+  exports: [NavBarComponent, StarRatingComponent],
+  bootstrap: [StarRatingComponent]
 })
 export class SharedModule { }
