@@ -61,7 +61,4 @@ export class UserService {
     return;
       // this is a call to the service in the webAPI to the method Delete(Guid id);
   }
-
-
-
 }

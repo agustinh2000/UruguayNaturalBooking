@@ -20,34 +20,40 @@ export class ReportComponent implements OnInit {
 
   public selectedTouristSpot: string;
 
-  public  maxDate: Date;
+  public maxDate: Date;
 
   isShown = false;
+
+  public touristSpotSelected: FormControl;
 
   constructor(aTouristSpotService: TouristSpotService, private formBuilder: FormBuilder) {
     this.touristSpotService = aTouristSpotService;
     this.formGroup = this.formBuilder.group({
+      touristSpotSelected: new FormControl('', [Validators.required]),
       checkInPicker: ['', Validators.required],
       checkOutPicker: ['', Validators.required],
-  }, {validator: this.DateValidation});
+    }, { validator: this.DateValidation });
     this.maxDate = new Date();
-   }
-
-   touristSpotSelected = new FormControl('', [Validators.required]);
-
+  }
 
   ngOnInit(): void {
     this.touristSpotExisting = this.touristSpotService.getTouristSpots();
   }
 
-   DateValidation: ValidatorFn = (fg: FormGroup) => {
+  DateValidation: ValidatorFn = (fg: FormGroup) => {
     const start = fg.get('checkInPicker').value;
     const end = fg.get('checkOutPicker').value;
     return start !== null && end !== null && start <= end ? null : { range: true };
   }
 
-  generateReport():void{
-this.isShown = true;
+  formIsValid(): boolean {
+    return this.formGroup.valid;
+  }
+
+  generateReport(): void {
+    if (this.formIsValid()) {
+      this.isShown = true;
+    }
   }
 
 }
