@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TouristSpotForRequestModel } from 'src/app/models/TouristSpotForRequestModel';
 import { TouristSpotModelForLodgingResponseModel } from '../../models/TouristSpotModelForLodgingResponseModel';
 
 @Injectable({
@@ -42,4 +43,6 @@ export class TouristSpotService {
     }
     return touristSpotObteined;
   }
+
+  Add(touristSpotToAdd: TouristSpotForRequestModel) { return; }
 }

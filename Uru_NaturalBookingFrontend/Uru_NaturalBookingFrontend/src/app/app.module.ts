@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { SharedModule } from './shared/shared.module';
 import { FeaturesModule } from './features/features.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FeaturesModule } from './features/features.module';
     MatSidenavModule,
     SharedModule,
     FeaturesModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

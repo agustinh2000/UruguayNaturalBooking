@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BarRatingModule } from 'ngx-bar-rating';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,7 +21,7 @@ import { AddLodgingComponent } from './add-lodging/add-lodging.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { LodgingService } from './services/lodging.service';
 import { TouristSpotService } from './services/tourist-spot.service';
-import { NgbModule, NgbRating, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AddTouristSpotComponent } from './add-tourist-spot/add-tourist-spot.component';
@@ -30,17 +29,14 @@ import { TableComponent } from './table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { ReportService } from './services/report.service';
 import { ReportComponent } from './report/report.component';
-import { FormForReportComponent } from './form-for-report/form-for-report.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
+import { CategoryService } from './services/category.service';
 
 @NgModule({
-  declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent,
-    DeleteUserComponent, AddLodgingComponent],
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
-     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent, ReportComponent,
-      FormForReportComponent],
+     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent, ReportComponent, AddLodgingComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -53,18 +49,21 @@ import {MatInputModule} from '@angular/material/input';
     BrowserAnimationsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    BarRatingModule,
     MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    NgbModule,
+    FormsModule,
+    NgbRatingModule,
+    SharedModule,
+    MatSlideToggleModule
   ],
-  exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent, ModifyUserComponent, DeleteUserComponent],
-  providers: [RegionServiceService, UserService]
   exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent, ReportComponent,
-    FormForReportComponent],
-  providers: [RegionServiceService, UserService, ReportService]
+    AddLodgingComponent],
+  providers: [RegionServiceService, UserService, ReportService, TouristSpotService,
+  CategoryService, LodgingService]
 })
 
 export class FeaturesModule { }

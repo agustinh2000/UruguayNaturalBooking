@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ReportService } from '../services/report.service';
 import { ReportModel } from '../../models/ReportModel';
 
@@ -7,20 +7,27 @@ import { ReportModel } from '../../models/ReportModel';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
+
+
 export class TableComponent implements OnInit {
 
-   reportService: ReportService;
+  @Input() checkIn: Date;
+  @Input() checkOut: Date;
+  @Input() touristSpot: string;
+
+  reportService: ReportService;
 
   dataSource: ReportModel[];
 
   displayedColumns = ['Lodging', 'QuantityOfReserves'];
+
 
   constructor(aReportService: ReportService) {
     this.reportService = aReportService;
   }
 
   ngOnInit(): void {
-   this.dataSource = this.reportService.getLodgingsForReport();
+   this.dataSource = this.reportService.getLodgingsForReport(this.checkIn, this.checkOut, this.touristSpot);
   }
 
 }

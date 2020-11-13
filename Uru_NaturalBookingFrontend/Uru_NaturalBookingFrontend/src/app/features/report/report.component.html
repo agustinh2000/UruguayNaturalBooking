@@ -1,1 +1,39 @@
-<p>report works!</p>
+<div class="padre">
+  <form [formGroup]="formGroup" class="formulario">
+    <h1> Reporte de hospedajes </h1>
+    <div class="contenedor">
+
+      <mat-form-field appearance="fill" class="checkInPicker">
+        <mat-label>Check-in maximo</mat-label>
+        <input matInput [matDatepicker]="checkInPicker" [max]="maxDate" formControlName="checkInPicker" required>
+        <mat-datepicker-toggle matSuffix [for]="checkInPicker"></mat-datepicker-toggle>
+        <mat-datepicker #checkInPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="checkOutPicker">
+        <mat-label>Check-out maximo</mat-label>
+        <input matInput [matDatepicker]="checkOutPicker" [max]="maxDate" formControlName="checkOutPicker" required>
+        <mat-datepicker-toggle matSuffix [for]="checkOutPicker"></mat-datepicker-toggle>
+        <mat-datepicker #checkOutPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="touristSpotCombo">
+        <mat-label>Seleccione un punto turistico</mat-label>
+        <mat-select [formControl]="touristSpotSelected">
+          <mat-option *ngFor="let touristSpot of touristSpotExisting" [value]="touristSpot.Id" required>
+            {{touristSpot.Name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-error *ngIf="formGroup.errors?.range && formGroup.touched">El check-in no puede ser mayor al check-out.</mat-error>
+
+
+      <button class="button" (click)="generateReport()" [disabled]="formGroup.invalid">Generar reporte</button>
+
+    </div>
+  </form>
+</div>
+<div *ngIf="isShown">
+  <app-table [checkIn]="formGroup.controls.checkInPicker.value" [checkOut]="formGroup.controls.checkOutPicker.value" [touristSpot]="touristSpotSelected.value">
+  </app-table>
+</div>

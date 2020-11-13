@@ -1,0 +1,104 @@
+.contenedor {
+    width: 100%;
+    padding: 3%;
+    box-sizing: border-box;
+  }
+  
+  .formulario {
+    background: #fff;
+    margin-top: 4%;
+    padding: 0.1%;
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #1a2537;
+    font-size: 40px;
+  }
+  
+  .email, .contraseña {
+    font-size: 20px;
+    width: 96%;
+    padding: 2%;
+    border: none;
+  }
+  
+  .input-contenedor {
+    margin-bottom: 3.5%;
+    border: 1px solid #aaa;
+  }
+  
+  .icon {
+    min-width: 8.5%;
+    text-align: center;
+    color: #999;
+  }
+  
+  .button {
+    position: relative;
+    border: none;
+    width: 20%;
+    height: 40%;
+    color: white;
+    font-size: 120%;
+    background: #1a2537;
+    padding: 1.5% 1.5%;
+    border-radius: 5px;
+    cursor: pointer;
+    left: 48vh;
+    top: -2vh;
+  }
+  
+  .button:hover {
+    background: cadetblue;
+  }
+  
+  p {
+    text-align: center;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: #1a2537;
+    font-weight: 600;
+  }
+  
+  .link:hover {
+    color: cadetblue;
+  }
+  
+  .linea {
+    border-bottom: 1px solid black;
+  }
+
+  .checkInPicker{
+      position:relative;
+      top: -3vh;
+  }
+
+  .checkOutPicker{
+    position:relative;
+    top: -3vh;
+    left: 11.5vh;
+}
+
+.touristSpotCombo{
+  position:relative;
+  top: -3vh;
+  left: 23vh;
+  width: 33vh;
+}
+  
+  @media(min-width:768px) {
+    .formulario {
+      position: relative;
+      margin: auto;
+      width: 131vh;
+      height: 30vh;
+      top: -3vh;
+      margin-top: 4%;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+  }

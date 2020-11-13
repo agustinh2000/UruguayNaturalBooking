@@ -21,7 +21,7 @@ export class ReportService {
 
   constructor() { }
 
-  getLodgingsForReport(): ReportModel[] {
+  getLodgingsForReport(checkIn : Date, checkOut : Date, touristSpotId: string): ReportModel[] {
     const lodgingsObteined: ReportModel[] = [];
     for (const lodging of this.lodgignsForReport){
       lodgingsObteined.push(lodging);
