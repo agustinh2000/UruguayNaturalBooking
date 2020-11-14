@@ -1,0 +1,87 @@
+.contenedor {
+  width: 100%;
+  padding: 3%;
+  box-sizing: border-box;
+}
+
+.formulario {
+  background: #fff;
+  margin-top: 4%;
+  padding: 0.1%;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  color: #1a2537;
+  font-size: 40px;
+}
+
+.button {
+  position: relative;
+  border: none;
+  width: 60%;
+  height: 40%;
+  color: white;
+  font-size: 120%;
+  background: #1a2537;
+  padding: 1.5% 1.5%;
+  border-radius: 5px;
+  cursor: pointer;
+  left: 25vh;
+  top: 5vh;
+}
+
+.button:hover {
+  background: cadetblue;
+}
+
+p {
+  text-align: center;
+}
+
+@media(min-width:768px) {
+  .formulario {
+    position: relative;
+    margin: auto;
+    width: 131vh;
+    height: 50vh;
+    top: -3vh;
+    margin-top: 4%;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+}
+
+.inputCommentary {
+  position: relative;
+  left: 17vh;
+  width: 90vh;
+  top: -2vh;
+  height: 10vh;
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #ddd999;
+  visibility: visible;
+}
+
+ngb-rating {
+  position: relative;
+  top: -2.4vh;
+  left: 40vh;
+}
+
+.filled {
+  color: #fbff00;
+}
+
+.textStars {
+  font-size: 20px;
+  position: relative;
+  left: -37vh;
+  top: 4.5vh;
+  color: rgb(112, 112, 112);
+  font: Arial;
+}

@@ -46,7 +46,7 @@ p {
     margin: auto;
     width: 131vh;
     height: 30vh;
-    top: -3vh;
+    top: -5vh;
     margin-top: 4%;
     border-radius: 8px;
     box-sizing: border-box;
@@ -57,6 +57,12 @@ p {
   position: relative;
   left: 17vh;
   width: 90vh;
-  top: -2vh;
+  top: -3.5vh;
 }
+
+.commentaryForm{
+  position: relative;
+  top: -8vh;
+}
+
 

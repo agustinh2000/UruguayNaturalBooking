@@ -35,6 +35,7 @@ import {MatInputModule} from '@angular/material/input';
 import { CategoryService } from './services/category.service';
 import { ReserveService } from './services/reserve.service';
 import { FormCommentaryComponent } from './form-commentary/form-commentary.component';
+import { ReviewService } from './services/review.service';
 
 @NgModule({
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
@@ -66,7 +67,7 @@ import { FormCommentaryComponent } from './form-commentary/form-commentary.compo
     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent, ReportComponent,
     AddLodgingComponent, FormCommentaryComponent],
   providers: [RegionServiceService, UserService, ReportService, TouristSpotService,
-  CategoryService, LodgingService, ReserveService]
+  CategoryService, LodgingService, ReserveService, ReviewService]
 })
 
 export class FeaturesModule { }

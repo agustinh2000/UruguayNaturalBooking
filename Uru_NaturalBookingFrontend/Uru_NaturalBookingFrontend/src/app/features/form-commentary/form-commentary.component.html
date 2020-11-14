@@ -1,1 +1,32 @@
-<p>form-commentary works!</p>
+<div class="padre">
+    <form [formGroup]="formGroup" class="formulario">
+        <h1> Ingresar comentario </h1>
+        <div class="contenedor">
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputCommentary">
+                    <mat-label>Ingrese una reseña</mat-label>
+                    <textarea formControlName="commentary" rows="4" cols="50" matInput #commentary placeholder="Ex. En el viaje que tuvimos y la estadia, la pasamos maravilloso..."></textarea>
+                    <mat-hint align="end">{{commentary.value.length}}</mat-hint>
+                    <mat-error *ngIf="formGroup.controls.commentary.hasError('required')">
+                        Por favor ingrese una reseña.
+                    </mat-error>
+                    <mat-error *ngIf="formGroup.controls.commentary.hasError('whitespace')">
+                        La reseña ingresada no puede ser vacia.
+                    </mat-error>
+                  </mat-form-field>
+            </div>
+
+            <div class="input-contenedor-stars">
+                <p class="textStars">Puntuación:</p>
+                <ngb-rating [(rate)]="currentRate" [max]="5">
+                    <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                    </ng-template>
+                </ngb-rating>
+            </div>
+
+            <button class="button" (click)="comment()">Hacer comentario</button>
+        </div>
+    </form>
+</div>

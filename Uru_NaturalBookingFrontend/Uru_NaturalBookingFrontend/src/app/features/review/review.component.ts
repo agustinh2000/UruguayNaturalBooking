@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { TouristSpotModelForLodgingResponseModel } from 'src/app/models/TouristSpotModelForLodgingResponseModel';
 import { ReserveService } from '../services/reserve.service';
 import { TouristSpotService } from '../services/tourist-spot.service';
@@ -21,7 +21,7 @@ export class ReviewComponent implements OnInit {
   constructor(aServiceOfReserves: ReserveService, private formBuilder: FormBuilder) {
     this.reserveService = aServiceOfReserves;
     this.formGroup = this.formBuilder.group({
-      reserveSelected: new FormControl('', [Validators.required])
+      reserveSelected: new FormControl('', [Validators.required, this.noWhitespaceValidator])
     });
   }
 
@@ -30,6 +30,12 @@ export class ReviewComponent implements OnInit {
 
   reserveExist(reserveId: string): boolean {
     return this.reserveService.ReserveExist(reserveId);
+  }
+
+  noWhitespaceValidator: ValidatorFn = (control: FormControl) => {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
   }
 
   openCommentaryForm(): void {

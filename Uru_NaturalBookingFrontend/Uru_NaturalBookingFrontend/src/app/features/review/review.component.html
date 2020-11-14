@@ -4,21 +4,29 @@
         <div class="contenedor">
 
             <div class="input-contenedor">
-            <mat-form-field class="inputForReserveId">
-                <mat-label>Ingrese el ID de la reserva para hacer una review</mat-label>
-                <input type="text" matInput formControlName="reserveSelected"
-                    placeholder="Ex. 15c33977-23a6-42f4-9d1e-4acebf004bdf" required>
-                <mat-error *ngIf="formGroup.controls.reserveSelected.hasError('required')">
-                    Por favor ingrese un ID de reserva valido.
-                </mat-error>
-                <mat-error *ngIf="!reserveExist(formGroup.controls.reserveSelected.value)">
-                    No es una reserva <strong>valida</strong>
-                </mat-error>
-            </mat-form-field>
+                <mat-form-field class="inputForReserveId">
+                    <mat-label>Ingrese el ID de la reserva para hacer una review</mat-label>
+                    <input [readonly]="isShown" type="text" matInput formControlName="reserveSelected"
+                        placeholder="Ex. 15c33977-23a6-42f4-9d1e-4acebf004bdf" required>
+                    <mat-error *ngIf="formGroup.controls.reserveSelected.hasError('required')">
+                        Por favor ingrese un ID de reserva valido.
+                    </mat-error>
+                    <mat-error *ngIf="!reserveExist(formGroup.controls.reserveSelected.value)">
+                        No es un ID de reserva <strong>valido</strong>
+                    </mat-error>
+                    <mat-error *ngIf="formGroup.controls.reserveSelected.hasError('whitespace')">
+                        El ID de la reserva no puede ser vacio.
+                    </mat-error>
+                </mat-form-field>
             </div>
 
             <button class="button" (click)="openCommentaryForm()">Buscar reserva</button>
-
         </div>
     </form>
+</div>
+
+
+<div class="commentaryForm" *ngIf="isShown">
+    <app-form-commentary [reserveId]="formGroup.controls.reserveSelected.value">
+    </app-form-commentary>
 </div>
