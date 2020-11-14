@@ -18,8 +18,6 @@ export class ReportComponent implements OnInit {
 
   public touristSpotExisting: TouristSpotModelForLodgingResponseModel[];
 
-  public selectedTouristSpot: string;
-
   public maxDate: Date;
 
   isShown = false;

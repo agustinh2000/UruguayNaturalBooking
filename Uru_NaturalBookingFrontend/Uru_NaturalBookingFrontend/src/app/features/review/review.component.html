@@ -1,0 +1,24 @@
+<div class="padre">
+    <form [formGroup]="formGroup" class="formulario">
+        <h1> Busqueda de reserva para review </h1>
+        <div class="contenedor">
+
+            <div class="input-contenedor">
+            <mat-form-field class="inputForReserveId">
+                <mat-label>Ingrese el ID de la reserva para hacer una review</mat-label>
+                <input type="text" matInput formControlName="reserveSelected"
+                    placeholder="Ex. 15c33977-23a6-42f4-9d1e-4acebf004bdf" required>
+                <mat-error *ngIf="formGroup.controls.reserveSelected.hasError('required')">
+                    Por favor ingrese un ID de reserva valido.
+                </mat-error>
+                <mat-error *ngIf="!reserveExist(formGroup.controls.reserveSelected.value)">
+                    No es una reserva <strong>valida</strong>
+                </mat-error>
+            </mat-form-field>
+            </div>
+
+            <button class="button" (click)="openCommentaryForm()">Buscar reserva</button>
+
+        </div>
+    </form>
+</div>

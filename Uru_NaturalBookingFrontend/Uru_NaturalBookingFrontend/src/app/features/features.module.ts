@@ -33,10 +33,13 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import { CategoryService } from './services/category.service';
+import { ReserveService } from './services/reserve.service';
+import { FormCommentaryComponent } from './form-commentary/form-commentary.component';
 
 @NgModule({
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
-     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent, ReportComponent, AddLodgingComponent],
+     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
+    ReportComponent, AddLodgingComponent, FormCommentaryComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -57,13 +60,13 @@ import { CategoryService } from './services/category.service';
     FormsModule,
     NgbRatingModule,
     SharedModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
   exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent, ReportComponent,
-    AddLodgingComponent],
+    AddLodgingComponent, FormCommentaryComponent],
   providers: [RegionServiceService, UserService, ReportService, TouristSpotService,
-  CategoryService, LodgingService]
+  CategoryService, LodgingService, ReserveService]
 })
 
 export class FeaturesModule { }
