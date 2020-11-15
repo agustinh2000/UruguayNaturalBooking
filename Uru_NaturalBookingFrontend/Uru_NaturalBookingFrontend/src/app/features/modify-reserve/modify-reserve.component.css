@@ -1,0 +1,71 @@
+.contenedor {
+    width: 100%;
+    padding: 3%;
+    box-sizing: border-box;
+  }
+  
+  .formulario {
+    background: #fff;
+    margin-top: 4%;
+    padding: 0.1%;
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #1a2537;
+    font-size: 40px;
+  }
+  
+  .button {
+    position: relative;
+    border: none;
+    width: 60%;
+    height: 40%;
+    color: white;
+    font-size: 120%;
+    background: #1a2537;
+    padding: 1.5% 1.5%;
+    border-radius: 5px;
+    cursor: pointer;
+    left: 25vh;
+    top: 0vh;
+  }
+  
+  .button:hover {
+    background: cadetblue;
+  }
+  
+  p {
+    text-align: center;
+  }
+  
+  @media(min-width:768px) {
+    .formulario {
+      position: relative;
+      margin: auto;
+      width: 131vh;
+      height: 30vh;
+      top: -5vh;
+      margin-top: 4%;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+  }
+  
+  .inputForReserveId{
+    position: relative;
+    left: 17vh;
+    width: 90vh;
+    top: -3.5vh;
+  }
+  
+  .commentaryForm{
+    position: relative;
+    top: -8vh;
+  }
+
+  .modifyReserveForm{
+    position: relative;
+    top: -5vh;
+  }

@@ -36,11 +36,14 @@ import { CategoryService } from './services/category.service';
 import { ReserveService } from './services/reserve.service';
 import { FormCommentaryComponent } from './form-commentary/form-commentary.component';
 import { ReviewService } from './services/review.service';
+import { ModifyReserveComponent } from './modify-reserve/modify-reserve.component';
+import { FormModifyReserveComponent } from './form-modify-reserve/form-modify-reserve.component';
 
 @NgModule({
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
      ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
-    ReportComponent, AddLodgingComponent, FormCommentaryComponent],
+    ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent, 
+    FormModifyReserveComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -65,7 +68,7 @@ import { ReviewService } from './services/review.service';
   ],
   exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent, ReportComponent,
-    AddLodgingComponent, FormCommentaryComponent],
+    AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent, FormModifyReserveComponent],
   providers: [RegionServiceService, UserService, ReportService, TouristSpotService,
   CategoryService, LodgingService, ReserveService, ReviewService]
 })

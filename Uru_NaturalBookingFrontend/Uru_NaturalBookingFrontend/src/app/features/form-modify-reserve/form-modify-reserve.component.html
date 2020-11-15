@@ -1,0 +1,61 @@
+<div class="padre">
+    <form [formGroup]="formGroup" class="formulario">
+        <h1> Datos de la reserva </h1>
+        <div class="contenedor">
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputForName">
+                    <mat-label> Nombre de quien reservo </mat-label>
+                    <input readonly type="text" matInput formControlName="name">
+                </mat-form-field>
+            </div>
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputForLastName">
+                    <mat-label> Apellido de quien reservo </mat-label>
+                    <input readonly type="text" matInput formControlName="lastName">
+                </mat-form-field>
+            </div>
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputForEmail">
+                    <mat-label> Email de quien reservo </mat-label>
+                    <input readonly type="email" matInput formControlName="email">
+                </mat-form-field>
+            </div>
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputForLodgingName">
+                    <mat-label> Nombre del hospedaje reservado </mat-label>
+                    <input readonly type="text" matInput formControlName="nameOfLodging">
+                </mat-form-field>
+            </div>
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputDescription">
+                    <mat-label>Modificación de la descripción</mat-label>
+                    <textarea formControlName="description" rows="4" cols="50" matInput #description
+                        placeholder="Ex. Para mas información acerca de su reserva, comuníquese..." required></textarea>
+                    <mat-hint align="end">{{description.value.length}}</mat-hint>
+                    <mat-error *ngIf="formGroup.controls.description.hasError('required')">
+                        Por favor, si elimina la descripción actual, la misma es requerida.
+                    </mat-error>
+                    <mat-error *ngIf="formGroup.controls.description.hasError('whitespace')">
+                        La descripción modificada, no puede ser vacía.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <h6 class="stateTextOfSelectReserve">Estado de la reserva: </h6>
+            <mat-form-field class="comboOfStatesToChange" appearance="fill">
+                <mat-label>Estado de la reserva</mat-label>
+                <mat-select [(value)]="stateSelected">
+                    <mat-option *ngFor="let key of existingStates.keys()" [value]="key">
+                        {{existingStates.get(key)}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button class="button" (click) = "modifyReserve()">Modificar reserva</button>
+        </div>
+    </form>
+</div>
