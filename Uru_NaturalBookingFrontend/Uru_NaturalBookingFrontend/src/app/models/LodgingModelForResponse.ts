@@ -8,6 +8,8 @@ export class LodgingModelForResponse{
 
         public Description: string;
 
+        public IsAvailable: boolean;
+
         public QuantityOfStars: number;
 
         public Address: string;
