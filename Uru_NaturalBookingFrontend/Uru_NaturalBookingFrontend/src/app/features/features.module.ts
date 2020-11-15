@@ -16,22 +16,22 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { UserService } from './services/user.service';
 import { ModifyUserComponent } from './modify-user/modify-user.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { AddLodgingComponent } from './add-lodging/add-lodging.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { LodgingService } from './services/lodging.service';
 import { TouristSpotService } from './services/tourist-spot.service';
 import { NgbModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AddTouristSpotComponent } from './add-tourist-spot/add-tourist-spot.component';
 import { TableComponent } from './table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { ReportService } from './services/report.service';
 import { ReportComponent } from './report/report.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatInputModule} from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 import { CategoryService } from './services/category.service';
 import { ReserveService } from './services/reserve.service';
 import { FormCommentaryComponent } from './form-commentary/form-commentary.component';
@@ -42,11 +42,9 @@ import { ModifyLodgingCapacityComponent } from './modify-lodging-capacity/modify
 
 @NgModule({
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
-     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
-    ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent, 
-    FormModifyReserveComponent],
-     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent, ReportComponent, AddLodgingComponent,
-      ModifyLodgingCapacityComponent],
+    ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
+    ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
+    FormModifyReserveComponent, ModifyLodgingCapacityComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -70,10 +68,11 @@ import { ModifyLodgingCapacityComponent } from './modify-lodging-capacity/modify
     MatSlideToggleModule,
   ],
   exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
-    ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent, ReportComponent,
-    AddLodgingComponent],
+    ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
+    ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
+    FormModifyReserveComponent, ModifyLodgingCapacityComponent],
   providers: [RegionServiceService, UserService, ReportService, TouristSpotService,
-  CategoryService, LodgingService, ReserveService, ReviewService]
+    CategoryService, LodgingService, ReserveService, ReviewService]
 })
 
 export class FeaturesModule { }

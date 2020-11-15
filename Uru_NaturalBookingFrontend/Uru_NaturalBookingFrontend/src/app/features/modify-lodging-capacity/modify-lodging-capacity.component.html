@@ -3,7 +3,6 @@
         <img src= {{lodging.ImagesPath[0]}} class="imagen">
         <h2>{{lodging.Name}}</h2>
         <p class="price">Disponibilidad:</p>
-        <p class="price">{{lodging.IsAvailable}}:</p>
         <mat-slide-toggle [(ngModel)]="lodging.IsAvailable" color="primary" (ngModelChange)="changed($event)"></mat-slide-toggle>
         <p class="ocupado">Ocupado</p>
         <p class="libre">Libre</p>
