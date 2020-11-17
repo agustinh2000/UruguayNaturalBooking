@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Region } from 'src/app/models/region';
+import { Region } from 'src/app/models/Region';
 import { CategoryModel } from '../../models/CategoryModel';
 import { RegionServiceService } from '../services/region-service.service';
 import { TouristSpotForRequestModel } from '../../models/TouristSpotForRequestModel';
@@ -58,7 +58,6 @@ export class AddTouristSpotComponent implements OnInit {
   }
 
   public selectFiles(event){
-
       for (let i = 0; i < event.target.files.length; i++) {
           this.myFiles.push(event.target.files[i]);
       }

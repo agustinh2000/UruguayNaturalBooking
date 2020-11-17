@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Region } from '../../models/region';
+import { Region } from '../../models/Region';
 
 
 @Injectable({
@@ -10,28 +10,28 @@ export class RegionServiceService {
 
   readonly regions: Region[] = [
     { Id: '13046b7e-3d83-4576-b459-65c4c965b037',
-      NumberRegion: 0,
-      NameOfRegion: 'Región Metropolitana',
+      Name: 0,
+      Description: 'Región Metropolitana',
       pathOfPhoto: '../../assets/img/RegionMetropolitana.jpg'},
 
       {Id: 'fcceee6e-5b30-433b-bcd7-10b45af6efc5',
-      NumberRegion: 1,
-      NameOfRegion: 'Región Sur',
+      Name: 1,
+      Description: 'Región Sur',
       pathOfPhoto: '../../assets/img/RegionCentroSur.jpg'},
 
       {Id: 'bd7a2aac-ceb5-49b6-a2ec-c288ba3f7c03',
-      NumberRegion: 2,
-      NameOfRegion: 'Región Este',
+      Name: 2,
+      Description: 'Región Este',
       pathOfPhoto: '../../assets/img/RegionEste.jpg'},
 
       {Id: 'cb4f3a7b-1bff-4c85-a7c9-44a79d4c2c0a',
-      NumberRegion: 3,
-      NameOfRegion: 'Región Norte',
+      Name: 3,
+      Description: 'Región Norte',
       pathOfPhoto: '../../assets/img/RegionNorte.jpg'},
 
       {Id: 'bcc6f5bc-d580-41ea-a28a-0626784cfee0',
-      NumberRegion: 4,
-      NameOfRegion: 'Región Pajaros Pintados',
+      Name: 4,
+      Description: 'Región Pajaros Pintados',
       pathOfPhoto: '../../assets/img/RegionPajarosPintadosjpg.jpg'},
   ];
 

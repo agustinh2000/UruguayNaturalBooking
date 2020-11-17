@@ -1,0 +1,55 @@
+.card-header{
+    position: relative;
+    top: 0.01vh;
+    max-width: 27vh;
+    background-color: #3f51b5;
+    color: rgb(255, 255, 255);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    text-align: center;
+}
+
+.filter-content{
+    width: 27vh;
+    height: auto;
+    word-wrap: break-word;
+    background-color: #3f51b5;
+    border-bottom-right-radius: 12px;
+}
+
+.buttonOfCheck{
+    border: none;
+    color: rgb(46, 46, 46);
+    background: #D5E1A3;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 27.5vh;
+    position: relative;
+    left: -6vh;
+    top: -3vh;
+}
+
+.buttonOfCheck:hover {
+    background: cadetblue;
+}
+
+.touristSpots{
+    position: relative;
+    top: -48vh;
+    left: 10vh;
+}
+
+.content2{
+    overflow: hidden;
+    height: auto;
+    overflow-x: hidden;
+    min-width: 100%;
+}
+
+
+
+
+
+
+
+

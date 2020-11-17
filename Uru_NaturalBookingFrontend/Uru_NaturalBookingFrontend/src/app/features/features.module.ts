@@ -39,12 +39,15 @@ import { ReviewService } from './services/review.service';
 import { ModifyReserveComponent } from './modify-reserve/modify-reserve.component';
 import { FormModifyReserveComponent } from './form-modify-reserve/form-modify-reserve.component';
 import { ModifyLodgingCapacityComponent } from './modify-lodging-capacity/modify-lodging-capacity.component';
+import { TouristSpotViewComponent } from './tourist-spot-view/tourist-spot-view.component';
+import { SelectionOfTouristSpotComponent } from './selection-of-tourist-spot/selection-of-tourist-spot.component';
 
 @NgModule({
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
     ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
-    FormModifyReserveComponent, ModifyLodgingCapacityComponent],
+    FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent, 
+    SelectionOfTouristSpotComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -66,11 +69,14 @@ import { ModifyLodgingCapacityComponent } from './modify-lodging-capacity/modify
     NgbRatingModule,
     SharedModule,
     MatSlideToggleModule,
+    MatToolbarModule,
+    MatSidenavModule
   ],
   exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
     ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
-    FormModifyReserveComponent, ModifyLodgingCapacityComponent],
+    FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent,
+    SelectionOfTouristSpotComponent],
   providers: [RegionServiceService, UserService, ReportService, TouristSpotService,
     CategoryService, LodgingService, ReserveService, ReviewService]
 })

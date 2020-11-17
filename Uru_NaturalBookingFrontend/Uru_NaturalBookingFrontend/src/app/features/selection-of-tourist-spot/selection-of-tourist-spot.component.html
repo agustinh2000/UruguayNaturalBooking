@@ -1,0 +1,18 @@
+<div class="content2"> 
+<header class="card-header">
+    <h5 class="title">Categorias existentes </h5>
+</header>
+<div class="filter-content">
+    <div class="card-body">
+        <form>
+            <label class="form-check" *ngFor="let category of allCategories; let i = index">
+                <button class="buttonOfCheck" (click)="doCheck(i)">
+                    <input class="checkBox" type="checkbox" [checked]="categoriesChecked[i]">
+                    <span class="textOfButton"> {{category.Name}} </span>
+                </button>
+            </label>
+        </form>
+    </div>
+</div>
+<app-tourist-spot-view class="touristSpots" [categoriesSelectedId]="categoriesSelectedId"></app-tourist-spot-view>
+</div>

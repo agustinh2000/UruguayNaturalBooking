@@ -1,0 +1,8 @@
+<div class = "padre">
+    <div class="card" *ngFor="let touristSpot of touristSpotFilterByRegion; let i = index">
+        <img src= {{touristSpot.ImagePath}} class="imagen">
+        <h3>{{touristSpot.Name}}</h3>
+        <p class="description"><i>{{touristSpot.Description}}</i></p>
+        <p class="region"><i><strong>{{touristSpot.RegionModel.Description}}</strong></i></p>
+    </div>
+</div>

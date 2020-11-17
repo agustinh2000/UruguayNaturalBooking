@@ -13,8 +13,6 @@ export class ModifyLodgingCapacityComponent implements OnInit {
 
   public lodgings: LodgingModelForResponse[];
 
-  public lodgingsAvailability: boolean[];
-
   constructor(aLodgingService: LodgingService) {
     this.lodgingService = aLodgingService;
   }
