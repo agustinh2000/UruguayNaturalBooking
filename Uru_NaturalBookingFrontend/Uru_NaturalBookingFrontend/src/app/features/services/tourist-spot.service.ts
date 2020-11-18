@@ -133,6 +133,10 @@ export class TouristSpotService {
       {
         Id: '6714839a-ccf8-4e55-b858-476a9fe68606',
         Name: 'Atracciones'
+      }, 
+      {
+        Id: '6714839a-ccf8-4e55-b858-476a9fe68608',
+        Name: 'Putin'
       }
       ]
     },
@@ -158,6 +162,10 @@ export class TouristSpotService {
       {
         Id: '6714839a-ccf8-4e55-b858-476a9fe68606',
         Name: 'Atracciones'
+      },
+      {
+        Id: '6714839a-ccf8-4e55-b858-476a9fe68608',
+        Name: 'Putin'
       }
       ]
     }
