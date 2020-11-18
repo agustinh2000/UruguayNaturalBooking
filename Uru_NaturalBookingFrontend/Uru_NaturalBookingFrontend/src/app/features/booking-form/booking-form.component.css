@@ -1,0 +1,200 @@
+.contenedor {
+    width: 180vh;
+    height: 50vh;
+    padding: 3%;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    color: #1a2537;
+    font-size: 40px;
+    position: relative;
+    top: -3.5vh;
+}
+
+.formulario {
+    background: #fff;
+    margin-top: 4%;
+    padding: 0.1%;
+    box-sizing: border-box;
+}
+
+.button {
+    position: relative;
+    border: none;
+    width: 60%;
+    height: 40%;
+    color: white;
+    font-size: 120%;
+    background: #1a2537;
+    padding: 1.5% 1.5%;
+    border-radius: 5px;
+    cursor: pointer;
+    left: 30vh;
+    top: -62vh;
+}
+
+.button:hover {
+    background: cadetblue;
+}
+
+p {
+    text-align: center;
+}
+
+@media(min-width:768px) {
+    .formulario {
+        position: relative;
+        margin: auto;
+        width: 160vh;
+        height: 40vh;
+        top: -3vh;
+        margin-top: 4%;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+}
+
+.inputForName {
+    position: relative;
+    width: 50vh;
+    top: 0vh;
+    left: -2vh;
+    height: 12vh;
+}
+
+.buttonMinus {
+    height: 4.5vh;
+    width: 4.5vh;
+    border-radius: 8px;
+    background-color: #1a2537;
+    color: white;
+    outline: none;
+    position: relative;
+    top: 5.5vh;
+    left: -22.7vh;
+}
+
+.buttonPlus {
+    height: 4.5vh;
+    width: 4.5vh;
+    border-radius: 8px;
+    background-color: #1a2537;
+    color: white;
+    outline: none;
+    position: relative;
+    top: 1vh;
+    left: 0.5vh;
+}
+
+.textOfQuantity {
+    width: 10vh;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+    top: 1vh;
+}
+
+.adults, .childs, .babies, .retired {
+    margin-bottom: 3.5%;
+    border-radius: 12px;
+    width: 33vh;
+    height: 11vh;
+    text-align: center;
+    color: rgb(112, 112, 112);
+}
+
+.adults {
+    position: relative;
+    left: 50vh;
+    top: -13.5vh;
+}
+
+.childs {
+    position: relative;
+    left: 77vh;
+    top: -29.8vh;
+}
+
+.babies {
+    position: relative;
+    left: 103vh;
+    top: -46.3vh;
+}
+
+.retired {
+    position: relative;
+    left: 130vh;
+    top: -62.8vh;
+}
+
+.buttonMinus[disabled], .buttonMinusChild[disabled], .buttonMinusBabies[disabled], .buttonMinusRetired[disabled] {
+    background-color: #9b9b9b;
+    color: black;
+}
+
+.buttonMinusChild {
+    height: 4.5vh;
+    width: 4.5vh;
+    border-radius: 8px;
+    background-color: #1a2537;
+    color: white;
+    outline: none;
+    position: relative;
+    top: 5.5vh;
+    left: -22vh;
+}
+
+.buttonMinusBabies {
+    height: 4.5vh;
+    width: 4.5vh;
+    border-radius: 8px;
+    background-color: #1a2537;
+    color: white;
+    outline: none;
+    position: relative;
+    top: 5.5vh;
+    left: -21.2vh;
+}
+
+.buttonMinusRetired {
+    height: 4.5vh;
+    width: 4.5vh;
+    border-radius: 8px;
+    background-color: #1a2537;
+    color: white;
+    outline: none;
+    position: relative;
+    top: 5.5vh;
+    left: -23.5vh;
+}
+
+.contentForSearchLodgings {
+    position: relative;
+    left: -3.3vh;
+    width: 160vh;
+    height: 20vh;
+}
+
+.checkInPicker {
+    position: relative;
+    top: -1vh;
+    width: 21vh;
+}
+
+.checkOutPicker {
+    position: relative;
+    top: -1vh;
+    left: 6vh;
+    width: 21vh;
+}
+
+mat-error {
+    text-align: center;
+    position: relative;
+    top: -75vh;
+}
+input[type=text]{
+    outline: none;
+}

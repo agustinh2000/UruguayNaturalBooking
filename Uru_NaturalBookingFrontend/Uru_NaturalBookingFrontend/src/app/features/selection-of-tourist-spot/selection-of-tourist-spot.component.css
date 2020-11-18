@@ -27,6 +27,7 @@
     position: relative;
     left: -6vh;
     top: -3vh;
+    text-align: left;
 }
 
 .buttonOfCheck:hover {

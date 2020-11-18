@@ -1,0 +1,70 @@
+<div class="padre">
+    <form [formGroup]="formGroup" class="formulario">
+        <div class="contenedor">
+            <h1>Busqueda de hospedajes en {{touristSpotSelected}}</h1>
+
+            <div class="contentForSearchLodgings">
+
+                <mat-form-field appearance="fill" class="checkInPicker">
+                    <mat-label>Check-in</mat-label>
+                    <input matInput [matDatepicker]="checkInPicker" [max]="maxDate" formControlName="checkInPicker"
+                        required>
+                    <mat-datepicker-toggle matSuffix [for]="checkInPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #checkInPicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="checkOutPicker">
+                    <mat-label>Check-out</mat-label>
+                    <input matInput [matDatepicker]="checkOutPicker" [max]="maxDate" formControlName="checkOutPicker"
+                        required>
+                    <mat-datepicker-toggle matSuffix [for]="checkOutPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #checkOutPicker></mat-datepicker>
+                </mat-form-field>
+
+                <div class="adults">
+                    <span class="text"> Adultos (desde 13 años) </span>
+                    <button [disabled]="quantityOfAdults===0" class="buttonMinus" type="button"
+                        (click)="minus('adults')"><i class="fa fa-minus"></i></button>
+                    <input readonly [disabled]="quantityOfAdults===0" class="textOfQuantity" type="text"
+                        [value]="quantityOfAdults">
+                    <button class="buttonPlus" type="button" (click)="plus('adults')"><i
+                            class="fa fa-plus"></i></button>
+                </div>
+
+                <div class="childs">
+                    <span class="text"> Niños (de 2 a 12 años) </span>
+                    <button [disabled]="quantityOfChilds===0" class="buttonMinusChild" type="button"
+                        (click)="minus('childs')"><i class="fa fa-minus"></i></button>
+                    <input readonly [disabled]="quantityOfChilds===0" class="textOfQuantity" type="text"
+                        [value]="quantityOfChilds">
+                    <button class="buttonPlus" type="button" (click)="plus('childs')"><i
+                            class="fa fa-plus"></i></button>
+                </div>
+
+                <div class="babies">
+                    <span class="text"> Bebes (hasta 2 años) </span>
+                    <button [disabled]="quantityOfBabies===0" class="buttonMinusBabies" type="button"
+                        (click)="minus('babies')"><i class="fa fa-minus"></i></button>
+                    <input readonly [disabled]="quantityOfBabies===0" class="textOfQuantity" type="text"
+                        [value]="quantityOfBabies">
+                    <button class="buttonPlus" type="button" (click)="plus('babies')"><i
+                            class="fa fa-plus"></i></button>
+                </div>
+
+                <div class="retired">
+                    <span class="text"> Jubilados (desde 70 años) </span>
+                    <button [disabled]="quantityOfRetired===0" class="buttonMinusRetired" type="button"
+                        (click)="minus('retired')"><i class="fa fa-minus"></i></button>
+                    <input readonly [disabled]="quantityOfRetired===0" class="textOfQuantity" type="text"
+                        [value]="quantityOfRetired">
+                    <button class="buttonPlus" type="button" (click)="plus('retired')"><i
+                            class="fa fa-plus"></i></button>
+                </div>
+                <button class="button"> Buscar hospedajes </button>
+                
+                <mat-error *ngIf="formGroup.errors?.range && formGroup.touched">El check-in no puede ser mayor al check-out.
+                </mat-error>
+            </div>
+        </div>
+    </form>
+</div>
