@@ -4,17 +4,17 @@
   flex-wrap: wrap;
   overflow: hidden;
   justify-content: center;
-  width: 180vh;
+  width: 175vh;
 }
 
 .card {
   position: relative;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 370px;
+  width: 350px;
   margin-left: 4vh;
   text-align: center;
   font-family: arial;
-  margin-top: 2%;
+  margin-top: 3.5%;
   border-radius: 13px;
   max-height: auto;
   word-wrap: break-word;
