@@ -41,13 +41,14 @@ import { FormModifyReserveComponent } from './form-modify-reserve/form-modify-re
 import { ModifyLodgingCapacityComponent } from './modify-lodging-capacity/modify-lodging-capacity.component';
 import { TouristSpotViewComponent } from './tourist-spot-view/tourist-spot-view.component';
 import { SelectionOfTouristSpotComponent } from './selection-of-tourist-spot/selection-of-tourist-spot.component';
+import { LodgingCardsComponent } from './lodging-cards/lodging-cards.component';
 
 @NgModule({
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
     ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
     FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent, 
-    SelectionOfTouristSpotComponent],
+    SelectionOfTouristSpotComponent, LodgingCardsComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -76,7 +77,7 @@ import { SelectionOfTouristSpotComponent } from './selection-of-tourist-spot/sel
     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
     ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
     FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent,
-    SelectionOfTouristSpotComponent],
+    SelectionOfTouristSpotComponent, LodgingCardsComponent],
   providers: [RegionServiceService, UserService, ReportService, TouristSpotService,
     CategoryService, LodgingService, ReserveService, ReviewService]
 })
