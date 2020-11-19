@@ -11,6 +11,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import { NgbModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -27,7 +29,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSidenavModule,
     NgbModule,
     NgbRatingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule,
+    MatMenuModule
   ],
   exports: [NavBarComponent, StarRatingComponent],
   bootstrap: [StarRatingComponent]

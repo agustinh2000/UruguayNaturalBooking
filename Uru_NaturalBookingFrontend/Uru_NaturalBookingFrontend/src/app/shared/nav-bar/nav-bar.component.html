@@ -1,27 +1,141 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button fxShow="true" fxHide.gt-sm>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="logo">
+      <a href="/"> <img [src]="pathLogo" width="200px" alt="Logo de la empresa"></a>
+    </div>
+    <span class="example-spacer"></span>
+    <div class="navigation" fxShow="true" fxHide.lt-md="true">
 
-    <mat-toolbar color="primary">
-      <mat-toolbar-row>
-        <button mat-icon-button fxShow="true" fxHide.gt-sm>
-          <mat-icon>menu</mat-icon>
+      <span routerLink="regions">
+        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+          <mat-icon>home</mat-icon>
+          Inicio
+        </a>
+      </span>
+
+
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_box</mat-icon>Usuarios <i class="fas fa-caret-down" style="color:black"></i>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="register-user">
+          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+            <span class="material-icons">add_box</span>
+            Agregar usuario
+          </a>
         </button>
-        <div class="logo">
-          <a href="/"> <img [src]="pathLogo" width="200px" alt="Logo de la empresa"></a>
-        </div>
-        <span class="example-spacer"></span>
-        <div class="navigation" fxShow="true" fxHide.lt-md="true">
-          <a href="#" class="button" mat-button>
-            <mat-icon>home</mat-icon>
-            Inicio
+        <button mat-menu-item routerLink="modify-user">
+          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+            <span class="material-icons">
+              construction
+            </span>
+            Modificar usuario
           </a>
-          <a href="#" class="button" mat-button>
-            <mat-icon>details</mat-icon>
-            Categorias
+        </button>
+        <button mat-menu-item routerLink="delete-user">
+          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+            <span class="material-icons">
+              delete_forever
+            </span>
+            Eliminar usuario
           </a>
-          <a href="#" class= "button" mat-button>
-            <mat-icon>account_box</mat-icon>
-            My Account
-          </a>
-        </div>
-      </mat-toolbar-row>
-    </mat-toolbar>  
+        </button>
+      </mat-menu>
 
+
+
+      <button mat-button [matMenuTriggerFor]="menu2">
+        <mat-icon>account_box</mat-icon>Puntos turisticos <i class="fas fa-caret-down" style="color:black"></i>
+      </button>
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item routerLink="add-touristSpot">
+          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+            <span class="material-icons">add_box</span>
+            Añadir punto turistico
+          </a>
+        </button>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="menu3">
+        <mat-icon>account_box</mat-icon> Hospedaje <i class="fas fa-caret-down" style="color:black"></i>
+      </button>
+      <mat-menu #menu3="matMenu">
+        <button mat-menu-item routerLink="add-lodging">
+          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+            <span class="material-icons">add_box</span>
+            Añadir hospedaje
+          </a>
+        </button>
+        <button mat-menu-item routerLink="modify-lodging-capacity">
+          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+            <span class="material-icons">
+              construction
+            </span>
+            Modificar hospedaje
+          </a>
+        </button>
+
+
+        <button mat-menu-item routerLink="modify-reserve">
+          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+            <span class="material-icons">
+              construction
+            </span>
+            Modificar reserva
+          </a>
+        </button>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="menu4">
+        <mat-icon>account_box</mat-icon> Inicio/cierre de sesión <i class="fas fa-caret-down" style="color:black"></i>
+      </button>
+      <mat-menu #menu4="matMenu">
+        <button mat-menu-item routerLink="login">
+          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+            <span class="material-icons">
+              login
+              </span>
+            Login
+          </a>
+        </button>
+        <button mat-menu-item routerLink="logout">
+          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+            <span class="material-icons">
+              exit_to_app
+              </span>
+            Logout
+          </a>
+        </button>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="menu5">
+        <mat-icon>account_box</mat-icon> Reporte <i class="fas fa-caret-down" style="color:black"></i>
+      </button>
+      <mat-menu #menu5="matMenu">
+        <button mat-menu-item routerLink="report">
+          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+            <span class="material-icons">
+              build
+              </span>
+            Generar reporte
+          </a>
+        </button>
+      </mat-menu>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

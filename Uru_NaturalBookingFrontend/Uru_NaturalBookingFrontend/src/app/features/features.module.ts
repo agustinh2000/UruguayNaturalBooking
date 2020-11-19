@@ -43,6 +43,8 @@ import { TouristSpotViewComponent } from './tourist-spot-view/tourist-spot-view.
 import { SelectionOfTouristSpotComponent } from './selection-of-tourist-spot/selection-of-tourist-spot.component';
 import { LodgingCardsComponent } from './lodging-cards/lodging-cards.component';
 import { BookingFormComponent } from './booking-form/booking-form.component';
+import { RouterModule } from '@angular/router';
+import { MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
@@ -72,7 +74,9 @@ import { BookingFormComponent } from './booking-form/booking-form.component';
     SharedModule,
     MatSlideToggleModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    RouterModule,
+    MatMenuModule
   ],
   exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
