@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LodgingService } from '../services/lodging.service';
 import { LodgingForSearchModel } from '../../models/LodgingForSearchModel';
+import { SearchOfLodgingModelForRequest } from 'src/app/models/SearchOfLodgingModelForRequest';
 
 @Component({
   selector: 'app-lodging-cards',
@@ -8,6 +9,8 @@ import { LodgingForSearchModel } from '../../models/LodgingForSearchModel';
   styleUrls: ['./lodging-cards.component.css']
 })
 export class LodgingCardsComponent implements OnInit {
+
+  @Input() searchModel: SearchOfLodgingModelForRequest;
 
   Arr = Array;
 
@@ -20,6 +23,6 @@ export class LodgingCardsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-  this.lodgingsOfSearch = this.lodgingsService.getLodgingsOfSearch();
+  this.lodgingsOfSearch = this.lodgingsService.getLodgingsOfSearch(this.searchModel);
   }
 }

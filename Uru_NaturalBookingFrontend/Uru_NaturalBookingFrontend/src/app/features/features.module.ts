@@ -49,8 +49,7 @@ import { BookingFormComponent } from './booking-form/booking-form.component';
     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
     ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
     FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent, 
-    SelectionOfTouristSpotComponent, LodgingCardsComponent],
-    SelectionOfTouristSpotComponent, BookingFormComponent],
+    SelectionOfTouristSpotComponent, LodgingCardsComponent, BookingFormComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -79,8 +78,7 @@ import { BookingFormComponent } from './booking-form/booking-form.component';
     ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
     ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
     FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent,
-    SelectionOfTouristSpotComponent, LodgingCardsComponent],
-    SelectionOfTouristSpotComponent, BookingFormComponent],
+    SelectionOfTouristSpotComponent, LodgingCardsComponent, BookingFormComponent],
   providers: [RegionServiceService, UserService, ReportService, TouristSpotService,
     CategoryService, LodgingService, ReserveService, ReviewService]
 })

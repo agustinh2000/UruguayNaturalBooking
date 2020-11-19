@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ReserveService } from '../services/reserve.service';
+import { SearchOfLodgingModelForRequest } from '../../models/SearchOfLodgingModelForRequest';
+import { TouristSpotService } from '../services/tourist-spot.service';
 
 @Component({
   selector: 'app-booking-form',
@@ -14,8 +16,6 @@ export class BookingFormComponent implements OnInit {
 
   public formGroup: FormGroup;
 
-  private reserveService: ReserveService;
-
   public quantityOfAdults: number = 0;
 
   public quantityOfChilds: number = 0;
@@ -26,10 +26,17 @@ export class BookingFormComponent implements OnInit {
 
   public maxDate: Date;
 
-  constructor(aReserveService: ReserveService, private formBuilder: FormBuilder) {
-    this.reserveService = aReserveService;
+  public showLodgingsAvailables: boolean = false;
+
+  public searchModel: SearchOfLodgingModelForRequest;
+
+  public nameOfTouristSpot: string;
+
+  private touristSpotService: TouristSpotService;
+
+  constructor(aTouristSpotService: TouristSpotService, private formBuilder: FormBuilder) {
+    this.touristSpotService = aTouristSpotService;
     this.formGroup = this.formBuilder.group({
-      touristSpotSelected: new FormControl('', [Validators.required]),
       checkInPicker: ['', Validators.required],
       checkOutPicker: ['', Validators.required],
     }, { validator: this.DateValidation });
@@ -43,7 +50,8 @@ export class BookingFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.touristSpotSelected = 'Punta del este';
+    this.nameOfTouristSpot = this.touristSpotService.getTouristSpotById(this.touristSpotSelected).Name;
+    this.nameOfTouristSpot = 'Punta del este';
   }
 
   noWhitespaceValidator: ValidatorFn = (control: FormControl) => {
@@ -80,6 +88,46 @@ export class BookingFormComponent implements OnInit {
     if (typeOfGuest === 'retired' && this.quantityOfRetired > 0){
       this.quantityOfRetired--;
     }
+  }
+
+  private formIsValid(): boolean{
+    return this.formGroup.valid;
+  }
+
+  public isInvalidQuantityOfGuest(): boolean{
+    return this.quantityOfAdults === 0 &&
+           this.quantityOfBabies === 0 &&
+           this.quantityOfChilds === 0 &&
+           this.quantityOfRetired === 0;
+  }
+
+  public searchOfLodgings(): void{
+    if (this.formIsValid() && !this.isInvalidQuantityOfGuest()){
+      this.showLodgingsAvailables = true;
+      this.searchModel = {
+        CheckIn: this.formGroup.controls.checkInPicker.value,
+        CheckOut: this.formGroup.controls.checkOutPicker.value,
+        QuantityOfAdult: this.quantityOfAdults,
+        QuantityOfBabies: this.quantityOfBabies,
+        QuantityOfChilds: this.quantityOfChilds,
+        QuantityOfRetireds: this.quantityOfRetired,
+        TouristSpotIdSearch: this.touristSpotSelected
+      };
+    }
+  }
+
+  public clearFields(): void{
+    this.quantityOfAdults = 0;
+    this.quantityOfBabies = 0;
+    this.quantityOfChilds = 0;
+    this.quantityOfRetired = 0;
+    this.showLodgingsAvailables = false;
+    this.searchModel = new SearchOfLodgingModelForRequest();
+    this.formGroup = this.formBuilder.group({
+      checkInPicker: ['', Validators.required],
+      checkOutPicker: ['', Validators.required],
+    }, { validator: this.DateValidation });
+    this.maxDate = new Date();
   }
 }
 

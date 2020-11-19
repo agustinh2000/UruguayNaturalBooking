@@ -19,7 +19,7 @@
 }
 
 .name{
-    color: #3f51b5;
+    color: #003580;
     position: absolute;
     bottom:80%;
     left:40%;
@@ -27,7 +27,7 @@
 }
 
 .address{
-    color: grey;
+    color: #333333;
     position: absolute;
     bottom:60%;
     left:40%;
@@ -35,14 +35,14 @@
 }
 
 .reviewScore{
-    color: grey;
+    color: #333333;
     position: relative;
     float: right;
     bottom:95%;
 }
 
 .quantityStars{
-    color: grey;
+    color: #333333;
     position: relative;
     float: right;
     bottom:95%;
@@ -50,7 +50,7 @@
 }
 
 .pricePerNight{
-    color: grey;
+    color: #333333;
     position: relative;
     bottom:34vh;
     left:.1%;
@@ -66,6 +66,7 @@
     width: 50px;
     min-height: 50px;
     border-radius: 15px;
+    text-align: center;
 }
 
 .detail{
@@ -79,8 +80,20 @@
     border-radius: 15px;
 }
 
-.textDetail{
+.buttonOfDetails{
     color: white;
+    background-color: #1a2537;
+    position: absolute;
+    left:90vh;
+    top:30vh;
+    width: 100px;
+    min-height: 45px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.buttonOfDetails:hover{
+    background-color: cadetblue;
 }
 
 .reviewScore{
@@ -121,7 +134,7 @@
 }
 
 .totalPrice{
-    color: grey;
+    color: #333333;
     position: relative;
     bottom:40vh;
     left:1.1%;

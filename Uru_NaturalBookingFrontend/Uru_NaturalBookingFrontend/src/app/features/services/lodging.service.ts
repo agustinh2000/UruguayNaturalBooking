@@ -4,6 +4,7 @@ import { LodgingModelForSearchResponse } from 'src/app/models/LodgingModelForSea
 import { TouristSpotModelForLodgingResponseModel } from 'src/app/models/TouristSpotModelForLodgingResponseModel';
 import { LodgingModelForRequest } from '../../models/LodgingModelForRequest';
 import { LodgingForSearchModel } from '../../models/LodgingForSearchModel';
+import { SearchOfLodgingModelForRequest } from '../../models/SearchOfLodgingModelForRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -190,7 +191,7 @@ export class LodgingService {
     return lodgingsObteined;
   }
 
-  getLodgingsOfSearch(): LodgingForSearchModel[]{
+  getLodgingsOfSearch(searchModel: SearchOfLodgingModelForRequest): LodgingForSearchModel[]{
     const lodgingsObteined: LodgingForSearchModel[] = [];
     for (const lodging of this.lodgingsForSearch) {
       lodgingsObteined.push(lodging);
@@ -200,7 +201,7 @@ export class LodgingService {
 
   changeAvailability(id: string, newState: boolean): void {
     for (const lodging of this.lodgings) {
-      if (lodging.Id === id && lodging.IsAvailable! == newState) {
+      if (lodging.Id === id && lodging.IsAvailable !== newState) {
         lodging.IsAvailable = newState;
       }
     }

@@ -1,7 +1,7 @@
 <div class="padre">
     <form [formGroup]="formGroup" class="formulario">
         <div class="contenedor">
-            <h1>Busqueda de hospedajes en {{touristSpotSelected}}</h1>
+            <h1>Busqueda de hospedajes en {{nameOfTouristSpot}}</h1>
 
             <div class="contentForSearchLodgings">
 
@@ -60,11 +60,28 @@
                     <button class="buttonPlus" type="button" (click)="plus('retired')"><i
                             class="fa fa-plus"></i></button>
                 </div>
-                <button class="button"> Buscar hospedajes </button>
-                
-                <mat-error *ngIf="formGroup.errors?.range && formGroup.touched">El check-in no puede ser mayor al check-out.
+
+
+                <ng-container *ngIf="!showLodgingsAvailables; else ButtonCancel">
+                    <button class="button" (click)="searchOfLodgings()"> Buscar hospedajes </button>
+                </ng-container>
+
+                <ng-template #ButtonCancel>
+                    <button class="button" (click)="clearFields()"> Cancelar </button>
+                </ng-template>
+
+
+                <mat-error *ngIf="formGroup.errors?.range && formGroup.touched">El check-in no puede ser mayor al
+                    check-out.
+                </mat-error>
+
+                <mat-error *ngIf="isInvalidQuantityOfGuest()">La cantidad total de huespuedes no puede ser 0.
                 </mat-error>
             </div>
         </div>
     </form>
+</div>
+
+<div *ngIf="showLodgingsAvailables">
+    <app-lodging-cards [searchModel]="searchModel"></app-lodging-cards>
 </div>

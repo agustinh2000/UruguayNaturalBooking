@@ -1,24 +1,23 @@
-<div class = "padre">
+<div class="padre">
     <div class="card" *ngFor="let searchItem of lodgingsOfSearch; let i = index">
-        <div class = "image">
-        <img src= {{searchItem.Lodging.ImagesPath[0]}} class="imagen">
+        <div class="image">
+            <img src={{searchItem.Lodging.ImagesPath[0]}} class="imagen">
         </div>
-        <div class = "content">
-        <h2 class = "name">{{searchItem.Lodging.Name}}</h2>
-        <div class = "stars">
-            <span class="star" *ngFor="let i of Arr(searchItem.Lodging.QuantityOfStars).fill(1)">
-                <img width="26" src="../../assets/img/star.png" />
-            </span>
+        <div class="content">
+            <h2 class="name">{{searchItem.Lodging.Name}}</h2>
+            <div class="stars">
+                <span class="star" *ngFor="let i of Arr(searchItem.Lodging.QuantityOfStars).fill(1)">
+                    <img width="26" src="../../assets/img/star.png" />
+                </span>
+            </div>
+            <span class="address">{{searchItem.Lodging.Address}},
+                {{searchItem.Lodging.LodgingTouristSpotModel.Name}}</span>
+            <span class="pricePerNight"> USD {{searchItem.Lodging.PricePerNight}} (por noche)</span>
+            <div class="review">
+                <span class="reviewScore">{{searchItem.Lodging.ReviewsAverageScore}}</span>
+            </div>
+            <button class="buttonOfDetails">Ver detalle</button>
+            <span class="totalPrice">Precio total: USD {{searchItem.TotalPriceForSearch}}</span>
         </div>
-        <span class = "address">{{searchItem.Lodging.Address}}, {{searchItem.Lodging.LodgingTouristSpotModel.Name}}</span>
-        <span class = "pricePerNight"> USD {{searchItem.Lodging.PricePerNight}} (por noche)</span>
-        <div class = "review">
-        <span class = "reviewScore">{{searchItem.Lodging.ReviewsAverageScore}}</span>
-         </div>
-         <div class = "detail">
-             <span class = "textDetail">Ver detalle</span>
-         </div>
-        <span class = "totalPrice">Precio total: USD {{searchItem.TotalPriceForSearch}}</span>
-    </div>
     </div>
 </div>

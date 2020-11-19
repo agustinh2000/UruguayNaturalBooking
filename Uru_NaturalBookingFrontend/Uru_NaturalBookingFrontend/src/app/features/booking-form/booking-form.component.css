@@ -32,7 +32,7 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
     left: 30vh;
-    top: -62vh;
+    top: -59vh;
 }
 
 .button:hover {
@@ -48,7 +48,7 @@ p {
         position: relative;
         margin: auto;
         width: 160vh;
-        height: 40vh;
+        height: 43vh;
         top: -3vh;
         margin-top: 4%;
         border-radius: 8px;
@@ -193,7 +193,7 @@ p {
 mat-error {
     text-align: center;
     position: relative;
-    top: -75vh;
+    top: -73.5vh;
 }
 input[type=text]{
     outline: none;

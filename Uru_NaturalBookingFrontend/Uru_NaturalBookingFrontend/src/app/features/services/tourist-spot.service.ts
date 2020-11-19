@@ -194,4 +194,10 @@ export class TouristSpotService {
   getTouristSpotsFilterByRegionAndCategories(categoriesSelected: string[], regionSelected: string): TouristSpotModelForResponse[]{
     return this.getAllTouristSpots();
   }
+
+  getTouristSpotById(touristSpotId: string): TouristSpotForRequestModel{
+    return;
+    // this is a call to the webAPI
+  }
+
 }
