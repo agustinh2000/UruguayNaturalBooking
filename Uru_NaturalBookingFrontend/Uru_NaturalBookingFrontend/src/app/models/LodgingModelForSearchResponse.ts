@@ -1,4 +1,5 @@
 import { TouristSpotModelForLodgingResponseModel } from './TouristSpotModelForLodgingResponseModel';
+import { ReviewModelForResponse } from './ReviewModelForResponse';
 
 export class LodgingModelForSearchResponse{
     public Name: string;
@@ -9,4 +10,5 @@ export class LodgingModelForSearchResponse{
     public PricePerNight: number;
     public ReviewsAverageScore: number;
     public LodgingTouristSpotModel: TouristSpotModelForLodgingResponseModel;
+    public ReviewsForLodging: ReviewModelForResponse[];
 }

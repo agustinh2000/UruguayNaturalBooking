@@ -45,6 +45,7 @@ import { LodgingCardsComponent } from './lodging-cards/lodging-cards.component';
 import { BookingFormComponent } from './booking-form/booking-form.component';
 import { RouterModule } from '@angular/router';
 import { MatMenuModule} from '@angular/material/menu';
+import { LodgingDetailComponent } from './lodging-detail/lodging-detail.component';
 
 @NgModule({
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
@@ -52,6 +53,7 @@ import { MatMenuModule} from '@angular/material/menu';
     ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
     FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent, 
     SelectionOfTouristSpotComponent, LodgingCardsComponent, BookingFormComponent],
+    SelectionOfTouristSpotComponent, LodgingCardsComponent, LodgingDetailComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -83,6 +85,7 @@ import { MatMenuModule} from '@angular/material/menu';
     ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
     FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent,
     SelectionOfTouristSpotComponent, LodgingCardsComponent, BookingFormComponent],
+    SelectionOfTouristSpotComponent, LodgingCardsComponent, LodgingDetailComponent ],
   providers: [RegionServiceService, UserService, ReportService, TouristSpotService,
     CategoryService, LodgingService, ReserveService, ReviewService]
 })

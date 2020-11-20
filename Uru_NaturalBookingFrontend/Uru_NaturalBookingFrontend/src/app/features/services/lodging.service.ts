@@ -5,6 +5,7 @@ import { TouristSpotModelForLodgingResponseModel } from 'src/app/models/TouristS
 import { LodgingModelForRequest } from '../../models/LodgingModelForRequest';
 import { LodgingForSearchModel } from '../../models/LodgingForSearchModel';
 import { SearchOfLodgingModelForRequest } from '../../models/SearchOfLodgingModelForRequest';
+import { ReviewModelForResponse } from '../../models/ReviewModelForResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -120,68 +121,95 @@ export class LodgingService {
   ];
 
 
+  readonly reviews: ReviewModelForResponse[] = [
+    {
+      Id: '53fd830d-988d-4cf6-91f9-abf920f9dc5b',
+      Score: 5,
+      Description: 'Fue una estadia excelente en este hospedaje de lujo.',
+      NameOfWhoComments: 'Agustin',
+      LastNameOfWhoComments: 'Hernandorena'
+    },
+    {
+      Id: '53fd830d-988d-4cf6-91f9-abf920f9dc5c',
+      Score: 1,
+      Description: 'Me encontre con JP y me quiso clavar muy mal.',
+      NameOfWhoComments: 'Joaquin',
+      LastNameOfWhoComments: 'Lamela'
+    }
+
+  ];
+
+
 
 
   readonly lodgingsResultOfSearch: LodgingModelForSearchResponse[] =
-  [
-  {
-    Name: 'Proa Sur UY',
-    Description: 'Un hotel bueno',
-    QuantityOfStars: 3,
-    Address: 'Avda. Franklin Roosevelt',
-    ImagesPath: ['../../assets/img/proa.jpg'],
-    PricePerNight: 120,
-    ReviewsAverageScore: 4.2,
-    LodgingTouristSpotModel: this.touristSpots[0]
-  },
-  {
-    Name: 'Enjoy',
-    Description: 'Un hotel excelente',
-    QuantityOfStars: 5,
-    Address: 'Avda. Franklin Roosevelt parada 12343344',
-    ImagesPath: ['../../assets/img/enjoy.jpg'],
-    PricePerNight: 145,
-    ReviewsAverageScore: 4.7,
-    LodgingTouristSpotModel: this.touristSpots[0]
-  },
-  {
-    Name: 'Arapey Thermal Resort',
-    Description: 'Un hotel magnifico',
-    QuantityOfStars: 5,
-    Address: 'Avda. Luis A. De Herrera',
-    ImagesPath: ['../../assets/img/arapey.jpg'],
-    PricePerNight: 190,
-    ReviewsAverageScore: 4.9,
-    LodgingTouristSpotModel: this.touristSpots[0]
-  }
-  ];
+    [
+      {
+        Name: 'Proa Sur UY',
+        Description: 'Un hotel bueno',
+        QuantityOfStars: 3,
+        Address: 'Avda. Franklin Roosevelt',
+        ImagesPath: ['../../assets/img/proa.jpg', '../../assets/img/proa2.jpg'],
+        PricePerNight: 120,
+        ReviewsAverageScore: 4.2,
+        LodgingTouristSpotModel: this.touristSpots[0],
+        ReviewsForLodging: this.reviews
+      },
+      {
+        Name: 'Enjoy',
+        Description: 'Un hotel excelente',
+        QuantityOfStars: 5,
+        Address: 'Avda. Franklin Roosevelt parada 12343344',
+        ImagesPath: ['../../assets/img/enjoy.jpg'],
+        PricePerNight: 145,
+        ReviewsAverageScore: 4.7,
+        LodgingTouristSpotModel: this.touristSpots[0],
+        ReviewsForLodging: this.reviews
+
+      },
+      {
+        Name: 'Arapey Thermal Resort',
+        Description: 'Un hotel magnifico',
+        QuantityOfStars: 5,
+        Address: 'Avda. Luis A. De Herrera',
+        ImagesPath: ['../../assets/img/arapey.jpg'],
+        PricePerNight: 190,
+        ReviewsAverageScore: 4.9,
+        LodgingTouristSpotModel: this.touristSpots[0],
+        ReviewsForLodging: this.reviews
+      }
+    ];
 
   readonly lodgingsForSearch: LodgingForSearchModel[] =
-  [
-  {
-    CheckIn: new Date(),
-    CheckOut: new Date(),
-    QuantityOfGuest: [1, 2, 3, 4],
-    Lodging: this.lodgingsResultOfSearch[0],
-    TotalPriceForSearch: 1900
-  },
-  {
-    CheckIn: new Date(),
-    CheckOut: new Date(),
-    QuantityOfGuest: [1, 2, 3, 4],
-    Lodging: this.lodgingsResultOfSearch[1],
-    TotalPriceForSearch: 1900
-  },
-  {
-    CheckIn: new Date(),
-    CheckOut: new Date(),
-    QuantityOfGuest: [1, 2, 3, 4],
-    Lodging: this.lodgingsResultOfSearch[2],
-    TotalPriceForSearch: 2220
-  }
-  ];
+    [
+      {
+        CheckIn: new Date(),
+        CheckOut: new Date(),
+        QuantityOfGuest: [1, 2, 3, 4],
+        Lodging: this.lodgingsResultOfSearch[0],
+        TotalPriceForSearch: 1900
+      },
+      {
+        CheckIn: new Date(),
+        CheckOut: new Date(),
+        QuantityOfGuest: [1, 2, 3, 4],
+        Lodging: this.lodgingsResultOfSearch[1],
+        TotalPriceForSearch: 1900
+      },
+      {
+        CheckIn: new Date(),
+        CheckOut: new Date(),
+        QuantityOfGuest: [1, 2, 3, 4],
+        Lodging: this.lodgingsResultOfSearch[2],
+        TotalPriceForSearch: 2220
+      }
+    ];
 
   constructor() { }
+
+  getLodgingSearched(): LodgingForSearchModel {
+    return this.lodgingsForSearch[0];
+  }
 
   getLodgings(): LodgingModelForResponse[] {
     const lodgingsObteined: LodgingModelForResponse[] = [];
@@ -191,7 +219,7 @@ export class LodgingService {
     return lodgingsObteined;
   }
 
-  getLodgingsOfSearch(searchModel: SearchOfLodgingModelForRequest): LodgingForSearchModel[]{
+  getLodgingsOfSearch(): LodgingForSearchModel[] {
     const lodgingsObteined: LodgingForSearchModel[] = [];
     for (const lodging of this.lodgingsForSearch) {
       lodgingsObteined.push(lodging);
