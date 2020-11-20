@@ -1,6 +1,6 @@
 <div class="padre">
     <form [formGroup]="formGroup" class="formulario">
-        <h1> Busqueda de reserva para modificar </h1>
+        <h1 class="textReserve"> Busqueda de reserva para modificar </h1>
         <div class="contenedor">
 
             <div class="input-contenedor">
@@ -20,7 +20,8 @@
                 </mat-form-field>
             </div>
 
-            <button class="button" (click)="openModifyForm()">Buscar reserva</button>
+            <button class="button textReserve" (click)="openModifyForm()" [disabled]="formGroup.invalid">Buscar
+                reserva</button>
         </div>
     </form>
 </div>

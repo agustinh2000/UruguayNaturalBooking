@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Region } from 'src/app/models/Region';
 import { CategoryModel } from '../../models/CategoryModel';
 import { RegionServiceService } from '../services/region-service.service';
@@ -21,7 +21,7 @@ export class AddTouristSpotComponent implements OnInit {
 
   private touristSpotService: TouristSpotService;
 
-  regionsOfTheSystem: Region [];
+  regionsOfTheSystem: Region[];
 
   categoriesOfTheSystem: CategoryModel[];
 
@@ -29,22 +29,20 @@ export class AddTouristSpotComponent implements OnInit {
 
   selectedFiles: FileList;
 
-  touristSpotToAdd: TouristSpotForRequestModel ;
-
-  selected = new FormControl([Validators.required]);
+  touristSpotToAdd: TouristSpotForRequestModel;
 
   public formGroup: FormGroup;
 
-  myFiles: string [] = [];
+  myFiles: string[] = [];
 
   constructor(private formBuilder: FormBuilder, aRegionService: RegionServiceService,
-              aCategoryService: CategoryService, aTouristSpotService: TouristSpotService) {
+    aCategoryService: CategoryService, aTouristSpotService: TouristSpotService) {
     this.touristSpotService = aTouristSpotService;
-    this.categoryService  = aCategoryService;
+    this.categoryService = aCategoryService;
     this.regionService = aRegionService;
     this.formGroup = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      name: ['', [Validators.required, this.noWhitespaceValidator]],
+      description: ['', [Validators.required, this.noWhitespaceValidator]],
     });
   }
 
@@ -57,10 +55,10 @@ export class AddTouristSpotComponent implements OnInit {
     this.categoriesOfTheSystem = this.categoryService.getCategories();
   }
 
-  public selectFiles(event){
-      for (let i = 0; i < event.target.files.length; i++) {
-          this.myFiles.push(event.target.files[i]);
-      }
+  public selectFiles(event) {
+    for (let i = 0; i < event.target.files.length; i++) {
+      this.myFiles.push(event.target.files[i]);
+    }
   }
 
   public Add(): void {
@@ -69,6 +67,26 @@ export class AddTouristSpotComponent implements OnInit {
     this.touristSpotToAdd.ListOfCategoriesId = this.selectedCategories.value;
     this.touristSpotService.Add(this.touristSpotToAdd);
   }
+
+  getErrorMessage(): string {
+    if (this.formGroup.controls.name.hasError('required')) {
+      return 'Error. El nombre es requerido.';
+    }
+    return this.formGroup.controls.name.hasError('whitespace') ? 'Error. El nombre ingresado no puede ser vacío.' : '';
   }
+
+  getErrorMessageDescription(): string{
+    if (this.formGroup.controls.description.hasError('required')) {
+      return 'Error. La descripción es requerida.';
+    }
+    return this.formGroup.controls.description.hasError('whitespace') ? 'Error. La descripción ingresado no puede ser vacío.' : '';
+  }
+
+  noWhitespaceValidator: ValidatorFn = (control: FormControl) => {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
+}
 
 

@@ -37,11 +37,10 @@ h1 {
   font-size: 40px;
 }
 
-.name, .lastName, .userName, .email, .contraseña {
-  font-size: 20px;
-  width: 96%;
-  padding: 2%;
-  border: none;
+.input-name, .selector-of-region, .input-text-area, .selector-of-categories {
+  width: 98%;
+  padding: 0.5%;
+  border-radius: 8px;
 }
 
 .input-contenedor {
@@ -64,10 +63,6 @@ h1 {
   padding: 3.5% 5%;
   border-radius: 5px;
   cursor: pointer;
-}
-
-:required, .name.ng-invalid.ng-touched {
-  border: 1px solid red;
 }
 
 .button:hover {
@@ -96,8 +91,13 @@ p {
   .formulario {
     margin: auto;
     width: 32.5%;
-    margin-top: 4%;
+    margin-top: 2%;
     border-radius: 2%;
     box-sizing: border-box;
   }
+}
+
+.button[disabled] {
+  background-color: rgb(170, 170, 170);
+  cursor: not-allowed;
 }

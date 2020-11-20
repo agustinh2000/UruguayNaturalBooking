@@ -2,10 +2,11 @@
     <h1> Agregar hospedaje </h1>
     <div class="contenedor">
 
-        <div class="input-contenedor">
-            <i class="fas fa-user icon"></i>
-            <input type="text" placeholder="Nombre" name="name" class="name" formControlName="name">
-        </div>
+        <mat-form-field appearance="fill" class="input-name">
+            <mat-label> Nombre </mat-label>
+            <input formControlName="name" type="text" matInput placeholder="Ex. Hotel Enjoy Conrad" required>
+            <mat-error *ngIf="formGroup.controls.name.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
 
         <div class="input-contenedor-stars">
             <p class="textStars">Cantidad de estrellas</p>
@@ -23,35 +24,43 @@
             </div>
         -->
 
-        <div class="input-contenedor">
-            <i class="fas fa-user icon"></i>
-            <input type="text" placeholder="Dirección" name="address" class="address" formControlName="address">
-        </div>
-
-        <h5 class="touristSpotAssocied">Punto turistico asociado: </h5>
-        <mat-form-field appearance="fill">
-            <mat-label>Seleccione un punto turistico</mat-label>
-            <mat-select [(value)]="selectedTouristSpot">
-                <mat-option *ngFor="let touristSpot of touristSpotExisting" [value]="touristSpot.Id">
-                    {{touristSpot.Name}}</mat-option>
-            </mat-select>
+        <mat-form-field appearance="fill" class="input-address">
+            <mat-label> Dirección </mat-label>
+            <input formControlName="address" type="text" matInput placeholder="Ex. Playa Mansa, parada 21." required>
+            <mat-error *ngIf="formGroup.controls.address.invalid">{{getErrorMessageAddress()}}</mat-error>
         </mat-form-field>
 
+        <div class="cointainer-of-touristSpot">
+            <h5 class="touristSpotAssocied">Punto turistico asociado: </h5>
+            <mat-form-field class="selector-of-touristSpot" appearance="fill">
+                <mat-label>Seleccione un punto turistico</mat-label>
+                <mat-select [(value)]="selectedTouristSpot" formControlName="selectedTouristSpotControl" required>
+                    <mat-option *ngFor="let touristSpot of touristSpotExisting" [value]="touristSpot.Id">
+                        {{touristSpot.Name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
         <h5 class="isAvailable">Disponible: </h5>
         <h6 class="textAvailable"> No disponible </h6>
         <mat-slide-toggle color="primary" (click)="ChangeStateOfAvailability()"></mat-slide-toggle>
         <h6 class="textNoAvailable"> Disponible </h6>
 
-        <div class="input-contenedor-price">
-            <i class="fas fa-user icon"></i>
-            <input type="number" placeholder="Ingrese el precio en USD" name="pricePerNight" class="pricePerNight" formControlName="pricePerNight">
-        </div>
+        <mat-form-field class="input-contenedor-price" appearance="fill">
+            <mat-label>Precio por noche en USD</mat-label>
+            <input formControlName="pricePerNight" matInput type="number" class="example-right-align">
+            <span matPrefix>$USD&nbsp;</span>
+            <span matSuffix>.00</span>
+            <mat-error *ngIf="formGroup.controls.pricePerNight.invalid">{{getErrorMessagePrice()}}</mat-error>
+        </mat-form-field>
 
-        <div class="input-text-area">
-            <i class="fas fa-envelope icon"></i>
-            <textarea placeholder="Ingrese una descripcion aqui." textarea style="resize: none;" formControlName="description" rows="5" cols="68" required></textarea>
-        </div>
 
-        <button class="button" (click)="Create()">Crear hospedaje</button>
+        <mat-form-field class="input-text-area" appearance="fill">
+            <mat-label>Textarea</mat-label>
+            <textarea placeholder="Ingrese una descripcion aqui." formControlName="description" rows="5" cols="68"
+                matInput required></textarea>
+            <mat-error *ngIf="formGroup.controls.description.invalid">{{getErrorMessageDescription()}}</mat-error>
+        </mat-form-field>
+
+        <button class="button" (click)="Create()" [disabled]="formGroup.invalid">Crear hospedaje</button>
     </div>
 </form>

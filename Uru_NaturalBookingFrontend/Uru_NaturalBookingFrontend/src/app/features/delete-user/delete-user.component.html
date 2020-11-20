@@ -3,7 +3,6 @@
         <h1> Eliminacion de usuario </h1>
         <div class="contenedor">
             <div class="optionSelector">
-                <h2>Seleccione un usuario </h2>
                 <mat-form-field appearance="fill">
                     <mat-label>Elija un usuario</mat-label>
                     <mat-select [(value)]="selectedUser">
@@ -12,15 +11,18 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="input-contenedor">
-                <i class="fas fa-user icon"></i>
-                <input type="text" placeholder="Nombre de usuario" name="userName" class="userName"
-                    formControlName="userName" disabled>
-            </div>
-            <div class="input-contenedor">
-                <i class="fas fa-envelope icon"></i>
-                <input type="email" placeholder="Correo electronico" name="email" class="email" formControlName="email" disabled>
-            </div>
+
+            <mat-form-field appearance="fill" class="input-userName">
+                <mat-label> Nombre de usuario </mat-label>
+                <input readonly formControlName="userName" type="text" matInput placeholder="Ex. Agus00">
+            </mat-form-field>
+
+            <mat-form-field class="input-email" appearance="fill">
+                <mat-label>Correo electrónico</mat-label>
+                <input readonly matInput placeholder="joaquin.lamela00@gmail.com" formControlName="email">
+                <mat-error *ngIf="formGroup.controls.email.invalid">{{getErrorMessageEmail()}}</mat-error>
+            </mat-form-field>
+
             <button class="button" (click)="Delete()">Eliminar</button>
         </div>
     </form>

@@ -3,38 +3,21 @@
         <h1> Inicio sesión </h1>
         <div class="contenedor">
 
-            <div class="input-contenedor">
-                <i class="fas fa-envelope icon"></i>
-                <input type="email" placeholder="Correo electronico" name="email" class="email" formControlName="email">
-            </div>
+            <mat-form-field class="input-email" appearance="fill">
+                <mat-label>Ingrese su correo electrónico</mat-label>
+                <input matInput placeholder="Correo electronico" formControlName="email" required>
+                <mat-error *ngIf="formGroup.controls.email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
 
-            <div class="input-contenedor">
-                <i class="fas fa-key icon"></i>
-                <input type="password" placeholder="Contraseña" name="password" class="contraseña"
-                    formControlName="password">
-            </div>
-
-            <ng-container
-                *ngIf="formGroup.controls.email.errors?.required && (formGroup.controls.email.touched); else EmailInvalid">
-                <div>
-                    El email es requerido.
-                </div>
-            </ng-container>
-
-            <ng-template #EmailInvalid>
-                <ng-container
-                    *ngIf="formGroup.controls.email.errors?.email && (formGroup.controls.email.touched);else PasswordRequired">
-                    <div>
-                        El email es invalido.
-                    </div>
-                </ng-container>
-            </ng-template>
-
-            <ng-template #PasswordRequired>
-                <div *ngIf="formGroup.controls.password.errors?.required && (formGroup.controls.password.touched)">
-                    La contraseña es requerida
-                </div>
-            </ng-template>
+            <mat-form-field class="input-password" appearance="fill">
+                <mat-label>Ingrese su contraseña</mat-label>
+                <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="formGroup.controls.password.invalid">{{getErrorMessagePassword()}}</mat-error>
+            </mat-form-field>
 
             <button class="button" (click)="Login()" [disabled]="formGroup.invalid">Iniciar sesión</button>
 

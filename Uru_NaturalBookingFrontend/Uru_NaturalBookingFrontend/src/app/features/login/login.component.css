@@ -17,7 +17,12 @@ h1 {
   font-size: 40px;
 }
 
-.email, .contraseña {
+.input-email, .input-password {
+  width: 99%;
+  margin: 1%;
+}
+
+.contraseña {
   font-size: 20px;
   width: 96%;
   padding: 2%;
@@ -76,4 +81,9 @@ p {
     border-radius: 2%;
     box-sizing: border-box;
   }
+}
+
+.button[disabled] {
+  background-color: rgb(170, 170, 170);
+  cursor: not-allowed;
 }

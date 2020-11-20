@@ -19,11 +19,10 @@ h1 {
   font-size: 40px;
 }
 
-.name, .address, .pricePerNight{
-  font-size: 20px;
+.input-name, .input-address, .input-contenedor-price, .input-text-area, .cointainer-of-touristSpot {
   width: 100%;
-  padding: 2%;
-  border: none;
+  padding: 0.5%;
+  border-radius: 8px;
 }
 
 .input-contenedor {
@@ -39,7 +38,7 @@ h1 {
 
 .button {
   position: relative;
-  top:-12vh;
+  top: -14vh;
   border: none;
   width: 100%;
   color: white;
@@ -75,7 +74,7 @@ p {
 @media(min-width:768px) {
   .formulario {
     margin: auto;
-    height: 105vh;
+    height: 110vh;
     width: 40%;
     margin-top: 4%;
     border-radius: 2%;
@@ -89,7 +88,7 @@ p {
   visibility: visible;
 }
 
-ngb-rating{
+ngb-rating {
   position: relative;
   top: -5.5vh;
   left: 30vh;
@@ -99,46 +98,46 @@ ngb-rating{
   color: #fbff00;
 }
 
-.textStars{
+.textStars {
   font-size: 20px;
   position: relative;
   left: -24.5vh;
   top: 1.5vh;
-  color:  rgb(112, 112, 112);
+  color: rgb(112, 112, 112);
   font: Arial;
 }
 
 .input-contenedor-stars {
-  height: 7vh; 
+  height: 7vh;
   margin-bottom: 3.5%;
   border: 1px solid #aaa;
 }
 
-.star{
+.star {
   width: 4vh;
 }
 
-.touristSpotAssocied{
+.touristSpotAssocied {
   position: relative;
   top: 3vh;
   color: rgb(112, 112, 112);
 }
 
-.isAvailable{
+.isAvailable {
   position: relative;
   top: -3vh;
   color: rgb(112, 112, 112);
 }
 
-mat-form-field{
+.selector-of-touristSpot {
   position: relative;
   top: -4vh;
   left: 34vh;
-  width: 45vh;
+  width: 56%;
   border-radius: 8px;
 }
 
-mat-slide-toggle{
+mat-slide-toggle {
   position: relative;
   left: 30vh;
   top: -11.5vh;
@@ -157,39 +156,53 @@ mat-slide-toggle{
 }
 
 /deep/ .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-container {
-  transform: translate3d(100px,0,0) !important;
+  transform: translate3d(100px, 0, 0) !important;
 }
 
-.textAvailable{
- position: relative;
- top: -6.7vh;
- left: 15vh;
+.textAvailable {
+  position: relative;
+  top: -6.7vh;
+  left: 15vh;
 }
 
-.textNoAvailable{
+.textNoAvailable {
   position: relative;
   top: -15vh;
   left: 48vh;
 }
 
 input[type='number'] {
-  -moz-appearance:textfield;
+  -moz-appearance: textfield;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-.input-contenedor-price{
-  margin-bottom: 3.5%;
-  border: 1px solid #aaa;
+.input-contenedor-price {
   position: relative;
-  top: -12vh; 
+  top: -12vh;
 }
 
-.input-text-area{
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button, input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+.input-text-area {
   margin-bottom: 3.5%;
   position: relative;
-  top: -12vh; 
+  top: -12vh;
+}
+
+.button[disabled] {
+  background-color: rgb(170, 170, 170);
+  cursor: not-allowed;
 }

@@ -1,57 +1,42 @@
+<form [formGroup]="formGroup" class="formulario">
+    <h1> Alta de punto turistico </h1>
+    <div class="contenedor">
 
-    <form [formGroup]="formGroup" class="formulario">
-        <h1> Alta de punto turistico </h1>
-        <div class="contenedor">
+        <mat-form-field appearance="fill" class="input-name">
+            <mat-label> Nombre </mat-label>
+            <input formControlName="name" type="text" matInput placeholder="Ex. Punta del Este" required>
+            <mat-error *ngIf="formGroup.controls.name.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
 
-            <div class="input-contenedor">
-                <i class="fas fa-user icon"></i>
-                <input type="text" placeholder="Nombre" name="name" class="name" formControlName="name" required>
-            </div>
+        <mat-form-field class="selector-of-region" appearance="fill">
+            <mat-label>Elija una region</mat-label>
+            <mat-select [formControl]="selectedRegion">
+                <mat-option *ngFor="let region of regionsOfTheSystem" [value]="region.Id">
+                    {{region.Description}} </mat-option>
+            </mat-select>
+        </mat-form-field>
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Elija una region</mat-label>
-                    <mat-select [formControl]="selectedRegion">
-                        <mat-option *ngFor="let region of regionsOfTheSystem" [value]="region.Id">
-                            {{region.NameOfRegion}} </mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <mat-form-field class="input-text-area" appearance="fill">
+            <mat-label>Textarea</mat-label>
+            <textarea placeholder="Ingrese una descripcion aqui." formControlName="description" rows="10" cols="50"
+                matInput required></textarea>
+            <mat-error *ngIf="formGroup.controls.description.invalid">{{getErrorMessageDescription()}}</mat-error>
+        </mat-form-field>
 
-            <div class="input-text-area">
-                <i class="fas fa-envelope icon"></i>
-                <textarea placeholder="Ingrese una descripcion aqui." textarea style="resize: none;" formControlName="description" rows="13" cols="55" required></textarea>
-            </div>
+        <mat-form-field class="selector-of-categories" appearance="fill">
+            <mat-label>Categorias</mat-label>
+            <mat-select [formControl]="selectedCategories" multiple>
+                <mat-option *ngFor="let category of categoriesOfTheSystem" [value]="category.Id">{{category.Name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
-            <mat-form-field appearance="fill">
-                <mat-label>Categorias</mat-label>
-                <mat-select [formControl]="selectedCategories" multiple>
-                  <mat-option *ngFor="let category of categoriesOfTheSystem" [value]="category.Id">{{category.Name}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-
-
-              <div class="form-group">
-                <label for="file">Choose File</label>
-                <input type="file" id="file" multiple accept="image/*" (change)="selectFiles($event)">
-              </div>
-
-              <ng-container
-              *ngIf= "formGroup.controls.name.errors?.required && (formGroup.controls.name.touched)">
-              <div>
-                  El nombre es requerido.
-              </div>
-            </ng-container>
-
-
-            <ng-template #DescriptionRequired>
-                <ng-container
-                    *ngIf="formGroup.controls.decription.errors?.required">
-                    <div>
-                        La descripcion es requerida.
-                    </div>
-                </ng-container>
-            </ng-template>
-
-            <button class="button" (click)="Add()">Agregar</button>
+        <div class="form-group">
+            <label for="file">Seleccione un archivo.</label>
+            <input type="file" id="file" multiple accept="image/*" (change)="selectFiles($event)">
         </div>
 
-    </form>
+        <button class="button" (click)="Add()" [disabled]="formGroup.invalid">Agregar</button>
+    </div>
+
+</form>

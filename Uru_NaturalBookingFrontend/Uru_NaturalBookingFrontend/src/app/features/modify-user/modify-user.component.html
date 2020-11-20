@@ -4,7 +4,6 @@
         <div class="contenedor">
 
             <div class="optionSelector">
-                <h2>Seleccione un usuario </h2>
                 <mat-form-field appearance="fill">
                     <mat-label>Elija un usuario</mat-label>
                     <mat-select [(value)]="selectedUser">
@@ -14,82 +13,39 @@
                 </mat-form-field>
             </div>
 
+            <mat-form-field appearance="fill" class="input-name">
+                <mat-label> Nombre </mat-label>
+                <input formControlName="name" type="text" matInput placeholder="Ex. Joaquín" required>
+                <mat-error *ngIf="formGroup.controls.name.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
 
-            <div class="input-contenedor">
-                <i class="fas fa-user icon"></i>
-                <input type="text" placeholder="Nombre" name="name" class="name" formControlName="name">
-            </div>
+            <mat-form-field appearance="fill" class="input-lastName">
+                <mat-label> Apellido </mat-label>
+                <input formControlName="lastName" type="text" matInput placeholder="Ex. Hernandorena" required>
+                <mat-error *ngIf="formGroup.controls.lastName.invalid">{{getErrorMessageLastName()}}</mat-error>
+            </mat-form-field>
 
-            <div class="input-contenedor">
-                <i class="fas fa-user icon"></i>
-                <input type="text" placeholder="Apellido" name="lastName" class="lastName" formControlName="lastName">
-            </div>
+            <mat-form-field appearance="fill" class="input-userName">
+                <mat-label> Nombre de usuario </mat-label>
+                <input formControlName="userName" type="text" matInput placeholder="Ex. Agus00" required>
+                <mat-error *ngIf="formGroup.controls.userName.invalid">{{getErrorMessageUserName()}}</mat-error>
+            </mat-form-field>
 
-            <div class="input-contenedor">
-                <i class="fas fa-user icon"></i>
-                <input type="text" placeholder="Nombre de usuario" name="userName" class="userName"
-                    formControlName="userName">
-            </div>
+            <mat-form-field class="input-email" appearance="fill">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput placeholder="joaquin.lamela00@gmail.com" formControlName="email" required>
+                <mat-error *ngIf="formGroup.controls.email.invalid">{{getErrorMessageEmail()}}</mat-error>
+            </mat-form-field>
 
-            <div class="input-contenedor">
-                <i class="fas fa-envelope icon"></i>
-                <input type="email" placeholder="Correo electronico" name="email" class="email" formControlName="email">
-            </div>
-
-            <div class="input-contenedor">
-                <i class="fas fa-key icon"></i>
-                <input type="password" placeholder="Contraseña" name="password" class="contraseña"
-                    formControlName="password">
-            </div>
-
-            <ng-container
-                *ngIf="formGroup.controls.name.errors?.required && (formGroup.controls.name.touched); else LastNameRequired">
-                <div>
-                    El nombre es requerido.
-                </div>
-            </ng-container>
-
-            <ng-template #LastNameRequired>
-                <ng-container
-                    *ngIf="formGroup.controls.lastName.errors?.required && (formGroup.controls.lastName.touched);else UserNameRequired">
-                    <div>
-                        El apellido es requerido.
-                    </div>
-                </ng-container>
-            </ng-template>
-
-            <ng-template #UserNameRequired>
-                <ng-container
-                    *ngIf="formGroup.controls.userName.errors?.required && (formGroup.controls.userName.touched);else EmailRequired">
-                    <div>
-                        El nombre de usuario es requerido.
-                    </div>
-                </ng-container>
-            </ng-template>
-
-            <ng-template #EmailRequired>
-                <ng-container
-                    *ngIf="formGroup.controls.email.errors?.required && (formGroup.controls.email.touched);else EmailInvalid">
-                    <div>
-                        El email es requerido.
-                    </div>
-                </ng-container>
-            </ng-template>
-
-            <ng-template #EmailInvalid>
-                <ng-container
-                    *ngIf="formGroup.controls.email.errors?.email && (formGroup.controls.email.touched);else PasswordRequired">
-                    <div>
-                        El email es invalido.
-                    </div>
-                </ng-container>
-            </ng-template>
-
-            <ng-template #PasswordRequired>
-                <div *ngIf="formGroup.controls.password.errors?.required && (formGroup.controls.password.touched)">
-                    La contraseña es requerida.
-                </div>
-            </ng-template>
+            <mat-form-field class="input-password" appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="formGroup.controls.password.invalid">{{getErrorMessagePassword()}}</mat-error>
+            </mat-form-field>
 
             <button class="button" (click)="Register()" [disabled]="formGroup.invalid">Modificar</button>
         </div>

@@ -27,11 +27,8 @@ export class DeleteUserComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private serviceUserPassed: UserService) {
     this.serviceUser = serviceUserPassed;
     this.formGroup = this.formBuilder.group({
-      name: [''],
-      lastName: [''],
       userName: [''],
       email: [''],
-      password: [''],
     });
   }
 
