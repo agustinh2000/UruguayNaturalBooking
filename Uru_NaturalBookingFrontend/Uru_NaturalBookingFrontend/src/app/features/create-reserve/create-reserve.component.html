@@ -1,0 +1,46 @@
+<div class="padre">
+    <form [formGroup]="formGroup" class="formulario">
+        <h1> Confirmar reserva</h1>
+        <div class="contenedor">
+
+            <mat-form-field appearance="fill" class="input-lodging">
+                <mat-label> Hospedaje </mat-label>
+                <input [value] = "lodgingForReserve.Lodging.Name" type="text" matInput readonly>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="input-checkIn">
+                <mat-label> Check-in </mat-label>
+                <input [value] =  "lodgingForReserve.CheckIn | date: 'fullDate'" type="text" matInput readonly>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="input-checkOut">
+                <mat-label> Check-out </mat-label>
+                <input [value] = "lodgingForReserve.CheckIn | date: 'fullDate'" type="text" matInput readonly>
+            </mat-form-field>
+
+            <mat-form-field class="input-email" class = "input-tourists" appearance="fill">
+                <mat-label>Huespedes</mat-label>
+                <input [value] = "lodgingForReserve.QuantityOfGuest | tourists" type= "text" type="text" matInput readonly>
+            </mat-form-field>
+
+            <mat-form-field class= "input-name" appearance="fill">
+                <mat-label>Nombre</mat-label>
+                <input formControlName= "name" type= "text"  matInput required>
+                <mat-error *ngIf="formGroup.controls.name.invalid">{{getErrorMessageName()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class = "input-lastName"  appearance="fill">
+                <mat-label>Apellido</mat-label>
+                <input formControlName= "lastName" type= "text"  matInput required>
+                <mat-error *ngIf="formGroup.controls.lastName.invalid">{{getErrorMessageLastName()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class = "input-email"  appearance="fill">
+                <mat-label>Correo electronico</mat-label>
+                <input formControlName= "email" type= "email"  matInput required>
+                <mat-error *ngIf="formGroup.controls.email.invalid">{{getErrorMessageEmail()}}</mat-error>
+            </mat-form-field>
+            <button class="button" (click)="Reserve()" [disabled]="formGroup.invalid">Confirmar reserva</button>
+        </div>
+    </form>
+</div>

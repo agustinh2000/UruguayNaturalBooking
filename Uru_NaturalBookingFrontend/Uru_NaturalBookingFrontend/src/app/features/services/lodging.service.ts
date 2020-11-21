@@ -145,6 +145,7 @@ export class LodgingService {
   readonly lodgingsResultOfSearch: LodgingModelForSearchResponse[] =
     [
       {
+        Id:'17e40d14-7124-46ab-8097-4fa5276718cf',
         Name: 'Proa Sur UY',
         Description: 'Un hotel bueno',
         QuantityOfStars: 3,
@@ -156,6 +157,7 @@ export class LodgingService {
         ReviewsForLodging: this.reviews
       },
       {
+        Id: 'b8d09fa7-6469-4fc4-b250-156000a76e8a',
         Name: 'Enjoy',
         Description: 'Un hotel excelente',
         QuantityOfStars: 5,
@@ -168,6 +170,7 @@ export class LodgingService {
 
       },
       {
+        Id: 'a7e9831d-bafc-4915-8e26-523a34ec03a5',
         Name: 'Arapey Thermal Resort',
         Description: 'Un hotel magnifico',
         QuantityOfStars: 5,
@@ -219,7 +222,7 @@ export class LodgingService {
     return lodgingsObteined;
   }
 
-  getLodgingsOfSearch(): LodgingForSearchModel[] {
+  getLodgingsOfSearch(search: SearchOfLodgingModelForRequest): LodgingForSearchModel[] {
     const lodgingsObteined: LodgingForSearchModel[] = [];
     for (const lodging of this.lodgingsForSearch) {
       lodgingsObteined.push(lodging);

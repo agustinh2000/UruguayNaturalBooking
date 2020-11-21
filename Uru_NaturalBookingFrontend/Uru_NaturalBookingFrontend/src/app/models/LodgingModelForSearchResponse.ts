@@ -2,6 +2,7 @@ import { TouristSpotModelForLodgingResponseModel } from './TouristSpotModelForLo
 import { ReviewModelForResponse } from './ReviewModelForResponse';
 
 export class LodgingModelForSearchResponse{
+    public Id: string;
     public Name: string;
     public Description: string;
     public QuantityOfStars: number;
