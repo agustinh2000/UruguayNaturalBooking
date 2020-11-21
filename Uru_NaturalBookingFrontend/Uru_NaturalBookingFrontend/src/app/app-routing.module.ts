@@ -17,6 +17,8 @@ import { TouristSpotNotExistGuard } from './features/Guards/Tourist-Spot-Not-Exi
 import { BookingFormComponent } from './features/booking-form/booking-form.component';
 import { LodgingDetailComponent } from './features/lodging-detail/lodging-detail.component';
 import { LodgingNotExistGuard } from './features/Guards/lodging-not-exist.guard';
+import { ReserveConfirmationComponent } from './features/reserve-confirmation/reserve-confirmation.component';
+import { CreateReserveComponent } from './features/create-reserve/create-reserve.component';
 
 const routes: Routes = [
   { path: 'add-lodging', component: AddLodgingComponent },
@@ -47,6 +49,10 @@ const routes: Routes = [
     path: 'lodging-detail',
     component: LodgingDetailComponent,
     canActivate: [LodgingNotExistGuard],
+  },
+  {
+    path: 'create-reserve',
+    component: CreateReserveComponent,
   },
 ];
 

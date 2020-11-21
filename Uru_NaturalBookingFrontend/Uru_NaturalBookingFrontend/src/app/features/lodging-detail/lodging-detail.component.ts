@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LodgingForSearchModel } from 'src/app/models/LodgingForSearchModel';
 import { LodgingModelForResponse } from 'src/app/models/LodgingModelForResponse';
 import { LodgingModelForSearchResponse } from 'src/app/models/LodgingModelForSearchResponse';
@@ -27,7 +27,11 @@ export class LodgingDetailComponent implements OnInit {
   public lodgingId: string;
   public totalPriceForSearch: number;
 
-  constructor(aLodgingService: LodgingService, private route: ActivatedRoute) {
+  constructor(
+    aLodgingService: LodgingService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.lodgingsService = aLodgingService;
     this.route.queryParams.subscribe((params) => {
       this.checkIn = params.CheckIn;
@@ -64,7 +68,14 @@ export class LodgingDetailComponent implements OnInit {
     }
   }
 
-  public reserveNow() {
-    // With routing change the component
+  public reserveNow(): void {
+    this.router.navigate(['create-reserve'], {
+      queryParams: {
+        CheckIn: this.checkIn,
+        CheckOut: this.checkOut,
+        QuantityOfGuest: this.quantityOfGuest,
+        LodgingId: this.lodgingId,
+      },
+    });
   }
 }
