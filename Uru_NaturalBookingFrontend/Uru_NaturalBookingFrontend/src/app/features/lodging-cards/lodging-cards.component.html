@@ -16,7 +16,7 @@
             <div class="review">
                 <span class="reviewScore">{{searchItem.Lodging.ReviewsAverageScore}}</span>
             </div>
-            <button class="buttonOfDetails">Ver detalle</button>
+            <button class="buttonOfDetails" (click)="displayDetailLodging(searchItem)">Ver detalle</button>
             <span class="totalPrice">Precio total: USD {{searchItem.TotalPriceForSearch}}</span>
         </div>
     </div>

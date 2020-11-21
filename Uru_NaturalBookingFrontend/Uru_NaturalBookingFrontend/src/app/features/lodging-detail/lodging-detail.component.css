@@ -11,7 +11,7 @@
     border-radius: 13px;
 }
 
-.cardReview{
+.cardReview {
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     width: 800px;
@@ -25,68 +25,68 @@
     margin-top: 3vh;
 }
 
-.name{
+.name {
     color: #3f51b5;
     position: absolute;
-    bottom:80%;
-    left:40%;
+    bottom: 80%;
+    left: 40%;
     font-weight: bold;
 }
 
-.address{
+.address {
     color: grey;
     position: absolute;
-    bottom:60%;
-    left:40%;
+    bottom: 60%;
+    left: 40%;
     margin-top: .5%;
 }
 
-.reviewScore{
+.reviewScore {
     color: grey;
     position: relative;
     float: right;
-    bottom:95%;
+    bottom: 95%;
 }
 
-.quantityStars{
+.quantityStars {
     color: grey;
     position: relative;
     float: right;
-    bottom:95%;
+    bottom: 95%;
     left: 30%;
 }
 
-.pricePerNight{
+.pricePerNight {
     color: grey;
     position: absolute;
     top: 17vh;
-    left:40%;
+    left: 40%;
     font-weight: bold;
 }
 
-.review{
+.review {
     background-color: #252850;
     position: relative;
-    left:102vh;
-    top: -51vh;  
+    left: 102vh;
+    top: -51vh;
     font-weight: bold;
     width: 50px;
     min-height: 50px;
     border-radius: 15px;
 }
 
-.reviewScore{
-    top:1.5vh;
+.reviewScore {
+    top: 1.5vh;
     color: white;
     right: 25%;
 }
 
-.star{
-    bottom:95%;
+.star {
+    bottom: 95%;
     display: inline-block;
 }
 
-.stars{
+.stars {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -94,36 +94,35 @@
     top: -40vh;
     margin-top: 1px;
     width: 40%;
-    left:40%;
+    left: 40%;
     margin-top: 6%;
 }
 
-.image{
+.image {
     position: relative;
     width: 300px;
     height: 300px;
     border-radius: 13px;
 }
 
-.imagen{
+.imagen {
     width: 100%;
     height: 100%;
     border-radius: 13px;
-
 }
 
-.totalPrice{
+.totalPrice {
     color: grey;
     position: absolute;
-    left:40%;
+    left: 40%;
     font-weight: bold;
-    top:20vh;
+    top: 20vh;
     margin-top: 1%;
 }
 
-.right{
-    position:absolute;
-    bottom:0;
+.right {
+    position: absolute;
+    bottom: 0;
     right: 64%;
     outline: none;
     cursor: pointer;
@@ -131,54 +130,54 @@
     height: 100%;
 }
 
-.left{
-    position:absolute;
-    bottom:0;
-    left:0%;
+.left {
+    position: absolute;
+    bottom: 0;
+    left: 0%;
     outline: none;
-    cursor:pointer;
-    width:3rem;
+    cursor: pointer;
+    width: 3rem;
     height: 100%;
 }
 
-.leftArrow{
-font-size: 39px;
-margin:auto;
-position: absolute;
-top:50%;
-left:0;
-cursor:pointer;
-width: 3rem;
-height: 3rem;
-}
-
-.rightArrow{
+.leftArrow {
     font-size: 39px;
-    margin:auto;
+    margin: auto;
     position: absolute;
-    cursor:pointer;
-    top:48%;
+    top: 50%;
+    left: 0;
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
 }
 
-.starReview{
-    top:30vh;
+.rightArrow {
+    font-size: 39px;
+    margin: auto;
+    position: absolute;
+    cursor: pointer;
+    top: 48%;
 }
 
-.description{
+.starReview {
+    top: 30vh;
+}
+
+.description {
     margin-top: 2vh;
     color: grey;
 }
 
-.nameWhoComment{
+.nameWhoComment {
     color: grey;
     font-weight: bold;
     font-size: 12px;
 }
 
-.reserveButton{
-   position: absolute;
-   top: 45vh;
-   left: 60%;
-   background-color: rgb(13, 13, 80);
-   color: white;
+.reserveButton {
+    position: absolute;
+    top: 45vh;
+    left: 60%;
+    background-color: rgb(13, 13, 80);
+    color: white;
 }

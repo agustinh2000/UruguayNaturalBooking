@@ -195,6 +195,7 @@ mat-error {
     position: relative;
     top: -73.5vh;
 }
-input[type=text]{
+
+input[type=text] {
     outline: none;
 }

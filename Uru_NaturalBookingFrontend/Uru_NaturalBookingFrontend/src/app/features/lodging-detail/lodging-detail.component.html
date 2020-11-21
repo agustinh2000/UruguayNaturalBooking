@@ -1,37 +1,38 @@
 <div class="card">
     <div class="image">
-        <img src={{lodgingForReserve.Lodging.ImagesPath[indexOfImageToShow]}} class="imagen">
+        <img src={{lodgingForReserve.ImagesPath[indexOfImageToShow]}} class="imagen">
     </div>
-    <h2 class="name">{{lodgingForReserve.Lodging.Name}}</h2>
+    <h2 class="name">{{lodgingForReserve.Name}}</h2>
     <div class="stars">
-        <span class="star" *ngFor="let i of starLodgingArr(lodgingForReserve.Lodging.QuantityOfStars).fill(1)">
+        <span class="star" *ngFor="let i of starLodgingArr(lodgingForReserve.QuantityOfStars).fill(1)">
             <img width="26" src="../../assets/img/star.png" />
         </span>
     </div>
 
-    <div class="right" (click) = "nextImage()" mat-icon-button color="white">
+    <div class="right" (click)="nextImage()" mat-icon-button color="white">
         <mat-icon class="rightArrow">arrow_forward</mat-icon>
     </div>
-    <div class="left" (click) = "previousImage()" mat-icon-button color="white">
+    <div class="left" (click)="previousImage()" mat-icon-button color="white">
         <mat-icon class="leftArrow">arrow_back</mat-icon>
     </div>
-    <span class="address">{{lodgingForReserve.Lodging.Address}},
-        {{lodgingForReserve.Lodging.LodgingTouristSpotModel.Name}}</span>
-    <span class="pricePerNight"> USD {{lodgingForReserve.Lodging.PricePerNight}} (por noche)</span>
+    <span class="address">{{lodgingForReserve.Address}},
+        {{lodgingForReserve.LodgingTouristSpotModel.Name}}</span>
+    <span class="pricePerNight"> USD {{lodgingForReserve.PricePerNight}} (por noche)</span>
     <div class="review">
-        <span class="reviewScore">{{lodgingForReserve.Lodging.ReviewsAverageScore}}</span>
+        <span class="reviewScore">{{lodgingForReserve.ReviewsAverageScore}}</span>
     </div>
-    <span class="totalPrice">Precio total: USD {{lodgingForReserve.TotalPriceForSearch}}</span>
+    <span class="totalPrice">Precio total: USD {{totalPriceForSearch}}</span>
 </div>
 <div class="reviews">
-    <div class="cardReview" *ngFor="let review of lodgingForReserve.Lodging.ReviewsForLodging">
+    <div class="cardReview" *ngFor="let review of lodgingForReserve.ReviewsForLodging">
         <div class="starReview">
             <span class="starr" *ngFor="let i of starReviewArr(review.Score).fill(1)">
                 <img width="26" src="../../assets/img/star.png" />
             </span>
         </div>
-        <p class = "description"> <i>"{{review.Description}}"</i></p>
-        <span class = "nameWhoComment">{{review.NameOfWhoComments | uppercase}} {{review.LastNameOfWhoComments | uppercase}}</span>
+        <p class="description"> <i>"{{review.Description}}"</i></p>
+        <span class="nameWhoComment">{{review.NameOfWhoComments | uppercase}}
+            {{review.LastNameOfWhoComments | uppercase}}</span>
     </div>
 </div>
-<button class = "reserveButton" mat-button color="primary" (click) = "reserveNow()">Reservar ahora</button>
+<button class="reserveButton" mat-button color="primary" (click)="reserveNow()">Reservar ahora</button>

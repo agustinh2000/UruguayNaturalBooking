@@ -12,8 +12,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BookingFormComponent implements OnInit {
 
-  @Input() reserveId: string;
-
   public touristSpotIdSelected: string;
 
   public formGroup: FormGroup;
@@ -53,7 +51,7 @@ export class BookingFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.touristSpotIdSelected = this.currentRoute.snapshot.params['idTouristSpot'];
-    this.nameOfTouristSpot = this.touristSpotService.getTouristSpotById(this.touristSpotIdSelected).Name;
+    //this.nameOfTouristSpot = this.touristSpotService.getTouristSpotById(this.touristSpotIdSelected).Name;
   }
 
   noWhitespaceValidator: ValidatorFn = (control: FormControl) => {

@@ -15,25 +15,43 @@ import { SelectionOfTouristSpotComponent } from './features/selection-of-tourist
 import { RegionNotExistGuard } from './features/Guards/region-not-exist.guard';
 import { TouristSpotNotExistGuard } from './features/Guards/Tourist-Spot-Not-Exist.guard';
 import { BookingFormComponent } from './features/booking-form/booking-form.component';
+import { LodgingDetailComponent } from './features/lodging-detail/lodging-detail.component';
+import { LodgingNotExistGuard } from './features/Guards/lodging-not-exist.guard';
 
 const routes: Routes = [
   { path: 'add-lodging', component: AddLodgingComponent },
   { path: 'add-touristSpot', component: AddTouristSpotComponent },
-  { path: 'delete-user', component: DeleteUserComponent  },
-  { path: 'login', component: LoginComponent  },
-  { path: 'register-user', component: RegisterUserComponent  },
-  { path: 'modify-lodging-capacity', component: ModifyLodgingCapacityComponent  },
-  { path: 'modify-reserve', component: ModifyReserveComponent  },
-  { path: 'modify-user', component: ModifyUserComponent  },
-  { path: 'regions', component: RegionComponent  },
-  { path: 'report', component: ReportComponent  },
-  { path: 'review', component: ReviewComponent  },
-  { path: 'touristSpots/:idRegion', component: SelectionOfTouristSpotComponent, canActivate: [RegionNotExistGuard] },
-  { path: 'lodgings/:idTouristSpot/:idRegion', component: BookingFormComponent, canActivate: [TouristSpotNotExistGuard] },
+  { path: 'delete-user', component: DeleteUserComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register-user', component: RegisterUserComponent },
+  {
+    path: 'modify-lodging-capacity',
+    component: ModifyLodgingCapacityComponent,
+  },
+  { path: 'modify-reserve', component: ModifyReserveComponent },
+  { path: 'modify-user', component: ModifyUserComponent },
+  { path: 'regions', component: RegionComponent },
+  { path: 'report', component: ReportComponent },
+  { path: 'review', component: ReviewComponent },
+  {
+    path: 'touristSpots/:idRegion',
+    component: SelectionOfTouristSpotComponent,
+    canActivate: [RegionNotExistGuard],
+  },
+  {
+    path: 'lodgings/:idTouristSpot/:idRegion',
+    component: BookingFormComponent,
+    canActivate: [TouristSpotNotExistGuard],
+  },
+  {
+    path: 'lodging-detail',
+    component: LodgingDetailComponent,
+    canActivate: [LodgingNotExistGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
