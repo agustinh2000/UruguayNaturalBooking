@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { LodgingService } from '../services/lodging.service';
 import { ReserveModelForRequest } from '../../models/ReserveModelForRequest';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LodgingModelForResponse } from 'src/app/models/LodgingModelForResponse';
 
 @Component({
@@ -33,7 +33,8 @@ export class CreateReserveComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     aLodgingService: LodgingService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.lodgingsService = aLodgingService;
     this.formGroup = this.formBuilder.group({
@@ -100,6 +101,7 @@ export class CreateReserveComponent implements OnInit {
     this.reserve.QuantityOfBaby = this.quantityOfGuest[2];
     this.reserve.QuantityOfRetired = this.quantityOfGuest[3];
     this.reserve.IdOfLodgingToReserve = this.lodgingId;
-    //call web api post method
+    // call web api post method
+    this.router.navigate(['reserve-confirmation', '123']);
   }
 }

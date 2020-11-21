@@ -19,6 +19,7 @@ import { LodgingDetailComponent } from './features/lodging-detail/lodging-detail
 import { LodgingNotExistGuard } from './features/Guards/lodging-not-exist.guard';
 import { ReserveConfirmationComponent } from './features/reserve-confirmation/reserve-confirmation.component';
 import { CreateReserveComponent } from './features/create-reserve/create-reserve.component';
+import { ReserveNotExistGuard } from './features/Guards/reserve-not-exist.guard';
 
 const routes: Routes = [
   { path: 'add-lodging', component: AddLodgingComponent },
@@ -53,6 +54,12 @@ const routes: Routes = [
   {
     path: 'create-reserve',
     component: CreateReserveComponent,
+  },
+
+  {
+    path: 'reserve-confirmation/:idReserve',
+    component: ReserveConfirmationComponent,
+    canActivate: [ReserveNotExistGuard],
   },
 ];
 

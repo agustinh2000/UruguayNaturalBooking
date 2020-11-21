@@ -1,23 +1,12 @@
-<div class = "content">
-<h4> <strong>!Gracias, {{reserveConfirmation.Name}} {{reserveConfirmation.LastName}}! </strong></h4>
-<h4><strong>Tu reserva en {{reserveConfirmation.Lodging.Name}} ha sido {{reserveConfirmation.DescriptionOfState}} </strong></h4>
-<p>Te esperamos a partir del <strong>{{reserveConfirmation.CheckIn | date: 'dd/MM/yyyy'}} </strong> </p>
-<p>{{reserveConfirmation.DescriptionForGuest}}</p>
-<h4>No olvide guardar su codigo de reserva:</h4>
-<h6><strong>{{reserveConfirmation.Id}}</strong></h6>
-<img class = "confirmationImage" src="../../assets/img/confirmacion.jpg">
-<h5>Ante cualquier inconveniente no dude en comunicarse:</h5>
-<h6>{{reserveConfirmation.PhoneNumberOfContact}}</h6>
+<div class="content">
+    <h4> <strong>!Gracias, {{reserveConfirmation.Name}} {{reserveConfirmation.LastName}}! </strong></h4>
+    <h4><strong>Tu reserva en {{reserveConfirmation.Lodging.Name}} ha sido {{reserveConfirmation.DescriptionOfState}}
+        </strong></h4>
+    <p>Te esperamos a partir del <strong>{{reserveConfirmation.CheckIn | date: 'dd/MM/yyyy'}} </strong> </p>
+    <p>{{reserveConfirmation.DescriptionForGuest}}</p>
+    <h4>No olvide guardar su codigo de reserva:</h4>
+    <h6><strong>{{reserveConfirmation.Id}}</strong></h6>
+    <img class="confirmationImage" src="../../assets/img/confirmacion.jpg">
+    <h5>Ante cualquier inconveniente no dude en comunicarse:</h5>
+    <h6>{{reserveConfirmation.PhoneNumberOfContact}}</h6>
 </div>
-
-
-<!--public Name: string;
-public LastName: string;
-public Email: string;
-public DescriptionForGuest: string;
-public CheckIn: Date;
-public CheckOut: Date;
-public ReserveState: ReserveState;
-public DescriptionOfState: string;
-public Lodging: LodgingModelForReserveResponseModel;
-!-->
