@@ -1,12 +1,12 @@
 .card-header {
     position: relative;
-    top: 0.01vh;
+    top: .01vh;
     max-width: 27vh;
     background-color: #3f51b5;
-    color: rgb(255, 255, 255);
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    text-align: center;
+    color: #fff;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    text-align: center
 }
 
 .filter-content {
@@ -14,34 +14,34 @@
     height: auto;
     word-wrap: break-word;
     background-color: #3f51b5;
-    border-bottom-right-radius: 12px;
+    border-bottom-right-radius: 12px
 }
 
 .buttonOfCheck {
     border: none;
-    color: rgb(46, 46, 46);
-    background: #D5E1A3;
+    color: #2e2e2e;
+    background: #d5e1a3;
     border-radius: 5px;
     cursor: pointer;
     width: 27.5vh;
     position: relative;
     left: -6vh;
     top: -3vh;
-    text-align: left;
+    text-align: left
 }
 
 .buttonOfCheck:hover {
-    background: cadetblue;
+    background: #5f9ea0
 }
 
 .touristSpots {
     display: inline-block;
     position: relative;
     top: -48vh;
-    left: 27vh;
+    left: 27vh
 }
 
 .viewOfTouristSpots {
     display: inline-block;
-    height: 90vh;
+    height: 90vh
 }

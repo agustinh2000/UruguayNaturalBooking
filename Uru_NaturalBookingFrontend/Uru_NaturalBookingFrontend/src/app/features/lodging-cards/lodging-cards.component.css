@@ -1,13 +1,14 @@
-.padre{
+.padre {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: hidden
 }
+
 .card {
     position: relative;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
     width: 800px;
     word-wrap: break-word;
     margin: auto;
@@ -15,99 +16,80 @@
     font-family: arial;
     margin-top: 2%;
     height: 300px;
-    border-radius: 13px;
+    border-radius: 13px
 }
 
-.name{
+.name {
     color: #003580;
     position: absolute;
-    bottom:80%;
-    left:40%;
-    font-weight: bold;
+    bottom: 80%;
+    left: 40%;
+    font-weight: 700
 }
 
-.address{
-    color: #333333;
+.address {
+    color: #333;
     position: absolute;
-    bottom:60%;
-    left:40%;
-    margin-top: .5%;
+    bottom: 60%;
+    left: 40%;
+    margin-top: .5%
 }
 
-.reviewScore{
-    color: #333333;
+.reviewScore {
+    color: #333;
     position: relative;
     float: right;
-    bottom:95%;
+    bottom: 95%
 }
 
-.quantityStars{
-    color: #333333;
+.pricePerNight {
+    color: #333;
     position: relative;
-    float: right;
-    bottom:95%;
-    left: 30%;
+    bottom: 34vh;
+    left: .1%;
+    font-weight: 700
 }
 
-.pricePerNight{
-    color: #333333;
-    position: relative;
-    bottom:34vh;
-    left:.1%;
-    font-weight: bold;
-}
-
-.review{
+.review {
     background-color: #252850;
     position: relative;
-    left:102vh;
-    top: -53vh;  
-    font-weight: bold;
+    left: 102vh;
+    top: -53vh;
+    font-weight: 700;
     width: 50px;
     min-height: 50px;
     border-radius: 15px;
-    text-align: center;
+    text-align: center
 }
 
-.detail{
-    background-color: #3f51b5;
-    position: absolute;
-    left:90vh;
-    font-weight: bold;
-    top:30vh;
-    width: 100px;
-    min-height: 45px;
-    border-radius: 15px;
-}
-
-.buttonOfDetails{
-    color: white;
+.buttonOfDetails {
+    color: #fff;
     background-color: #1a2537;
     position: absolute;
-    left:90vh;
-    top:30vh;
+    left: 90vh;
+    top: 30vh;
     width: 100px;
     min-height: 45px;
     border-radius: 10px;
-    outline: none;
+    outline: 0
 }
 
-.buttonOfDetails:hover{
-    background-color: cadetblue;
+.buttonOfDetails:hover {
+    background-color: #5f9ea0
 }
 
-.reviewScore{
-    top:1.5vh;
-    color: white;
-    right: 25%;
+.reviewScore {
+    top: 1.5vh;
+    color: #fff;
+    right: 25%
 }
 
-.star{
-    bottom:95%;
-    display: inline-block;
+.star {
+    bottom: 95%;
+    display: inline-block
 }
 
-.stars{
+.stars {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -115,29 +97,27 @@
     top: -40vh;
     margin-top: 1px;
     width: 40%;
-    left:40%;
-    margin-top: 6%;
+    left: 40%;
+    margin-top: 6%
 }
 
-.image{
+.image {
     position: relative;
     width: 300px;
     height: 300px;
-    border-radius: 13px;
+    border-radius: 13px
 }
 
-.imagen{
+.imagen {
     width: 100%;
     height: 100%;
-    border-radius: 13px;
-
+    border-radius: 13px
 }
 
-.totalPrice{
-    color: #333333;
+.totalPrice {
+    color: #333;
     position: relative;
-    bottom:40vh;
-    left:1.1%;
-    font-weight: bold;
+    bottom: 40vh;
+    left: 1.1%;
+    font-weight: 700
 }
-

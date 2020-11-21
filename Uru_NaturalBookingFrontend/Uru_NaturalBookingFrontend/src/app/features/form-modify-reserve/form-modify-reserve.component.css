@@ -1,20 +1,20 @@
 .contenedor {
   width: 100%;
   padding: 3%;
-  box-sizing: border-box;
+  box-sizing: border-box
 }
 
 .formulario {
   background: #fff;
   margin-top: 4%;
-  padding: 0.1%;
-  box-sizing: border-box;
+  padding: .1%;
+  box-sizing: border-box
 }
 
 h1 {
   text-align: center;
   color: #1a2537;
-  font-size: 40px;
+  font-size: 40px
 }
 
 .button {
@@ -22,25 +22,21 @@ h1 {
   border: none;
   width: 60%;
   height: 40%;
-  color: white;
+  color: #fff;
   font-size: 120%;
   background: #1a2537;
   padding: 1.5% 1.5%;
   border-radius: 5px;
   cursor: pointer;
   left: 25vh;
-  top: 5vh;
+  top: 5vh
 }
 
 .button:hover {
-  background: cadetblue;
+  background: #5f9ea0
 }
 
-p {
-  text-align: center;
-}
-
-@media(min-width:768px) {
+@media (min-width:768px) {
   .formulario {
     position: relative;
     margin: auto;
@@ -49,7 +45,7 @@ p {
     top: -3vh;
     margin-top: 4%;
     border-radius: 8px;
-    box-sizing: border-box;
+    box-sizing: border-box
   }
 }
 
@@ -58,30 +54,30 @@ p {
   left: 17vh;
   width: 90vh;
   top: -1vh;
-  height: 10vh;
+  height: 10vh
 }
 
-.inputForName, .inputForLastName, .inputForEmail, .inputForLodgingName{
+.inputForEmail, .inputForLastName, .inputForLodgingName, .inputForName {
   position: relative;
   width: 90vh;
   top: -2vh;
-  left: 17vh;
+  left: 17vh
 }
 
-input[readonly]{
-  background-color: rgb(199, 199, 199);
+input[readonly] {
+  background-color: #c7c7c7
 }
 
-.stateTextOfSelectReserve{
+.stateTextOfSelectReserve {
   position: relative;
   top: 5vh;
   left: 17vh;
-  color: rgb(112, 112, 112);
+  color: #707070
 }
 
-.comboOfStatesToChange{
+.comboOfStatesToChange {
   position: relative;
   left: 45vh;
   width: 50vh;
-  top: 1vh;
+  top: 1vh
 }

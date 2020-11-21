@@ -1,103 +1,59 @@
-.padre {
-  position: relative;
-  top: -7vh;
-}
-
 .contenedor {
   width: 100%;
   padding: 3%;
-  box-sizing: border-box;
-}
-
-.optionSelector {
-  position: relative;
-  top: -5vh;
-}
-
-.optionSelector mat-form-field {
-  top: 2.5vh;
-  left: 18vh;
-  border-radius: 15px;
-}
-
-.optionSelector mat-option {
-  cursor: pointer;
+  box-sizing: border-box
 }
 
 .formulario {
   background: #fff;
   margin-top: 4%;
-  padding: 0.1%;
-  box-sizing: border-box;
+  padding: .1%;
+  box-sizing: border-box
 }
 
 h1 {
   text-align: center;
   color: #1a2537;
-  font-size: 40px;
+  font-size: 40px
 }
 
-.input-name, .selector-of-region, .input-text-area, .selector-of-categories {
+.input-name, .input-text-area, .selector-of-categories, .selector-of-region {
   width: 98%;
-  padding: 0.5%;
-  border-radius: 8px;
+  padding: .5%;
+  border-radius: 8px
 }
 
 .input-contenedor {
   margin-bottom: 3.5%;
-  border: 1px solid #aaa;
-}
-
-.icon {
-  min-width: 8.5%;
-  text-align: center;
-  color: #999;
+  border: 1px solid #aaa
 }
 
 .button {
   border: none;
   width: 100%;
-  color: white;
+  color: #fff;
   font-size: 135%;
   background: #1a2537;
   padding: 3.5% 5%;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: pointer
 }
 
 .button:hover {
-  background: cadetblue;
+  background: #5f9ea0
 }
 
-p {
-  text-align: center;
-}
-
-.link {
-  text-decoration: none;
-  color: #1a2537;
-  font-weight: 600;
-}
-
-.link:hover {
-  color: cadetblue;
-}
-
-.linea {
-  border-bottom: 1px solid black;
-}
-
-@media(min-width:768px) {
+@media (min-width:768px) {
   .formulario {
     margin: auto;
     width: 32.5%;
     margin-top: 2%;
     border-radius: 2%;
-    box-sizing: border-box;
+    box-sizing: border-box
   }
 }
 
 .button[disabled] {
-  background-color: rgb(170, 170, 170);
-  cursor: not-allowed;
+  background-color: #aaa;
+  cursor: not-allowed
 }

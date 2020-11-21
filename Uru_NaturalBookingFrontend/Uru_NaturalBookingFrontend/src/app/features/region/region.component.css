@@ -3,36 +3,32 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    height: 89.5h;
+    height: 89.5h
 }
 
 .item {
     overflow: hidden;
-    cursor: pointer;
+    cursor: pointer
 }
 
 .regionImage {
     width: 42.05vh;
     height: 90vh;
     transition: transform 1s;
-    position: relative;
+    position: relative
 }
 
 .regionImage:hover {
-    transform: scale(1.1);
-}
-
-a {
-    text-decoration: none;
+    transform: scale(1.1)
 }
 
 .descriptionOfRegion {
     position: relative;
-    color: white;
+    color: #fff;
     top: -100px;
     text-align: center;
     font-size: 1.4em;
     font-family: 'Source Sans Pro', sans-serif;
     line-height: 130%;
-    font-weight: normal;
+    font-weight: 400
 }
