@@ -55,7 +55,7 @@
 
 
         <mat-form-field class="input-text-area" appearance="fill">
-            <mat-label>Textarea</mat-label>
+            <mat-label>Descripción</mat-label>
             <textarea placeholder="Ingrese una descripcion aqui." formControlName="description" rows="5" cols="68"
                 matInput required></textarea>
             <mat-error *ngIf="formGroup.controls.description.invalid">{{getErrorMessageDescription()}}</mat-error>

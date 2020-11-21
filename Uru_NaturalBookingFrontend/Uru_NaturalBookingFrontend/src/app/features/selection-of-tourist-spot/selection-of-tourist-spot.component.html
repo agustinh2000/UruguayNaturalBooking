@@ -1,4 +1,3 @@
-
 <header class="card-header">
     <h5 class="title">Categorias existentes </h5>
 </header>
@@ -16,5 +15,7 @@
 </div>
 
 <div class="touristSpots">
-<app-tourist-spot-view class="viewOfTouristSpots" [categoriesSelectedId]="categoriesSelectedId"></app-tourist-spot-view>
+    <app-tourist-spot-view class="viewOfTouristSpots" [categoriesSelectedId]="categoriesSelectedId"
+        [regionSelectedId]="idRegionSelected">
+    </app-tourist-spot-view>
 </div>

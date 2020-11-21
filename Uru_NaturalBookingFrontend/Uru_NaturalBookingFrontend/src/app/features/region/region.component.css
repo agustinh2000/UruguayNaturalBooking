@@ -6,8 +6,9 @@
     height: 89.5h;
 }
 
-.item{
+.item {
     overflow: hidden;
+    cursor: pointer;
 }
 
 .regionImage {
@@ -17,21 +18,21 @@
     position: relative;
 }
 
-.regionImage:hover{
+.regionImage:hover {
     transform: scale(1.1);
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-.descriptionOfRegion{
+.descriptionOfRegion {
     position: relative;
     color: white;
     top: -100px;
     text-align: center;
     font-size: 1.4em;
     font-family: 'Source Sans Pro', sans-serif;
-    line-height:130%; 
+    line-height: 130%;
     font-weight: normal;
 }

@@ -11,6 +11,8 @@ import { ModifyUserComponent } from './features/modify-user/modify-user.componen
 import { RegionComponent } from './features/region/region.component';
 import { ReportComponent } from './features/report/report.component';
 import { ReviewComponent } from './features/review/review.component';
+import { SelectionOfTouristSpotComponent } from './features/selection-of-tourist-spot/selection-of-tourist-spot.component';
+import { RegionNotExistGuard } from './features/Guards/region-not-exist.guard';
 
 const routes: Routes = [
   { path: 'add-lodging', component: AddLodgingComponent },
@@ -24,6 +26,7 @@ const routes: Routes = [
   { path: 'regions', component: RegionComponent  },
   { path: 'report', component: ReportComponent  },
   { path: 'review', component: ReviewComponent  },
+  { path: 'touristSpots/:idRegion', component: SelectionOfTouristSpotComponent, canActivate: [RegionNotExistGuard] },
 ];
 
 @NgModule({

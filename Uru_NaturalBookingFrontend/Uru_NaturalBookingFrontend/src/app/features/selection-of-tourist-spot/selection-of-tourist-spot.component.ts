@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../services/category.service';
 import { CategoryModel } from '../../models/CategoryModel';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-selection-of-tourist-spot',
@@ -15,9 +16,12 @@ export class SelectionOfTouristSpotComponent implements OnInit {
 
   public categoriesSelectedId: string[];
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(private categoryService: CategoryService, private currentRoute: ActivatedRoute) {}
+
+  public idRegionSelected: string;
 
   ngOnInit(): void {
+    this.idRegionSelected = this.currentRoute.snapshot.params['idRegion'];
     this.allCategories = this.categoryService.getCategories();
     this.initializeCategoriesChecked();
   }

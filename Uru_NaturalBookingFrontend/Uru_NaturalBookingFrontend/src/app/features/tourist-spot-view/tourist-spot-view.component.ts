@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { TouristSpotModelForResponse } from '../../models/TouristSpotModelForResponse';
 import { TouristSpotService } from '../services/tourist-spot.service';
 import { CategoryModel } from '../../models/CategoryModel';
@@ -26,6 +26,11 @@ export class TouristSpotViewComponent implements OnInit {
   ngOnInit(): void {
     this.touristSpotFilterByRegion = 
     this.touristSpotService.getTouristSpotsFilterByRegionAndCategories(this.categoriesSelectedId, this.regionSelectedId);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.touristSpotFilterByRegion = 
+    this.touristSpotService.getTouristSpotsFilterByRegionAndCategories(changes.categoriesSelectedId.currentValue, this.regionSelectedId);
   }
 
 }

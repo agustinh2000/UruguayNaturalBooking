@@ -45,4 +45,8 @@ export class RegionServiceService {
     return regionsObteined;
   }
 
+  isValidRegion(idRegion: string): boolean {
+    const regionsObteined: Region[] = this.getRegions();
+    return regionsObteined.some(r => r.Id === idRegion);
+  }
 }

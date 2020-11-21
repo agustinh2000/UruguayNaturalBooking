@@ -9,7 +9,7 @@
         </mat-form-field>
 
         <mat-form-field class="selector-of-region" appearance="fill">
-            <mat-label>Elija una region</mat-label>
+            <mat-label> Elija una región </mat-label>
             <mat-select [formControl]="selectedRegion">
                 <mat-option *ngFor="let region of regionsOfTheSystem" [value]="region.Id">
                     {{region.Description}} </mat-option>
@@ -17,14 +17,14 @@
         </mat-form-field>
 
         <mat-form-field class="input-text-area" appearance="fill">
-            <mat-label>Textarea</mat-label>
+            <mat-label> Descripción </mat-label>
             <textarea placeholder="Ingrese una descripcion aqui." formControlName="description" rows="10" cols="50"
                 matInput required></textarea>
             <mat-error *ngIf="formGroup.controls.description.invalid">{{getErrorMessageDescription()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="selector-of-categories" appearance="fill">
-            <mat-label>Categorias</mat-label>
+            <mat-label> Categorias </mat-label>
             <mat-select [formControl]="selectedCategories" multiple>
                 <mat-option *ngFor="let category of categoriesOfTheSystem" [value]="category.Id">{{category.Name}}
                 </mat-option>
