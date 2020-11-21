@@ -48,6 +48,7 @@ import { MatMenuModule} from '@angular/material/menu';
 import { LodgingDetailComponent } from './lodging-detail/lodging-detail.component';
 import { CreateReserveComponent } from './create-reserve/create-reserve.component';
 import { TouristsPipe } from './tourists.pipe';
+import { ReserveConfirmationComponent } from './reserve-confirmation/reserve-confirmation.component';
 
 @NgModule({
   declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
@@ -55,7 +56,7 @@ import { TouristsPipe } from './tourists.pipe';
     ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
     FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent, 
     SelectionOfTouristSpotComponent, LodgingCardsComponent, BookingFormComponent, LodgingDetailComponent, CreateReserveComponent, 
-    TouristsPipe],
+    TouristsPipe, ReserveConfirmationComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -87,7 +88,7 @@ import { TouristsPipe } from './tourists.pipe';
     ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
     FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent,
     SelectionOfTouristSpotComponent, LodgingCardsComponent, BookingFormComponent, LodgingDetailComponent,
-    CreateReserveComponent, TouristsPipe],
+    CreateReserveComponent, TouristsPipe, ReserveConfirmationComponent],
   providers: [RegionServiceService, UserService, ReportService, TouristSpotService,
     CategoryService, LodgingService, ReserveService, ReviewService]
 })

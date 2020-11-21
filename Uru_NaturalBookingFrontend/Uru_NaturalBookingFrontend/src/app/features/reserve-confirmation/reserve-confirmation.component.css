@@ -1,0 +1,12 @@
+.content{
+    background-color: honeydew;
+    margin:auto;
+    left: 30%;
+    right: 30%;
+    text-align: center;
+    height: 100%;
+}
+
+.confirmationImage{
+    width:20%;
+}

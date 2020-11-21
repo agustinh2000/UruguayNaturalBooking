@@ -18,7 +18,14 @@ export class ReserveService {
 
   getReserveById(reserveId: string): ReserveModelForResponse {
     const reserveModel: ReserveModelForResponse = {
+      Id: '40a749b8-6c68-4705-af8f-25b967b4c7aa',
       Name: 'Joaquin',
+      PhoneNumberOfContact : 244087645,
+      QuantityOfAdult: 1,
+      QuantityOfBaby: 2,
+      QuantityOfChild: 3,
+      QuantityOfRetired: 4,
+      TotalPrice : 1240,
       LastName: 'Lamela',
       Email: 'joaquin.lamela@gmail.com',
       CheckIn: new Date(),
