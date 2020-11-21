@@ -20,8 +20,14 @@
                 </mat-form-field>
             </div>
 
-            <button class="button textReserve" (click)="openModifyForm()" [disabled]="formGroup.invalid">Buscar
-                reserva</button>
+            <ng-container *ngIf="!isShown; else ButtonCancel">
+                <button class="button textReserve" (click)="openModifyForm()" [disabled]="formGroup.invalid">Buscar
+                    reserva</button>
+            </ng-container>
+
+            <ng-template #ButtonCancel>
+                <button class="button textReserve" (click)="clearFields()"> Cancelar </button>
+            </ng-template>
         </div>
     </form>
 </div>

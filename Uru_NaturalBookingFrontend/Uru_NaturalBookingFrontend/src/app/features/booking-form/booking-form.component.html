@@ -61,7 +61,6 @@
                             class="fa fa-plus"></i></button>
                 </div>
 
-
                 <ng-container *ngIf="!showLodgingsAvailables; else ButtonCancel">
                     <button class="button" (click)="searchOfLodgings()"> Buscar hospedajes </button>
                 </ng-container>
@@ -69,7 +68,6 @@
                 <ng-template #ButtonCancel>
                     <button class="button" (click)="clearFields()"> Cancelar </button>
                 </ng-template>
-
 
                 <mat-error *ngIf="formGroup.errors?.range && formGroup.touched">El check-in no puede ser mayor al
                     check-out.

@@ -3,6 +3,7 @@ import { TouristSpotModelForResponse } from '../../models/TouristSpotModelForRes
 import { TouristSpotService } from '../services/tourist-spot.service';
 import { CategoryModel } from '../../models/CategoryModel';
 import { Region } from 'src/app/models/Region';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tourist-spot-view',
@@ -19,18 +20,22 @@ export class TouristSpotViewComponent implements OnInit {
 
   private touristSpotService: TouristSpotService;
 
-  constructor(aTouristSpotService: TouristSpotService) {
+  constructor(aTouristSpotService: TouristSpotService, private router: Router) {
     this.touristSpotService = aTouristSpotService;
    }
 
   ngOnInit(): void {
-    this.touristSpotFilterByRegion = 
+    this.touristSpotFilterByRegion =
     this.touristSpotService.getTouristSpotsFilterByRegionAndCategories(this.categoriesSelectedId, this.regionSelectedId);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.touristSpotFilterByRegion = 
+    this.touristSpotFilterByRegion =
     this.touristSpotService.getTouristSpotsFilterByRegionAndCategories(changes.categoriesSelectedId.currentValue, this.regionSelectedId);
+  }
+
+  navigateToLodgings(touristSpotId: string): void {
+    this.router.navigate(['/lodgings', touristSpotId, this.regionSelectedId]);
   }
 
 }

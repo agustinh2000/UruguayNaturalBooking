@@ -22,24 +22,6 @@ h1 {
   margin: 1%;
 }
 
-.contraseña {
-  font-size: 20px;
-  width: 96%;
-  padding: 2%;
-  border: none;
-}
-
-.input-contenedor {
-  margin-bottom: 3.5%;
-  border: 1px solid #aaa;
-}
-
-.icon {
-  min-width: 8.5%;
-  text-align: center;
-  color: #999;
-}
-
 .button {
   border: none;
   width: 100%;

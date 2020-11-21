@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@a
 import { ReserveService } from '../services/reserve.service';
 import { SearchOfLodgingModelForRequest } from '../../models/SearchOfLodgingModelForRequest';
 import { TouristSpotService } from '../services/tourist-spot.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking-form',
@@ -10,9 +11,10 @@ import { TouristSpotService } from '../services/tourist-spot.service';
   styleUrls: ['./booking-form.component.css']
 })
 export class BookingFormComponent implements OnInit {
+
   @Input() reserveId: string;
 
-  @Input() touristSpotSelected: string;
+  public touristSpotIdSelected: string;
 
   public formGroup: FormGroup;
 
@@ -34,7 +36,7 @@ export class BookingFormComponent implements OnInit {
 
   private touristSpotService: TouristSpotService;
 
-  constructor(aTouristSpotService: TouristSpotService, private formBuilder: FormBuilder) {
+  constructor(aTouristSpotService: TouristSpotService, private formBuilder: FormBuilder, private currentRoute: ActivatedRoute) {
     this.touristSpotService = aTouristSpotService;
     this.formGroup = this.formBuilder.group({
       checkInPicker: ['', Validators.required],
@@ -50,8 +52,8 @@ export class BookingFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.nameOfTouristSpot = this.touristSpotService.getTouristSpotById(this.touristSpotSelected).Name;
-    this.nameOfTouristSpot = 'Punta del este';
+    this.touristSpotIdSelected = this.currentRoute.snapshot.params['idTouristSpot'];
+    this.nameOfTouristSpot = this.touristSpotService.getTouristSpotById(this.touristSpotIdSelected).Name;
   }
 
   noWhitespaceValidator: ValidatorFn = (control: FormControl) => {
@@ -111,7 +113,7 @@ export class BookingFormComponent implements OnInit {
         QuantityOfBabies: this.quantityOfBabies,
         QuantityOfChilds: this.quantityOfChilds,
         QuantityOfRetireds: this.quantityOfRetired,
-        TouristSpotIdSearch: this.touristSpotSelected
+        TouristSpotIdSearch: this.touristSpotIdSelected
       };
     }
   }

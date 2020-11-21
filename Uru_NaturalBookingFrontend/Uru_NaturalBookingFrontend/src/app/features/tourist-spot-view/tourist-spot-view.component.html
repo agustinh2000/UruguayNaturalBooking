@@ -1,7 +1,8 @@
 <div class="padre">
-        <div class="card" *ngFor="let touristSpot of touristSpotFilterByRegion; let i = index">
-            <a href="google.com">
-                <img src={{touristSpot.ImagePath}} class="imagen">
+    <div class="card" *ngFor="let touristSpot of touristSpotFilterByRegion; let i = index"
+        (click)="navigateToLodgings(touristSpot.Id)">
+        <a>
+            <img src={{touristSpot.ImagePath}} class="imagen">
             <h3>{{touristSpot.Name}}</h3>
             <p class="description"><i>{{touristSpot.Description}}</i></p>
             <p class="region"><i><strong>{{touristSpot.RegionModel.Description}}</strong></i></p>
@@ -9,6 +10,6 @@
             <div *ngFor="let category of touristSpot.ListOfCategoriesModel">
                 <p class="category">{{category.Name}}</p>
             </div>
-            </a>
-        </div>
+        </a>
+    </div>
 </div>

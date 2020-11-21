@@ -41,4 +41,11 @@ export class ModifyReserveComponent implements OnInit {
     }
   }
 
+  public clearFields(): void{
+    this.isShown = false;
+    this.formGroup = this.formBuilder.group({
+      reserveSelected: ['', [Validators.required, this.noWhitespaceValidator]]
+    });
+  }
+
 }

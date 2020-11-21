@@ -19,7 +19,7 @@ export class RegionNotExistGuard implements CanActivate {
     | boolean
     | UrlTree {
     const idRegion = route.url[1].path;
-    if (!this.regionService.isValidRegion(idRegion.toString())) {
+    if (!this.regionService.isValidRegion(idRegion)) {
       alert('Ups no existe la región seleccionada.');
       this.router.navigate(['regions']);
       return false;

@@ -4,7 +4,7 @@
       <mat-icon>menu</mat-icon>
     </button>
     <div class="logo">
-      <a href="/"> <img [src]="pathLogo" width="200px" alt="Logo de la empresa"></a>
+      <a (click)="navigateToRegions()"> <img [src]="pathLogo" width="200px" alt="Logo de la empresa"></a>
     </div>
     <span class="example-spacer"></span>
     <div class="navigation" fxShow="true" fxHide.lt-md="true">
@@ -97,7 +97,7 @@
           <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
             <span class="material-icons">
               login
-              </span>
+            </span>
             Login
           </a>
         </button>
@@ -105,7 +105,7 @@
           <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
             <span class="material-icons">
               exit_to_app
-              </span>
+            </span>
             Logout
           </a>
         </button>
@@ -119,7 +119,7 @@
           <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
             <span class="material-icons">
               build
-              </span>
+            </span>
             Generar reporte
           </a>
         </button>

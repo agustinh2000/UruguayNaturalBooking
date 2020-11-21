@@ -12,7 +12,7 @@ export class TouristSpotService {
 
   readonly touristSpots: TouristSpotModelForLodgingResponseModel[] = [
     {
-      Id: '13046b7e-3d83-4576-b459-65c4c965b037',
+      Id: '13046b7e-3d83-4576-b459-65c4c965b038',
       Name: 'Punta del este'
     },
 
@@ -39,7 +39,7 @@ export class TouristSpotService {
 
   readonly touristSpotsModelForResponse: TouristSpotModelForResponse[] = [
     {
-      Id: '13046b7e-3d83-4576-b459-65c4c965b037',
+      Id: '13046b7e-3d83-4576-b459-65c4c965b038',
       Name: 'Punta del este',
       Description: 'Un lugar inolvidable, donde se pasa un buen rato.',
       RegionModel: {
@@ -198,6 +198,11 @@ export class TouristSpotService {
   getTouristSpotById(touristSpotId: string): TouristSpotForRequestModel{
     return;
     // this is a call to the webAPI
+  }
+
+  isValidTouristSpot(touristSpotId: string): boolean {
+    const touristSpotObteined: TouristSpotModelForResponse[] = this.getAllTouristSpots();
+    return touristSpotObteined.some(t => t.Id === touristSpotId);
   }
 
 }

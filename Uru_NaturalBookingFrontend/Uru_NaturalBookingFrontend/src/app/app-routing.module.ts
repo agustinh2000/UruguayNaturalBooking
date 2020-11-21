@@ -13,6 +13,8 @@ import { ReportComponent } from './features/report/report.component';
 import { ReviewComponent } from './features/review/review.component';
 import { SelectionOfTouristSpotComponent } from './features/selection-of-tourist-spot/selection-of-tourist-spot.component';
 import { RegionNotExistGuard } from './features/Guards/region-not-exist.guard';
+import { TouristSpotNotExistGuard } from './features/Guards/Tourist-Spot-Not-Exist.guard';
+import { BookingFormComponent } from './features/booking-form/booking-form.component';
 
 const routes: Routes = [
   { path: 'add-lodging', component: AddLodgingComponent },
@@ -27,6 +29,7 @@ const routes: Routes = [
   { path: 'report', component: ReportComponent  },
   { path: 'review', component: ReviewComponent  },
   { path: 'touristSpots/:idRegion', component: SelectionOfTouristSpotComponent, canActivate: [RegionNotExistGuard] },
+  { path: 'lodgings/:idTouristSpot/:idRegion', component: BookingFormComponent, canActivate: [TouristSpotNotExistGuard] },
 ];
 
 @NgModule({
