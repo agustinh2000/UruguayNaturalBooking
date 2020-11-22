@@ -16,38 +16,38 @@
                         Inicio
                     </a>
                 </span>
-
-
-                <button mat-button [matMenuTriggerFor]="menu">
-                    <mat-icon>account_box</mat-icon>Usuarios <i class="fas fa-caret-down" style="color:black"></i>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item routerLink="register-user">
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
-                            mat-button>
-                            <span class="material-icons">add_box</span>
-                            Agregar usuario
-                        </a>
+                <ng-template [ngIf]="logued">
+                    <button mat-button [matMenuTriggerFor]="menu">
+                        <mat-icon>account_box</mat-icon>Usuarios <i class="fas fa-caret-down" style="color:black"></i>
                     </button>
-                    <button mat-menu-item routerLink="modify-user">
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
-                            mat-button>
-                            <span class="material-icons">
-                                construction
-                            </span>
-                            Modificar usuario
-                        </a>
-                    </button>
-                    <button mat-menu-item routerLink="delete-user">
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
-                            mat-button>
-                            <span class="material-icons">
-                                delete_forever
-                            </span>
-                            Eliminar usuario
-                        </a>
-                    </button>
-                </mat-menu>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item routerLink="register-user">
+                            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
+                                mat-button>
+                                <span class="material-icons">add_box</span>
+                                Agregar usuario
+                            </a>
+                        </button>
+                        <button mat-menu-item routerLink="modify-user">
+                            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
+                                mat-button>
+                                <span class="material-icons">
+                                    construction
+                                </span>
+                                Modificar usuario
+                            </a>
+                        </button>
+                        <button mat-menu-item routerLink="delete-user">
+                            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
+                                mat-button>
+                                <span class="material-icons">
+                                    delete_forever
+                                </span>
+                                Eliminar usuario
+                            </a>
+                        </button>
+                    </mat-menu>
+                </ng-template>
 
                 <button mat-button [matMenuTriggerFor]="menu2">
                     <mat-icon>account_box</mat-icon>Puntos turisticos <i class="fas fa-caret-down"

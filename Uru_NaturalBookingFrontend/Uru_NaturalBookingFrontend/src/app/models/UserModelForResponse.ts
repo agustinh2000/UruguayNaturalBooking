@@ -1,5 +1,12 @@
 export class UserModelForResponse{
-    public UserName?: string;
-    public Mail?: string;
-    public Id?: string;
+    public id: string;
+    public userName: string;
+    public mail: string;
+    public name: string;
+    public lastName: string;
+    public password: string;
+
+    public constructor(init?: Partial<UserModelForResponse>) {
+        Object.assign(this, init);
+    }
 }

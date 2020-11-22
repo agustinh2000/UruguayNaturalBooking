@@ -25,8 +25,8 @@
 
             <mat-form-field class="input-email" appearance="fill">
                 <mat-label>Correo electrónico</mat-label>
-                <input matInput placeholder="joaquin.lamela00@gmail.com" formControlName="email" required>
-                <mat-error *ngIf="formGroup.controls.email.invalid">{{getErrorMessageEmail()}}</mat-error>
+                <input matInput placeholder="joaquin.lamela00@gmail.com" formControlName="mail" required>
+                <mat-error *ngIf="formGroup.controls.mail.invalid">{{getErrorMessageEmail()}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="input-password" appearance="fill">
@@ -39,7 +39,7 @@
                 <mat-error *ngIf="formGroup.controls.password.invalid">{{getErrorMessagePassword()}}</mat-error>
             </mat-form-field>
 
-            <button class="button" (click)="Register()" [disabled]="formGroup.invalid">Registrar usuario</button>
+            <button class="button" (click)="register()" [disabled]="formGroup.invalid">Registrar usuario</button>
 
             <p class="linea">Al registrar al usuario, el mismo acepta nuestras <a href="#">Condiciones de Uso y Politica
                     de Privacidad</a></p>

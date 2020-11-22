@@ -15,29 +15,9 @@ export class UserService {
   uri = `${environment.baseUrl}api/users`;
 
   readonly users: UserModelForResponse[] = [
-    {
-      Id: '5016bb05-4871-4079-a430-882b637e421a',
-      UserName: 'Joaco00',
-      Mail: 'joaquin.lamela00@gmail.com',
-    },
-    {
-      Id: 'b198d786-9b5b-4ea0-923a-6b21021ac19d',
-      UserName: 'agustinh00',
-      Mail: 'agustinhernandorena@gmail.com',
-    },
-    {
-      Id: 'cf688384-ab9e-4520-89c7-c059b875eec2',
-      UserName: 'MartinG',
-      Mail: 'rgskinks@gmail.com',
-    },
-    {
-      Id: '36d6c3e6-87e2-44d1-a282-11c3abe1160f',
-      UserName: 'MartinGuto',
-      Mail: 'martin.gut@hotmail.com',
-    },
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(
     userInformationToLogin: UserModelForLoginRequest
@@ -48,24 +28,56 @@ export class UserService {
     );
   }
 
-  Register(
-    userInformationToRegister: UserModelForRequest
-  ): UserModelForResponse {
-    return;
-    // this is a call to the service in the webAPI to the method POST of UserController
+  register(
+    userToRegister: UserModelForRequest
+  ): Observable<UserModelForResponse> {
+    let myHeaders = new HttpHeaders();
+    myHeaders = myHeaders.append('token', localStorage.token);
+    return this.http.post<UserModelForResponse>(
+      this.uri, userToRegister,
+      {
+        headers: myHeaders,
+      }
+    );
   }
 
-  getUsersOfSystem(): UserModelForResponse[] {
-    const usersObteined: UserModelForResponse[] = [];
-    for (const user of this.users) {
-      usersObteined.push(user);
-    }
-    return usersObteined;
+  modify(
+    userModified: UserModelForRequest, idOfUserToModify: string
+  ): Observable<UserModelForResponse> {
+    let myHeaders = new HttpHeaders();
+    myHeaders = myHeaders.append('token', localStorage.token);
+    return this.http.put<UserModelForResponse>(
+      `${this.uri}/${idOfUserToModify}`, userModified,
+      {
+        headers: myHeaders,
+      }
+    );
   }
 
-  getUserById(userId: string): UserModelForRequest {
-    return;
-    // this is a call to the service in the webAPI to the method Get(Guid id)
+
+  getUserById(
+    userId: string
+  ): Observable<UserModelForResponse> {
+    let myHeaders = new HttpHeaders();
+    myHeaders = myHeaders.append('token', localStorage.token);
+    return this.http.get<UserModelForResponse>(
+      `${this.uri}/${userId}`,
+      {
+        headers: myHeaders,
+      }
+    );
+  }
+
+  getUsersOfSystem(
+  ): Observable<UserModelForResponse> {
+    let myHeaders = new HttpHeaders();
+    myHeaders = myHeaders.append('token', localStorage.token);
+    return this.http.get<UserModelForResponse>(
+      this.uri,
+      {
+        headers: myHeaders,
+      }
+    );
   }
 
   deleteUser(userId: string): void {

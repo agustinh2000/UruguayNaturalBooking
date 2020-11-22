@@ -64,7 +64,7 @@ namespace WebApi.Controllers
 
 
         [ServiceFilter(typeof(AuthorizationFilter))]
-        [HttpGet("{id}", Name = "getUser")]
+        [HttpGet("{id}", Name = "user")]
         public IActionResult Get(Guid id)
         {
             try
@@ -90,7 +90,7 @@ namespace WebApi.Controllers
             try
             {
                 User userCreated = userManagement.Create(user);
-                return CreatedAtRoute("getUser", new { id = user.Id }, UserModelForResponse.ToModel(userCreated));
+                return CreatedAtRoute("user", new { id = user.Id }, UserModelForResponse.ToModel(userCreated));
             }
             catch (DomainBusinessLogicException e)
             {
@@ -109,7 +109,7 @@ namespace WebApi.Controllers
             try
             {
                 User userUpdated = userManagement.UpdateUser(id, user);
-                return CreatedAtRoute("getUser", new { id = userUpdated.Id }, UserModelForResponse.ToModel(userUpdated));
+                return CreatedAtRoute("user", new { id = userUpdated.Id }, UserModelForResponse.ToModel(userUpdated));
             }
             catch (DomainBusinessLogicException e)
             {

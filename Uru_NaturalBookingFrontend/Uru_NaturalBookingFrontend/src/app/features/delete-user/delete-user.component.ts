@@ -33,16 +33,16 @@ export class DeleteUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usersOfTheSystem = this.serviceUser.getUsersOfSystem();
+    //this.usersOfTheSystem = this.serviceUser.getUsersOfSystem();
   }
 
   public ChargeInfoInFields(): void{
-    this.userSelectedInModelOfRequest = this.serviceUser.getUserById(this.selectedUser.Id);
+    //this.userSelectedInModelOfRequest = this.serviceUser.getUserById(this.selectedUser.Id);
     this.formGroup.controls.userName.setValue(this.userSelectedInModelOfRequest.UserName);
     this.formGroup.controls.email.setValue(this.userSelectedInModelOfRequest.Mail);
   }
 
   public Delete(): void {
-    this.serviceUser.deleteUser(this.selectedUser.Id);
+    //this.serviceUser.deleteUser(this.selectedUser.Id);
   }
 }

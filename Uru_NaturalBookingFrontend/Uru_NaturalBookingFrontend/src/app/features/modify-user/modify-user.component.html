@@ -6,9 +6,9 @@
             <div class="optionSelector">
                 <mat-form-field appearance="fill">
                     <mat-label>Elija un usuario</mat-label>
-                    <mat-select [(value)]="selectedUser">
-                        <mat-option *ngFor="let user of usersOfTheSystem" [value]="user" (click)="ChargeInfoInFields()">
-                            {{user.UserName}}</mat-option>
+                    <mat-select  formControlName="selectedUser" (selectionChange)="chargeInfoInFields()">
+                        <mat-option *ngFor="let user of usersOfTheSystem" [value]="user.id">
+                            {{user.userName}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -33,8 +33,8 @@
 
             <mat-form-field class="input-email" appearance="fill">
                 <mat-label>Correo electrónico</mat-label>
-                <input matInput placeholder="joaquin.lamela00@gmail.com" formControlName="email" required>
-                <mat-error *ngIf="formGroup.controls.email.invalid">{{getErrorMessageEmail()}}</mat-error>
+                <input matInput placeholder="joaquin.lamela00@gmail.com" formControlName="mail" required>
+                <mat-error *ngIf="formGroup.controls.mail.invalid">{{getErrorMessageEmail()}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="input-password" appearance="fill">
@@ -47,7 +47,7 @@
                 <mat-error *ngIf="formGroup.controls.password.invalid">{{getErrorMessagePassword()}}</mat-error>
             </mat-form-field>
 
-            <button class="button" (click)="Register()" [disabled]="formGroup.invalid">Modificar</button>
+            <button class="button" (click)="modify()" [disabled]="formGroup.invalid">Modificar</button>
         </div>
     </form>
 </div>

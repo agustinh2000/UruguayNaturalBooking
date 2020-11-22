@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, Ng
 import { UserService } from '../services/user.service';
 import { UserModelForRequest } from '../../models/UserModelForRequest';
 import { UserModelForResponse } from '../../models/UserModelForResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modify-user',
@@ -11,7 +12,7 @@ import { UserModelForResponse } from '../../models/UserModelForResponse';
 })
 export class ModifyUserComponent implements OnInit {
 
-  usersOfTheSystem: UserModelForResponse [];
+  usersOfTheSystem;
 
   informationOfUserToRegister: UserModelForRequest;
 
@@ -21,41 +22,70 @@ export class ModifyUserComponent implements OnInit {
 
   selected = new FormControl([Validators.required]);
 
-  selectedUser: UserModelForResponse;
-
-  userSelectedInModelOfRequest: UserModelForRequest;
+  userSelectedInModelOfRequest: UserModelForResponse;
 
   public hide: boolean = true;
 
-  constructor(private formBuilder: FormBuilder, private serviceUserPassed: UserService) {
+  constructor(private formBuilder: FormBuilder, private serviceUserPassed: UserService,
+              private router: Router) {
+    this.usersOfTheSystem = new Array();
+    this.userSelectedInModelOfRequest = null;
     this.serviceUser = serviceUserPassed;
     this.formGroup = this.formBuilder.group({
       name: ['', [Validators.required, this.noWhitespaceValidator]],
       lastName: ['', [Validators.required, this.noWhitespaceValidator]],
       userName: ['', [Validators.required, this.noWhitespaceValidator]],
-      email: ['', [Validators.required, Validators.email]],
+      mail: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, this.noWhitespaceValidator]],
+      selectedUser: ['', [Validators.required]]
     });
   }
 
   ngOnInit(): void {
-    this.usersOfTheSystem = this.serviceUser.getUsersOfSystem();
+    this.serviceUser.getUsersOfSystem().subscribe(
+      res => {
+        this.usersOfTheSystem = res;
+      },
+      (err) => {
+        alert(err.error);
+        console.log(err);
+      }
+    );
   }
 
-  public Register(): void {
-    this.informationOfUserToRegister = new UserModelForRequest(this.formGroup.value);
-    this.serviceUser.Register(this.informationOfUserToRegister);
-  }
-
-  public ChargeInfoInFields(): void{
-    this.userSelectedInModelOfRequest = this.serviceUser.getUserById(this.selectedUser.Id);
+  public chargeInfoInFields(): void {
+    this.serviceUser.getUserById(this.formGroup.controls.selectedUser.value).subscribe(
+      (res: UserModelForResponse) => {
+        console.log(res);
+        this.userSelectedInModelOfRequest = res;
+      },
+      (err) => {
+        alert(err.error);
+        console.log(err);
+      }
+    );
     this.formGroup = this.formBuilder.group({
-      name: [this.userSelectedInModelOfRequest.Name, [Validators.required, this.noWhitespaceValidator]],
-      lastName: [this.userSelectedInModelOfRequest.LastName, [Validators.required, this.noWhitespaceValidator]],
-      userName: [this.userSelectedInModelOfRequest.UserName, [Validators.required, this.noWhitespaceValidator]],
-      email: [this.userSelectedInModelOfRequest.Mail, [Validators.required, Validators.email]],
-      password: [this.userSelectedInModelOfRequest.Password, [Validators.required, this.noWhitespaceValidator]],
+      name: [this.userSelectedInModelOfRequest.name, [Validators.required, this.noWhitespaceValidator]],
+      lastName: [this.userSelectedInModelOfRequest.lastName, [Validators.required, this.noWhitespaceValidator]],
+      userName: [this.userSelectedInModelOfRequest.userName, [Validators.required, this.noWhitespaceValidator]],
+      mail: [this.userSelectedInModelOfRequest.mail, [Validators.required, Validators.email]],
+      password: [this.userSelectedInModelOfRequest.password, [Validators.required, this.noWhitespaceValidator]],
     });
+  }
+
+  public modify(): void {
+    this.informationOfUserToRegister = new UserModelForRequest(this.formGroup.value);
+    /*this.serviceUser.modify(this.informationOfUserToRegister, this.selectedUser.id).subscribe(
+      (res: UserModelForResponse) => {
+        console.log(res);
+        this.router.navigate(['/regions']);
+      },
+      (err) => {
+        alert(err.error);
+        console.log(err);
+      }
+    );
+    */
   }
 
   getErrorMessage(): string {
@@ -65,14 +95,14 @@ export class ModifyUserComponent implements OnInit {
     return this.formGroup.controls.name.hasError('whitespace') ? 'Error. El nombre ingresado no puede ser vacío.' : '';
   }
 
-  getErrorMessageLastName(): string{
+  getErrorMessageLastName(): string {
     if (this.formGroup.controls.lastName.hasError('required')) {
       return 'Error. El apellido es requerido.';
     }
     return this.formGroup.controls.lastName.hasError('whitespace') ? 'Error. El apellido ingresado no puede ser vacío.' : '';
   }
 
-  getErrorMessageUserName(): string{
+  getErrorMessageUserName(): string {
     if (this.formGroup.controls.userName.hasError('required')) {
       return 'Error. El nombre de usuario es requerido.';
     }
@@ -80,13 +110,13 @@ export class ModifyUserComponent implements OnInit {
   }
 
   getErrorMessageEmail(): string {
-    if (this.formGroup.controls.email.hasError('required')) {
+    if (this.formGroup.controls.mail.hasError('required')) {
       return 'Error. El email es requerido.';
     }
-    return this.formGroup.controls.email.hasError('email') ? 'Error. El email ingresado debe tener un formato valido.' : '';
+    return this.formGroup.controls.mail.hasError('email') ? 'Error. El email ingresado debe tener un formato valido.' : '';
   }
 
-  getErrorMessagePassword(): string{
+  getErrorMessagePassword(): string {
     if (this.formGroup.controls.password.hasError('required')) {
       return 'Error. La contraseña es requerida.';
     }
