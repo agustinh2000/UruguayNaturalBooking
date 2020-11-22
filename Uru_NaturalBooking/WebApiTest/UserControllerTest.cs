@@ -25,6 +25,8 @@ namespace WebApiTest
 
         UserModelForResponse aUserModel;
 
+        LoginResponseModel aLoginModelForResponse;
+
         User aUserModified;
 
         User invalidUser;
@@ -88,6 +90,14 @@ namespace WebApiTest
                 User = aUser
             };
 
+            aLoginModelForResponse = new LoginResponseModel()
+            {
+                Mail = "agustinhernandorena@gmail.com",
+                UserName = "agustinh2000",
+                Id = aUser.Id,
+                Token = aUserSession.Token
+            };
+
         }
 
         [TestMethod]
@@ -98,9 +108,9 @@ namespace WebApiTest
             UserController userController = new UserController(userMock.Object);
             var result = userController.Login(aLoginModel);
             var createdResult = result as OkObjectResult;
-            var userModelResult = createdResult.Value as UserModelForResponse;
+            var userModelResult = createdResult.Value as LoginResponseModel;
             userMock.VerifyAll();
-            Assert.AreEqual(aUserModel, userModelResult);
+            Assert.AreEqual(aLoginModelForResponse, userModelResult);
         }
 
         [TestMethod]

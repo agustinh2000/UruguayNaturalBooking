@@ -30,7 +30,7 @@ namespace WebApi.Controllers
             try
             {
                 UserSession userSession = userManagement.LogIn(loginModel.Email, loginModel.Password);
-                return Ok(UserModelForResponse.ToModel(userSession.User));
+                return Ok(LoginResponseModel.ToModel(userSession));
             }
             catch (ClientBusinessLogicException e)
             {

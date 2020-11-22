@@ -45,8 +45,6 @@
         </button>
       </mat-menu>
 
-
-
       <button mat-button [matMenuTriggerFor]="menu2">
         <mat-icon>account_box</mat-icon>Puntos turisticos <i class="fas fa-caret-down" style="color:black"></i>
       </button>
@@ -78,7 +76,6 @@
           </a>
         </button>
 
-
         <button mat-menu-item routerLink="modify-reserve">
           <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
             <span class="material-icons">
@@ -89,27 +86,33 @@
         </button>
       </mat-menu>
 
-      <button mat-button [matMenuTriggerFor]="menu4">
-        <mat-icon>account_box</mat-icon> Inicio/cierre de sesión <i class="fas fa-caret-down" style="color:black"></i>
-      </button>
-      <mat-menu #menu4="matMenu">
-        <button mat-menu-item routerLink="login">
-          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
-            <span class="material-icons">
-              login
-            </span>
-            Login
-          </a>
+      <div *ngIf="logued; then thenBlock; else elseBlock"></div>
+      <ng-template #thenBlock>
+        <button mat-button (click)="logout()">
+          <span>
+            <a class="button" mat-button>
+              <span class="material-icons">
+                exit_to_app
+              </span>
+              Cerrar sesión
+            </a>
+          </span>
         </button>
-        <button mat-menu-item routerLink="logout">
-          <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
-            <span class="material-icons">
-              exit_to_app
-            </span>
-            Logout
-          </a>
+      </ng-template>
+
+      <ng-template #elseBlock>
+        <button mat-button>
+          <span routerLink="login">
+            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+              <span class="material-icons">
+                login
+              </span>
+              Inicio sesión
+            </a>
+          </span>
         </button>
-      </mat-menu>
+      </ng-template>
+
 
       <button mat-button [matMenuTriggerFor]="menu5">
         <mat-icon>account_box</mat-icon> Reporte <i class="fas fa-caret-down" style="color:black"></i>

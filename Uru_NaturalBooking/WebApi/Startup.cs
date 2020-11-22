@@ -34,7 +34,15 @@ namespace WebApi
             {
                 options.SerializerSettings.ReferenceLoopHandling =
                     Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            }); ;
+            });
+
+            services.AddCors(cors =>
+            {
+                cors.AddPolicy("UruguayNaturalPolicy", options =>
+                {
+                    options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
 
             //services.AddControllers();
 
@@ -105,6 +113,8 @@ namespace WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("UruguayNaturalPolicy");
 
             app.UseAuthorization();
 

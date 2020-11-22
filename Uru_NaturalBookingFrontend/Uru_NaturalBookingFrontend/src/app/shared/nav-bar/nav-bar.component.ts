@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/features/services/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,16 +8,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent implements OnInit {
-
   pathLogo = '../assets/img/UruguayNatural.png';
 
-  constructor(private router: Router) { }
+  public logued: boolean = false;
+
+  constructor(private router: Router, private usersService: UserService) {}
 
   ngOnInit(): void {
+    this.isLogued();
   }
 
-  navigateToRegions(): void{
+  navigateToRegions(): void {
     this.router.navigate(['regions']);
   }
 
+  isLogued(): void {
+    this.logued = this.usersService.isLogued();
+  }
+
+  logout(): void {
+    this.usersService.logout();
+    localStorage.clear();
+    this.logued = false;
+  }
+
+  onActivate($event): void {
+    this.isLogued();
+  }
 }

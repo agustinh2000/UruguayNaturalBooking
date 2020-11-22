@@ -19,7 +19,7 @@
                 <mat-error *ngIf="formGroup.controls.password.invalid">{{getErrorMessagePassword()}}</mat-error>
             </mat-form-field>
 
-            <button class="button" (click)="Login()" [disabled]="formGroup.invalid">Iniciar sesión</button>
+            <button class="button" (click)="login()" [disabled]="formGroup.invalid">Iniciar sesión</button>
 
             <p class="linea">Al iniciar sesión, aceptas nuestras <a href="#">Condiciones de Uso y Politica de
                     Privacidad</a></p>
