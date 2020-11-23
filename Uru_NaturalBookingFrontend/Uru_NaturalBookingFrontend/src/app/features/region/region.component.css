@@ -3,7 +3,7 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    height: 89.5h
+    height: 89.8vh
 }
 
 .item {
@@ -12,7 +12,7 @@
 }
 
 .regionImage {
-    width: 42.05vh;
+    width: 43vh;
     height: 90vh;
     transition: transform 1s;
     position: relative
