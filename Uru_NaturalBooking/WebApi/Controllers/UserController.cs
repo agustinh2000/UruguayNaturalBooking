@@ -70,7 +70,8 @@ namespace WebApi.Controllers
             try
             {
                 User user = userManagement.GetUser(id);
-                return Ok(UserModelForResponse.ToModel(user));
+                UserModelForResponse toReturn = UserModelForResponse.ToModel(user);
+                return Ok(toReturn);
             }
             catch (ClientBusinessLogicException e)
             {

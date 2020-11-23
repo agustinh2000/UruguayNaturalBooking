@@ -14,10 +14,9 @@ import { UserModelForRequest } from '../../models/UserModelForRequest';
 export class UserService {
   uri = `${environment.baseUrl}api/users`;
 
-  readonly users: UserModelForResponse[] = [
-  ];
+  readonly users: UserModelForResponse[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(
     userInformationToLogin: UserModelForLoginRequest
@@ -33,51 +32,41 @@ export class UserService {
   ): Observable<UserModelForResponse> {
     let myHeaders = new HttpHeaders();
     myHeaders = myHeaders.append('token', localStorage.token);
-    return this.http.post<UserModelForResponse>(
-      this.uri, userToRegister,
-      {
-        headers: myHeaders,
-      }
-    );
+    return this.http.post<UserModelForResponse>(this.uri, userToRegister, {
+      headers: myHeaders,
+    });
   }
 
   modify(
-    userModified: UserModelForRequest, idOfUserToModify: string
+    userModified: UserModelForRequest,
+    idOfUserToModify: string
   ): Observable<UserModelForResponse> {
     let myHeaders = new HttpHeaders();
     myHeaders = myHeaders.append('token', localStorage.token);
     return this.http.put<UserModelForResponse>(
-      `${this.uri}/${idOfUserToModify}`, userModified,
+      `${this.uri}/${idOfUserToModify}`,
+      userModified,
       {
         headers: myHeaders,
       }
     );
   }
 
-
-  getUserById(
-    userId: string
-  ): Observable<UserModelForResponse> {
+  getUserById(userId: string): Observable<UserModelForResponse> {
     let myHeaders = new HttpHeaders();
     myHeaders = myHeaders.append('token', localStorage.token);
-    return this.http.get<UserModelForResponse>(
-      `${this.uri}/${userId}`,
-      {
-        headers: myHeaders,
-      }
-    );
+    myHeaders = myHeaders.append('Accept', 'application/json');
+    return this.http.get<UserModelForResponse>(`${this.uri}/${userId}`, {
+      headers: myHeaders,
+    });
   }
 
-  getUsersOfSystem(
-  ): Observable<UserModelForResponse> {
+  getUsersOfSystem(): Observable<UserModelForResponse> {
     let myHeaders = new HttpHeaders();
     myHeaders = myHeaders.append('token', localStorage.token);
-    return this.http.get<UserModelForResponse>(
-      this.uri,
-      {
-        headers: myHeaders,
-      }
-    );
+    return this.http.get<UserModelForResponse>(this.uri, {
+      headers: myHeaders,
+    });
   }
 
   deleteUser(userId: string): void {

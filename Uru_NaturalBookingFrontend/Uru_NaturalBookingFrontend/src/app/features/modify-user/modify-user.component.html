@@ -6,8 +6,9 @@
             <div class="optionSelector">
                 <mat-form-field appearance="fill">
                     <mat-label>Elija un usuario</mat-label>
-                    <mat-select  formControlName="selectedUser" (selectionChange)="chargeInfoInFields()">
-                        <mat-option *ngFor="let user of usersOfTheSystem" [value]="user.id">
+                    <mat-select formControlName="selectedUser">
+                        <mat-option *ngFor="let user of usersOfTheSystem" [value]="user.id"
+                            (click)="chargeInfoInFields(user.id)">
                             {{user.userName}}</mat-option>
                     </mat-select>
                 </mat-form-field>
