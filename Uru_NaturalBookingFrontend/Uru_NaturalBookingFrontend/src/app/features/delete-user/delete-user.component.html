@@ -5,9 +5,9 @@
             <div class="optionSelector">
                 <mat-form-field appearance="fill">
                     <mat-label>Elija un usuario</mat-label>
-                    <mat-select [(value)]="selectedUser">
-                        <mat-option *ngFor="let user of usersOfTheSystem" [value]="user" (click)="ChargeInfoInFields()">
-                            {{user.UserName}}</mat-option>
+                    <mat-select (selectionChange)="chargeInfoInFields($event)">
+                        <mat-option *ngFor="let user of usersOfTheSystem" [value]="user.id">
+                            {{user.userName}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -23,7 +23,7 @@
                 <mat-error *ngIf="formGroup.controls.email.invalid">{{getErrorMessageEmail()}}</mat-error>
             </mat-form-field>
 
-            <button class="button" (click)="Delete()">Eliminar</button>
+            <button class="button" (click)="delete()">Eliminar</button>
         </div>
     </form>
 </div>

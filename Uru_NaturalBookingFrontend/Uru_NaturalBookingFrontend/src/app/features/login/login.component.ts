@@ -70,8 +70,8 @@ export class LoginComponent implements OnInit {
     );
     this.serviceUser.login(this.informationOfUserToLogin).subscribe(
       (res: LoginModelForResponse) => {
-        console.log(res);
         localStorage.setItem('token', res.token);
+        localStorage.setItem('idUser', res.idUser);
         this.router.navigate(['/regions']);
       },
       (err) => {

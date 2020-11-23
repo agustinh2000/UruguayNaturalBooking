@@ -1,30 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+} from '@angular/forms';
 import { UserService } from '../services/user.service';
-import { UserModelForRequest } from '../../models/UserModelForRequest';
 import { UserModelForResponse } from '../../models/UserModelForResponse';
+import { MatSelectChange } from '@angular/material/select';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-delete-user',
   templateUrl: './delete-user.component.html',
-  styleUrls: ['./delete-user.component.css']
+  styleUrls: ['./delete-user.component.css'],
 })
 export class DeleteUserComponent implements OnInit {
-
   private serviceUser: UserService;
 
   public formGroup: FormGroup;
 
-  usersOfTheSystem: UserModelForResponse [];
+  public usersOfTheSystem;
 
-  selected = new FormControl([Validators.required]);
+  userSelectedInModelOfRequest: UserModelForResponse;
 
-  selectedUser: UserModelForResponse;
+  private idOfUserToDelete: string;
 
-  userSelectedInModelOfRequest: UserModelForRequest;
-
-
-  constructor(private formBuilder: FormBuilder, private serviceUserPassed: UserService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private serviceUserPassed: UserService,
+    private router: Router
+  ) {
+    this.usersOfTheSystem = new Array<UserModelForResponse>();
     this.serviceUser = serviceUserPassed;
     this.formGroup = this.formBuilder.group({
       userName: [''],
@@ -33,16 +42,50 @@ export class DeleteUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.usersOfTheSystem = this.serviceUser.getUsersOfSystem();
+    this.serviceUser.getUsersOfSystem().subscribe(
+      (res) => {
+        this.usersOfTheSystem = res;
+      },
+      (err) => {
+        alert(err.error);
+        console.log(err);
+      }
+    );
   }
 
-  public ChargeInfoInFields(): void{
-    //this.userSelectedInModelOfRequest = this.serviceUser.getUserById(this.selectedUser.Id);
-    this.formGroup.controls.userName.setValue(this.userSelectedInModelOfRequest.UserName);
-    this.formGroup.controls.email.setValue(this.userSelectedInModelOfRequest.Mail);
+  public chargeInfoInFields(event: MatSelectChange): void {
+    this.idOfUserToDelete = event.value;
+    this.serviceUser.getUserById(this.idOfUserToDelete).subscribe(
+      (res) => {
+        this.userSelectedInModelOfRequest = res;
+        this.chargeInfoInForm();
+      },
+      (err) => {
+        alert(err.error);
+        console.log(err);
+      }
+    );
   }
 
-  public Delete(): void {
-    //this.serviceUser.deleteUser(this.selectedUser.Id);
+  private chargeInfoInForm(): void {
+    this.formGroup.controls.userName.setValue(
+      this.userSelectedInModelOfRequest.userName
+    );
+    this.formGroup.controls.email.setValue(
+      this.userSelectedInModelOfRequest.mail
+    );
+  }
+
+  public delete(): void {
+    this.serviceUser.deleteUser(this.idOfUserToDelete).subscribe(
+      (res) => {
+        alert('Se ha eliminado correctamente el usuario.');
+        this.router.navigate(['/regions']);
+      },
+      (err) => {
+        alert(err.error);
+        console.log(err);
+      }
+    );
   }
 }

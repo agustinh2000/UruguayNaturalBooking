@@ -12,6 +12,7 @@ import { UserService } from '../services/user.service';
 import { UserModelForRequest } from '../../models/UserModelForRequest';
 import { UserModelForResponse } from '../../models/UserModelForResponse';
 import { Router } from '@angular/router';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-modify-user',
@@ -27,13 +28,11 @@ export class ModifyUserComponent implements OnInit {
 
   private serviceUser: UserService;
 
-  selected = new FormControl([Validators.required]);
-
   userSelectedInModelOfRequest: UserModelForResponse;
 
   public hide: boolean = true;
 
-  public selectedUser: FormControl = new FormControl('', [Validators.required]);
+  private idOfUserToModify: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,8 +63,9 @@ export class ModifyUserComponent implements OnInit {
     );
   }
 
-  public chargeInfoInFields(idUserSelected: string): void {
-    this.serviceUser.getUserById(idUserSelected).subscribe(
+  public chargeInfoInFields(event: MatSelectChange): void {
+    this.idOfUserToModify = event.value;
+    this.serviceUser.getUserById(this.idOfUserToModify).subscribe(
       (res) => {
         this.result(res);
         this.chargeInfoInForm();
@@ -117,17 +117,17 @@ export class ModifyUserComponent implements OnInit {
     this.informationOfUserToRegister = new UserModelForRequest(
       this.formGroup.value
     );
-    /*this.serviceUser.modify(this.informationOfUserToRegister, this.selectedUser.id).subscribe(
-      (res: UserModelForResponse) => {
-        console.log(res);
-        this.router.navigate(['/regions']);
-      },
-      (err) => {
-        alert(err.error);
-        console.log(err);
-      }
-    );
-    */
+    this.serviceUser
+      .modify(this.informationOfUserToRegister, this.idOfUserToModify)
+      .subscribe(
+        (res: UserModelForResponse) => {
+          this.router.navigate(['/regions']);
+        },
+        (err) => {
+          alert(err.error);
+          console.log(err);
+        }
+      );
   }
 
   getErrorMessage(): string {

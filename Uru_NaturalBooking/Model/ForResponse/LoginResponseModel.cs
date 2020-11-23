@@ -11,12 +11,15 @@ namespace Model.ForResponse
         public Guid Id { get; set; }
         public string Token { get; set; }
 
+        public Guid IdUser { get; set; }
+
         protected override LoginResponseModel SetModel(UserSession entity)
         {
             Id = entity.Id;
             UserName = entity.User.UserName;
             Mail = entity.User.Mail;
             Token = entity.Token;
+            IdUser = entity.User.Id;
             return this;
         }
 

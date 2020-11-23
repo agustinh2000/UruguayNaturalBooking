@@ -17,7 +17,6 @@ export class UserService {
   readonly users: UserModelForResponse[] = [];
 
   constructor(private http: HttpClient) {}
-
   login(
     userInformationToLogin: UserModelForLoginRequest
   ): Observable<LoginModelForResponse> {
@@ -43,6 +42,7 @@ export class UserService {
   ): Observable<UserModelForResponse> {
     let myHeaders = new HttpHeaders();
     myHeaders = myHeaders.append('token', localStorage.token);
+    myHeaders = myHeaders.append('Accept', 'application/json');
     return this.http.put<UserModelForResponse>(
       `${this.uri}/${idOfUserToModify}`,
       userModified,
@@ -69,9 +69,18 @@ export class UserService {
     });
   }
 
-  deleteUser(userId: string): void {
-    return;
-    // this is a call to the service in the webAPI to the method Delete(Guid id);
+  deleteUser(userId: string): Observable<{}> {
+    if (localStorage.idUser === userId) {
+      localStorage.removeItem('idUser');
+    }
+    let myHeaders = new HttpHeaders();
+    myHeaders = myHeaders.append('token', localStorage.token);
+    myHeaders = myHeaders.append('Accept', 'application/json');
+    let result = this.http.delete(`${this.uri}/${userId}`, {
+      headers: myHeaders,
+    });
+    localStorage.removeItem('token');
+    return result;
   }
 
   isLogued(): boolean {
