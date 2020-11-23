@@ -25,6 +25,8 @@ namespace Domain
 
         public RegionName Name { get; set; }
 
+        public string PathOfPhoto { get; set; }
+
         public string GetEnumDescription()
         {
             FieldInfo fi = Name.GetType().GetField(Name.ToString());

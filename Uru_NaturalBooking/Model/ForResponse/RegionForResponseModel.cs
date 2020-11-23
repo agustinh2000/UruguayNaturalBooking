@@ -17,11 +17,14 @@ namespace Model.ForResponse
 
         public string DescriptionOfName { get; set; }
 
+        public string PathOfPhoto { get; set; }
+
         protected override RegionForResponseModel SetModel(Region region)
         {
             Id = region.Id;
             Name = region.Name;
-            DescriptionOfName = region.GetEnumDescription(); 
+            DescriptionOfName = region.GetEnumDescription();
+            PathOfPhoto = region.PathOfPhoto;
             return this;
         }
 

@@ -6,22 +6,33 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-region',
   templateUrl: './region.component.html',
-  styleUrls: ['./region.component.css']
+  styleUrls: ['./region.component.css'],
 })
 export class RegionComponent implements OnInit {
-
-  regions: Region[];
+  public regions;
   private service: RegionServiceService;
 
-  constructor(private servicePassed: RegionServiceService, private router: Router) {
+  constructor(
+    private servicePassed: RegionServiceService,
+    private router: Router
+  ) {
+    this.regions = new Array<Region>();
     this.service = servicePassed;
   }
 
   ngOnInit(): void {
-    this.regions = this.service.getRegions();
+    this.service.getRegions().subscribe(
+      (res) => {
+        this.regions = res;
+      },
+      (err) => {
+        alert(err.error);
+        console.log(err);
+      }
+    );
   }
 
-  getSelectionOfTouristSpot(idRegion: string): void{
+  getSelectionOfTouristSpot(idRegion: string): void {
     this.router.navigate(['touristSpots', idRegion]);
   }
 }

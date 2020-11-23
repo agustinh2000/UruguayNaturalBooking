@@ -1,6 +1,6 @@
-export class Region{
-    Id?: string;
-    Name?: number;
-    Description?: string;
-    pathOfPhoto?: string;
+export class Region {
+  id?: string;
+  name?: number;
+  descriptionOfName?: string;
+  pathOfPhoto?: string;
 }

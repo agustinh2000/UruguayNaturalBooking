@@ -1,6 +1,6 @@
 <ul class="containerOfRegions">
-    <li *ngFor="let region of regions" class="item" (click)="getSelectionOfTouristSpot(region.Id)">
+    <li *ngFor="let region of regions" class="item" (click)="getSelectionOfTouristSpot(region.id)">
         <img class="regionImage" [src]="region.pathOfPhoto" alt="Foto de la region">
-        <h3 class="descriptionOfRegion">{{region.Description}}</h3>
+        <h3 class="descriptionOfRegion">{{region.descriptionOfName}}</h3>
     </li>
 </ul>
