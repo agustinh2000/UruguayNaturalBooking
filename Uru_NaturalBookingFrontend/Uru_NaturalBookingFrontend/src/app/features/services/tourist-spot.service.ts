@@ -238,13 +238,11 @@ export class TouristSpotService {
     );
   }
 
-  getTouristSpotById(touristSpotId: string): TouristSpotForRequestModel {
-    return;
-    // this is a call to the webAPI
-  }
-
-  isValidTouristSpot(touristSpotId: string): boolean {
-    const touristSpotObteined: TouristSpotModelForResponse[] = this.getAllTouristSpots();
-    return touristSpotObteined.some((t) => t.id === touristSpotId);
+  getTouristSpotById(
+    touristSpotId: string
+  ): Observable<TouristSpotModelForResponse> {
+    return this.http.get<TouristSpotModelForResponse>(
+      `${this.uri}/${touristSpotId}`
+    );
   }
 }
