@@ -199,12 +199,8 @@ export class TouristSpotService {
     return touristSpotObteined;
   }
 
-  getAllTouristSpots(): TouristSpotModelForResponse[] {
-    const touristSpotObteined: TouristSpotModelForResponse[] = [];
-    for (const touristSpot of this.touristSpotsModelForResponse) {
-      touristSpotObteined.push(touristSpot);
-    }
-    return touristSpotObteined;
+  getAllTouristSpots(): Observable<TouristSpotModelForResponse> {
+    return this.http.get<TouristSpotModelForResponse>(this.uri);
   }
 
   Add(

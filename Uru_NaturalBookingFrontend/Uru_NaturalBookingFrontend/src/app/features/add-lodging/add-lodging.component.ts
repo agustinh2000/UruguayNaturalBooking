@@ -17,6 +17,7 @@ import { TouristSpotModelForLodgingResponseModel } from '../../models/TouristSpo
   styleUrls: ['./add-lodging.component.css'],
 })
 export class AddLodgingComponent implements OnInit {
+  
   informationOfLodgingToCreate: LodgingModelForRequest;
 
   public formGroup: FormGroup;
@@ -29,43 +30,83 @@ export class AddLodgingComponent implements OnInit {
 
   public currentRate: number;
 
-  public touristSpotExisting: TouristSpotModelForLodgingResponseModel[];
+  public touristSpotExisting;
 
   public isAvailable: boolean = false;
+
+  public photosOfLodging;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private lodgingServicePassed: LodgingService,
     private touristSpotServicePassed: TouristSpotService
   ) {
+    this.touristSpotExisting = new Array();
+    this.photosOfLodging = new Array();
     this.touristSpotService = touristSpotServicePassed;
     this.lodgingService = lodgingServicePassed;
     this.formGroup = this.formBuilder.group({
       name: ['', [Validators.required, this.noWhitespaceValidator]],
       description: ['', [Validators.required, this.noWhitespaceValidator]],
       address: ['', [Validators.required, this.noWhitespaceValidator]],
-      imagePath: ['', [Validators.required, this.noWhitespaceValidator]],
+      images: ['', [this.noEmptyList]],
       pricePerNight: ['', [Validators.required, this.noWhitespaceValidator]],
       selectedTouristSpotControl: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
-    this.touristSpotExisting = this.touristSpotService.getTouristSpots();
+    this.chargeTouristSpots();
   }
 
-  public Create(): void {
+  private chargeTouristSpots(): void {
+    this.touristSpotService.getAllTouristSpots().subscribe(
+      res => {
+        this.touristSpotExisting = res;
+      },
+      (err) => {
+        alert(err.error);
+      }
+    );
+  }
+
+  public create(): void {
     this.informationOfLodgingToCreate = new LodgingModelForRequest(
       this.formGroup.value
     );
     this.informationOfLodgingToCreate.QuantityOfStars = this.currentRate;
     this.informationOfLodgingToCreate.IsAvailable = this.isAvailable;
     this.informationOfLodgingToCreate.TouristSpotId = this.selectedTouristSpot;
-    this.lodgingService.CreateLodging(this.informationOfLodgingToCreate);
+    this.informationOfLodgingToCreate.Images = this.photosOfLodging;
+    this.createLodging(this.informationOfLodgingToCreate);
+  }
+
+  private createLodging(informationOfLodging: LodgingModelForRequest): void{
+    this.lodgingService.add(informationOfLodging).subscribe(
+      res => {
+        alert('Hospedaje agregado');
+      },
+      (err) => {
+        alert(err.error);
+      }
+    );
   }
 
   public ChangeStateOfAvailability(): void {
     this.isAvailable = !this.isAvailable;
+  }
+
+  public addPhoto(): void {
+    const path = this.formGroup.controls.images.value;
+    if (path.trim() !== ''){
+      this.photosOfLodging.push(path);
+      this.formGroup.controls.images.reset();
+    }
+  }
+
+  public isEmptyListOfPhotos(): boolean {
+    return this.photosOfLodging.length === 0;
   }
 
   getErrorMessage(): string {
@@ -105,13 +146,16 @@ export class AddLodgingComponent implements OnInit {
   }
 
   getErrorMessageForPhoto(): string {
-    if (this.formGroup.controls.imagePath.hasError('required')) {
-      return 'Error. El link a la foto es requerido.';
+    if (this.formGroup.controls.images.hasError('emptyList')) {
+      return 'Error. Debe ingresar al menos una foto para el hospedaje.';
     }
-    return this.formGroup.controls.imagePath.hasError('whitespace')
-      ? 'Error. El link a la foto ingresado no puede ser vacío.'
-      : '';
   }
+
+  noEmptyList: ValidatorFn = (control: FormControl) => {
+    const isEmptyList = this.isEmptyListOfPhotos();
+    const isValid = !isEmptyList;
+    return isValid ? null : { emptyList: true };
+  };
 
   noWhitespaceValidator: ValidatorFn = (control: FormControl) => {
     const isWhitespace = (control.value || '').trim().length === 0;

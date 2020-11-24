@@ -28,8 +28,8 @@
             <mat-form-field class="selector-of-touristSpot" appearance="fill">
                 <mat-label>Seleccione un punto turistico</mat-label>
                 <mat-select [(value)]="selectedTouristSpot" formControlName="selectedTouristSpotControl" required>
-                    <mat-option *ngFor="let touristSpot of touristSpotExisting" [value]="touristSpot.Id">
-                        {{touristSpot.Name}}</mat-option>
+                    <mat-option *ngFor="let touristSpot of touristSpotExisting" [value]="touristSpot.id">
+                        {{touristSpot.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -55,14 +55,13 @@
         </mat-form-field>
 
         <mat-form-field class="input-urlPhoto" appearance="fill">
-            <mat-label> Url de la foto </mat-label> <input formControlName="imagePath" type="text" matInput
-                placeholder="Ex. https://www.gettyimages.es/gi-resources/images/500px/983794168.jpg" required>
-            <mat-error *ngIf="formGroup.controls.imagePath.invalid">{{getErrorMessageForPhoto()}}</mat-error>
+            <mat-label> Url de la foto </mat-label> <input formControlName="images" type="text" matInput
+                placeholder="Ex. https://www.gettyimages.es/gi-resources/images/500px/983794168.jpg">
+            <mat-error *ngIf="formGroup.controls.images.invalid">{{getErrorMessageForPhoto()}}</mat-error>
         </mat-form-field>
 
-        <button class="buttonAddPicture">Añadir foto</button>
+        <button type = "button" class = "buttonAddPicture" (click)="addPhoto()">Añadir foto</button>
 
-
-        <button class="button" (click)="Create()" [disabled]="formGroup.invalid">Crear hospedaje</button>
+        <button class="button" (click)="create()" [disabled]="formGroup.invalid ||  isEmptyListOfPhotos()">Crear hospedaje</button>
     </div>
 </form>

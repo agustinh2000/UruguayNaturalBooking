@@ -6,11 +6,16 @@ import { LodgingModelForRequest } from '../../models/LodgingModelForRequest';
 import { LodgingForSearchModel } from '../../models/LodgingForSearchModel';
 import { SearchOfLodgingModelForRequest } from '../../models/SearchOfLodgingModelForRequest';
 import { ReviewModelForResponse } from '../../models/ReviewModelForResponse';
+import { Observable } from 'rxjs';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LodgingService {
+  uri = `${environment.baseUrl}api/lodgings`;
+
   readonly touristSpots: TouristSpotModelForLodgingResponseModel[] = [
     {
       id: '13046b7e-3d83-4576-b459-65c4c965b037',
@@ -199,7 +204,7 @@ export class LodgingService {
     },
   ];
 
-  constructor() {}
+  constructor(private http: HttpClient ) {}
 
   getLodgingById(lodgingId: string): LodgingModelForResponse {
     return this.lodgings[5];
@@ -219,6 +224,23 @@ export class LodgingService {
         lodging.isAvailable = newState;
       }
     }
+  }
+
+  
+  add(
+    lodgingToAdd: LodgingModelForRequest
+  ): Observable<LodgingModelForResponse> {
+    let myHeaders = new HttpHeaders();
+    if (localStorage.token !== undefined) {
+      myHeaders = myHeaders.append('token', localStorage.token);
+    }
+    return this.http.post<LodgingModelForResponse>(
+      this.uri,
+      lodgingToAdd,
+      {
+        headers: myHeaders,
+      }
+    );
   }
 
   CreateLodging(
