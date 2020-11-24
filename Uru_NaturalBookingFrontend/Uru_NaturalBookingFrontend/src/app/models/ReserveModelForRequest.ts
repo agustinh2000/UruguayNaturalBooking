@@ -1,26 +1,25 @@
 export class ReserveModelForRequest {
+  public name: string;
 
-    public Name: string;
+  public lastName: string;
 
-    public LastName: string;
+  public email: string;
 
-    public Email: string;
+  public checkIn: Date;
 
-    public CheckIn: Date;
+  public checkOut: Date;
 
-    public CheckOut: Date;
+  public quantityOfAdult: number;
 
-    public QuantityOfAdult: number;
+  public quantityOfChild: number;
 
-    public QuantityOfChild: number;
+  public quantityOfRetired: number;
 
-    public QuantityOfRetired: number;
+  public quantityOfBaby: number;
 
-    public QuantityOfBaby: number;
+  public idOfLodgingToReserve: string;
 
-    public IdOfLodgingToReserve: string;
-
-    public constructor(init?: Partial<ReserveModelForRequest>) {
-        Object.assign(this, init);
-    }
+  public constructor(init?: Partial<ReserveModelForRequest>) {
+    Object.assign(this, init);
+  }
 }

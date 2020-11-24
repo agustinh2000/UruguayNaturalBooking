@@ -24,7 +24,7 @@ namespace WebApi.Controllers
             reserveManagement = reserveLogic;
         }
 
-        [HttpGet("{id}", Name = "getReserve")]
+        [HttpGet("{id}", Name = "reserve")]
         public IActionResult Get(Guid id)
         {
             try
@@ -48,7 +48,7 @@ namespace WebApi.Controllers
             try
             {
                 Reserve reserve = reserveManagement.Create(ReserveModelForRequest.ToEntity(aReserveModel), aReserveModel.IdOfLodgingToReserve);
-                return CreatedAtRoute("getReserve", new { id = reserve.Id }, ReserveModelForResponse.ToModel(reserve));
+                return CreatedAtRoute("reserve", new { id = reserve.Id }, ReserveModelForResponse.ToModel(reserve));
             }
             catch (DomainBusinessLogicException e)
             {
@@ -71,7 +71,7 @@ namespace WebApi.Controllers
             try
             {
                 Reserve reserve = reserveManagement.Update(idForUpdateReserve, ReserveModelForRequestUpdate.ToEntity(aReserveModelForUpdate));
-                return CreatedAtRoute("getReserve", new { id = reserve.Id }, ReserveModelForResponse.ToModel(reserve));
+                return CreatedAtRoute("reserve", new { id = reserve.Id }, ReserveModelForResponse.ToModel(reserve));
             }
             catch (DomainBusinessLogicException e)
             {

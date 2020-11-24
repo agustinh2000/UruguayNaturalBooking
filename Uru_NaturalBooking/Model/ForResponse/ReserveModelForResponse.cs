@@ -8,6 +8,7 @@ namespace Model.ForResponse
 {
     public class ReserveModelForResponse : ModelBaseForResponse<Reserve, ReserveModelForResponse>
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
 
         public string LastName { get; set; }
@@ -42,6 +43,7 @@ namespace Model.ForResponse
 
         protected override ReserveModelForResponse SetModel(Reserve entity)
         {
+            Id = entity.Id;
             Name = entity.Name;
             LastName = entity.LastName;
             Email = entity.Email;

@@ -1,5 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { DescriptionOfState } from 'src/app/models/ReserveState';
 import { ReviewModelForRequest } from 'src/app/models/ReviewModelForRequest';
 import { ReserveModelForResponse } from '../../models/ReserveModelForResponse';
@@ -9,10 +15,9 @@ import { ReserveModelForRequestUpdate } from '../../models/ReserveModelForReques
 @Component({
   selector: 'app-form-modify-reserve',
   templateUrl: './form-modify-reserve.component.html',
-  styleUrls: ['./form-modify-reserve.component.css']
+  styleUrls: ['./form-modify-reserve.component.css'],
 })
 export class FormModifyReserveComponent implements OnInit {
-
   @Input() reserveId: string;
 
   public formGroup: FormGroup;
@@ -25,15 +30,21 @@ export class FormModifyReserveComponent implements OnInit {
 
   public stateSelected: number;
 
-  constructor(aReserveService: ReserveService, private formBuilder: FormBuilder) {
+  constructor(
+    aReserveService: ReserveService,
+    private formBuilder: FormBuilder
+  ) {
     this.reserveService = aReserveService;
     this.formGroup = this.formBuilder.group({
       name: new FormControl(''),
       lastName: new FormControl(''),
       email: new FormControl(''),
-      description: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
+      description: new FormControl('', [
+        Validators.required,
+        this.noWhitespaceValidator,
+      ]),
       reserveState: new FormControl('', [Validators.required]),
-      nameOfLodging: new FormControl('')
+      nameOfLodging: new FormControl(''),
     });
   }
 
@@ -46,18 +57,23 @@ export class FormModifyReserveComponent implements OnInit {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
-  }
+  };
 
   public ChargeInfoInFields(): void {
-    this.reserveSelectedToModify = this.reserveService.getReserveById(this.reserveId);
-    this.stateSelected = this.reserveSelectedToModify.ReserveState;
+    //this.reserveSelectedToModify = this.reserveService.getReserveById(this.reserveId);
+    this.stateSelected = this.reserveSelectedToModify.reserveState;
     this.formGroup = this.formBuilder.group({
-      name: new FormControl(this.reserveSelectedToModify.Name),
-      lastName: new FormControl(this.reserveSelectedToModify.LastName),
-      email: new FormControl(this.reserveSelectedToModify.Email),
-      description: new FormControl(this.reserveSelectedToModify.DescriptionForGuest, [Validators.required, this.noWhitespaceValidator]),
-      reserveState: new FormControl(this.reserveSelectedToModify.ReserveState, [Validators.required]),
-      nameOfLodging: new FormControl(this.reserveSelectedToModify.Lodging.Name)
+      name: new FormControl(this.reserveSelectedToModify.name),
+      lastName: new FormControl(this.reserveSelectedToModify.lastName),
+      email: new FormControl(this.reserveSelectedToModify.email),
+      description: new FormControl(
+        this.reserveSelectedToModify.descriptionForGuest,
+        [Validators.required, this.noWhitespaceValidator]
+      ),
+      reserveState: new FormControl(this.reserveSelectedToModify.reserveState, [
+        Validators.required,
+      ]),
+      nameOfLodging: new FormControl(this.reserveSelectedToModify.lodging.name),
     });
   }
 
@@ -70,7 +86,7 @@ export class FormModifyReserveComponent implements OnInit {
       const reserveToModify: ReserveModelForRequestUpdate = {
         Id: this.reserveId,
         Description: this.formGroup.controls.description.value,
-        StateOfReserve: this.stateSelected
+        StateOfReserve: this.stateSelected,
       };
       this.reserveService.updateReserve(reserveToModify);
     }

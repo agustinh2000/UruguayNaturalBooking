@@ -95,7 +95,7 @@ namespace Domain
             int quantityOfRetired = quantityOfGuest[3];
             const double discountForChilds = 0.50;
             const double discountForBabys = 0.25;
-            const double discountForRetireds = 0.30;
+            const double discountForRetireds = 0.70;
             double quantityOfRetiredToApplyDiscount = Math.Floor(quantityOfRetired / 2.0);
             double quantityOfRetiredWithOutDiscount = quantityOfRetired - quantityOfRetiredToApplyDiscount;
             return (PricePerNight * totalDaysToStay) * (quantityOfAdults + (quantityOfChilds * discountForChilds)

@@ -40,7 +40,7 @@
                 <input formControlName="email" type="email" matInput required>
                 <mat-error *ngIf="formGroup.controls.email.invalid">{{getErrorMessageEmail()}}</mat-error>
             </mat-form-field>
-            <button class="button" (click)="Reserve()" [disabled]="formGroup.invalid">Confirmar reserva</button>
+            <button class="button" (click)="createReserve()" [disabled]="formGroup.invalid">Confirmar reserva</button>
         </div>
     </form>
 </div>

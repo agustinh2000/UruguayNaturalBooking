@@ -24,8 +24,17 @@ export class ReserveConfirmationComponent implements OnInit {
 
   ngOnInit(): void {
     this.reserveId = this.currentRoute.snapshot.params.idReserve;
-    this.reserveConfirmation = this.reserveService.getReserveById(
-      this.reserveId
+    this.getTheReserveConfirmation(this.reserveId);
+  }
+
+  private getTheReserveConfirmation(reserveId: string): void {
+    this.reserveService.getReserveById(reserveId).subscribe(
+      (res: ReserveModelForResponse) => {
+        this.reserveConfirmation = res;
+      },
+      (err) => {
+        alert(err.error);
+      }
     );
   }
 }

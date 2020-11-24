@@ -1,4 +1,4 @@
-export class LodgingModelForReserveResponseModel{
-    public Name: string;
-    public Address: string;
+export class LodgingModelForReserveResponseModel {
+  public name: string;
+  public address: string;
 }

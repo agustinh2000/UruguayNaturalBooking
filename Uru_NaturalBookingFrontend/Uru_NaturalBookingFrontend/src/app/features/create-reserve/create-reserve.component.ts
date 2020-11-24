@@ -10,6 +10,8 @@ import { LodgingService } from '../services/lodging.service';
 import { ReserveModelForRequest } from '../../models/ReserveModelForRequest';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LodgingModelForResponse } from 'src/app/models/LodgingModelForResponse';
+import { ReserveService } from '../services/reserve.service';
+import { ReserveModelForResponse } from 'src/app/models/ReserveModelForResponse';
 
 @Component({
   selector: 'app-create-reserve',
@@ -34,7 +36,8 @@ export class CreateReserveComponent implements OnInit {
     private formBuilder: FormBuilder,
     aLodgingService: LodgingService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private reserveService: ReserveService
   ) {
     this.lodgingsService = aLodgingService;
     this.formGroup = this.formBuilder.group({
@@ -94,19 +97,26 @@ export class CreateReserveComponent implements OnInit {
     return isValid ? null : { whitespace: true };
   };
 
-  public Reserve(): void {
+  public createReserve(): void {
     this.reserve = new ReserveModelForRequest();
-    this.reserve.Name = this.formGroup.controls.name.value;
-    this.reserve.LastName = this.formGroup.controls.lastName.value;
-    this.reserve.Email = this.formGroup.controls.email.value;
-    this.reserve.CheckIn = this.checkIn;
-    this.reserve.CheckOut = this.checkOut;
-    this.reserve.QuantityOfAdult = this.quantityOfGuest[0];
-    this.reserve.QuantityOfChild = this.quantityOfGuest[1];
-    this.reserve.QuantityOfBaby = this.quantityOfGuest[2];
-    this.reserve.QuantityOfRetired = this.quantityOfGuest[3];
-    this.reserve.IdOfLodgingToReserve = this.lodgingId;
-    // call web api post method
-    this.router.navigate(['reserve-confirmation', '123']);
+    this.reserve.name = this.formGroup.controls.name.value;
+    this.reserve.lastName = this.formGroup.controls.lastName.value;
+    this.reserve.email = this.formGroup.controls.email.value;
+    this.reserve.checkIn = this.checkIn;
+    this.reserve.checkOut = this.checkOut;
+    this.reserve.quantityOfAdult = this.quantityOfGuest[0];
+    this.reserve.quantityOfChild = this.quantityOfGuest[1];
+    this.reserve.quantityOfBaby = this.quantityOfGuest[2];
+    this.reserve.quantityOfRetired = this.quantityOfGuest[3];
+    this.reserve.idOfLodgingToReserve = this.lodgingId;
+
+    this.reserveService.createReserve(this.reserve).subscribe(
+      (res: ReserveModelForResponse) => {
+        this.router.navigate(['reserve-confirmation', res.id]);
+      },
+      (err) => {
+        alert(err);
+      }
+    );
   }
 }
