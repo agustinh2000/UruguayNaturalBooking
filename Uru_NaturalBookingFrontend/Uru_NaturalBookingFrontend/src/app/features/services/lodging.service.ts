@@ -204,7 +204,7 @@ export class LodgingService {
     },
   ];
 
-  constructor(private http: HttpClient ) {}
+  constructor(private http: HttpClient) {}
 
   getLodgingById(lodgingId: string): LodgingModelForResponse {
     return this.lodgings[5];
@@ -226,7 +226,6 @@ export class LodgingService {
     }
   }
 
-  
   add(
     lodgingToAdd: LodgingModelForRequest
   ): Observable<LodgingModelForResponse> {
@@ -234,13 +233,9 @@ export class LodgingService {
     if (localStorage.token !== undefined) {
       myHeaders = myHeaders.append('token', localStorage.token);
     }
-    return this.http.post<LodgingModelForResponse>(
-      this.uri,
-      lodgingToAdd,
-      {
-        headers: myHeaders,
-      }
-    );
+    return this.http.post<LodgingModelForResponse>(this.uri, lodgingToAdd, {
+      headers: myHeaders,
+    });
   }
 
   CreateLodging(

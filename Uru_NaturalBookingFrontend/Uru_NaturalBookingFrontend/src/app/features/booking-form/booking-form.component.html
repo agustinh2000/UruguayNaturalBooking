@@ -62,7 +62,8 @@
                 </div>
 
                 <ng-container *ngIf="!showLodgingsAvailables; else ButtonCancel">
-                    <button class="button" (click)="searchOfLodgings()"> Buscar hospedajes </button>
+                    <button [disabled]="formGroup.invalid || isInvalidQuantityOfGuest()" class="button"
+                        (click)="searchOfLodgings()"> Buscar hospedajes </button>
                 </ng-container>
 
                 <ng-template #ButtonCancel>
