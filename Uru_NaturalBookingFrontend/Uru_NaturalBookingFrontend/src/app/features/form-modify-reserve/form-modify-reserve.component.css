@@ -28,7 +28,7 @@ h1 {
   padding: 1.5% 1.5%;
   border-radius: 5px;
   cursor: pointer;
-  left: 25vh;
+  left: 20%;
   top: 5vh
 }
 
@@ -40,28 +40,29 @@ h1 {
   .formulario {
     position: relative;
     margin: auto;
-    width: 131vh;
+    width: 50%;
     height: 90vh;
     top: -3vh;
     margin-top: 4%;
     border-radius: 8px;
-    box-sizing: border-box
+    box-sizing: border-box;
+    align-items: center;
   }
 }
 
 .inputDescription {
   position: relative;
-  left: 17vh;
-  width: 90vh;
+  width: 90%;
   top: -1vh;
-  height: 10vh
+  height: 10vh;
+  left: 5%
 }
 
 .inputForEmail, .inputForLastName, .inputForLodgingName, .inputForName {
   position: relative;
-  width: 90vh;
+  width: 90%;
   top: -2vh;
-  left: 17vh
+  left: 5%
 }
 
 input[readonly] {
@@ -71,13 +72,13 @@ input[readonly] {
 .stateTextOfSelectReserve {
   position: relative;
   top: 5vh;
-  left: 17vh;
+  left: 5%;
   color: #707070
 }
 
 .comboOfStatesToChange {
   position: relative;
-  left: 45vh;
-  width: 50vh;
+  left: 28%;
+  width: 67%;
   top: 1vh
 }

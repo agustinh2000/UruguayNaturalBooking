@@ -50,12 +50,12 @@
             <mat-form-field class="comboOfStatesToChange" appearance="fill">
                 <mat-label>Estado de la reserva</mat-label>
                 <mat-select [(value)]="stateSelected">
-                    <mat-option *ngFor="let key of existingStates.keys()" [value]="key">
+                    <mat-option *ngFor="let key of existingStatesKeys" [value]="key">
                         {{existingStates.get(key)}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
-            <button class="button" (click) = "modifyReserve()">Modificar reserva</button>
+            <button class="button" (click)="modifyReserve()">Modificar reserva</button>
         </div>
     </form>
 </div>

@@ -24,11 +24,17 @@ export class ReserveNotExistGuard implements CanActivate {
     | boolean
     | UrlTree {
     const idReserve = route.url[1].path;
-    if (!this.reserveService.reserveExist(idReserve)) {
-      alert('Ups no existe la reserva buscada.');
-      this.router.navigate(['regions']);
-      return false;
-    }
-    return true;
+    return new Observable<boolean | UrlTree>((obs) => {
+      this.reserveService.getReserveById(idReserve).subscribe(
+        (res) => {
+          obs.next(true);
+        },
+        (err) => {
+          alert(err.error);
+          obs.next(false);
+          this.router.navigate(['/regions']);
+        }
+      );
+    });
   }
 }

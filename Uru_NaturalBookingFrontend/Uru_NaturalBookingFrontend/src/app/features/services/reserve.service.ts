@@ -6,7 +6,7 @@ import { DescriptionOfState } from '../../models/ReserveState';
 import { ReserveModelForRequestUpdate } from '../../models/ReserveModelForRequestUpdate';
 import { ReserveModelForRequest } from 'src/app/models/ReserveModelForRequest';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,12 +15,6 @@ import { environment } from 'src/environments/environment';
 export class ReserveService {
   uri = `${environment.baseUrl}api/reserves`;
 
-  reserveExist(reserveId: string): boolean {
-    return true;
-    // this is a call to the ReserveController in the webAPI to get the reserve by the id,
-    // and in this case if we get a 200 means that reserve exist, in other case not.
-  }
-
   constructor(private http: HttpClient) {}
 
   getReserveById(reserveId: string): Observable<ReserveModelForResponse> {
@@ -28,11 +22,28 @@ export class ReserveService {
   }
 
   updateReserve(
-    reserveModelForUpdate: ReserveModelForRequestUpdate
-  ): ReserveModelForResponse {
-    return;
-    // this is a call to the ReserveController in the webAPI to update the reserve passed in the parameter
-    // and return the reserve update in ReserveModelForResponse
+    reserveModelForUpdate: ReserveModelForRequestUpdate,
+    reserveId: string
+  ): Observable<ReserveModelForResponse> {
+    const headersForUpdate = this.defineHeaders();
+    return this.http.put<ReserveModelForResponse>(
+      `${this.uri}/${reserveId}`,
+      reserveModelForUpdate,
+      { headers: headersForUpdate }
+    );
+  }
+
+  private hasUserLogued(): boolean {
+    const token = localStorage.token;
+    return token != null && token !== undefined && token !== '';
+  }
+
+  private defineHeaders(): HttpHeaders {
+    let myHeaders = new HttpHeaders();
+    if (this.hasUserLogued()) {
+      myHeaders = myHeaders.append('token', localStorage.token);
+    }
+    return myHeaders;
   }
 
   createReserve(

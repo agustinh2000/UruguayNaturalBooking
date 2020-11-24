@@ -11,6 +11,7 @@ import { ReviewModelForRequest } from 'src/app/models/ReviewModelForRequest';
 import { ReserveModelForResponse } from '../../models/ReserveModelForResponse';
 import { ReserveService } from '../services/reserve.service';
 import { ReserveModelForRequestUpdate } from '../../models/ReserveModelForRequestUpdate';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-modify-reserve',
@@ -28,11 +29,14 @@ export class FormModifyReserveComponent implements OnInit {
 
   public existingStates: Map<number, string>;
 
+  public existingStatesKeys: number[];
+
   public stateSelected: number;
 
   constructor(
     aReserveService: ReserveService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.reserveService = aReserveService;
     this.formGroup = this.formBuilder.group({
@@ -50,7 +54,8 @@ export class FormModifyReserveComponent implements OnInit {
 
   ngOnInit(): void {
     this.existingStates = DescriptionOfState;
-    this.ChargeInfoInFields();
+    this.existingStatesKeys = Array.from(this.existingStates.keys());
+    this.chargeInfoInFields();
   }
 
   noWhitespaceValidator: ValidatorFn = (control: FormControl) => {
@@ -59,9 +64,26 @@ export class FormModifyReserveComponent implements OnInit {
     return isValid ? null : { whitespace: true };
   };
 
-  public ChargeInfoInFields(): void {
-    //this.reserveSelectedToModify = this.reserveService.getReserveById(this.reserveId);
-    this.stateSelected = this.reserveSelectedToModify.reserveState;
+  public chargeInfoInFields(): void {
+    this.reserveService.getReserveById(this.reserveId).subscribe(
+      (res: ReserveModelForResponse) => {
+        this.chargeInfoOnFormGroup(res);
+      },
+      (err) => {
+        if (err.status === 400) {
+          alert(
+            'Error. No es un formato valido para los identificiadores, el mismo debe ser formato GUID.'
+          );
+        } else {
+          alert(err.error);
+        }
+      }
+    );
+  }
+
+  private chargeInfoOnFormGroup(reserveModel: ReserveModelForResponse): void {
+    this.reserveSelectedToModify = reserveModel;
+    this.stateSelected = this.reserveSelectedToModify.stateOfReserve;
     this.formGroup = this.formBuilder.group({
       name: new FormControl(this.reserveSelectedToModify.name),
       lastName: new FormControl(this.reserveSelectedToModify.lastName),
@@ -70,9 +92,10 @@ export class FormModifyReserveComponent implements OnInit {
         this.reserveSelectedToModify.descriptionForGuest,
         [Validators.required, this.noWhitespaceValidator]
       ),
-      reserveState: new FormControl(this.reserveSelectedToModify.reserveState, [
-        Validators.required,
-      ]),
+      reserveState: new FormControl(
+        this.reserveSelectedToModify.stateOfReserve,
+        [Validators.required]
+      ),
       nameOfLodging: new FormControl(this.reserveSelectedToModify.lodging.name),
     });
   }
@@ -88,7 +111,23 @@ export class FormModifyReserveComponent implements OnInit {
         Description: this.formGroup.controls.description.value,
         StateOfReserve: this.stateSelected,
       };
-      this.reserveService.updateReserve(reserveToModify);
+      this.reserveService
+        .updateReserve(reserveToModify, this.reserveId)
+        .subscribe(
+          (res: ReserveModelForResponse) => {
+            alert(
+              'Se ha modificado correctamente el estado y/o descripción de la reserva con ID: ' +
+                this.reserveId +
+                ' pasando a tener el estado: ' +
+                res.descriptionOfState
+            );
+            this.router.navigate(['/regions']);
+          },
+          (err) => {
+            alert(err.error);
+            this.router.navigate(['/regions']);
+          }
+        );
     }
   }
 }

@@ -14,7 +14,7 @@ export class ReserveModelForResponse {
   public quantityOfChild: number;
   public quantityOfBaby: number;
   public quantityOfRetired: number;
-  public reserveState: ReserveState;
+  public stateOfReserve: ReserveState;
   public descriptionOfState: string;
   public lodging: LodgingModelForReserveResponseModel;
   public totalPrice: number;

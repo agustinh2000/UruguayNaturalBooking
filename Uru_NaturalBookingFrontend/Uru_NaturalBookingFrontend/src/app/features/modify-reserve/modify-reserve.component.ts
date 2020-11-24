@@ -6,6 +6,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { ReserveModelForResponse } from 'src/app/models/ReserveModelForResponse';
 import { ReserveService } from '../services/reserve.service';
 
 @Component({
@@ -19,6 +20,8 @@ export class ModifyReserveComponent implements OnInit {
   private reserveService: ReserveService;
 
   isShown = false;
+
+  private existReserve: boolean;
 
   constructor(
     aServiceOfReserves: ReserveService,
@@ -35,8 +38,27 @@ export class ModifyReserveComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  reserveExist(reserveId: string): boolean {
-    return this.reserveService.reserveExist(reserveId);
+  openModifyForm(): void {
+    this.reserveService
+      .getReserveById(this.formGroup.controls.reserveSelected.value)
+      .subscribe(
+        (res: ReserveModelForResponse) => {
+          this.markShown(res);
+        },
+        (err) => {
+          if (err.status === 400) {
+            alert(
+              'Error. No es un formato valido para los identificiadores, el mismo debe ser formato GUID.'
+            );
+          } else {
+            alert(err.error);
+          }
+        }
+      );
+  }
+
+  markShown(reserveModel: ReserveModelForResponse): void {
+    this.isShown = reserveModel !== null;
   }
 
   noWhitespaceValidator: ValidatorFn = (control: FormControl) => {
@@ -45,9 +67,12 @@ export class ModifyReserveComponent implements OnInit {
     return isValid ? null : { whitespace: true };
   };
 
-  openModifyForm(): void {
-    if (this.reserveExist(this.formGroup.controls.reserveSelected.value)) {
-      this.isShown = true;
+  getErrorMessage(): string {
+    if (this.formGroup.controls.reserveSelected.hasError('required')) {
+      return 'Error. El ID de la reserva es requerido.';
+    }
+    if (this.formGroup.controls.reserveSelected.hasError('whitespace')) {
+      return 'Error. El ID de la reserva no puede ser vacio.';
     }
   }
 
