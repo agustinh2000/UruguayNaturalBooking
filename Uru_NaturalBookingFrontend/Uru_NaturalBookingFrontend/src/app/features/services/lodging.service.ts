@@ -9,6 +9,7 @@ import { ReviewModelForResponse } from '../../models/ReviewModelForResponse';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { LoginModelForResponse } from 'src/app/models/LoginModelForResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -204,10 +205,10 @@ export class LodgingService {
     },
   ];
 
-  constructor(private http: HttpClient ) {}
+  constructor(private http: HttpClient) {}
 
-  getLodgingById(lodgingId: string): LodgingModelForResponse {
-    return this.lodgings[5];
+  getLodgingById(lodgingId: string): Observable<LodgingModelForResponse> {
+    return this.http.get<LodgingModelForResponse>(`${this.uri}/${lodgingId}`);
   }
 
   getLodgings(): Observable<LodgingModelForResponse> {
@@ -256,13 +257,9 @@ export class LodgingService {
     if (localStorage.token !== undefined) {
       myHeaders = myHeaders.append('token', localStorage.token);
     }
-    return this.http.post<LodgingModelForResponse>(
-      this.uri,
-      lodgingToAdd,
-      {
-        headers: myHeaders,
-      }
-    );
+    return this.http.post<LodgingModelForResponse>(this.uri, lodgingToAdd, {
+      headers: myHeaders,
+    });
   }
 
   CreateLodging(
@@ -272,4 +269,8 @@ export class LodgingService {
     // this is a call to the service in the webAPI to the method POST of LodgingController
   }
 
+  isValidLodging(idLodging: string): boolean {
+    const lodgingsObteined: LodgingModelForResponse[] = this.getLodgings();
+    return lodgingsObteined.some((l) => l.id === idLodging);
+  }
 }

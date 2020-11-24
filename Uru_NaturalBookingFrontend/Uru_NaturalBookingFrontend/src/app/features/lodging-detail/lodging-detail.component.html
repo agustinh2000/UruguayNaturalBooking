@@ -9,19 +9,31 @@
         </span>
     </div>
 
+    <button class="reserveButton" mat-button color="primary" (click)="reserveNow()">Reservar ahora</button>
+
     <div class="right" (click)="nextImage()" mat-icon-button color="white">
         <mat-icon class="rightArrow">arrow_forward</mat-icon>
     </div>
     <div class="left" (click)="previousImage()" mat-icon-button color="white">
         <mat-icon class="leftArrow">arrow_back</mat-icon>
     </div>
-    <span class="address">{{lodgingForReserve.address}},
-        {{lodgingForReserve.lodgingTouristSpotModel.name}}</span>
-    <span class="pricePerNight"> USD {{lodgingForReserve.pricePerNight}} (por noche)</span>
+    <div class="address">
+        <span>{{lodgingForReserve.address}}</span>
+    </div>
+    <div class="pricePerNight">
+        <span> USD {{lodgingForReserve.pricePerNight}} (por noche)</span>
+    </div>
     <div class="review">
         <span class="reviewScore">{{lodgingForReserve.reviewsAverageScore}}</span>
     </div>
-    <span class="totalPrice">Precio total: USD {{totalPriceForSearch}}</span>
+    <div class="totalPrice">
+        <span>Precio total: USD {{totalPriceForSearch}}</span>
+    </div>
+
+    <div class="description">
+        <span> <strong>Descripción:</strong> {{lodgingForReserve.description}}</span>
+    </div>
+
 </div>
 <div class="reviews">
     <div class="cardReview" *ngFor="let review of lodgingForReserve.reviewsForLodging">
@@ -35,4 +47,3 @@
             {{review.lastNameOfWhoComments | uppercase}}</span>
     </div>
 </div>
-<button class="reserveButton" mat-button color="primary" (click)="reserveNow()">Reservar ahora</button>

@@ -51,8 +51,13 @@ export class CreateReserveComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.lodgingForReserve = this.lodgingsService.getLodgingById(
-      this.lodgingId
+    this.lodgingsService.getLodgingById(this.lodgingId).subscribe(
+      (res: LodgingModelForResponse) => {
+        this.lodgingForReserve = res;
+      },
+      (err) => {
+        alert(err.error);
+      }
     );
   }
 

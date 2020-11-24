@@ -10,6 +10,7 @@ import { LodgingModelForRequest } from '../../models/LodgingModelForRequest';
 import { LodgingService } from '../services/lodging.service';
 import { TouristSpotService } from '../services/tourist-spot.service';
 import { TouristSpotModelForLodgingResponseModel } from '../../models/TouristSpotModelForLodgingResponseModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-lodging',
@@ -17,7 +18,6 @@ import { TouristSpotModelForLodgingResponseModel } from '../../models/TouristSpo
   styleUrls: ['./add-lodging.component.css'],
 })
 export class AddLodgingComponent implements OnInit {
-  
   informationOfLodgingToCreate: LodgingModelForRequest;
 
   public formGroup: FormGroup;
@@ -36,11 +36,11 @@ export class AddLodgingComponent implements OnInit {
 
   public photosOfLodging;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private lodgingServicePassed: LodgingService,
-    private touristSpotServicePassed: TouristSpotService
+    private touristSpotServicePassed: TouristSpotService,
+    private router: Router
   ) {
     this.touristSpotExisting = new Array();
     this.photosOfLodging = new Array();
@@ -62,7 +62,7 @@ export class AddLodgingComponent implements OnInit {
 
   private chargeTouristSpots(): void {
     this.touristSpotService.getAllTouristSpots().subscribe(
-      res => {
+      (res) => {
         this.touristSpotExisting = res;
       },
       (err) => {
@@ -82,10 +82,17 @@ export class AddLodgingComponent implements OnInit {
     this.createLodging(this.informationOfLodgingToCreate);
   }
 
-  private createLodging(informationOfLodging: LodgingModelForRequest): void{
+  private createLodging(informationOfLodging: LodgingModelForRequest): void {
     this.lodgingService.add(informationOfLodging).subscribe(
-      res => {
-        alert('Hospedaje agregado');
+      (res) => {
+        alert(
+          'Hospedaje con nombre: ' +
+            res.name +
+            'en la dirección' +
+            res.address +
+            ' agregado correctamente'
+        );
+        this.router.navigateByUrl('/regions');
       },
       (err) => {
         alert(err.error);
@@ -99,7 +106,7 @@ export class AddLodgingComponent implements OnInit {
 
   public addPhoto(): void {
     const path = this.formGroup.controls.images.value;
-    if (path.trim() !== ''){
+    if (path.trim() !== '') {
       this.photosOfLodging.push(path);
       this.formGroup.controls.images.reset();
     }

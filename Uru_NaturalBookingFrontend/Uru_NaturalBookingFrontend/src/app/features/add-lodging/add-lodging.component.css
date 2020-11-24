@@ -25,6 +25,29 @@ h1 {
   border-radius: 8px;
 }
 
+.input-urlPhoto {
+  position: relative;
+  width: 50%;
+  top: -15vh;
+}
+
+.buttonAddPicture {
+  position: relative;
+  top: -16vh;
+  left: 4%;
+  border: none;
+  width: 40%;
+  color: white;
+  font-size: 135%;
+  background: #50c438;
+  padding: 1.5% 3%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buttonAddPicture:hover {
+  background: #49a320;
+}
 
 .input-contenedor {
   margin-bottom: 3.5%;
@@ -39,7 +62,7 @@ h1 {
 
 .button {
   position: relative;
-  top: 0;
+  top: -14vh;
   border: none;
   width: 100%;
   color: white;
@@ -75,7 +98,7 @@ p {
 @media(min-width:768px) {
   .formulario {
     margin: auto;
-    height: 160vh;
+    height: 125vh;
     width: 40%;
     margin-top: 4%;
     border-radius: 2%;

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LodgingForSearchModel } from 'src/app/models/LodgingForSearchModel';
 import { LodgingModelForResponse } from 'src/app/models/LodgingModelForResponse';
-import { LodgingModelForSearchResponse } from 'src/app/models/LodgingModelForSearchResponse';
 import { LodgingService } from '../services/lodging.service';
 
 @Component({
@@ -43,15 +41,20 @@ export class LodgingDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.lodgingForReserve = this.lodgingsService.getLodgingById(
-      this.lodgingId
+    this.lodgingsService.getLodgingById(this.lodgingId).subscribe(
+      (res: LodgingModelForResponse) => {
+        this.lodgingForReserve = res;
+      },
+      (err) => {
+        alert(err.error);
+      }
     );
   }
 
   public nextImage(): void {
     if (
       this.indexOfImageToShow ===
-      this.lodgingForReserve.reviewsForLodging.length - 1
+      this.lodgingForReserve.imagesPath.length - 1
     ) {
       this.indexOfImageToShow = 0;
     } else {
@@ -61,8 +64,7 @@ export class LodgingDetailComponent implements OnInit {
 
   public previousImage(): void {
     if (this.indexOfImageToShow === 0) {
-      this.indexOfImageToShow =
-        this.lodgingForReserve.reviewsForLodging.length - 1;
+      this.indexOfImageToShow = this.lodgingForReserve.imagesPath.length - 1;
     } else {
       this.indexOfImageToShow--;
     }
