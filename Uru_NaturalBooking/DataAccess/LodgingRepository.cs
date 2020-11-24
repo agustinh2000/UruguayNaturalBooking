@@ -60,7 +60,7 @@ namespace DataAccess
                 List<Lodging> listOfLodgingsWithReserves = context.Set<Lodging>().AsEnumerable().Where(x => x.TouristSpot.Id.Equals(idOfTouristSpot)
                 && x.QuantityOfReserveForThePeriod(dateCheckInMax, dateCheckOutMax) > 0)
                     .OrderByDescending(x => x.QuantityOfReserveForThePeriod(dateCheckInMax, dateCheckOutMax))
-                    .ThenByDescending(x => x.CreationDate).ToList();
+                    .ThenBy(x => x.CreationDate).ToList();
 
                 if (listOfLodgingsWithReserves.IsNullOrEmpty())
                 {

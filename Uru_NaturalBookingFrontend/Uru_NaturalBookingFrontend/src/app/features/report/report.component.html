@@ -5,38 +5,33 @@
 
       <mat-form-field appearance="fill" class="checkInPicker">
         <mat-label>Check-in maximo</mat-label>
-        <input matInput [matDatepicker]="checkInPicker" [max]="maxDate" formControlName="checkInPicker" required>
+        <input [disabled]="isShown" matInput [matDatepicker]="checkInPicker" formControlName="checkInPicker" required>
         <mat-datepicker-toggle matSuffix [for]="checkInPicker"></mat-datepicker-toggle>
         <mat-datepicker #checkInPicker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="checkOutPicker">
         <mat-label>Check-out maximo</mat-label>
-        <input matInput [matDatepicker]="checkOutPicker" [max]="maxDate" formControlName="checkOutPicker" required>
+        <input [disabled]="isShown" matInput [matDatepicker]="checkOutPicker" formControlName="checkOutPicker" required>
         <mat-datepicker-toggle matSuffix [for]="checkOutPicker"></mat-datepicker-toggle>
         <mat-datepicker #checkOutPicker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="touristSpotCombo">
         <mat-label>Seleccione un punto turistico</mat-label>
-        <mat-select formControlName="touristSpotSelected">
+        <mat-select [disabled]="isShown" formControlName="touristSpotSelected">
           <mat-option *ngFor="let touristSpot of touristSpotExisting" [value]="touristSpot.id" required>
             {{touristSpot.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <div *ngIf="!isShown; else elseBlock">
-      <button class="button" (click)="generateReport()">Generar reporte</button>
+        <button class="button" (click)="generateReport()">Generar reporte</button>
       </div>
-      
-      <ng-template #elseBlock>      
-      <button class="button" (click)="cancel()">Cancelar</button>
+
+      <ng-template #elseBlock>
+        <button class="button" (click)="cancel()">Cancelar</button>
       </ng-template>
-
-
-      <ng-template [ngIf]="!isShown">
-      </ng-template>
-
 
       <mat-error *ngIf="formGroup.errors?.range && formGroup.touched">El check-in no puede ser mayor al check-out.
       </mat-error>
