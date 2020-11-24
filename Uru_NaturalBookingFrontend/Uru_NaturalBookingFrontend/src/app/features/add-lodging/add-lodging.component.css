@@ -141,6 +141,10 @@ ngb-rating {
   width: 4vh;
 }
 
+ngb-rating {
+  outline: none;
+}
+
 .touristSpotAssocied {
   position: relative;
   top: 3vh;
@@ -167,32 +171,16 @@ mat-slide-toggle {
   top: -11.5vh;
 }
 
-/deep/ .mat-slide-toggle-bar {
-  height: 28px !important;
-  width: 112px !important;
-}
-
-/deep/ .mat-slide-toggle-thumb {
-  position: relative;
-  left: -1vh;
-  height: 34px !important;
-  width: 34px !important;
-}
-
-/deep/ .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-container {
-  transform: translate3d(100px, 0, 0) !important;
-}
-
 .textAvailable {
   position: relative;
-  top: -6.7vh;
+  top: -6.9vh;
   left: 15vh;
 }
 
 .textNoAvailable {
   position: relative;
-  top: -15vh;
-  left: 48vh;
+  top: -14.3vh;
+  left: 37vh;
 }
 
 input[type='number'] {

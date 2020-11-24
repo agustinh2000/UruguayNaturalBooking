@@ -23,48 +23,46 @@ export class ModifyLodgingCapacityComponent implements OnInit {
     this.chargeLodgings();
   }
 
-  private chargeLodgings(): void{
+  private chargeLodgings(): void {
     this.lodgingService.getLodgings().subscribe(
-      res => {
+      (res) => {
         this.lodgings = res;
       },
       (err) => {
         alert(err.error);
-        this.router.navigate(['regions']);
+        this.router.navigate(['/regions']);
       }
     );
-  }
-
-  ngOnChange(): void {
-    this.lodgings = this.lodgingService.getLodgings();
   }
 
   public changed($event): void {
     for (const lodging of this.lodgings) {
-       const modifiedLodging = new LodgingModelForRequest();
-       modifiedLodging.Name = lodging.name;
-       modifiedLodging.QuantityOfStars = lodging.quantityOfStars;
-       modifiedLodging.Description = lodging.description;
-       modifiedLodging.Address = lodging.address;
-       modifiedLodging.IsAvailable = lodging.isAvailable;
-       this.modifyLodging(lodging.id, modifiedLodging);
+      const modifiedLodging = new LodgingModelForRequest();
+      modifiedLodging.Name = lodging.name;
+      modifiedLodging.QuantityOfStars = lodging.quantityOfStars;
+      modifiedLodging.Description = lodging.description;
+      modifiedLodging.Address = lodging.address;
+      modifiedLodging.IsAvailable = lodging.isAvailable;
+      this.modifyLodging(lodging.id, modifiedLodging);
     }
   }
 
-  private modifyLodging(lodgingId: string, modifiedLodging: LodgingModelForRequest): void{
+  private modifyLodging(
+    lodgingId: string,
+    modifiedLodging: LodgingModelForRequest
+  ): void {
     this.lodgingService.modify(lodgingId, modifiedLodging).subscribe(
-      (res) => {
-      },
+      (res) => {},
       (err) => {
-        alert(err.error);
         this.lodgings = this.chargeLodgings();
+        alert(err.error);
       }
     );
   }
 
-  public delete(event, lodgingId): void{
+  public delete(event, lodgingId): void {
     this.lodgingService.delete(lodgingId).subscribe(
-      res => {
+      (res) => {
         this.lodgings = this.chargeLodgings();
       },
       (err) => {
@@ -72,5 +70,4 @@ export class ModifyLodgingCapacityComponent implements OnInit {
       }
     );
   }
-
 }

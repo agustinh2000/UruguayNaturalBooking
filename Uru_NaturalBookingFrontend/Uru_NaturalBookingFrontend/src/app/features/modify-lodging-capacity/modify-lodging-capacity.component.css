@@ -21,22 +21,22 @@
 .libre {
   color: grey;
   font-size: 15px;
-  position: absolute;
-  bottom: 9%;
-  left: 27%
+  position: relative;
+  bottom: 23.5%;
+  right: 17%;
 }
 
 .ocupado {
   color: grey;
   font-size: 15px;
-  position: absolute;
-  bottom: 9%;
-  right: 25%
+  position: relative;
+  bottom: 12.5%;
+  left: 17%
 }
 
-.name{
+.name {
   position: relative;
-  margin-top:87%;
+  margin-top: 87%;
   margin-left: 7%;
 }
 
@@ -47,20 +47,21 @@
   border-radius: 13px
 }
 
-.deleteButton{
+.deleteButton {
   background-color: red;
-  color:white;
-  position: absolute;
-  margin-top:68.5vh;
-  margin-left: 40%;
+  color: white;
+  position: relative;
+  bottom: 24.5%;
+  border-bottom-left-radius: 13px;
+  border-bottom-right-radius: 13px;
 }
 
-.price{
-  margin-bottom:5vh;
+.disponibilityText {
+  margin-bottom: 5vh;
 }
 
-mat-slide-toggle {
-  position: absolute;
-  margin-top:63vh;
+.toogle {
+  position: relative;
+  bottom: 8%;
   left: 45%;
 }
