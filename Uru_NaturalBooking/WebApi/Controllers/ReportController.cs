@@ -22,7 +22,7 @@ namespace WebApi.Controllers
         }
 
         [ServiceFilter(typeof(AuthorizationFilter))]
-        [HttpGet("generateReport")]
+        [HttpGet("report")]
         public IActionResult Get([FromQuery] Guid idOfTouristSpot, [FromQuery] DateTime checkInMax, [FromQuery] DateTime checkOutMax)
         {
             try

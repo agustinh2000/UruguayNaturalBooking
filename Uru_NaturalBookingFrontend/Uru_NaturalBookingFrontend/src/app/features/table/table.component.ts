@@ -17,17 +17,28 @@ export class TableComponent implements OnInit {
 
   reportService: ReportService;
 
-  dataSource: ReportModel[];
+  dataSource;
 
   displayedColumns = ['Lodging', 'QuantityOfReserves'];
 
-
   constructor(aReportService: ReportService) {
+    this.dataSource = new Array();
     this.reportService = aReportService;
   }
 
   ngOnInit(): void {
-   this.dataSource = this.reportService.getLodgingsForReport(this.checkIn, this.checkOut, this.touristSpot);
+   this.generateReport();
+  }
+
+  private generateReport(): void{
+    this.reportService.getLodgingsForReport(this.checkIn, this.checkOut, this.touristSpot).subscribe(
+      res => {
+        this.dataSource = res;
+      },
+      (err) => {
+        alert(err.error);
+      }
+    );
   }
 
 }

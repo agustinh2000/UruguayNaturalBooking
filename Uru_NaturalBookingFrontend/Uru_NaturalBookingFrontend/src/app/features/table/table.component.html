@@ -2,12 +2,12 @@
 
     <ng-container matColumnDef="Lodging">
       <th mat-header-cell *matHeaderCellDef> Hospedaje </th>
-      <td mat-cell *matCellDef="let element"> {{element.NameOfLodging}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.nameOfLodging}} </td>
     </ng-container>
   
     <ng-container matColumnDef="QuantityOfReserves">
       <th mat-header-cell *matHeaderCellDef> Cantidad de reservas</th>
-      <td mat-cell *matCellDef="let element"> {{element.QuantityOfReserves}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.quantityOfReserves}} </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

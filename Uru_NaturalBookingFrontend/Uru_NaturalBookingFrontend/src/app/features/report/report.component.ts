@@ -16,7 +16,7 @@ export class ReportComponent implements OnInit {
 
   private touristSpotService: TouristSpotService;
 
-  public touristSpotExisting: TouristSpotModelForLodgingResponseModel[];
+  public touristSpotExisting;
 
   public maxDate: Date;
 
@@ -25,6 +25,7 @@ export class ReportComponent implements OnInit {
   public touristSpotSelected: FormControl;
 
   constructor(aTouristSpotService: TouristSpotService, private formBuilder: FormBuilder) {
+    this.touristSpotExisting = new Array();
     this.touristSpotService = aTouristSpotService;
     this.formGroup = this.formBuilder.group({
       touristSpotSelected: new FormControl('', [Validators.required]),
@@ -35,7 +36,18 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.touristSpotExisting = this.touristSpotService.getTouristSpots();
+    this.chargeTouristSpotsAvailable();
+  }
+
+  chargeTouristSpotsAvailable(): void {
+    this.touristSpotService.getAllTouristSpots().subscribe(
+      (res) => {
+        this.touristSpotExisting = res;
+      },
+      (err) => {
+        alert(err.error);
+      }
+    );
   }
 
   DateValidation: ValidatorFn = (fg: FormGroup) => {
@@ -52,6 +64,11 @@ export class ReportComponent implements OnInit {
     if (this.formIsValid()) {
       this.isShown = true;
     }
+  }
+
+  cancel(): void{
+    this.formGroup.reset();
+    this.isShown = false;
   }
 
 }

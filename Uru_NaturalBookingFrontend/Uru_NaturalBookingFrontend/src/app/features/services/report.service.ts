@@ -1,4 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ReportModel } from '../../models/ReportModel';
 
 @Injectable({
@@ -6,26 +9,27 @@ import { ReportModel } from '../../models/ReportModel';
 })
 export class ReportService {
 
-  readonly lodgignsForReport: ReportModel[] = [
-    { NameOfLodging: 'Hotel Enjoy',
-      QuantityOfReserves: 10},
-      { NameOfLodging: 'Hotel Sheraton',
-      QuantityOfReserves: 7},
-      { NameOfLodging: 'Hotel NH',
-      QuantityOfReserves: 6},
-      { NameOfLodging: 'Hotel Carmelo',
-      QuantityOfReserves: 4},
-      { NameOfLodging: 'Hotel IBIS',
-      QuantityOfReserves: 2},
-  ];
+  uri = `${environment.baseUrl}api/reports`;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getLodgingsForReport(checkIn : Date, checkOut : Date, touristSpotId: string): ReportModel[] {
-    const lodgingsObteined: ReportModel[] = [];
-    for (const lodging of this.lodgignsForReport){
-      lodgingsObteined.push(lodging);
+  getLodgingsForReport(
+    checkIn: Date, checkOut: Date, touristSpotId: string
+  ): Observable<ReportModel> {
+    let myHeaders = new HttpHeaders();
+    if (localStorage.token !== undefined) {
+      myHeaders = myHeaders.append('token', localStorage.token);
     }
-    return lodgingsObteined;
+    return this.http.get<ReportModel>(
+      `${this.uri}/report`,
+      {
+        params: {
+          idOfTouristSpot: touristSpotId,
+          checkInMax: checkIn.toDateString(),
+          checkOutMax: checkOut.toDateString(),
+        },
+        headers: myHeaders,
+      }
+    );
   }
 }

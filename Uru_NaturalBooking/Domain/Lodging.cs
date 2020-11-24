@@ -125,7 +125,7 @@ namespace Domain
 
         public int QuantityOfReserveForThePeriod(DateTime dateCheckIn, DateTime dateCheckOut)
         {
-            return ReservesForLodging.Where(x => x.CheckIn >= dateCheckIn && x.CheckOut <= dateCheckOut 
+            return ReservesForLodging.Where(x => x.CheckIn.Date >= dateCheckIn.Date && x.CheckOut.Date <= dateCheckOut.Date 
             && x.StateOfReserve != Reserve.ReserveState.Expirada && x.StateOfReserve != Reserve.ReserveState.Rechazada).Count();
         }
 
