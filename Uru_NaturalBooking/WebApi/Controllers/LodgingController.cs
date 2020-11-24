@@ -29,7 +29,7 @@ namespace WebApi.Controllers
             try
             {
                 List<Lodging> allLodgings = lodgingManagement.GetAllLoadings();
-                return Ok(LodgingModelForSearchResponse.ToModel(allLodgings));
+                return Ok(LodgingModelForResponse.ToModel(allLodgings));
             }
             catch (ClientBusinessLogicException e)
             {

@@ -9,7 +9,7 @@
 .card {
   position: relative;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
-  max-width: 400px;
+  width: 400px;
   margin: auto;
   text-align: center;
   font-family: arial;
@@ -21,28 +21,46 @@
 .libre {
   color: grey;
   font-size: 15px;
-  position: relative;
-  bottom: 12.5%;
-  left: 11%
+  position: absolute;
+  bottom: 9%;
+  left: 27%
 }
 
 .ocupado {
   color: grey;
   font-size: 15px;
+  position: absolute;
+  bottom: 9%;
+  right: 25%
+}
+
+.name{
   position: relative;
-  bottom: 5%;
-  right: 15%
+  margin-top:87%;
+  margin-left: 7%;
 }
 
 .imagen {
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 70%;
   border-radius: 13px
 }
 
+.deleteButton{
+  background-color: red;
+  color:white;
+  position: absolute;
+  margin-top:68.5vh;
+  margin-left: 40%;
+}
+
+.price{
+  margin-bottom:5vh;
+}
+
 mat-slide-toggle {
-  position: relative;
+  position: absolute;
+  margin-top:63vh;
   left: 45%;
-  bottom: .1%
 }

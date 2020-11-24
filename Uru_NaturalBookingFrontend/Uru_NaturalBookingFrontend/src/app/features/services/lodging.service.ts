@@ -210,12 +210,8 @@ export class LodgingService {
     return this.lodgings[5];
   }
 
-  getLodgings(): LodgingModelForResponse[] {
-    const lodgingsObteined: LodgingModelForResponse[] = [];
-    for (const lodging of this.lodgings) {
-      lodgingsObteined.push(lodging);
-    }
-    return lodgingsObteined;
+  getLodgings(): Observable<LodgingModelForResponse> {
+    return this.http.get<LodgingModelForResponse>(this.uri);
   }
 
   changeAvailability(id: string, newState: boolean): void {
@@ -226,7 +222,33 @@ export class LodgingService {
     }
   }
 
-  
+  modify(
+    id: string, lodgingModified: LodgingModelForRequest
+  ): Observable<LodgingModelForResponse> {
+    let myHeaders = new HttpHeaders();
+    if (localStorage.token !== undefined) {
+      myHeaders = myHeaders.append('token', localStorage.token);
+    }
+    return this.http.put<LodgingModelForResponse>(
+      `${this.uri}/${id}`,
+      lodgingModified,
+      {
+        headers: myHeaders,
+      }
+    );
+  }
+  delete(id: string): Observable<{}> {
+    let myHeaders = new HttpHeaders();
+    if (localStorage.token !== undefined) {
+      myHeaders = myHeaders.append('token', localStorage.token);
+    }
+    return this.http.delete(`${this.uri}/${id}`, {
+      headers: myHeaders,
+      responseType: 'text' as 'json',
+    });
+  }
+
+
   add(
     lodgingToAdd: LodgingModelForRequest
   ): Observable<LodgingModelForResponse> {
@@ -250,8 +272,4 @@ export class LodgingService {
     // this is a call to the service in the webAPI to the method POST of LodgingController
   }
 
-  isValidLodging(idLodging: string): boolean {
-    const lodgingsObteined: LodgingModelForResponse[] = this.getLodgings();
-    return lodgingsObteined.some((l) => l.id === idLodging);
-  }
 }

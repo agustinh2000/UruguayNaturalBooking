@@ -20,6 +20,8 @@ namespace Model.ForResponse
 
         public List<String> ImagesPath { get; set; }
 
+        public bool IsAvailable { get; set; }
+
         public double PricePerNight { get; set; }
 
         public double ReviewsAverageScore { get; set; }
@@ -45,6 +47,7 @@ namespace Model.ForResponse
             ReviewsAverageScore = Math.Round(lodging.ReviewsAverageScore, 2);
             LodgingTouristSpotModel = TouristSpotModelForLodgingResponseModel.ToModel(lodging.TouristSpot);
             ReviewsForLodging = lodging.Reviews.ConvertAll(r => ReviewModelForResponse.ToModel(r));
+            IsAvailable = lodging.IsAvailable;
             return this;
         }
 

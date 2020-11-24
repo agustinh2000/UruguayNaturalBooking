@@ -26,11 +26,13 @@ export class LodgingNotExistGuard implements CanActivate {
     | boolean
     | UrlTree {
     this.idLodging = route.queryParams.LodgingId;
-    if (!this.lodgingService.isValidLodging(this.idLodging)) {
+    /*if (!this.lodgingService.isValidLodging(this.idLodging)) {
       alert('Error. El hospedaje buscado no existe.');
       this.router.navigate(['regions']);
       return false;
     }
+    return true;
+    */
     return true;
   }
 }

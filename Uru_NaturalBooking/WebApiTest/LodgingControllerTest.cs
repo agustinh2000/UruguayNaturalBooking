@@ -17,7 +17,7 @@ namespace WebApiTest
     public class LodgingControllerTest
     {
         TouristSpotModelForLodgingResponseModel lodgingTouristSpotModel;
-        LodgingModelForSearchResponse lodgingModelForSearchResponse;
+        LodgingModelForResponse lodgingModelForSearchResponse;
         LodgingModelForResponse lodgingModelForResponse;
         LodgingModelForRequest lodgingModelForRequest;
         ReviewModelForResponse reviewModelForResponse;
@@ -55,7 +55,16 @@ namespace WebApiTest
 
             };
 
-            lodgingModelForSearchResponse = new LodgingModelForSearchResponse()
+            reviewModelForResponse = new ReviewModelForResponse()
+            {
+                Description = "Muy buena",
+                Id = Guid.NewGuid(),
+                LastNameOfWhoComments = "Her",
+                NameOfWhoComments = "Agustin",
+                Score = 3
+            };
+
+            lodgingModelForSearchResponse = new LodgingModelForResponse()
             {
                 Id = Guid.NewGuid(),
                 Name = "Hotel las cumbres",
@@ -64,7 +73,8 @@ namespace WebApiTest
                 QuantityOfStars = 5,
                 PricePerNight = 150,
                 LodgingTouristSpotModel = lodgingTouristSpotModel,
-                ReviewsAverageScore = 4.3
+                ReviewsAverageScore = 4.3,
+                ReviewsForLodging = new List<ReviewModelForResponse>() { reviewModelForResponse }
             };
 
             review = new Review()
@@ -77,14 +87,7 @@ namespace WebApiTest
             };
 
 
-            reviewModelForResponse = new ReviewModelForResponse()
-            {
-                Description = "Muy buena",
-                Id = Guid.NewGuid(),
-                LastNameOfWhoComments = "Her",
-                NameOfWhoComments = "Agustin",
-                Score = 3
-            };
+           
 
             lodgingModelForResponse = new LodgingModelForResponse()
             {
@@ -204,7 +207,7 @@ namespace WebApiTest
             LodgingController lodgingController = new LodgingController(lodgingManagementMock.Object);
             var result = lodgingController.Get();
             var createdResult = result as OkObjectResult;
-            var model = createdResult.Value as List<LodgingModelForSearchResponse>;
+            var model = createdResult.Value as List<LodgingModelForResponse>;
             lodgingManagementMock.VerifyAll();
             Assert.AreEqual(lodgingModelForSearchResponse, model.First());
         }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LodgingService } from '../services/lodging.service';
 import { LodgingModelForResponse } from '../../models/LodgingModelForResponse';
+import { LodgingModelForRequest } from '../../models/LodgingModelForRequest';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modify-lodging-capacity',
@@ -10,13 +12,27 @@ import { LodgingModelForResponse } from '../../models/LodgingModelForResponse';
 export class ModifyLodgingCapacityComponent implements OnInit {
   private lodgingService: LodgingService;
 
-  public lodgings: LodgingModelForResponse[];
+  public lodgings;
 
-  constructor(aLodgingService: LodgingService) {
+  constructor(aLodgingService: LodgingService, private router: Router) {
+    this.lodgings = new Array<LodgingModelForResponse>();
     this.lodgingService = aLodgingService;
   }
+
   ngOnInit(): void {
-    this.lodgings = this.lodgingService.getLodgings();
+    this.chargeLodgings();
+  }
+
+  private chargeLodgings(): void{
+    this.lodgingService.getLodgings().subscribe(
+      res => {
+        this.lodgings = res;
+      },
+      (err) => {
+        alert(err.error);
+        this.router.navigate(['regions']);
+      }
+    );
   }
 
   ngOnChange(): void {
@@ -25,8 +41,36 @@ export class ModifyLodgingCapacityComponent implements OnInit {
 
   public changed($event): void {
     for (const lodging of this.lodgings) {
-      this.lodgingService.changeAvailability(lodging.id, lodging.isAvailable);
+       const modifiedLodging = new LodgingModelForRequest();
+       modifiedLodging.Name = lodging.name;
+       modifiedLodging.QuantityOfStars = lodging.quantityOfStars;
+       modifiedLodging.Description = lodging.description;
+       modifiedLodging.Address = lodging.address;
+       modifiedLodging.IsAvailable = lodging.isAvailable;
+       this.modifyLodging(lodging.id, modifiedLodging);
     }
-    this.lodgings = this.lodgingService.getLodgings();
   }
+
+  private modifyLodging(lodgingId: string, modifiedLodging: LodgingModelForRequest): void{
+    this.lodgingService.modify(lodgingId, modifiedLodging).subscribe(
+      (res) => {
+      },
+      (err) => {
+        alert(err.error);
+        this.lodgings = this.chargeLodgings();
+      }
+    );
+  }
+
+  public delete(event, lodgingId): void{
+    this.lodgingService.delete(lodgingId).subscribe(
+      res => {
+        this.lodgings = this.chargeLodgings();
+      },
+      (err) => {
+        alert(err.error);
+      }
+    );
+  }
+
 }
