@@ -8,12 +8,7 @@
                     <mat-label>Ingrese una reseña</mat-label>
                     <textarea formControlName="commentary" rows="4" cols="50" matInput #commentary placeholder="Ex. En el viaje que tuvimos y la estadia, la pasamos maravilloso..."></textarea>
                     <mat-hint align="end">{{commentary.value.length}}</mat-hint>
-                    <mat-error *ngIf="formGroup.controls.commentary.hasError('required')">
-                        Por favor ingrese una reseña.
-                    </mat-error>
-                    <mat-error *ngIf="formGroup.controls.commentary.hasError('whitespace')">
-                        La reseña ingresada no puede ser vacia.
-                    </mat-error>
+                    <mat-error *ngIf="formGroup.controls.commentary.invalid">{{getErrorMessage()}}</mat-error>
                   </mat-form-field>
             </div>
 

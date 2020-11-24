@@ -16,6 +16,12 @@
                         Inicio
                     </a>
                 </span>
+                <span routerLink="review">
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+                        <mat-icon>rate_review</mat-icon>
+                        Review
+                    </a>
+                </span>
                 <ng-template [ngIf]="logued">
                     <button mat-button [matMenuTriggerFor]="menu">
                         <mat-icon>account_box</mat-icon>Usuarios <i class="fas fa-caret-down" style="color:black"></i>

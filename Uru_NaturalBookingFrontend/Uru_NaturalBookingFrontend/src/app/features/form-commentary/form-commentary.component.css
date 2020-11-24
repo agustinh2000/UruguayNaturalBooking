@@ -85,3 +85,7 @@ ngb-rating {
   color: #707070;
   font: Arial
 }
+
+ngb-rating{
+  outline: none;
+}

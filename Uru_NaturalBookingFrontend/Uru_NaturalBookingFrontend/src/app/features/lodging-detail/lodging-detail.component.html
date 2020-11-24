@@ -38,7 +38,7 @@
 <div class="reviews">
     <div class="cardReview" *ngFor="let review of lodgingForReserve.reviewsForLodging">
         <div class="starReview">
-            <span class="starr" *ngFor="let i of starReviewArr(review.Score).fill(1)">
+            <span class="starr" *ngFor="let i of starReviewArr(review.score).fill(1)">
                 <img width="26" src="../../assets/img/star.png" />
             </span>
         </div>
