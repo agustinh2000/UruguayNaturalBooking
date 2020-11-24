@@ -3,6 +3,7 @@ import { LodgingService } from '../services/lodging.service';
 import { LodgingForSearchModel } from '../../models/LodgingForSearchModel';
 import { SearchOfLodgingModelForRequest } from 'src/app/models/SearchOfLodgingModelForRequest';
 import { NavigationExtras, Router } from '@angular/router';
+import { SearchOfLodgingsService } from '../services/search-of-lodgings.service';
 
 @Component({
   selector: 'app-lodging-cards',
@@ -14,28 +15,34 @@ export class LodgingCardsComponent implements OnInit {
 
   Arr = Array;
 
-  private lodgingsService: LodgingService;
+  public lodgingsOfSearch;
 
-  public lodgingsOfSearch: LodgingForSearchModel[];
-
-  constructor(aLodgingService: LodgingService, private router: Router) {
-    this.lodgingsService = aLodgingService;
+  constructor(
+    private searchService: SearchOfLodgingsService,
+    private router: Router
+  ) {
+    this.lodgingsOfSearch = new Array<LodgingForSearchModel>();
   }
 
   ngOnInit(): void {
-    this.lodgingsOfSearch = this.lodgingsService.getLodgingsOfSearch(
-      this.searchModel
+    this.searchService.getLodgingsOfSearch(this.searchModel).subscribe(
+      (res) => {
+        this.lodgingsOfSearch = res;
+      },
+      (err) => {
+        alert(err.error);
+      }
     );
   }
 
   displayDetailLodging(preReserve: LodgingForSearchModel): void {
     this.router.navigate(['/lodging-detail'], {
       queryParams: {
-        CheckIn: preReserve.CheckIn,
-        CheckOut: preReserve.CheckOut,
-        QuantityOfGuest: preReserve.QuantityOfGuest,
-        LodgingId: preReserve.Lodging.Id,
-        TotalPriceForSearch: preReserve.TotalPriceForSearch,
+        CheckIn: preReserve.checkIn,
+        CheckOut: preReserve.checkOut,
+        QuantityOfGuest: preReserve.quantityOfGuest,
+        LodgingId: preReserve.lodging.id,
+        TotalPriceForSearch: preReserve.totalPriceForSearch,
       },
     });
   }

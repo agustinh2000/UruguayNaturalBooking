@@ -5,10 +5,9 @@ import { LodgingModelForResponse } from '../../models/LodgingModelForResponse';
 @Component({
   selector: 'app-modify-lodging-capacity',
   templateUrl: './modify-lodging-capacity.component.html',
-  styleUrls: ['./modify-lodging-capacity.component.css']
+  styleUrls: ['./modify-lodging-capacity.component.css'],
 })
 export class ModifyLodgingCapacityComponent implements OnInit {
-
   private lodgingService: LodgingService;
 
   public lodgings: LodgingModelForResponse[];
@@ -24,10 +23,9 @@ export class ModifyLodgingCapacityComponent implements OnInit {
     this.lodgings = this.lodgingService.getLodgings();
   }
 
-
   public changed($event): void {
     for (const lodging of this.lodgings) {
-      this.lodgingService.changeAvailability(lodging.Id, lodging.IsAvailable);
+      this.lodgingService.changeAvailability(lodging.id, lodging.isAvailable);
     }
     this.lodgings = this.lodgingService.getLodgings();
   }

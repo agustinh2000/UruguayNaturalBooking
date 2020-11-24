@@ -1,7 +1,7 @@
-export class ReviewModelForResponse{
-    public Id: string;
-    public Score: number;
-    public Description: string;
-    public NameOfWhoComments: string;
-    public LastNameOfWhoComments: string;
+export class ReviewModelForResponse {
+  public id: string;
+  public score: number;
+  public description: string;
+  public nameOfWhoComments: string;
+  public lastNameOfWhoComments: string;
 }

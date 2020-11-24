@@ -44,19 +44,38 @@ import { SelectionOfTouristSpotComponent } from './selection-of-tourist-spot/sel
 import { LodgingCardsComponent } from './lodging-cards/lodging-cards.component';
 import { BookingFormComponent } from './booking-form/booking-form.component';
 import { RouterModule } from '@angular/router';
-import { MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { LodgingDetailComponent } from './lodging-detail/lodging-detail.component';
 import { CreateReserveComponent } from './create-reserve/create-reserve.component';
 import { TouristsPipe } from './tourists.pipe';
 import { ReserveConfirmationComponent } from './reserve-confirmation/reserve-confirmation.component';
+import { SearchOfLodgingsService } from './services/search-of-lodgings.service';
 
 @NgModule({
-  declarations: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
-    ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
-    ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
-    FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent, 
-    SelectionOfTouristSpotComponent, LodgingCardsComponent, BookingFormComponent, LodgingDetailComponent, CreateReserveComponent, 
-    TouristsPipe, ReserveConfirmationComponent],
+  declarations: [
+    RegionComponent,
+    ReviewComponent,
+    LoginComponent,
+    RegisterUserComponent,
+    ModifyUserComponent,
+    DeleteUserComponent,
+    AddTouristSpotComponent,
+    TableComponent,
+    ReportComponent,
+    AddLodgingComponent,
+    FormCommentaryComponent,
+    ModifyReserveComponent,
+    FormModifyReserveComponent,
+    ModifyLodgingCapacityComponent,
+    TouristSpotViewComponent,
+    SelectionOfTouristSpotComponent,
+    LodgingCardsComponent,
+    BookingFormComponent,
+    LodgingDetailComponent,
+    CreateReserveComponent,
+    TouristsPipe,
+    ReserveConfirmationComponent,
+  ],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -81,16 +100,42 @@ import { ReserveConfirmationComponent } from './reserve-confirmation/reserve-con
     MatToolbarModule,
     MatSidenavModule,
     RouterModule,
-    MatMenuModule
+    MatMenuModule,
   ],
-  exports: [RegionComponent, ReviewComponent, LoginComponent, RegisterUserComponent,
-    ModifyUserComponent, DeleteUserComponent, AddTouristSpotComponent, TableComponent,
-    ReportComponent, AddLodgingComponent, FormCommentaryComponent, ModifyReserveComponent,
-    FormModifyReserveComponent, ModifyLodgingCapacityComponent, TouristSpotViewComponent,
-    SelectionOfTouristSpotComponent, LodgingCardsComponent, BookingFormComponent, LodgingDetailComponent,
-    CreateReserveComponent, TouristsPipe, ReserveConfirmationComponent],
-  providers: [RegionServiceService, UserService, ReportService, TouristSpotService,
-    CategoryService, LodgingService, ReserveService, ReviewService]
+  exports: [
+    RegionComponent,
+    ReviewComponent,
+    LoginComponent,
+    RegisterUserComponent,
+    ModifyUserComponent,
+    DeleteUserComponent,
+    AddTouristSpotComponent,
+    TableComponent,
+    ReportComponent,
+    AddLodgingComponent,
+    FormCommentaryComponent,
+    ModifyReserveComponent,
+    FormModifyReserveComponent,
+    ModifyLodgingCapacityComponent,
+    TouristSpotViewComponent,
+    SelectionOfTouristSpotComponent,
+    LodgingCardsComponent,
+    BookingFormComponent,
+    LodgingDetailComponent,
+    CreateReserveComponent,
+    TouristsPipe,
+    ReserveConfirmationComponent,
+  ],
+  providers: [
+    RegionServiceService,
+    UserService,
+    ReportService,
+    TouristSpotService,
+    CategoryService,
+    LodgingService,
+    ReserveService,
+    ReviewService,
+    SearchOfLodgingsService,
+  ],
 })
-
-export class FeaturesModule { }
+export class FeaturesModule {}

@@ -51,7 +51,7 @@ export class LodgingDetailComponent implements OnInit {
   public nextImage(): void {
     if (
       this.indexOfImageToShow ===
-      this.lodgingForReserve.ReviewsForLodging.length - 1
+      this.lodgingForReserve.reviewsForLodging.length - 1
     ) {
       this.indexOfImageToShow = 0;
     } else {
@@ -62,7 +62,7 @@ export class LodgingDetailComponent implements OnInit {
   public previousImage(): void {
     if (this.indexOfImageToShow === 0) {
       this.indexOfImageToShow =
-        this.lodgingForReserve.ReviewsForLodging.length - 1;
+        this.lodgingForReserve.reviewsForLodging.length - 1;
     } else {
       this.indexOfImageToShow--;
     }

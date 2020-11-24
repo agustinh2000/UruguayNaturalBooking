@@ -1,9 +1,10 @@
-<div class = "padre">
+<div class="padre">
     <div class="card" *ngFor="let lodging of lodgings; let i = index">
-        <img src= {{lodging.ImagesPath[0]}} class="imagen">
-        <h2>{{lodging.Name}}</h2>
+        <img src={{lodging.imagesPath[0]}} class="imagen">
+        <h2>{{lodging.name}}</h2>
         <p class="price">Disponibilidad:</p>
-        <mat-slide-toggle [(ngModel)]="lodging.IsAvailable" color="primary" (ngModelChange)="changed($event)"></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="lodging.isAvailable" color="primary" (ngModelChange)="changed($event)">
+        </mat-slide-toggle>
         <p class="ocupado">Ocupado</p>
         <p class="libre">Libre</p>
     </div>

@@ -13,189 +13,189 @@ import { ReviewModelForResponse } from '../../models/ReviewModelForResponse';
 export class LodgingService {
   readonly touristSpots: TouristSpotModelForLodgingResponseModel[] = [
     {
-      Id: '13046b7e-3d83-4576-b459-65c4c965b037',
-      Name: 'Punta del este',
+      id: '13046b7e-3d83-4576-b459-65c4c965b037',
+      name: 'Punta del este',
     },
 
     {
-      Id: 'fcceee6e-5b30-433b-bcd7-10b45af6efc5',
-      Name: 'San Ramón',
+      id: 'fcceee6e-5b30-433b-bcd7-10b45af6efc5',
+      name: 'San Ramón',
     },
 
     {
-      Id: 'bd7a2aac-ceb5-49b6-a2ec-c288ba3f7c03',
-      Name: 'Atlantida',
+      id: 'bd7a2aac-ceb5-49b6-a2ec-c288ba3f7c03',
+      name: 'Atlantida',
     },
 
     {
-      Id: 'cb4f3a7b-1bff-4c85-a7c9-44a79d4c2c0a',
-      Name: 'Las Toscas',
+      id: 'cb4f3a7b-1bff-4c85-a7c9-44a79d4c2c0a',
+      name: 'Las Toscas',
     },
 
     {
-      Id: 'bcc6f5bc-d580-41ea-a28a-0626784cfee0',
-      Name: 'La floresta',
+      id: 'bcc6f5bc-d580-41ea-a28a-0626784cfee0',
+      name: 'La floresta',
     },
   ];
 
   readonly reviews: ReviewModelForResponse[] = [
     {
-      Id: '53fd830d-988d-4cf6-91f9-abf920f9dc5b',
-      Score: 5,
-      Description: 'Fue una estadia excelente en este hospedaje de lujo.',
-      NameOfWhoComments: 'Agustin',
-      LastNameOfWhoComments: 'Hernandorena',
+      id: '53fd830d-988d-4cf6-91f9-abf920f9dc5b',
+      score: 5,
+      description: 'Fue una estadia excelente en este hospedaje de lujo.',
+      nameOfWhoComments: 'Agustin',
+      lastNameOfWhoComments: 'Hernandorena',
     },
     {
-      Id: '53fd830d-988d-4cf6-91f9-abf920f9dc5c',
-      Score: 1,
-      Description: 'Me encontre con JP y me quiso clavar muy mal.',
-      NameOfWhoComments: 'Joaquin',
-      LastNameOfWhoComments: 'Lamela',
+      id: '53fd830d-988d-4cf6-91f9-abf920f9dc5c',
+      score: 1,
+      description: 'Me encontre con JP y me quiso clavar muy mal.',
+      nameOfWhoComments: 'Joaquin',
+      lastNameOfWhoComments: 'Lamela',
     },
   ];
 
   readonly lodgings: LodgingModelForResponse[] = [
     {
-      Id: '4bd1d316-b8eb-42f3-8e76-af41b2687a10',
-      Name: 'Enjoy',
-      Description: 'Un hotel increible',
-      QuantityOfStars: 5,
-      IsAvailable: true,
-      ImagesPath: ['../../assets/img/enjoy.jpg'],
-      LodgingTouristSpotModel: null,
-      ReviewsForLodging: null,
-      Address: 'Punta del Este',
-      PricePerNight: 120,
-      ReviewsAverageScore: 4,
+      id: '4bd1d316-b8eb-42f3-8e76-af41b2687a10',
+      name: 'Enjoy',
+      description: 'Un hotel increible',
+      quantityOfStars: 5,
+      isAvailable: true,
+      imagesPath: ['../../assets/img/enjoy.jpg'],
+      lodgingTouristSpotModel: null,
+      reviewsForLodging: null,
+      address: 'Punta del Este',
+      pricePerNight: 120,
+      reviewsAverageScore: 4,
     },
     {
-      Id: '502c715e-33fc-4df9-94f6-bd62a6be3d14',
-      Name: 'Sheraton',
-      Description: 'Un hotel genial',
-      QuantityOfStars: 5,
-      IsAvailable: false,
-      ImagesPath: ['../../assets/img/sheraton.jpg'],
-      LodgingTouristSpotModel: null,
-      ReviewsForLodging: null,
-      Address: 'Colonia',
-      PricePerNight: 120,
-      ReviewsAverageScore: 4,
+      id: '502c715e-33fc-4df9-94f6-bd62a6be3d14',
+      name: 'Sheraton',
+      description: 'Un hotel genial',
+      quantityOfStars: 5,
+      isAvailable: false,
+      imagesPath: ['../../assets/img/sheraton.jpg'],
+      lodgingTouristSpotModel: null,
+      reviewsForLodging: null,
+      address: 'Colonia',
+      pricePerNight: 120,
+      reviewsAverageScore: 4,
     },
     {
-      Id: '5690844e-ca55-4cea-a4d1-2e370fa147dc',
-      Name: 'Ibis',
-      Description: 'Un hotel increible',
-      QuantityOfStars: 3,
-      IsAvailable: false,
-      ImagesPath: ['../../assets/img/ibis.jpg'],
-      LodgingTouristSpotModel: null,
-      ReviewsForLodging: null,
-      Address: 'Montevideo',
-      PricePerNight: 120,
-      ReviewsAverageScore: 4,
+      id: '5690844e-ca55-4cea-a4d1-2e370fa147dc',
+      name: 'Ibis',
+      description: 'Un hotel increible',
+      quantityOfStars: 3,
+      isAvailable: false,
+      imagesPath: ['../../assets/img/ibis.jpg'],
+      lodgingTouristSpotModel: null,
+      reviewsForLodging: null,
+      address: 'Montevideo',
+      pricePerNight: 120,
+      reviewsAverageScore: 4,
     },
     {
-      Id: '28311417-7c70-4bae-9295-571fab4efe50',
-      Name: 'Arapey Thermal Resort',
-      Description: 'Un hotel fantastico',
-      QuantityOfStars: 5,
-      IsAvailable: true,
-      ImagesPath: ['../../assets/img/arapey.jpg'],
-      LodgingTouristSpotModel: null,
-      ReviewsForLodging: null,
-      Address: 'Montevideo',
-      PricePerNight: 120,
-      ReviewsAverageScore: 4,
+      id: '28311417-7c70-4bae-9295-571fab4efe50',
+      name: 'Arapey Thermal Resort',
+      description: 'Un hotel fantastico',
+      quantityOfStars: 5,
+      isAvailable: true,
+      imagesPath: ['../../assets/img/arapey.jpg'],
+      lodgingTouristSpotModel: null,
+      reviewsForLodging: null,
+      address: 'Montevideo',
+      pricePerNight: 120,
+      reviewsAverageScore: 4,
     },
     {
-      Id: 'b94bbc9b-a083-4f66-ad79-ce0392b8e8b4',
-      Name: 'NH Columbia',
-      Description: 'Un hotel bueno',
-      QuantityOfStars: 3,
-      IsAvailable: true,
-      ImagesPath: ['../../assets/img/nh.jpg'],
-      LodgingTouristSpotModel: null,
-      ReviewsForLodging: null,
-      Address: 'Montevideo',
-      PricePerNight: 120,
-      ReviewsAverageScore: 4,
+      id: 'b94bbc9b-a083-4f66-ad79-ce0392b8e8b4',
+      name: 'NH Columbia',
+      description: 'Un hotel bueno',
+      quantityOfStars: 3,
+      isAvailable: true,
+      imagesPath: ['../../assets/img/nh.jpg'],
+      lodgingTouristSpotModel: null,
+      reviewsForLodging: null,
+      address: 'Montevideo',
+      pricePerNight: 120,
+      reviewsAverageScore: 4,
     },
     {
-      Id: '17e40d14-7124-46ab-8097-4fa5276718cf',
-      Name: 'Proa Sur UY',
-      Description: 'Un hotel bueno',
-      QuantityOfStars: 3,
-      IsAvailable: true,
-      ImagesPath: ['../../assets/img/proa.jpg', '../../assets/img/proa2.jpg'],
-      LodgingTouristSpotModel: this.touristSpots[0],
-      ReviewsForLodging: this.reviews,
-      Address: 'Montevideo',
-      PricePerNight: 120,
-      ReviewsAverageScore: 4.0,
+      id: '17e40d14-7124-46ab-8097-4fa5276718cf',
+      name: 'Proa Sur UY',
+      description: 'Un hotel bueno',
+      quantityOfStars: 3,
+      isAvailable: true,
+      imagesPath: ['../../assets/img/proa.jpg', '../../assets/img/proa2.jpg'],
+      lodgingTouristSpotModel: this.touristSpots[0],
+      reviewsForLodging: this.reviews,
+      address: 'Montevideo',
+      pricePerNight: 120,
+      reviewsAverageScore: 4.0,
     },
   ];
 
   readonly lodgingsResultOfSearch: LodgingModelForSearchResponse[] = [
     {
-      Id: '17e40d14-7124-46ab-8097-4fa5276718cf',
-      Name: 'Proa Sur UY',
-      Description: 'Un hotel bueno',
-      QuantityOfStars: 3,
-      Address: 'Avda. Franklin Roosevelt',
-      ImagesPath: ['../../assets/img/proa.jpg', '../../assets/img/proa2.jpg'],
-      PricePerNight: 120,
-      ReviewsAverageScore: 4.2,
-      LodgingTouristSpotModel: this.touristSpots[0],
-      ReviewsForLodging: this.reviews,
+      id: '17e40d14-7124-46ab-8097-4fa5276718cf',
+      name: 'Proa Sur UY',
+      description: 'Un hotel bueno',
+      quantityOfStars: 3,
+      address: 'Avda. Franklin Roosevelt',
+      imagesPath: ['../../assets/img/proa.jpg', '../../assets/img/proa2.jpg'],
+      pricePerNight: 120,
+      reviewsAverageScore: 4.2,
+      lodgingTouristSpotModel: this.touristSpots[0],
+      reviewsForLodging: this.reviews,
     },
     {
-      Id: 'b8d09fa7-6469-4fc4-b250-156000a76e8a',
-      Name: 'Enjoy',
-      Description: 'Un hotel excelente',
-      QuantityOfStars: 5,
-      Address: 'Avda. Franklin Roosevelt parada 12343344',
-      ImagesPath: ['../../assets/img/enjoy.jpg'],
-      PricePerNight: 145,
-      ReviewsAverageScore: 4.7,
-      LodgingTouristSpotModel: this.touristSpots[0],
-      ReviewsForLodging: this.reviews,
+      id: 'b8d09fa7-6469-4fc4-b250-156000a76e8a',
+      name: 'Enjoy',
+      description: 'Un hotel excelente',
+      quantityOfStars: 5,
+      address: 'Avda. Franklin Roosevelt parada 12343344',
+      imagesPath: ['../../assets/img/enjoy.jpg'],
+      pricePerNight: 145,
+      reviewsAverageScore: 4.7,
+      lodgingTouristSpotModel: this.touristSpots[0],
+      reviewsForLodging: this.reviews,
     },
     {
-      Id: 'a7e9831d-bafc-4915-8e26-523a34ec03a5',
-      Name: 'Arapey Thermal Resort',
-      Description: 'Un hotel magnifico',
-      QuantityOfStars: 5,
-      Address: 'Avda. Luis A. De Herrera',
-      ImagesPath: ['../../assets/img/arapey.jpg'],
-      PricePerNight: 190,
-      ReviewsAverageScore: 4.9,
-      LodgingTouristSpotModel: this.touristSpots[0],
-      ReviewsForLodging: this.reviews,
+      id: 'a7e9831d-bafc-4915-8e26-523a34ec03a5',
+      name: 'Arapey Thermal Resort',
+      description: 'Un hotel magnifico',
+      quantityOfStars: 5,
+      address: 'Avda. Luis A. De Herrera',
+      imagesPath: ['../../assets/img/arapey.jpg'],
+      pricePerNight: 190,
+      reviewsAverageScore: 4.9,
+      lodgingTouristSpotModel: this.touristSpots[0],
+      reviewsForLodging: this.reviews,
     },
   ];
 
   readonly lodgingsForSearch: LodgingForSearchModel[] = [
     {
-      CheckIn: new Date(),
-      CheckOut: new Date(),
-      QuantityOfGuest: [1, 2, 3, 4],
-      Lodging: this.lodgingsResultOfSearch[0],
-      TotalPriceForSearch: 1900,
+      checkIn: new Date(),
+      checkOut: new Date(),
+      quantityOfGuest: [1, 2, 3, 4],
+      lodging: this.lodgingsResultOfSearch[0],
+      totalPriceForSearch: 1900,
     },
     {
-      CheckIn: new Date(),
-      CheckOut: new Date(),
-      QuantityOfGuest: [1, 2, 3, 4],
-      Lodging: this.lodgingsResultOfSearch[1],
-      TotalPriceForSearch: 1900,
+      checkIn: new Date(),
+      checkOut: new Date(),
+      quantityOfGuest: [1, 2, 3, 4],
+      lodging: this.lodgingsResultOfSearch[1],
+      totalPriceForSearch: 1900,
     },
     {
-      CheckIn: new Date(),
-      CheckOut: new Date(),
-      QuantityOfGuest: [1, 2, 3, 4],
-      Lodging: this.lodgingsResultOfSearch[2],
-      TotalPriceForSearch: 2220,
+      checkIn: new Date(),
+      checkOut: new Date(),
+      quantityOfGuest: [1, 2, 3, 4],
+      lodging: this.lodgingsResultOfSearch[2],
+      totalPriceForSearch: 2220,
     },
   ];
 
@@ -213,20 +213,10 @@ export class LodgingService {
     return lodgingsObteined;
   }
 
-  getLodgingsOfSearch(
-    search: SearchOfLodgingModelForRequest
-  ): LodgingForSearchModel[] {
-    const lodgingsObteined: LodgingForSearchModel[] = [];
-    for (const lodging of this.lodgingsForSearch) {
-      lodgingsObteined.push(lodging);
-    }
-    return lodgingsObteined;
-  }
-
   changeAvailability(id: string, newState: boolean): void {
     for (const lodging of this.lodgings) {
-      if (lodging.Id === id && lodging.IsAvailable !== newState) {
-        lodging.IsAvailable = newState;
+      if (lodging.id === id && lodging.isAvailable !== newState) {
+        lodging.isAvailable = newState;
       }
     }
   }
@@ -240,6 +230,6 @@ export class LodgingService {
 
   isValidLodging(idLodging: string): boolean {
     const lodgingsObteined: LodgingModelForResponse[] = this.getLodgings();
-    return lodgingsObteined.some((l) => l.Id === idLodging);
+    return lodgingsObteined.some((l) => l.id === idLodging);
   }
 }

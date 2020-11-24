@@ -1,23 +1,23 @@
 <div class="padre">
     <div class="card" *ngFor="let searchItem of lodgingsOfSearch; let i = index">
         <div class="image">
-            <img src={{searchItem.Lodging.ImagesPath[0]}} class="imagen">
+            <img src={{searchItem.lodging.imagesPath[0]}} class="imagen">
         </div>
         <div class="content">
-            <h2 class="name">{{searchItem.Lodging.Name}}</h2>
+            <h2 class="name">{{searchItem.lodging.name}}</h2>
             <div class="stars">
-                <span class="star" *ngFor="let i of Arr(searchItem.Lodging.QuantityOfStars).fill(1)">
+                <span class="star" *ngFor="let i of Arr(searchItem.lodging.quantityOfStars).fill(1)">
                     <img width="26" src="../../assets/img/star.png" />
                 </span>
             </div>
-            <span class="address">{{searchItem.Lodging.Address}},
-                {{searchItem.Lodging.LodgingTouristSpotModel.Name}}</span>
-            <span class="pricePerNight"> USD {{searchItem.Lodging.PricePerNight}} (por noche)</span>
+            <span class="address">{{searchItem.lodging.address}},
+                {{searchItem.lodging.lodgingTouristSpotModel.name}}</span>
+            <span class="pricePerNight"> USD {{searchItem.lodging.pricePerNight}} (por noche)</span>
             <div class="review">
-                <span class="reviewScore">{{searchItem.Lodging.ReviewsAverageScore}}</span>
+                <span class="reviewScore">{{searchItem.lodging.reviewsAverageScore}}</span>
             </div>
             <button class="buttonOfDetails" (click)="displayDetailLodging(searchItem)">Ver detalle</button>
-            <span class="totalPrice">Precio total: USD {{searchItem.TotalPriceForSearch}}</span>
+            <span class="totalPrice">Precio total: USD {{searchItem.totalPriceForSearch}}</span>
         </div>
     </div>
 </div>

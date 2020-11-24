@@ -2,25 +2,25 @@ import { ReviewModelForResponse } from './ReviewModelForResponse';
 import { TouristSpotModelForLodgingResponseModel } from './TouristSpotModelForLodgingResponseModel';
 
 export class LodgingModelForResponse {
-  public Id: string;
+  public id: string;
 
-  public Name: string;
+  public name: string;
 
-  public Description: string;
+  public description: string;
 
-  public IsAvailable: boolean;
+  public isAvailable: boolean;
 
-  public QuantityOfStars: number;
+  public quantityOfStars: number;
 
-  public Address: string;
+  public address: string;
 
-  public ImagesPath: string[];
+  public imagesPath: string[];
 
-  public PricePerNight: number;
+  public pricePerNight: number;
 
-  public ReviewsAverageScore: number;
+  public reviewsAverageScore: number;
 
-  public ReviewsForLodging: ReviewModelForResponse[];
+  public reviewsForLodging: ReviewModelForResponse[];
 
-  public LodgingTouristSpotModel: TouristSpotModelForLodgingResponseModel;
+  public lodgingTouristSpotModel: TouristSpotModelForLodgingResponseModel;
 }

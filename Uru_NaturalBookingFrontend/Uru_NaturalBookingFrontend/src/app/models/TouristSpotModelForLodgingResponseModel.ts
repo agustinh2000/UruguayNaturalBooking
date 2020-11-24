@@ -1,4 +1,4 @@
-export class TouristSpotModelForLodgingResponseModel{
-    public Id: string;
-    public Name: string;
+export class TouristSpotModelForLodgingResponseModel {
+  public id: string;
+  public name: string;
 }
