@@ -10,14 +10,33 @@
                     <img width="26" src="../../assets/img/star.png" />
                 </span>
             </div>
-            <span class="address">{{searchItem.lodging.address}},
-                {{searchItem.lodging.lodgingTouristSpotModel.name}}</span>
-            <span class="pricePerNight"> USD {{searchItem.lodging.pricePerNight}} (por noche)</span>
+
+            <div class="textAddress">
+                <span><strong> Dirección: </strong></span>
+            </div>
+
+            <div class="address">
+                <span>{{searchItem.lodging.address}}</span>
+            </div>
+
+            <div class="textPricePerNight">
+                <span><strong> Precio por noche: </strong></span>
+            </div>
+
+            <div class="pricePerNight">
+                <span> USD {{searchItem.lodging.pricePerNight}} (por noche)</span>
+            </div>
             <div class="review">
                 <span class="reviewScore">{{searchItem.lodging.reviewsAverageScore}}</span>
             </div>
+
+            <div class="textTotalPrice">
+                <span><strong> Precio total para la búsqueda: </strong></span>
+            </div>
+
+            <div class="totalPrice"> USD {{searchItem.totalPriceForSearch}}</div>
+
             <button class="buttonOfDetails" (click)="displayDetailLodging(searchItem)">Ver detalle</button>
-            <span class="totalPrice">Precio total: USD {{searchItem.totalPriceForSearch}}</span>
         </div>
     </div>
 </div>

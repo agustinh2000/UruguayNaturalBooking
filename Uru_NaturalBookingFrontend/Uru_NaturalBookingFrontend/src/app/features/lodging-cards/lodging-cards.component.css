@@ -1,18 +1,9 @@
-.padre {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    white-space: nowrap;
-    overflow: hidden
-}
-
 .card {
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
     width: 800px;
     word-wrap: break-word;
     margin: auto;
-    text-align: center;
     font-family: arial;
     margin-top: 2%;
     height: 300px;
@@ -27,12 +18,19 @@
     font-weight: 700
 }
 
+.textAddress {
+    color: #333;
+    position: absolute;
+    bottom: 58%;
+    left: 40%;
+}
+
 .address {
     color: #333;
     position: absolute;
-    bottom: 60%;
+    bottom: 50%;
     left: 40%;
-    margin-top: .5%
+    width: 60%;
 }
 
 .reviewScore {
@@ -42,19 +40,32 @@
     bottom: 95%
 }
 
-.pricePerNight {
+.textPricePerNight {
     color: #333;
-    position: relative;
-    bottom: 34vh;
-    left: .1%;
-    font-weight: 700
+    position: absolute;
+    bottom: 40%;
+    left: 40%;
+}
+
+.textTotalPrice {
+    color: #333;
+    position: absolute;
+    bottom: 20%;
+    left: 40%;
+}
+
+.pricePerNight {
+    position: absolute;
+    bottom: 30%;
+    left: 40%;
+    display: inline-block;
 }
 
 .review {
     background-color: #252850;
-    position: relative;
-    left: 102vh;
-    top: -53vh;
+    position: absolute;
+    left: 92%;
+    top: 7%;
     font-weight: 700;
     width: 50px;
     min-height: 50px;
@@ -66,8 +77,8 @@
     color: #fff;
     background-color: #1a2537;
     position: absolute;
-    left: 90vh;
-    top: 30vh;
+    left: 85%;
+    top: 80%;
     width: 100px;
     min-height: 45px;
     border-radius: 10px;
@@ -94,10 +105,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    top: -40vh;
-    margin-top: 1px;
+    bottom: 375%;
     width: 40%;
-    left: 40%;
+    left: 39.5%;
     margin-top: 6%
 }
 
@@ -116,8 +126,7 @@
 
 .totalPrice {
     color: #333;
-    position: relative;
-    bottom: 40vh;
-    left: 1.1%;
-    font-weight: 700
+    position: absolute;
+    bottom: 12%;
+    left: 40%;
 }

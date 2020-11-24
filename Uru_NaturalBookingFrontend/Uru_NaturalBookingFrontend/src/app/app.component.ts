@@ -18,10 +18,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLogued();
-  }
-
-  navigateToRegions(): void {
-    this.router.navigate(['regions']);
+    this.navigateToRegions();
   }
 
   isLogued(): void {
@@ -32,7 +29,7 @@ export class AppComponent implements OnInit {
     this.usersService.logout().subscribe(
       (res: string) => {
         alert(res);
-        this.router.navigate(['/regions']);
+        this.navigateToRegions();
       },
       (err) => {
         alert(err.error);
@@ -45,5 +42,9 @@ export class AppComponent implements OnInit {
 
   onActivate($event): void {
     this.isLogued();
+  }
+
+  navigateToRegions(): void {
+    this.router.navigate(['regions']);
   }
 }

@@ -7,7 +7,7 @@
 
                 <mat-form-field appearance="fill" class="checkInPicker">
                     <mat-label>Check-in</mat-label>
-                    <input matInput [matDatepicker]="checkInPicker" [max]="maxDate" formControlName="checkInPicker"
+                    <input matInput [matDatepicker]="checkInPicker" [min]="maxDate" formControlName="checkInPicker"
                         required>
                     <mat-datepicker-toggle matSuffix [for]="checkInPicker"></mat-datepicker-toggle>
                     <mat-datepicker #checkInPicker></mat-datepicker>
@@ -15,7 +15,7 @@
 
                 <mat-form-field appearance="fill" class="checkOutPicker">
                     <mat-label>Check-out</mat-label>
-                    <input matInput [matDatepicker]="checkOutPicker" [max]="maxDate" formControlName="checkOutPicker"
+                    <input matInput [matDatepicker]="checkOutPicker" [min]="maxDate" formControlName="checkOutPicker"
                         required>
                     <mat-datepicker-toggle matSuffix [for]="checkOutPicker"></mat-datepicker-toggle>
                     <mat-datepicker #checkOutPicker></mat-datepicker>
