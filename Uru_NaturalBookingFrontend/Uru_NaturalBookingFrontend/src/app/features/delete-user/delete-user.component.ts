@@ -48,7 +48,7 @@ export class DeleteUserComponent implements OnInit {
       },
       (err) => {
         alert(err.error);
-        console.log(err);
+        this.router.navigate(['/regions']);
       }
     );
   }

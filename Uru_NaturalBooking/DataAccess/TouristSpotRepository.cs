@@ -64,8 +64,9 @@ namespace DataAccess
         {
             try
             {
-                List<TouristSpot> listOfTouristSpot = context.Set<TouristSpot>().AsEnumerable().Where(m => m.Region.Id.Equals(regionIdSearched)
-                && m.HasCategoriesSearched(listOfCategoriesIdSearched)).ToList();
+                List<TouristSpot> listOfTouristSpot = new List<TouristSpot>();
+                    listOfTouristSpot = context.Set<TouristSpot>().Include(d => d.ListOfCategories).Include(d => d.Region).Include(d => d.Image).AsEnumerable().Where(m =>
+                    m.Region.Id.Equals(regionIdSearched) && m.HasCategoriesSearched(listOfCategoriesIdSearched)).ToList();
                 if (listOfTouristSpot.IsNullOrEmpty())
                 {
                     throw new ClientException("Error obteniendo los elementos deseados");

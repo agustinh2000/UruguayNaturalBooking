@@ -12,6 +12,8 @@ import { RegionServiceService } from '../services/region-service.service';
 import { TouristSpotForRequestModel } from '../../models/TouristSpotForRequestModel';
 import { CategoryService } from '../services/category.service';
 import { TouristSpotService } from '../services/tourist-spot.service';
+import { TouristSpotModelForResponse } from '../../models/TouristSpotModelForResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-tourist-spot',
@@ -25,9 +27,9 @@ export class AddTouristSpotComponent implements OnInit {
 
   private touristSpotService: TouristSpotService;
 
-  regionsOfTheSystem: Region[];
+  regionsOfTheSystem;
 
-  categoriesOfTheSystem: CategoryModel[];
+  categoriesOfTheSystem;
 
   textValue: string;
 
@@ -41,41 +43,84 @@ export class AddTouristSpotComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    aRegionService: RegionServiceService,
-    aCategoryService: CategoryService,
-    aTouristSpotService: TouristSpotService
+    private aRegionService: RegionServiceService,
+    private aCategoryService: CategoryService,
+    private aTouristSpotService: TouristSpotService,
+    private router: Router
   ) {
+    this.regionsOfTheSystem = new Array<Region>();
+    this.categoriesOfTheSystem = new Array<CategoryModel>();
     this.touristSpotService = aTouristSpotService;
     this.categoryService = aCategoryService;
     this.regionService = aRegionService;
     this.formGroup = this.formBuilder.group({
       name: ['', [Validators.required, this.noWhitespaceValidator]],
       description: ['', [Validators.required, this.noWhitespaceValidator]],
+      imagePath: ['', [Validators.required, this.noWhitespaceValidator]],
     });
   }
-
   selectedRegion = new FormControl('', [Validators.required]);
-
   selectedCategories = new FormControl('', [Validators.required]);
 
   ngOnInit(): void {
-    //this.regionsOfTheSystem = this.regionService.getRegions();
-    this.categoriesOfTheSystem = this.categoryService.getCategories();
+    this.getRegions();
+    this.getCategories();
   }
 
-  public selectFiles(event) {
-    for (let i = 0; i < event.target.files.length; i++) {
-      this.myFiles.push(event.target.files[i]);
-    }
+  private getRegions(): void {
+    this.regionService.getRegions().subscribe(
+      (res) => {
+        this.regionsOfTheSystem = res;
+      },
+      (err) => {
+        alert(err.error);
+        this.router.navigate(['/regions']);
+      }
+    );
+  }
+
+  private getCategories(): void {
+    this.categoryService.getCategories().subscribe(
+      (res) => {
+        this.categoriesOfTheSystem = res;
+      },
+      (err) => {
+        alert(err.error);
+        this.router.navigate(['/regions']);
+      }
+    );
   }
 
   public Add(): void {
+    this.chargeInfo();
+    this.suscribeToAddTouristSpot(this.touristSpotToAdd);
+  }
+
+  private suscribeToAddTouristSpot(
+    touristSpotToAdd: TouristSpotForRequestModel
+  ): void {
+    this.touristSpotService.Add(touristSpotToAdd).subscribe(
+      (res: TouristSpotModelForResponse) => {
+        alert(
+          'El punto turistico con nombre ' +
+            res.name +
+            ' ha sido agregado correctamente.'
+        );
+        this.router.navigate(['/regions']);
+      },
+      (err) => {
+        alert(err.error);
+        this.router.navigate(['/regions']);
+      }
+    );
+  }
+
+  private chargeInfo(): void {
     this.touristSpotToAdd = new TouristSpotForRequestModel(
       this.formGroup.value
     );
-    this.touristSpotToAdd.RegionId = this.selectedRegion.value;
-    this.touristSpotToAdd.ListOfCategoriesId = this.selectedCategories.value;
-    this.touristSpotService.Add(this.touristSpotToAdd);
+    this.touristSpotToAdd.regionId = this.selectedRegion.value;
+    this.touristSpotToAdd.listOfCategoriesId = this.selectedCategories.value;
   }
 
   getErrorMessage(): string {
@@ -93,6 +138,15 @@ export class AddTouristSpotComponent implements OnInit {
     }
     return this.formGroup.controls.description.hasError('whitespace')
       ? 'Error. La descripción ingresado no puede ser vacío.'
+      : '';
+  }
+
+  getErrorMessageForPhoto(): string {
+    if (this.formGroup.controls.imagePath.hasError('required')) {
+      return 'Error. El link a la foto es requerido.';
+    }
+    return this.formGroup.controls.imagePath.hasError('whitespace')
+      ? 'Error. El link a la foto ingresado no puede ser vacío.'
       : '';
   }
 

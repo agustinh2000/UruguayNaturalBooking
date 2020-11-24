@@ -8,34 +8,39 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-tourist-spot-view',
   templateUrl: './tourist-spot-view.component.html',
-  styleUrls: ['./tourist-spot-view.component.css']
+  styleUrls: ['./tourist-spot-view.component.css'],
 })
-export class TouristSpotViewComponent implements OnInit {
-
+export class TouristSpotViewComponent {
   @Input() categoriesSelectedId: string[];
 
   @Input() regionSelectedId: string;
 
-  public touristSpotFilterByRegion: TouristSpotModelForResponse[];
+  public touristSpotFilterByRegion;
 
   private touristSpotService: TouristSpotService;
 
   constructor(aTouristSpotService: TouristSpotService, private router: Router) {
     this.touristSpotService = aTouristSpotService;
-   }
-
-  ngOnInit(): void {
-    this.touristSpotFilterByRegion =
-    this.touristSpotService.getTouristSpotsFilterByRegionAndCategories(this.categoriesSelectedId, this.regionSelectedId);
+    this.touristSpotFilterByRegion = new Array<TouristSpotModelForResponse>();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.touristSpotFilterByRegion =
-    this.touristSpotService.getTouristSpotsFilterByRegionAndCategories(changes.categoriesSelectedId.currentValue, this.regionSelectedId);
+    this.touristSpotService
+      .getTouristSpotsFilterByRegionAndCategories(
+        this.categoriesSelectedId,
+        this.regionSelectedId
+      )
+      .subscribe(
+        (res) => {
+          this.touristSpotFilterByRegion = res;
+        },
+        (err) => {
+          this.touristSpotFilterByRegion = [];
+        }
+      );
   }
 
   navigateToLodgings(touristSpotId: string): void {
     this.router.navigate(['/lodgings', touristSpotId, this.regionSelectedId]);
   }
-
 }

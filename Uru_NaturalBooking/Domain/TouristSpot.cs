@@ -62,6 +62,7 @@ namespace Domain
 
         public bool HasCategoriesSearched(List<Guid> listOfCategoriesIdSearched)
         {
+            var list = ListOfCategories;
             return !listOfCategoriesIdSearched.Except(ListOfCategories.ConvertAll(cat => cat.CategoryId)).Any(); 
         }
 

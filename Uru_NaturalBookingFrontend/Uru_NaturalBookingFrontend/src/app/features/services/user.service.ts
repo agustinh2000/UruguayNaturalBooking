@@ -17,6 +17,7 @@ export class UserService {
   readonly users: UserModelForResponse[] = [];
 
   constructor(private http: HttpClient) {}
+
   login(
     userInformationToLogin: UserModelForLoginRequest
   ): Observable<LoginModelForResponse> {
@@ -29,8 +30,7 @@ export class UserService {
   register(
     userToRegister: UserModelForRequest
   ): Observable<UserModelForResponse> {
-    let myHeaders = new HttpHeaders();
-    myHeaders = myHeaders.append('token', localStorage.token);
+    const myHeaders = this.defineHeaders();
     return this.http.post<UserModelForResponse>(this.uri, userToRegister, {
       headers: myHeaders,
     });
@@ -40,9 +40,7 @@ export class UserService {
     userModified: UserModelForRequest,
     idOfUserToModify: string
   ): Observable<UserModelForResponse> {
-    let myHeaders = new HttpHeaders();
-    myHeaders = myHeaders.append('token', localStorage.token);
-    myHeaders = myHeaders.append('Accept', 'application/json');
+    const myHeaders = this.defineHeaders();
     return this.http.put<UserModelForResponse>(
       `${this.uri}/${idOfUserToModify}`,
       userModified,
@@ -53,17 +51,14 @@ export class UserService {
   }
 
   getUserById(userId: string): Observable<UserModelForResponse> {
-    let myHeaders = new HttpHeaders();
-    myHeaders = myHeaders.append('token', localStorage.token);
-    myHeaders = myHeaders.append('Accept', 'application/json');
+    const myHeaders = this.defineHeaders();
     return this.http.get<UserModelForResponse>(`${this.uri}/${userId}`, {
       headers: myHeaders,
     });
   }
 
   getUsersOfSystem(): Observable<UserModelForResponse> {
-    let myHeaders = new HttpHeaders();
-    myHeaders = myHeaders.append('token', localStorage.token);
+    const myHeaders = this.defineHeaders();
     return this.http.get<UserModelForResponse>(this.uri, {
       headers: myHeaders,
     });
@@ -73,11 +68,10 @@ export class UserService {
     if (localStorage.idUser === userId) {
       localStorage.removeItem('idUser');
     }
-    let myHeaders = new HttpHeaders();
-    myHeaders = myHeaders.append('token', localStorage.token);
-    myHeaders = myHeaders.append('Accept', 'application/json');
-    let result = this.http.delete(`${this.uri}/${userId}`, {
+    const myHeaders = this.defineHeaders();
+    const result = this.http.delete(`${this.uri}/${userId}`, {
       headers: myHeaders,
+      responseType: 'text' as 'json',
     });
     localStorage.removeItem('token');
     return result;
@@ -89,13 +83,18 @@ export class UserService {
   }
 
   logout(): Observable<string> {
-    let myHeaders = new HttpHeaders();
-    const tokenValue = localStorage.token;
-    myHeaders = myHeaders.append('token', localStorage.token);
-    myHeaders = myHeaders.append('Accept', 'application/text');
+    const myHeaders = this.defineHeaders();
     return this.http.delete<string>(`${this.uri}/logout`, {
       headers: myHeaders,
       responseType: 'text' as 'json',
     });
+  }
+
+  private defineHeaders(): HttpHeaders {
+    let myHeaders = new HttpHeaders();
+    if (this.isLogued()) {
+      myHeaders = myHeaders.append('token', localStorage.token);
+    }
+    return myHeaders;
   }
 }

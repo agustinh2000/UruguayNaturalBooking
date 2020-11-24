@@ -1,14 +1,12 @@
-export class TouristSpotForRequestModel{
-    Id: string;
-    Name: string;
-    Description: string;
-    RegionId: string;
-    ImagePath: string;
-    ListOfCategoriesId: string[];
+export class TouristSpotForRequestModel {
+  id: string;
+  name: string;
+  description: string;
+  regionId: string;
+  imagePath: string;
+  listOfCategoriesId: string[];
 
-    public constructor(init?: Partial<TouristSpotForRequestModel>){
-        Object.assign(this, init);
-    }
-
-
+  public constructor(init?: Partial<TouristSpotForRequestModel>) {
+    Object.assign(this, init);
+  }
 }

@@ -58,7 +58,7 @@ export class ModifyUserComponent implements OnInit {
       },
       (err) => {
         alert(err.error);
-        console.log(err);
+        this.router.navigate(['/regions']);
       }
     );
   }
@@ -72,7 +72,6 @@ export class ModifyUserComponent implements OnInit {
       },
       (err) => {
         alert(err.error);
-        console.log(err);
       }
     );
   }
@@ -121,11 +120,13 @@ export class ModifyUserComponent implements OnInit {
       .modify(this.informationOfUserToRegister, this.idOfUserToModify)
       .subscribe(
         (res: UserModelForResponse) => {
+          alert(
+            'Se ha modificado correctamente al usuario con nombre: ' + res.name
+          );
           this.router.navigate(['/regions']);
         },
         (err) => {
           alert(err.error);
-          console.log(err);
         }
       );
   }

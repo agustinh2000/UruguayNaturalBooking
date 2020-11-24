@@ -11,8 +11,8 @@
         <mat-form-field class="selector-of-region" appearance="fill">
             <mat-label> Elija una región </mat-label>
             <mat-select [formControl]="selectedRegion">
-                <mat-option *ngFor="let region of regionsOfTheSystem" [value]="region.Id">
-                    {{region.Description}} </mat-option>
+                <mat-option *ngFor="let region of regionsOfTheSystem" [value]="region.id">
+                    {{region.descriptionOfName}} </mat-option>
             </mat-select>
         </mat-form-field>
 
@@ -26,15 +26,17 @@
         <mat-form-field class="selector-of-categories" appearance="fill">
             <mat-label> Categorias </mat-label>
             <mat-select [formControl]="selectedCategories" multiple>
-                <mat-option *ngFor="let category of categoriesOfTheSystem" [value]="category.Id">{{category.Name}}
+                <mat-option *ngFor="let category of categoriesOfTheSystem" [value]="category.id">{{category.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
-        <div class="form-group">
-            <label for="file">Seleccione un archivo.</label>
-            <input type="file" id="file" multiple accept="image/*" (change)="selectFiles($event)">
-        </div>
+        <mat-form-field appearance="fill" class="input-urlPhoto">
+            <mat-label> Url de la foto </mat-label>
+            <input formControlName="imagePath" type="text" matInput
+                placeholder="Ex. https://www.gettyimages.es/gi-resources/images/500px/983794168.jpg" required>
+            <mat-error *ngIf="formGroup.controls.imagePath.invalid">{{getErrorMessageForPhoto()}}</mat-error>
+        </mat-form-field>
 
         <button class="button" (click)="Add()" [disabled]="formGroup.invalid">Agregar</button>
     </div>

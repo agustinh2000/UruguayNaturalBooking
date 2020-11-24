@@ -99,7 +99,7 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpGet("getByCategoriesAndRegion")]
+        [HttpGet("byCategoriesAndRegion")]
         public IActionResult GetTouristSpotsByCategoriesAndRegionId([FromQuery] Guid[] categoriesId, [FromQuery] Guid regionId)
         {
             try

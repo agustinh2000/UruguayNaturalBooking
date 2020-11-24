@@ -17,7 +17,7 @@ h1 {
   font-size: 40px
 }
 
-.input-name, .input-text-area, .selector-of-categories, .selector-of-region {
+.input-name, .input-text-area, .selector-of-categories, .selector-of-region, .input-urlPhoto {
   width: 98%;
   padding: .5%;
   border-radius: 8px
