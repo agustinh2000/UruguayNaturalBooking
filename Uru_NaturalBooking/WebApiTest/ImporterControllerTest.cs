@@ -59,7 +59,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
+            string sourcePathJson =  "\\Importers\\ImporterJson.dll";
 
             var result = importerController.GetParameters(sourcePathJson);
             var createdResult = result as OkObjectResult;
@@ -97,7 +97,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
+            string sourcePathJson =  "\\Importers\\ImporterJson.dll";
 
             List<Parameter> listOfParameters = new List<Parameter>()
             {
@@ -127,7 +127,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
+            string sourcePathJson = "\\Importers\\ImporterJson.dll";
 
             List<Parameter> listOfParameters = new List<Parameter>()
             {
@@ -155,7 +155,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
+            string sourcePathJson =  "\\Importers\\ImporterJson.dll";
 
             List<Parameter> listOfParameters = new List<Parameter>()
             {
@@ -180,7 +180,7 @@ namespace WebApiTest
 
             ImporterController importerController = new ImporterController(lodgingManagementForImportationMock.Object, reflectionLogic);
 
-            string sourcePathJson = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
+            string sourcePathJson = "\\Importers\\ImporterJson.dll";
 
             List<Parameter> listOfParameters = new List<Parameter>()
             {

@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLogued();
-    this.navigateToRegions();
   }
 
   isLogued(): void {
@@ -45,6 +44,6 @@ export class AppComponent implements OnInit {
   }
 
   navigateToRegions(): void {
-    this.router.navigate(['regions']);
+    this.router.navigate(['/regions']);
   }
 }

@@ -20,21 +20,56 @@ import { LodgingNotExistGuard } from './features/Guards/lodging-not-exist.guard'
 import { ReserveConfirmationComponent } from './features/reserve-confirmation/reserve-confirmation.component';
 import { CreateReserveComponent } from './features/create-reserve/create-reserve.component';
 import { ReserveNotExistGuard } from './features/Guards/reserve-not-exist.guard';
+import { ImporterComponent } from './features/importer/importer.component';
+import { UserNotLoguedGuard } from './features/Guards/user-not-logued.guard';
 
 const routes: Routes = [
-  { path: 'add-lodging', component: AddLodgingComponent },
-  { path: 'add-touristSpot', component: AddTouristSpotComponent },
-  { path: 'delete-user', component: DeleteUserComponent },
+  {
+    path: '',
+    component: RegionComponent,
+  },
+  {
+    path: 'add-lodging',
+    component: AddLodgingComponent,
+    canActivate: [UserNotLoguedGuard],
+  },
+  {
+    path: 'add-touristSpot',
+    component: AddTouristSpotComponent,
+    canActivate: [UserNotLoguedGuard],
+  },
+  {
+    path: 'delete-user',
+    component: DeleteUserComponent,
+    canActivate: [UserNotLoguedGuard],
+  },
   { path: 'login', component: LoginComponent },
-  { path: 'register-user', component: RegisterUserComponent },
+  {
+    path: 'register-user',
+    component: RegisterUserComponent,
+    canActivate: [UserNotLoguedGuard],
+  },
   {
     path: 'modify-lodging-capacity',
     component: ModifyLodgingCapacityComponent,
+    canActivate: [UserNotLoguedGuard],
   },
-  { path: 'modify-reserve', component: ModifyReserveComponent },
-  { path: 'modify-user', component: ModifyUserComponent },
+  {
+    path: 'modify-reserve',
+    component: ModifyReserveComponent,
+    canActivate: [UserNotLoguedGuard],
+  },
+  {
+    path: 'modify-user',
+    component: ModifyUserComponent,
+    canActivate: [UserNotLoguedGuard],
+  },
   { path: 'regions', component: RegionComponent },
-  { path: 'report', component: ReportComponent },
+  {
+    path: 'report',
+    component: ReportComponent,
+    canActivate: [UserNotLoguedGuard],
+  },
   { path: 'review', component: ReviewComponent },
   {
     path: 'touristSpots/:idRegion',
@@ -60,6 +95,12 @@ const routes: Routes = [
     path: 'reserve-confirmation/:idReserve',
     component: ReserveConfirmationComponent,
     canActivate: [ReserveNotExistGuard],
+  },
+
+  {
+    path: 'importer',
+    component: ImporterComponent,
+    canActivate: [UserNotLoguedGuard],
   },
 ];
 

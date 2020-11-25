@@ -1,0 +1,74 @@
+.padre {
+    position: relative;
+    top: -7vh
+}
+
+.contenedor {
+    width: 100%;
+    padding: 3%;
+    box-sizing: border-box
+}
+
+.optionSelector {
+    position: relative;
+    top: -5vh
+}
+
+.optionSelector mat-form-field {
+    top: 2.5vh;
+    left: 18vh;
+    border-radius: 15px
+}
+
+.optionSelector mat-option {
+    cursor: pointer
+}
+
+.formulario {
+    background: #fff;
+    margin-top: 4%;
+    padding: .1%;
+    box-sizing: border-box
+}
+
+h1 {
+    text-align: center;
+    color: #1a2537;
+    font-size: 40px
+}
+
+.input-email, .input-userName {
+    width: 98%;
+    padding: .5%;
+    border-radius: 8px
+}
+
+.input-contenedor {
+    margin-bottom: 3.5%;
+    border: 1px solid #aaa
+}
+
+.button {
+    border: none;
+    width: 100%;
+    color: #fff;
+    font-size: 135%;
+    background: #d1222b;
+    padding: 3.5% 5%;
+    border-radius: 5px;
+    cursor: pointer
+}
+
+.button:hover {
+    background: #5f9ea0
+}
+
+@media (min-width:768px) {
+    .formulario {
+        margin: auto;
+        width: 32.5%;
+        margin-top: 4%;
+        border-radius: 2%;
+        box-sizing: border-box
+    }
+}

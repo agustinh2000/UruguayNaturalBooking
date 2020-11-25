@@ -28,7 +28,7 @@ namespace ImportationTest
         public void GetTheParametersOfJSONDllTestOk()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            List<Parameter> parametersOfImporterJson = reflectionLogic.GetTheParametersRequired(Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll");
+            List<Parameter> parametersOfImporterJson = reflectionLogic.GetTheParametersRequired( "\\Importers\\ImporterJson.dll");
             JsonImporter importerJson = new JsonImporter();
 
             CollectionAssert.AreEqual(importerJson.GetParameter(), parametersOfImporterJson);
@@ -38,7 +38,7 @@ namespace ImportationTest
         public void GetTheParametersOfXmlDllTestOk()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            List<Parameter> parametersOfImporterXml = reflectionLogic.GetTheParametersRequired(Directory.GetCurrentDirectory() + "\\Importers\\ImporterXml.dll");
+            List<Parameter> parametersOfImporterXml = reflectionLogic.GetTheParametersRequired("\\Importers\\ImporterXml.dll");
             XmlImporter importerXml = new XmlImporter();
 
             CollectionAssert.AreEqual(importerXml.GetParameter(), parametersOfImporterXml);
@@ -49,16 +49,16 @@ namespace ImportationTest
         public void FailInGetParametersOfJsonDllWithoutConstructorTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            List<Parameter> parametersOfImporterJson = reflectionLogic.GetTheParametersRequired(Directory.GetCurrentDirectory() + "\\ImporterWithoutConstructor\\ImporterJsonWithoutConstructor.dll");
+            List<Parameter> parametersOfImporterJson = reflectionLogic.GetTheParametersRequired( "\\ImporterWithoutConstructor\\ImporterJsonWithoutConstructor.dll");
         }
 
         [TestMethod]
         public void ImportingLodgingsTestOfJsonDllOk()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            List<Parameter> listOfParameters = reflectionLogic.GetTheParametersRequired(Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll");
+            List<Parameter> listOfParameters = reflectionLogic.GetTheParametersRequired(  "\\Importers\\ImporterJson.dll");
             listOfParameters[0].Value = Directory.GetCurrentDirectory() + "\\FilesToImport\\Lodgings.json";
-            List<LodgingModelForImport> lodgingsImported = reflectionLogic.ImportLodgings(Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll", listOfParameters);
+            List<LodgingModelForImport> lodgingsImported = reflectionLogic.ImportLodgings(  "\\Importers\\ImporterJson.dll", listOfParameters);
 
             TouristSpotModelForImport touristSpotModel = new TouristSpotModelForImport()
             {
@@ -90,7 +90,7 @@ namespace ImportationTest
         public void ImportingLodgingsTestOfXmlDllOk()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfXmlDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterXml.dll";
+            string pathOfXmlDll =  "\\Importers\\ImporterXml.dll";
             List<Parameter> listOfParameters = reflectionLogic.GetTheParametersRequired(pathOfXmlDll);
             listOfParameters[0].Value = Directory.GetCurrentDirectory() + "\\FilesToImport\\Lodgings.xml";
             List<LodgingModelForImport> lodgingsImported = reflectionLogic.ImportLodgings(pathOfXmlDll, listOfParameters);
@@ -125,10 +125,10 @@ namespace ImportationTest
         public void FailInImportLodgingWithMoreParametersInJsonDllTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            List<Parameter> listOfParameters = reflectionLogic.GetTheParametersRequired(Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll");
+            List<Parameter> listOfParameters = reflectionLogic.GetTheParametersRequired("\\Importers\\ImporterJson.dll");
             listOfParameters[0].Value = Directory.GetCurrentDirectory() + "\\FilesToImport\\Lodgings.json";
             listOfParameters.Add(new Parameter());
-            reflectionLogic.ImportLodgings(Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll", listOfParameters);
+            reflectionLogic.ImportLodgings("\\Importers\\ImporterJson.dll", listOfParameters);
         }
 
         [TestMethod]
@@ -136,7 +136,7 @@ namespace ImportationTest
         public void FailInImportLodgingWithMoreParametersInXmlDllTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfXmlDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterXml.dll";
+            string pathOfXmlDll =  "\\Importers\\ImporterXml.dll";
             List<Parameter> listOfParameters = reflectionLogic.GetTheParametersRequired(pathOfXmlDll);
             listOfParameters[0].Value = Directory.GetCurrentDirectory() + "\\FilesToImport\\Lodgings.xml";
             listOfParameters.Add(new Parameter());
@@ -148,7 +148,7 @@ namespace ImportationTest
         public void FailInImportLodgingWithBadDllTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfDll = Directory.GetCurrentDirectory() + "\\ImporterWithoutConstructor\\ImporterJsonWithoutConstructor.dll";
+            string pathOfDll = "\\ImporterWithoutConstructor\\ImporterJsonWithoutConstructor.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()
@@ -166,7 +166,7 @@ namespace ImportationTest
         public void FailInImportLodgingWrongPathOfFileJsonDllTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
+            string pathOfDll =  "\\Importers\\ImporterJson.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()
@@ -184,7 +184,7 @@ namespace ImportationTest
         public void FailInImportLodgingWrongPathOfFileXmlDllTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfXmlDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterXml.dll";
+            string pathOfXmlDll = "\\Importers\\ImporterXml.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()
@@ -202,7 +202,7 @@ namespace ImportationTest
         public void FailInImportLodgingEmptyPathOfFileJsonDllTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
+            string pathOfDll =  "\\Importers\\ImporterJson.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()
@@ -220,7 +220,7 @@ namespace ImportationTest
         public void FailInImportLodgingEmptyPathOfFileXmlDllTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfXmlDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterXml.dll";
+            string pathOfXmlDll =  "\\Importers\\ImporterXml.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()
@@ -238,7 +238,7 @@ namespace ImportationTest
         public void FailInImportLodgingNullPathOfFileJsonDllTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
+            string pathOfDll =  "\\Importers\\ImporterJson.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()
@@ -256,7 +256,7 @@ namespace ImportationTest
         public void FailInImportLodgingNullPathOfFileXmlDllTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfXmlDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterXml.dll";
+            string pathOfXmlDll =  "\\Importers\\ImporterXml.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()
@@ -274,7 +274,7 @@ namespace ImportationTest
         public void FailInImportLodgingWrongPathOfDirectoryJSONDllTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
+            string pathOfDll = "\\Importers\\ImporterJson.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()
@@ -292,7 +292,7 @@ namespace ImportationTest
         public void FailInImportLodgingWrongPathOfDirectoryXMLDllTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfXmlDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterXml.dll";
+            string pathOfXmlDll =  "\\Importers\\ImporterXml.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()
@@ -310,7 +310,7 @@ namespace ImportationTest
         public void FailInImportLodgingWithErrorInJSONFileTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
+            string pathOfDll = "\\Importers\\ImporterJson.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()
@@ -328,7 +328,7 @@ namespace ImportationTest
         public void FailInImportLodgingWithReadErrorInJSONFileTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterJson.dll";
+            string pathOfDll =  "\\Importers\\ImporterJson.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()
@@ -346,7 +346,7 @@ namespace ImportationTest
         public void FailInImportLodgingWithInvalidOperationInXMLFileTest()
         {
             ReflectionLogic reflectionLogic = new ReflectionLogic();
-            string pathOfXmlDll = Directory.GetCurrentDirectory() + "\\Importers\\ImporterXml.dll";
+            string pathOfXmlDll =  "\\Importers\\ImporterXml.dll";
             List<Parameter> listOfParametersExpected = new List<Parameter>()
             {
                 new Parameter()

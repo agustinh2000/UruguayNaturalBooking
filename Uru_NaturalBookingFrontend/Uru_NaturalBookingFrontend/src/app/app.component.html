@@ -11,13 +11,15 @@
             <div class="navigation" fxShow="true" fxHide.lt-md="true">
 
                 <span routerLink="regions">
-                    <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="buttonHome"
+                        mat-button>
                         <mat-icon>home</mat-icon>
                         Inicio
                     </a>
                 </span>
                 <span routerLink="review">
-                    <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" mat-button>
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="buttonReview"
+                        mat-button>
                         <mat-icon>rate_review</mat-icon>
                         Review
                     </a>
@@ -55,57 +57,93 @@
                     </mat-menu>
                 </ng-template>
 
-                <button mat-button [matMenuTriggerFor]="menu2">
-                    <mat-icon>account_box</mat-icon>Puntos turisticos <i class="fas fa-caret-down"
-                        style="color:black"></i>
-                </button>
-                <mat-menu #menu2="matMenu">
-                    <button mat-menu-item routerLink="add-touristSpot">
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
-                            mat-button>
-                            <span class="material-icons">add_box</span>
-                            Añadir punto turistico
-                        </a>
+                <ng-template [ngIf]="logued">
+                    <button mat-button [matMenuTriggerFor]="menu2">
+                        <span class="material-icons">
+                            tour
+                        </span>Puntos turisticos <i class="fas fa-caret-down" style="color:black"></i>
                     </button>
-                </mat-menu>
+                    <mat-menu #menu2="matMenu">
+                        <button mat-menu-item routerLink="add-touristSpot">
+                            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
+                                mat-button>
+                                <span class="material-icons">add_box</span>
+                                Añadir punto turistico
+                            </a>
+                        </button>
+                    </mat-menu>
+                </ng-template>
 
-                <button mat-button [matMenuTriggerFor]="menu3">
-                    <mat-icon>account_box</mat-icon> Hospedaje <i class="fas fa-caret-down" style="color:black"></i>
-                </button>
-                <mat-menu #menu3="matMenu">
-                    <button mat-menu-item routerLink="add-lodging">
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
-                            mat-button>
-                            <span class="material-icons">add_box</span>
-                            Añadir hospedaje
-                        </a>
+                <ng-template [ngIf]="logued">
+                    <button mat-button [matMenuTriggerFor]="menu3">
+                        <span class="material-icons">
+                            local_hotel
+                        </span> Hospedaje <i class="fas fa-caret-down" style="color:black"></i>
                     </button>
-                    <button mat-menu-item routerLink="modify-lodging-capacity">
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
-                            mat-button>
-                            <span class="material-icons">
-                                construction
-                            </span>
-                            Modificar hospedaje
-                        </a>
-                    </button>
+                    <mat-menu #menu3="matMenu">
+                        <button mat-menu-item routerLink="add-lodging">
+                            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
+                                mat-button>
+                                <span class="material-icons">add_box</span>
+                                Añadir hospedaje
+                            </a>
+                        </button>
+                        <button mat-menu-item routerLink="modify-lodging-capacity">
+                            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
+                                mat-button>
+                                <span class="material-icons">
+                                    construction
+                                </span>
+                                Modificar hospedaje
+                            </a>
+                        </button>
 
-                    <button mat-menu-item routerLink="modify-reserve">
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
-                            mat-button>
-                            <span class="material-icons">
-                                construction
-                            </span>
-                            Modificar reserva
-                        </a>
+                        <button mat-menu-item routerLink="modify-reserve">
+                            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
+                                mat-button>
+                                <span class="material-icons">
+                                    construction
+                                </span>
+                                Modificar reserva
+                            </a>
+                        </button>
+
+                        <button mat-menu-item routerLink="importer">
+                            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
+                                mat-button>
+                                <span class="material-icons">
+                                    publish
+                                </span>
+                                Importar hospedaje
+                            </a>
+                        </button>
+                    </mat-menu>
+                </ng-template>
+
+                <ng-template [ngIf]="logued">
+                    <button mat-button [matMenuTriggerFor]="menu5">
+                        <span class="material-icons">
+                            analytics
+                        </span> Reporte <i class="fas fa-caret-down" style="color:black"></i>
                     </button>
-                </mat-menu>
+                    <mat-menu #menu5="matMenu">
+                        <button mat-menu-item routerLink="report">
+                            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
+                                mat-button>
+                                <span class="material-icons">
+                                    build
+                                </span>
+                                Generar reporte
+                            </a>
+                        </button>
+                    </mat-menu>
+                </ng-template>
 
                 <div *ngIf="logued; then thenBlock; else elseBlock"></div>
                 <ng-template #thenBlock>
                     <button mat-button (click)="logout()">
                         <span>
-                            <a class="button" mat-button>
+                            <a class="buttonClose" mat-button>
                                 <span class="material-icons">
                                     exit_to_app
                                 </span>
@@ -118,7 +156,7 @@
                 <ng-template #elseBlock>
                     <button mat-button>
                         <span routerLink="login">
-                            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
+                            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="buttonLogin"
                                 mat-button>
                                 <span class="material-icons">
                                     login
@@ -129,21 +167,6 @@
                     </button>
                 </ng-template>
 
-
-                <button mat-button [matMenuTriggerFor]="menu5">
-                    <mat-icon>account_box</mat-icon> Reporte <i class="fas fa-caret-down" style="color:black"></i>
-                </button>
-                <mat-menu #menu5="matMenu">
-                    <button mat-menu-item routerLink="report">
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button"
-                            mat-button>
-                            <span class="material-icons">
-                                build
-                            </span>
-                            Generar reporte
-                        </a>
-                    </button>
-                </mat-menu>
             </div>
         </mat-toolbar-row>
     </mat-toolbar>

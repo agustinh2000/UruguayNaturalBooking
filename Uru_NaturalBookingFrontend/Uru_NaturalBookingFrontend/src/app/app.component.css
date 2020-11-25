@@ -25,3 +25,11 @@
 button {
     outline: none;
 }
+
+.buttonHome, .buttonReview, .buttonClose, .buttonLogin {
+    outline: none;
+}
+
+.buttonHome:hover, .buttonReview:hover, .buttonClose:hover, .buttonLogin:hover {
+    color: #fff;
+}

@@ -50,6 +50,7 @@ import { CreateReserveComponent } from './create-reserve/create-reserve.componen
 import { TouristsPipe } from './tourists.pipe';
 import { ReserveConfirmationComponent } from './reserve-confirmation/reserve-confirmation.component';
 import { SearchOfLodgingsService } from './services/search-of-lodgings.service';
+import { ImporterComponent } from './importer/importer.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { SearchOfLodgingsService } from './services/search-of-lodgings.service';
     CreateReserveComponent,
     TouristsPipe,
     ReserveConfirmationComponent,
+    ImporterComponent,
   ],
   imports: [
     CommonModule,
@@ -125,6 +127,7 @@ import { SearchOfLodgingsService } from './services/search-of-lodgings.service';
     CreateReserveComponent,
     TouristsPipe,
     ReserveConfirmationComponent,
+    ImporterComponent,
   ],
   providers: [
     RegionServiceService,

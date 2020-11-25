@@ -1,0 +1,24 @@
+<div class="padre">
+    <form [formGroup]="formGroup" class="formulario">
+        <h1> Importar hospedajes </h1>
+        <div class="contenedor">
+            <div class="optionSelector">
+                <mat-form-field appearance="fill">
+                    <mat-label>Elija un importador</mat-label>
+                    <mat-select formControlName="selectedImporter">
+                        <mat-option *ngFor="let importerName of importersAvailablesName" [value]="importerName">
+                            {{importerName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="fill" class="input-userName">
+                <mat-label> Ruta al archivo a importar </mat-label>
+                <input formControlName="pathForImport" type="text" matInput
+                    placeholder="Debe estar dentro del proyecto WebAPI">
+            </mat-form-field>
+
+            <button class="button" (click)="import()">Importar</button>
+        </div>
+    </form>
+</div>

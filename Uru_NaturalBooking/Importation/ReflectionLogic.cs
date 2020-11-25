@@ -34,10 +34,10 @@ namespace Importation
             }
         }
 
-        public List<Parameter> GetTheParametersRequired(string importerPath)
+        public List<Parameter> GetTheParametersRequired(string importerFileName)
         {
             List<Parameter> listOfParametersRequired = new List<Parameter>();
-            Assembly dll = Assembly.UnsafeLoadFrom(importerPath);
+            Assembly dll = Assembly.UnsafeLoadFrom(Directory.GetCurrentDirectory() + "\\" + importerFileName);
 
             IEnumerable<Type> types = dll.GetTypes().Where(i => typeof(IImport).IsAssignableFrom(i));
             foreach (Type type in types)
@@ -55,10 +55,10 @@ namespace Importation
             return listOfParametersRequired;
         }
 
-        public List<LodgingModelForImport> ImportLodgings(string importerPath, List<Parameter> parameterValues)
+        public List<LodgingModelForImport> ImportLodgings(string importerFileName, List<Parameter> parameterValues)
         {
             List<LodgingModelForImport> lodgingToImport = new List<LodgingModelForImport>();
-            Assembly dll = Assembly.UnsafeLoadFrom(importerPath);
+            Assembly dll = Assembly.UnsafeLoadFrom(Directory.GetCurrentDirectory() + "\\"+importerFileName);
 
             IEnumerable<Type> types = dll.GetTypes().Where(i => typeof(IImport).IsAssignableFrom(i));
             foreach (Type type in types)
