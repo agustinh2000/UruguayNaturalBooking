@@ -592,11 +592,34 @@ namespace BusinessLogicTest
             user.Name = "Gonzalo";
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
             userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            userRepositoryMock.Setup(m => m.GetUserByEmail(It.IsAny<string>())).Returns(value: null);
             userRepositoryMock.Setup(m => m.Update(It.IsAny<User>()));
             var userLogic = new UserManagement(userRepositoryMock.Object);
             var result = userLogic.UpdateUser(user.Id, user);
             userRepositoryMock.VerifyAll();
             Assert.AreEqual("Gonzalo", user.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DomainBusinessLogicException))]
+        public void TryToUpdateUserWithRepeatedMailTest()
+        {
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Martin",
+                LastName = "Gutman",
+                UserName = "colo20",
+                Mail = "colo2020@gmail.com",
+                Password = "martin1234"
+            };
+            user.Name = "Gonzalo";
+            var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            userRepositoryMock.Setup(m => m.GetUserByEmail(It.IsAny<string>())).Returns(user);
+            userRepositoryMock.Setup(m => m.Update(It.IsAny<User>()));
+            var userLogic = new UserManagement(userRepositoryMock.Object);
+            var result = userLogic.UpdateUser(user.Id, user);
         }
 
         [TestMethod]
@@ -616,6 +639,7 @@ namespace BusinessLogicTest
             user.Name = "Gonzalo";
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
             userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Throws(new ClientException());
+            userRepositoryMock.Setup(m => m.GetUserByEmail(It.IsAny<string>())).Returns(value: null);
             var userLogic = new UserManagement(userRepositoryMock.Object);
             var result = userLogic.UpdateUser(user.Id, user);
         }
@@ -638,6 +662,7 @@ namespace BusinessLogicTest
             user.Name = "";
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
             userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            userRepositoryMock.Setup(m => m.GetUserByEmail(It.IsAny<string>())).Returns(value: null);
             var userLogic = new UserManagement(userRepositoryMock.Object);
             var result = userLogic.UpdateUser(user.Id, user);
         }
@@ -659,6 +684,7 @@ namespace BusinessLogicTest
             user.Name = "Gonzalo";
             var userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
             userRepositoryMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(user);
+            userRepositoryMock.Setup(m => m.GetUserByEmail(It.IsAny<string>())).Returns(value: null);
             userRepositoryMock.Setup(m => m.Update(It.IsAny<User>())).Throws(new ServerException());
             var userLogic = new UserManagement(userRepositoryMock.Object);
             var result = userLogic.UpdateUser(user.Id, user);

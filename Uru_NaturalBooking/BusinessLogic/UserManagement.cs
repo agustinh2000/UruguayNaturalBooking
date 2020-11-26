@@ -158,6 +158,7 @@ namespace BusinessLogic
             try
             {
                 User userDb = GetUser(userToModifyId);
+                VerifyIfUserExist(aUser);
                 userDb.UpdateAttributes(aUser);
                 userDb.VerifyFormat();
                 userRepository.Update(userDb);
@@ -170,6 +171,10 @@ namespace BusinessLogic
             catch (ClientBusinessLogicException e)
             {
                 throw new ClientBusinessLogicException(e.Message);
+            }
+            catch (DomainBusinessLogicException e)
+            {
+                throw new DomainBusinessLogicException(e.Message);
             }
             catch (ServerException e)
             {
