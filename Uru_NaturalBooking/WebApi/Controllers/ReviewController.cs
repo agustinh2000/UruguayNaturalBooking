@@ -23,7 +23,7 @@ namespace WebApi.Controllers
             reviewManagement = reviewLogic;
         }
 
-        [HttpGet("{id}", Name = "getReview")]
+        [HttpGet("{id}", Name = "review")]
         public IActionResult Get(Guid id)
         {
             try
@@ -47,7 +47,7 @@ namespace WebApi.Controllers
             try
             {
                 Review review = reviewManagement.Create(ReviewModelForRequest.ToEntity(aReviewModel), aReviewModel.IdOfReserveAssociated);
-                return CreatedAtRoute("getReview", new { id = review.Id }, ReviewModelForResponse.ToModel(review));
+                return CreatedAtRoute("review", new { id = review.Id }, ReviewModelForResponse.ToModel(review));
             }
             catch (DomainBusinessLogicException e)
             {

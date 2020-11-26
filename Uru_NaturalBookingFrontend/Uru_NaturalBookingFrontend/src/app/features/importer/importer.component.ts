@@ -64,7 +64,9 @@ export class ImporterComponent implements OnInit {
           this.router.navigate(['/regions']);
         },
         (err) => {
-          alert(err.error);
+          alert(
+            'Hubieron hospedajes que no se pudieron importar: ' + err.error
+          );
         }
       );
   }

@@ -6,7 +6,6 @@ using DomainException;
 using RepositoryException;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BusinessLogic
 {
@@ -37,7 +36,7 @@ namespace BusinessLogic
                 {
                     touristSpotForLodging = touristSpotManagementLogic.GetTouristSpotById(touristSpot.Id);
                 }
-                catch (ClientBusinessLogicException e)
+                catch (ClientBusinessLogicException)
                 {
                     touristSpotForLodging = touristSpotManagementLogic.Create(touristSpot, touristSpot.Region.Id, touristSpot.ListOfCategories.ConvertAll(c => c.CategoryId)); 
                 }

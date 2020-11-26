@@ -86,23 +86,6 @@ namespace BusinessLogic
             }
         }
 
-
-        public List<TouristSpot> GetTouristSpotByRegion(Guid regionId)
-        {
-            try
-            {
-                return touristSpotRepository.GetTouristSpotByRegion(regionId);
-            }
-            catch (ClientException e)
-            {
-                throw new ClientBusinessLogicException(e.Message, e);
-            }
-            catch (ServerException e)
-            {
-                throw new ServerBusinessLogicException(e.Message, e);
-            }
-        }
-
         public TouristSpot GetTouristSpotById(Guid touristSpotId)
         {
             try
@@ -117,22 +100,6 @@ namespace BusinessLogic
             catch (ServerException e)
             {
                 throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedTouristSpot, e);
-            }
-        }
-
-        public List<TouristSpot> GetTouristSpotsByCategories(List<Guid> listOfCategoriesIdSearched)
-        {
-            try
-            {
-                return touristSpotRepository.GetTouristSpotsByCategories(listOfCategoriesIdSearched);
-            }
-            catch (ClientException e)
-            {
-                throw new ClientBusinessLogicException(MessageExceptionBusinessLogic.ErrorObteinedTouristSpotByCategories, e);
-            }
-            catch (ServerException e)
-            {
-                throw new ServerBusinessLogicException(MessageExceptionBusinessLogic.ErrorGettingTouristSpotByCategories, e);
             }
         }
 

@@ -1,0 +1,36 @@
+[{
+  "name": "Radisson Montevideo",
+  "description": "El Radisson Montevideo Victoria Plaza está ubicado en pleno centro de la ciudad, frente a la plaza Independencia, y ofrece vistas impresionantes a la bahía del puerto.",
+  "quantityOfStars": 5,
+  "address": "Av. Chiverta esquina Arazatí, Aidy Grill,",
+  "images": ["https://cf.bstatic.com/xdata/images/hotel/max1280x900/243870469.webp?k=90b563f90738836c1fb2d2d5dc3f4ad4cf554e650e5bd0299de37ea83670c598&o=",
+     "https://cf.bstatic.com/xdata/images/hotel/max1280x900/235263569.webp?k=5737be570389ede64b0ae2d041d25a7ef8a1b1e30f8e2fd2e1182eff10b9c798&o=", 
+     "https://cf.bstatic.com/xdata/images/hotel/max1280x900/202384310.webp?k=e6f86721bdd95f10721aa47d1590dc1594538c94381d39eb010ad972a2d47088&o="],
+  "pricePerNight": 300.0,
+  "isAvailable": true,
+  "touristSpot": {
+                    "id": "2637476F-B402-412D-B4CD-086808EE7B51",
+                    "name": "Punta del Este",
+                    "description": "La naturaleza abunda",
+                    "regionId": "fc775bb9-8cc8-4fdc-bca6-16e06bcd322b",
+                    "imagePath": "Desktop\\pde.jpg",
+                    "listOfCategoriesId": ["baa98b33-eafe-4d62-bb62-859a8e36d3a9"]
+                }
+},{
+  "name": "Sol y Luna Hotel",
+  "description": "El Sol y Luna Home & Spa ofrece alojamiento independiente con WiFi gratis en Punta del Este, a 300 metros de las playas Brava y Mansa.",
+  "quantityOfStars": 5,
+  "address": "Av. Chiverta esquina Arazatí, Aidy Grill,",
+  "images": ["https://cf.bstatic.com/xdata/images/hotel/max1280x900/40311205.webp?k=2d889779bbf27e507231b75672c9463553f63e57d5565378bdfb9895a88d83f4&o="],
+  "pricePerNight": 200.0,
+  "isAvailable": true,
+  "touristSpot": {
+                    "id": "2E792C77-5DAD-43B8-88F3-FE0A26D21F16",
+                    "name": "Punta del Este",
+                    "description": "La naturaleza abunda",
+                    "regionId": "fc775bb9-8cc8-4fdc-bca6-16e06bcd322b",
+                    "imagePath": "Desktop\\pde.jpg",
+                    "listOfCategoriesId": ["baa98b33-eafe-4d62-bb62-859a8e36d3a9"]
+                }
+}
+]

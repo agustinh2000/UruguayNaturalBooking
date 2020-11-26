@@ -515,50 +515,6 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        public void GetValidTouristSpotByRegion()
-        {
-            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
-            touristSpotRepositoryMock.Setup(m => m.GetTouristSpotByRegion(region1.Id)).Returns(new List<TouristSpot>() { touristSpot1 });
-
-            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
-
-            var result = touristSpotLogic.GetTouristSpotByRegion(region1.Id);
-
-            touristSpotRepositoryMock.VerifyAll();
-            Assert.AreEqual(touristSpot1, result[0]);
-        }
-
-
-        [TestMethod]
-        [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void GetInvalidTouristSpotByRegionTestInternalError()
-        {
-            List<TouristSpot> listOfTouristSpotSearched = new List<TouristSpot>() { touristSpot1, touristSpot3 };
-
-            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
-            touristSpotRepositoryMock.Setup(m => m.GetTouristSpotByRegion(It.IsAny<Guid>())).Throws(new ServerException());
-
-            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
-
-            var result = touristSpotLogic.GetTouristSpotByRegion(region1.Id);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ClientBusinessLogicException))]
-        public void GetInvalidTouristSpotByRegionTestNotFound()
-        {
-            List<TouristSpot> listOfTouristSpotSearched = new List<TouristSpot>() { touristSpot1, touristSpot3 };
-
-            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
-            touristSpotRepositoryMock.Setup(m => m.GetTouristSpotByRegion(It.IsAny<Guid>())).Throws(new ClientException());
-
-            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
-
-            var result = touristSpotLogic.GetTouristSpotByRegion(region1.Id);
-        }
-
-
-        [TestMethod]
         public void GetValidTouristSpotById()
         {
             Region region1 = new Region()
@@ -685,51 +641,6 @@ namespace BusinessLogicTest
             var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
 
             var result = touristSpotLogic.GetTouristSpotById(idForTouristSpot);
-        }
-
-
-        [TestMethod]
-        public void GetValidTouristSpotSearchByCategories()
-        {
-            List<TouristSpot> listOfTouristSpotSearched = new List<TouristSpot>() { touristSpot1, touristSpot2 };
-
-            List<Guid> listOfCategoriesIdToSearch = new List<Guid>() { category1.Id, category2.Id };
-
-            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
-            touristSpotRepositoryMock.Setup(m => m.GetTouristSpotsByCategories(listOfCategoriesIdToSearch)).Returns(new List<TouristSpot>() { touristSpot1 });
-
-            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
-
-            var result = touristSpotLogic.GetTouristSpotsByCategories(listOfCategoriesIdToSearch);
-
-            touristSpotRepositoryMock.VerifyAll();
-            Assert.IsTrue(new List<TouristSpot>(result).Contains(touristSpot1));
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void GetInvalidTouristSpotSearchByCategories()
-        {
-            List<Guid> listOfCategoriesToSearch = new List<Guid>() { category1.Id, category2.Id };
-            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
-            touristSpotRepositoryMock.Setup(m => m.GetTouristSpotsByCategories(listOfCategoriesToSearch)).Throws(new ServerException());
-
-            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
-
-            var result = touristSpotLogic.GetTouristSpotsByCategories(listOfCategoriesToSearch);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ClientBusinessLogicException))]
-        public void GetNotFountTouristSpotSearchedByCategoriesTest()
-        {
-            List<Guid> listOfCategoriesToSearch = new List<Guid>() { category1.Id, category2.Id };
-            var touristSpotRepositoryMock = new Mock<ITouristSpotRepository>(MockBehavior.Strict);
-            touristSpotRepositoryMock.Setup(m => m.GetTouristSpotsByCategories(listOfCategoriesToSearch)).Throws(new ClientException());
-
-            var touristSpotLogic = new TouristSpotManagement(touristSpotRepositoryMock.Object);
-
-            var result = touristSpotLogic.GetTouristSpotsByCategories(listOfCategoriesToSearch);
         }
 
         [TestMethod]

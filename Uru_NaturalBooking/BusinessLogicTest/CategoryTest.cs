@@ -3,13 +3,12 @@ using BusinessLogic;
 using BusinessLogicException;
 using DataAccessInterface;
 using Domain;
-using DomainException;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RepositoryException;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+
 
 namespace BusinessLogicTest
 {
@@ -235,100 +234,5 @@ namespace BusinessLogicTest
 
             List<Category> result = categoryLogic.GetAssociatedCategories(listOfIdentifier);
         }
-
-
-        [TestMethod]
-        public void CreateValidCategoryTestOk()
-        {
-            Category category = new Category
-            {
-                Name = "Playita y calor"
-            };
-
-            var categoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
-            categoryMock.Setup(m => m.Add(It.IsAny<Category>()));
-            categoryMock.Setup(m => m.GetCategoryByName(category.Name)).Returns(value: null);
-
-            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
-
-            Category result = categoryLogic.Create(category);
-
-            categoryMock.VerifyAll();
-            Assert.AreEqual(category, result);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void CreateInvalidCategoryInternalError()
-        {
-            Category category = new Category
-            {
-                Name = "Playita y calor"
-            };
-
-            var categoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
-            categoryMock.Setup(m => m.Add(It.IsAny<Category>())).Throws(new ServerException());
-            categoryMock.Setup(m => m.GetCategoryByName(category.Name)).Returns(value:null);
-
-
-            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
-
-            Category result = categoryLogic.Create(category);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(DomainBusinessLogicException))]
-        public void CreateInvalidCategoryWithoutName()
-        {
-            Category category = new Category
-            {
-                Name = ""
-            };
-
-            var categoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
-            categoryMock.Setup(m => m.Add(It.IsAny<Category>()));
-            categoryMock.Setup(m => m.GetCategoryByName(category.Name)).Returns(value: null);
-
-            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
-
-            Category result = categoryLogic.Create(category);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(DomainBusinessLogicException))]
-        public void CreateInvalidCategoryAlredyExist()
-        {
-            Category category = new Category
-            {
-                Name = "Monte"
-            };
-
-            var categoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
-            categoryMock.Setup(m => m.Add(It.IsAny<Category>()));
-            categoryMock.Setup(m => m.GetCategoryByName(category.Name)).Returns(category);
-
-            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
-
-            Category result = categoryLogic.Create(category);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ServerBusinessLogicException))]
-        public void CreateInvalidCategoryInternalErrorWhenSearchCategoryByName()
-        {
-            Category category = new Category
-            {
-                Name = "Monte"
-            };
-
-            var categoryMock = new Mock<ICategoryRepository>(MockBehavior.Strict);
-            categoryMock.Setup(m => m.Add(It.IsAny<Category>()));
-            categoryMock.Setup(m => m.GetCategoryByName(category.Name)).Throws(new ServerException());
-
-            CategoryManagement categoryLogic = new CategoryManagement(categoryMock.Object);
-
-            Category result = categoryLogic.Create(category);
-        }
-
     }
 }

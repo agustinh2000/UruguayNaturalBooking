@@ -8,11 +8,7 @@ namespace BusinessLogicInterface
     {
         TouristSpot Create(TouristSpot touristSpot, Guid regionId, List<Guid> listOfIdentifiers);
 
-        List<TouristSpot> GetTouristSpotByRegion(Guid regionId);
-
         TouristSpot GetTouristSpotById(Guid touristSpotId);
-
-        List<TouristSpot> GetTouristSpotsByCategories(List<Guid> listOfCategoriesIdSearched);
 
         List<TouristSpot> GetTouristSpotsByCategoriesAndRegion(List<Guid> listOfCategoriesIdSearched, Guid regionIdSearched);
 

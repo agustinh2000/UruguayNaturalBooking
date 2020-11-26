@@ -16,14 +16,6 @@ namespace Domain
 			ListOfTouristSpot = new List<CategoryTouristSpot>(); 
 		}
 
-        public void VerifyFormat()
-        {
-            if (string.IsNullOrEmpty(Name))
-            {
-                throw new CategoryException(MessageExceptionDomain.ErrorIsEmpty); 
-            }
-        }
-
         public override bool Equals(object obj)
         {
             return obj is Category category &&

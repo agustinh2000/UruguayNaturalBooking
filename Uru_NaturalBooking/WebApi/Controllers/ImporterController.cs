@@ -4,6 +4,7 @@ using System.Linq;
 using BusinessLogicInterface;
 using Castle.Core.Internal;
 using Domain;
+using Filters;
 using Importation;
 using ImporterException;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +26,7 @@ namespace WebApi.Controllers
             reflectionLogic = logicOfReflection;
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpGet]
         public IActionResult Get()
         {
@@ -39,7 +41,8 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("getTheParameterOfDllSelected")]
+        [ServiceFilter(typeof(AuthorizationFilter))]
+        [HttpGet("theParameterOfDllSelected")]
         public IActionResult GetParameters([FromQuery] string pathOfDll)
         {
             try
@@ -52,7 +55,7 @@ namespace WebApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
-
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
         public IActionResult Post([FromBody] List<Parameter> informationForTheImporters, [FromQuery] string pathOfDll)
         {

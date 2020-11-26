@@ -66,46 +66,5 @@ namespace BusinessLogic
             }
             return listOfCategoriesToAssociated;
         }
-
-        public Category Create(Category categoryToCreate)
-        {
-            try
-            {
-                VerifyIfCategoryExist(categoryToCreate);
-                categoryToCreate.Id = Guid.NewGuid();
-                categoryToCreate.VerifyFormat();
-                categoryRepository.Add(categoryToCreate);
-                return categoryToCreate;
-            }
-            catch (CategoryException e)
-            {
-                throw new DomainBusinessLogicException(e.Message);
-            }
-            catch (DomainBusinessLogicException e)
-            {
-                throw new DomainBusinessLogicException(e.Message);
-            }
-            catch (ServerException e)
-            {
-                throw new ServerBusinessLogicException("No se puede crear la categoria deseada", e);
-            }
-        }
-
-        private void VerifyIfCategoryExist(Category category)
-        {
-            try
-            {
-                Category catgegoryObteined = categoryRepository.GetCategoryByName(category.Name);
-                if (catgegoryObteined != null)
-                {
-                    throw new DomainBusinessLogicException(MessageExceptionBusinessLogic.ErrorCategoryAlredyExist);
-                }
-            }
-            catch (ServerException e)
-            {
-                throw new ServerException("No se puede crear la categoria debido a que ha ocurrido un error.", e);
-            }
-        }
-
     }
 }

@@ -3,12 +3,10 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Model;
 using Model.ForResponseAndRequest;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Security;
 using WebApi.Controllers;
 
 namespace WebApiTest
@@ -134,53 +132,5 @@ namespace WebApiTest
             mock.VerifyAll();
             Assert.AreEqual(500, createdResult.StatusCode);
         }
-
-        [TestMethod]
-        public void PostACategoryTest()
-        {
-            Category categoryToReturn = new Category()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Playa"
-            }; 
-
-            var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
-            mock.Setup(m => m.Create(It.IsAny<Category>())).Returns(categoryToReturn);
-            CategoryController categoryController = new CategoryController(mock.Object);
-
-            var result = categoryController.Post(categoryBeachModel);
-            var createdResult = result as CreatedAtRouteResult;
-            var resultValue = createdResult.Value as CategoryModel;
-
-            mock.VerifyAll();
-            Assert.AreEqual(categoryBeachModel, resultValue); 
-        }
-
-        [TestMethod]
-        public void TestPostCategoryWithInternalServerError()
-        {
-            var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
-            mock.Setup(m => m.Create(It.IsAny<Category>())).Throws(new ServerBusinessLogicException());
-            CategoryController categoryController = new CategoryController(mock.Object);
-
-            var result = categoryController.Post(categoryBeachModel);
-            var createdResult = result as ObjectResult;
-            mock.VerifyAll(); 
-            Assert.AreEqual(500, createdResult.StatusCode);
-        }
-
-        [TestMethod]
-        public void TestPostCategoryWithDomainErrorError()
-        {
-            var mock = new Mock<ICategoryManagement>(MockBehavior.Strict);
-            mock.Setup(m => m.Create(It.IsAny<Category>())).Throws(new DomainBusinessLogicException());
-            CategoryController categoryController = new CategoryController(mock.Object);
-
-            var result = categoryController.Post(categoryBeachModel);
-            var createdResult = result as BadRequestObjectResult;
-            mock.VerifyAll();
-            Assert.AreEqual(400, createdResult.StatusCode);
-        }
-
     }
 }
