@@ -1,0 +1,95 @@
+.contenedor {
+    width: 100%;
+    padding: 3%;
+    box-sizing: border-box
+}
+
+.formulario {
+    background: #fff;
+    margin-top: 4%;
+    padding: .1%;
+    box-sizing: border-box
+}
+
+h1 {
+    text-align: center;
+    color: #1a2537;
+    font-size: 40px
+}
+
+.button {
+    position: relative;
+    border: none;
+    width: 60%;
+    height: 40%;
+    color: #fff;
+    font-size: 120%;
+    background: #1a2537;
+    padding: 1.5% 1.5%;
+    border-radius: 5px;
+    cursor: pointer;
+    left: 20%;
+    top: 5vh
+}
+
+.button:hover {
+    background: #5f9ea0
+}
+
+@media (min-width:768px) {
+    .formulario {
+        position: relative;
+        margin: auto;
+        width: 50%;
+        height: 90vh;
+        top: -3vh;
+        margin-top: 4%;
+        border-radius: 8px;
+        box-sizing: border-box;
+        align-items: center;
+    }
+}
+
+.inputDescription {
+    position: relative;
+    width: 90%;
+    top: -1vh;
+    height: 10vh;
+    left: 5%
+}
+
+.inputForEmail, .inputForLastName, .inputForLodgingName, .inputForName {
+    position: relative;
+    width: 90%;
+    top: -2vh;
+    left: 5%
+}
+
+.inputForState {
+    position: relative;
+    width: 90%;
+    top: 4vh;
+    left: 5%;
+}
+
+input[readonly] {
+    background-color: #c7c7c7
+}
+
+textArea[readonly] {
+    background-color: #c7c7c7
+}
+
+.stateTextOfSelectReserve {
+    position: relative;
+    top: 5vh;
+    left: 5%;
+    color: #707070
+}
+
+.comboOfStatesToChange {
+    position: relative;
+    left: 28%;
+    width: 67%;
+    top: 1vh
+}

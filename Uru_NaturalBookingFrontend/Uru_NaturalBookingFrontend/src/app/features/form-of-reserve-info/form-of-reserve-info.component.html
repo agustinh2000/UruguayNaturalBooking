@@ -1,0 +1,52 @@
+<div class="padre">
+    <form [formGroup]="formGroup" class="formulario">
+        <h1> Datos de la reserva </h1>
+        <div class="contenedor">
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputForName">
+                    <mat-label> Nombre de quien reservo </mat-label>
+                    <input readonly type="text" matInput formControlName="name">
+                </mat-form-field>
+            </div>
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputForLastName">
+                    <mat-label> Apellido de quien reservo </mat-label>
+                    <input readonly type="text" matInput formControlName="lastName">
+                </mat-form-field>
+            </div>
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputForEmail">
+                    <mat-label> Email de quien reservo </mat-label>
+                    <input readonly type="email" matInput formControlName="email">
+                </mat-form-field>
+            </div>
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputForLodgingName">
+                    <mat-label> Nombre del hospedaje reservado </mat-label>
+                    <input readonly type="text" matInput formControlName="nameOfLodging">
+                </mat-form-field>
+            </div>
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputDescription">
+                    <mat-label>Descripción de la reserva</mat-label>
+                    <textarea readonly formControlName="description" rows="4" cols="50" matInput #description
+                        placeholder="Ex. Para mas información acerca de su reserva, comuníquese..." required></textarea>
+                    <mat-hint align="end">{{description.value.length}}</mat-hint>
+                </mat-form-field>
+            </div>
+
+            <div class="input-contenedor">
+                <mat-form-field class="inputForState">
+                    <mat-label> Estado de la reserva </mat-label>
+                    <input readonly type="text" matInput formControlName="reserveState">
+                </mat-form-field>
+            </div>
+
+        </div>
+    </form>
+</div>

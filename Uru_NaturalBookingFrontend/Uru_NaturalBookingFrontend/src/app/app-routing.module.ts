@@ -22,6 +22,7 @@ import { CreateReserveComponent } from './features/create-reserve/create-reserve
 import { ReserveNotExistGuard } from './features/Guards/reserve-not-exist.guard';
 import { ImporterComponent } from './features/importer/importer.component';
 import { UserNotLoguedGuard } from './features/Guards/user-not-logued.guard';
+import { AskStateOfReserveComponent } from './features/ask-state-of-reserve/ask-state-of-reserve.component';
 
 const routes: Routes = [
   {
@@ -101,6 +102,11 @@ const routes: Routes = [
     path: 'importer',
     component: ImporterComponent,
     canActivate: [UserNotLoguedGuard],
+  },
+
+  {
+    path: 'stateReserve',
+    component: AskStateOfReserveComponent,
   },
 ];
 

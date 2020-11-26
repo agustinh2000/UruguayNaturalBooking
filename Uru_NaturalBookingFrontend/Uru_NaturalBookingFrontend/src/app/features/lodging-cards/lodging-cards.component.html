@@ -26,9 +26,24 @@
             <div class="pricePerNight">
                 <span> USD {{searchItem.lodging.pricePerNight}} (por noche)</span>
             </div>
-            <div class="review">
-                <span class="reviewScore">{{searchItem.lodging.reviewsAverageScore}}</span>
+
+
+            <div *ngIf="searchItem.lodging.reviewsAverageScore !== 0 then positiveCase; else elseBlock">
             </div>
+
+            <ng-template #positiveCase>
+                <div class="review">
+                    <span class="reviewScore">{{searchItem.lodging.reviewsAverageScore}}</span>
+                </div>
+            </ng-template>
+
+            <ng-template #elseBlock>
+                <div class="review">
+                    <span class="reviewScore">S/P</span>
+                </div>
+            </ng-template>
+
+
 
             <div class="textTotalPrice">
                 <span><strong> Precio total para la búsqueda: </strong></span>

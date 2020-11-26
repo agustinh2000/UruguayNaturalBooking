@@ -24,6 +24,14 @@
                         Review
                     </a>
                 </span>
+
+                <span routerLink="stateReserve">
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="buttonReview"
+                        mat-button>
+                        <mat-icon>rate_review</mat-icon>
+                        Consultar reserva
+                    </a>
+                </span>
                 <ng-template [ngIf]="logued">
                     <button mat-button [matMenuTriggerFor]="menu">
                         <mat-icon>account_box</mat-icon>Usuarios <i class="fas fa-caret-down" style="color:black"></i>
